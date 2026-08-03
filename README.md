@@ -123,13 +123,13 @@ graph TD
     DB[("Data & Vectors<br/>(Isolated by userId)")]:::active_data
 
     %% Data Flow
-    AgentGateway ==>|Extracts & Stores| Router
-    AgentGateway <==|Contextual Recall| Router
+    AgentGateway -->|Extracts & Stores| Router
+    Router -->|Contextual Recall| AgentGateway
     
-    Router ==>|Orchestrates| CognitiveEngines
-    CognitiveEngines ==>|Delegates to| Plugins
+    Router -->|Orchestrates| CognitiveEngines
+    CognitiveEngines -->|Delegates to| Plugins
     
-    Plugins <==> DB
+    Plugins <--> DB
     
     %% Styling links
     linkStyle 0,1 stroke:#22c55e,stroke-width:3px
