@@ -1,0 +1,5 @@
+packages:
+  - packages/*
+
+patchedDependencies:
+  ollama-ai-provider: patches/ollama-ai-provider.patch
