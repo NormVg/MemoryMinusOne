@@ -81,33 +81,34 @@ const mem = createMemory({
 ## Architecture
 
 ```mermaid
-flowchart TD
-    classDef default fill:#1a1a2e,stroke:#16213e,color:#e2e8f0;
-    classDef facade fill:#0f3460,stroke:#16213e,color:#e2e8f0;
-    classDef core fill:#533483,stroke:#16213e,color:#e2e8f0;
-    classDef plugin fill:#0f52ba,stroke:#16213e,color:#e2e8f0;
+flowchart LR
+    %% Style Definitions
+    classDef facade fill:#1e293b,stroke:#3b82f6,stroke-width:2px,color:#f8fafc;
+    classDef core fill:#0f172a,stroke:#334155,stroke-width:1px,color:#e2e8f0;
+    classDef plugin fill:#1e1b4b,stroke:#6366f1,stroke-width:1px,color:#e0e7ff;
+    classDef external fill:#0f2942,stroke:#0284c7,stroke-width:1px,color:#e0f2fe;
 
-    Agent([Agent / LLM Calls]) --> MMO[MemoryMinusOne Facade]:::facade
+    Agent([Agent / LLM App]) --> MMO[MemoryMinusOne Facade]:::facade
     
     subgraph Core ["Cognitive Core"]
-        direction LR
+        direction TB
         Engine["Memory Engine<br/>(Recall & Decay)"]:::core
         Graph["Waypoint Graph<br/>(Spreading Activation)"]:::core
         Facts["Temporal Facts<br/>(SCD Versioning)"]:::core
     end
     
-    MMO --> Core
-    
-    subgraph Plugins ["Plugin Layer (Swappable Providers)"]
-        direction LR
+    subgraph Plugins ["Plugin Layer (Swappable)"]
+        direction TB
         Storage["Storage<br/>(Drizzle / Custom)"]:::plugin
         Embedding["Embedding<br/>(AI SDK / Custom)"]:::plugin
         Vector["Vector<br/>(pgvector / Custom)"]:::plugin
         Cache["Cache<br/>(Redis / Custom)"]:::plugin
     end
 
+    MMO --> Core
     Core --> Plugins
 ```
+
 
 
 
