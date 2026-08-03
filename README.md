@@ -81,31 +81,34 @@ const mem = createMemory({
 ## Architecture
 
 ```mermaid
-flowchart TB
-    subgraph MemoryMinusOne ["MemoryMinusOne"]
-        direction TB
-        subgraph CoreEngine ["Core Engine"]
-            direction TB
-            Engine["Engine<br/>• add()<br/>• query()<br/>• get()<br/>• reinforce()"]
-            Facts["Facts Namespace<br/>• evolve()<br/>• timeline()<br/>• query()"]
-        end
-        
-        Classifier["Sector Classifier<br/>(auto-classify)"]
-        WaypointGraph["Waypoint Graph<br/>(spreading activation)"]
-    end
+flowchart TD
+    classDef default fill:#1a1a2e,stroke:#16213e,color:#e2e8f0;
+    classDef facade fill:#0f3460,stroke:#16213e,color:#e2e8f0;
+    classDef core fill:#533483,stroke:#16213e,color:#e2e8f0;
+    classDef plugin fill:#0f52ba,stroke:#16213e,color:#e2e8f0;
 
-    subgraph PluginLayer ["Plugin Layer (Swappable Interfaces)"]
+    Agent([Agent / LLM Calls]) --> MMO[MemoryMinusOne Facade]:::facade
+    
+    subgraph Core ["Cognitive Core"]
         direction LR
-        Storage["IStoragePlugin<br/>(Drizzle / In-Memory)"]
-        Embedding["IEmbeddingPlugin<br/>(AI SDK / Synthetic)"]
-        Vector["IVectorPlugin<br/>(pgvector / In-Memory)"]
-        Cache["ICachePlugin<br/>(Upstash / LRU / None)"]
+        Engine["Memory Engine<br/>(Recall & Decay)"]:::core
+        Graph["Waypoint Graph<br/>(Spreading Activation)"]:::core
+        Facts["Temporal Facts<br/>(SCD Versioning)"]:::core
+    end
+    
+    MMO --> Core
+    
+    subgraph Plugins ["Plugin Layer (Swappable Providers)"]
+        direction LR
+        Storage["Storage<br/>(Drizzle / Custom)"]:::plugin
+        Embedding["Embedding<br/>(AI SDK / Custom)"]:::plugin
+        Vector["Vector<br/>(pgvector / Custom)"]:::plugin
+        Cache["Cache<br/>(Redis / Custom)"]:::plugin
     end
 
-    CoreEngine --> PluginLayer
-    Classifier --> CoreEngine
-    WaypointGraph --> CoreEngine
+    Core --> Plugins
 ```
+
 
 
 ## Packages
