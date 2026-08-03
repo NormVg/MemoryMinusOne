@@ -82,42 +82,60 @@ const mem = createMemory({
 
 ```mermaid
 flowchart TD
-    %% Custom Styles
-    classDef facade fill:#0f172a,stroke:#3b82f6,stroke-width:2px,color:#f8fafc;
-    classDef engine fill:#1e293b,stroke:#475569,stroke-width:1px,color:#f1f5f9;
-    classDef plugin fill:#1e1b4b,stroke:#6366f1,stroke-width:1px,color:#e0e7ff;
-    classDef db fill:#022c22,stroke:#10b981,stroke-width:1px,color:#ecfdf5;
+    %% Styling Classes
+    classDef input fill:#f8fafc,stroke:#cbd5e1,stroke-width:1px,color:#0f172a;
+    classDef router fill:#e0f2fe,stroke:#0284c7,stroke-width:1px,color:#0369a1;
+    classDef db fill:#fce7f3,stroke:#db2777,stroke-width:1px,color:#be185d;
+    classDef engine fill:#faf5ff,stroke:#9333ea,stroke-width:1px,color:#6b21a8;
+    classDef facts fill:#f0f9ff,stroke:#0284c7,stroke-width:1px,color:#0369a1;
+    classDef plugin fill:#eff6ff,stroke:#2563eb,stroke-width:1px,color:#1d4ed8;
+    classDef outputNode fill:#f0fdf4,stroke:#16a34a,stroke-width:1px,color:#15803d;
 
-    Agent([Agent / LLM App]) --> API["MemoryMinusOne SDK Facade<br/>• add()<br/>• query()<br/>• get()<br/>• reinforce()"]:::facade
-    
-    subgraph Engine ["Cognitive Subsystems (Core Engine)"]
-        direction LR
-        Sectors["Sector Router<br/>(Dynamic Classification)"]:::engine
-        Waypoints["Waypoint Manager<br/>(Spreading Activation)"]:::engine
-        Facts["Temporal Tracker<br/>(SCD Versioning)"]:::engine
-        Scoring["Hybrid Scoring<br/>(Semantic + Graph + Recency)"]:::engine
-    end
-    
-    subgraph Plugins ["Swappable Plugin Boundary"]
-        direction LR
-        IStore["Storage Plugin<br/>(IStoragePlugin)"]:::plugin
-        IEmbed["Embedding Plugin<br/>(IEmbeddingPlugin)"]:::plugin
-        IVec["Vector Plugin<br/>(IVectorPlugin)"]:::plugin
-        ICache["Cache Plugin<br/>(ICachePlugin)"]:::plugin
+    Input["API Call / Query"]:::input --> Sectors["Sector Router"]:::router
+
+    subgraph CoreEngine ["Cognitive Core"]
+        direction TD
+        VReq["Vector Search"]:::engine
+        WaypointGraph["Waypoint Graph"]:::engine
+        Decay["Decay Engine"]:::engine
+        Scoring["Composite Scoring"]:::engine
     end
 
-    subgraph Infrastructure ["Target Infrastructure (Developer-Owned)"]
-        direction LR
-        RelationalDB[("Relational DB<br/>(Postgres / SQLite)")]:::db
-        CacheDB[("Cache Store<br/>(Redis / Upstash)")]:::db
+    subgraph TemporalSystem ["Temporal Facts"]
+        direction TD
+        Facts["Fact Store"]:::facts
+        Timeline["Timeline Versioning"]:::facts
     end
 
-    API --> Engine
-    Engine --> Plugins
-    
-    IStore --> RelationalDB
-    IVec --> RelationalDB
-    ICache --> CacheDB
+    subgraph PluginLayer ["Plugin Layer (Swappable Interfaces)"]
+        direction LR
+        IStore["IStoragePlugin"]:::plugin
+        IEmbed["IEmbeddingPlugin"]:::plugin
+        IVec["IVectorPlugin"]:::plugin
+        ICache["ICachePlugin"]:::plugin
+    end
+
+    Sectors --> IEmbed
+    IEmbed --> DB[(Drizzle DB<br/>Memories / Waypoints / Facts)]:::db
+    IEmbed --> Cache[(Upstash Cache)]:::db
+
+    DB --> VReq
+    DB --> WaypointGraph
+    DB --> Decay
+    DB --> Facts
+
+    Facts --> Timeline
+
+    VReq --> Scoring
+    WaypointGraph --> Scoring
+    Decay --> Scoring
+    Timeline --> Scoring
+
+    Scoring --> Cache
+    Scoring --> Result["QueryResult[]"]:::outputNode
+
+    Result -.->|Reinforce Node| WaypointGraph
+    Result -.->|Update Salience| Decay
 ```
 
 
