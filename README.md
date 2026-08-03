@@ -81,60 +81,61 @@ const mem = createMemory({
 ## Architecture
 
 ```mermaid
-graph TD
-    %% Custom Styles for a Premium Look
-    classDef memory_core fill:#0f172a,stroke:#3b82f6,stroke-width:2px,color:#f8fafc,rx:8px,ry:8px
-    classDef plugin_layer fill:#1e293b,stroke:#8b5cf6,stroke-width:2px,color:#f8fafc,stroke-dasharray: 5 5,rx:8px,ry:8px
-    classDef plugin fill:#334155,stroke:#a855f7,stroke-width:1px,color:#e2e8f0,rx:4px,ry:4px
-    classDef active_data fill:#ecfeff,stroke:#06b6d4,stroke-width:2px,color:#164e63,rx:8px,ry:8px
-    classDef input_output fill:#f0fdf4,stroke:#22c55e,stroke-width:2px,color:#14532d,rx:20px,ry:20px
+flowchart TD
+    %% Styling Classes
+    classDef input fill:#f8fafc,stroke:#cbd5e1,stroke-width:1px,color:#0f172a;
+    classDef router fill:#e0f2fe,stroke:#0284c7,stroke-width:1px,color:#0369a1;
+    classDef db fill:#fce7f3,stroke:#db2777,stroke-width:1px,color:#be185d;
+    classDef engine fill:#faf5ff,stroke:#9333ea,stroke-width:1px,color:#6b21a8;
+    classDef facts fill:#f0f9ff,stroke:#0284c7,stroke-width:1px,color:#0369a1;
+    classDef plugin fill:#eff6ff,stroke:#2563eb,stroke-width:1px,color:#1d4ed8;
+    classDef outputNode fill:#f0fdf4,stroke:#16a34a,stroke-width:1px,color:#15803d;
 
-    %% Entry Point
-    AgentGateway(["🤖 AI Agent / LLM Interface"]):::input_output
+    Input["API Call / Query"]:::input --> Sectors["Sector Router"]:::router
 
-    %% The Core Product
-    subgraph MemoryMinusOne ["MemoryMinusOne SDK : The Cognitive Layer"]
-        direction TB
-        
-        %% Internal Orchestration
-        Router{"Semantic<br/>Sector Router"}:::active_data
-        
-        subgraph CognitiveEngines ["🧠 Autonomous Memory Engines"]
-            direction LR
-            Decay["Decay Engine<br/>(Forgets the irrelevant)"]:::memory_core
-            Waypoint["Waypoint Graph<br/>(Connects the dots)"]:::memory_core
-            Temporal["Temporal Versioning<br/>(Time-traveling facts)"]:::memory_core
-            Scoring["Composite Scoring<br/>(Hybrid search)"]:::memory_core
-            
-            Decay ~~~ Waypoint ~~~ Temporal ~~~ Scoring
-        end
-
-        %% Swappable Plugins
-        subgraph Plugins ["🔌 Plug-and-Play Infrastructure (Zero Vendor Lock-in)"]
-            direction LR
-            SPlugin["IStoragePlugin<br/>(e.g., Drizzle/Postgres)"]:::plugin
-            EPlugin["IEmbeddingPlugin<br/>(e.g., Vercel AI SDK)"]:::plugin
-            VPlugin["IVectorPlugin<br/>(e.g., pgvector/Valkey)"]:::plugin
-            CPlugin["ICachePlugin<br/>(e.g., Upstash Redis)"]:::plugin
-        end
+    subgraph CoreEngine ["Cognitive Core"]
+        direction TD
+        VReq["Vector Search"]:::engine
+        WaypointGraph["Waypoint Graph"]:::engine
+        Decay["Decay Engine"]:::engine
+        Scoring["Composite Scoring"]:::engine
     end
 
-    %% Data Store Execution
-    DB[("Data & Vectors<br/>(Isolated by userId)")]:::active_data
+    subgraph TemporalSystem ["Temporal Facts"]
+        direction TD
+        Facts["Fact Store"]:::facts
+        Timeline["Timeline Versioning"]:::facts
+    end
 
-    %% Data Flow
-    AgentGateway -->|Extracts & Stores| Router
-    Router -->|Contextual Recall| AgentGateway
-    
-    Router -->|Orchestrates| CognitiveEngines
-    CognitiveEngines -->|Delegates to| Plugins
-    
-    Plugins <--> DB
-    
-    %% Styling links
-    linkStyle 0,1 stroke:#22c55e,stroke-width:3px
-    linkStyle 2 stroke:#3b82f6,stroke-width:3px
-    linkStyle 3 stroke:#8b5cf6,stroke-width:2px,stroke-dasharray: 5 5
+    subgraph PluginLayer ["Plugin Layer (Swappable Interfaces)"]
+        direction LR
+        IStore["IStoragePlugin"]:::plugin
+        IEmbed["IEmbeddingPlugin"]:::plugin
+        IVec["IVectorPlugin"]:::plugin
+        ICache["ICachePlugin"]:::plugin
+    end
+
+    Sectors --> IEmbed
+    IEmbed --> DB[(Drizzle DB<br/>Memories / Waypoints / Facts)]:::db
+    IEmbed --> Cache[(Upstash Cache)]:::db
+
+    DB --> VReq
+    DB --> WaypointGraph
+    DB --> Decay
+    DB --> Facts
+
+    Facts --> Timeline
+
+    VReq --> Scoring
+    WaypointGraph --> Scoring
+    Decay --> Scoring
+    Timeline --> Scoring
+
+    Scoring --> Cache
+    Scoring --> Result["QueryResult[]"]:::outputNode
+
+    Result -.->|Reinforce Node| WaypointGraph
+    Result -.->|Update Salience| Decay
 ```
 
 
