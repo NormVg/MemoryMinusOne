@@ -3,7 +3,7 @@ import { IStoragePlugin } from "../core/plugin";
 import { clock } from "../core/clock";
 
 export class FactVersioning {
-  constructor(private storage: IStoragePlugin, private userId: string) {}
+  constructor(private storage: IStoragePlugin) {}
 
   /**
    * Sets a new fact using the Slowly Changing Dimension (SCD) pattern.
@@ -14,13 +14,13 @@ export class FactVersioning {
     subject: string,
     predicate: string,
     object: string,
-    confidence: number = 1.0,
-    metadata?: Record<string, any>
+    options: { userId: string; confidence?: number; metadata?: Record<string, any> }
   ): Promise<TemporalFact> {
+    const { userId, confidence = 1.0, metadata } = options;
     const now = clock.now();
     
     // Find currently active fact
-    const active = await this.storage.getActiveFact(subject, predicate, this.userId);
+    const active = await this.storage.getActiveFact(subject, predicate, userId);
     
     // If it's the exact same object, don't create a new version
     if (active && active.object === object) {
@@ -36,7 +36,7 @@ export class FactVersioning {
     // Insert new fact
     const newFact: TemporalFact = {
       id: crypto.randomUUID(),
-      userId: this.userId,
+      userId,
       subject,
       predicate,
       object,

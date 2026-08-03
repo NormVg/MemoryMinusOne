@@ -2,54 +2,48 @@ import { TemporalFact } from "../core/types";
 import { IStoragePlugin } from "../core/plugin";
 
 export class FactTimeline {
-  constructor(private storage: IStoragePlugin, private userId: string) {}
+  constructor(private storage: IStoragePlugin) {}
 
   /**
-   * Gets the full history of changes for a specific subject and predicate,
-   * sorted chronologically.
+   * Generates a chronological history of a specific property for a subject.
+   * e.g. "Where has Bob lived over time?"
    */
-  async getSubjectPredicateHistory(subject: string, predicate: string): Promise<TemporalFact[]> {
-    const facts = await this.storage.queryFacts(this.userId, { subject, predicate });
-    // Sort by validFrom ascending
+  async getPropertyHistory(subject: string, predicate: string, userId: string): Promise<TemporalFact[]> {
+    const facts = await this.storage.queryFacts(userId, { subject, predicate });
+    // Sort chronologically by when they became valid
     return facts.sort((a, b) => a.validFrom - b.validFrom);
   }
 
   /**
-   * Calculates the change frequency (volatility) of a fact.
-   * High volatility means this fact changes often (e.g. current location).
+   * Returns a chronological feed of all events/changes for a subject.
    */
-  async getVolatility(subject: string, predicate: string): Promise<number> {
-    const history = await this.getSubjectPredicateHistory(subject, predicate);
-    if (history.length < 2) return 0;
-    
-    const firstTime = history[0].validFrom;
-    const lastTime = history[history.length - 1].validFrom;
-    const duration = lastTime - firstTime;
-    
-    if (duration === 0) return 0;
-    
-    // changes per day
-    return (history.length - 1) / (duration / (1000 * 60 * 60 * 24));
-  }
-
-  /**
-   * Generates a chronological timeline of events for a given subject.
-   */
-  async getSubjectTimeline(subject: string): Promise<Array<{
-    time: number;
-    type: 'created' | 'invalidated';
+  async getSubjectTimeline(subject: string, userId: string): Array<{
+    timestamp: number;
+    description: string;
     fact: TemporalFact;
-  }>> {
-    const facts = await this.storage.queryFacts(this.userId, { subject });
-    const events: Array<{ time: number; type: 'created' | 'invalidated'; fact: TemporalFact }> = [];
+  }> {
+    const facts = await this.storage.queryFacts(userId, { subject });
+    
+    const events: Array<{timestamp: number; description: string; fact: TemporalFact}> = [];
 
     for (const fact of facts) {
-      events.push({ time: fact.validFrom, type: 'created', fact });
+      // Event: Fact became true
+      events.push({
+        timestamp: fact.validFrom,
+        description: `Started: ${fact.subject} ${fact.predicate} ${fact.object}`,
+        fact
+      });
+
+      // Event: Fact stopped being true
       if (fact.validTo !== null) {
-        events.push({ time: fact.validTo, type: 'invalidated', fact });
+        events.push({
+          timestamp: fact.validTo,
+          description: `Ended: ${fact.subject} ${fact.predicate} ${fact.object}`,
+          fact
+        });
       }
     }
 
-    return events.sort((a, b) => a.time - b.time);
+    return events.sort((a, b) => a.timestamp - b.timestamp);
   }
 }

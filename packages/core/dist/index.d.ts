@@ -1,5 +1,53 @@
 import { EventEmitter } from 'events';
 
+interface MemoryNode {
+    id: string;
+    userId: string;
+    content: string;
+    primarySector: string;
+    sectors: string[];
+    tags: string[];
+    metadata: Record<string, any>;
+    simhash?: string;
+    salience: number;
+    decayLambda: number;
+    version: number;
+    createdAt: number;
+    updatedAt: number;
+    lastSeenAt: number;
+}
+interface WaypointEdge {
+    srcId: string;
+    dstId: string;
+    userId: string;
+    weight: number;
+    createdAt: number;
+    updatedAt: number;
+}
+interface TemporalFact {
+    id: string;
+    userId: string;
+    subject: string;
+    predicate: string;
+    object: string;
+    validFrom: number;
+    validTo: number | null;
+    confidence: number;
+    metadata?: Record<string, any>;
+}
+interface SectorClassification {
+    primarySector: string;
+    sectors: string[];
+    confidence: number;
+}
+interface QueryResult {
+    memory: MemoryNode;
+    score: number;
+    matchType: "semantic" | "keyword" | "waypoint";
+    path?: string[];
+}
+type DecayTier = "hot" | "warm" | "cold";
+
 interface MemoryEvents {
     "memory:added": {
         id: string;
@@ -75,54 +123,6 @@ declare class DefaultLogger implements Logger {
     error(namespace: string, message: string, meta?: any): void;
 }
 
-interface MemoryNode {
-    id: string;
-    userId: string;
-    content: string;
-    primarySector: string;
-    sectors: string[];
-    tags: string[];
-    metadata: Record<string, any>;
-    simhash?: string;
-    salience: number;
-    decayLambda: number;
-    version: number;
-    createdAt: number;
-    updatedAt: number;
-    lastSeenAt: number;
-}
-interface WaypointEdge {
-    srcId: string;
-    dstId: string;
-    userId: string;
-    weight: number;
-    createdAt: number;
-    updatedAt: number;
-}
-interface TemporalFact {
-    id: string;
-    userId: string;
-    subject: string;
-    predicate: string;
-    object: string;
-    validFrom: number;
-    validTo: number | null;
-    confidence: number;
-    metadata?: Record<string, any>;
-}
-interface SectorClassification {
-    primarySector: string;
-    sectors: string[];
-    confidence: number;
-}
-interface QueryResult {
-    memory: MemoryNode;
-    score: number;
-    matchType: "semantic" | "keyword" | "waypoint";
-    path?: string[];
-}
-type DecayTier = "hot" | "warm" | "cold";
-
 interface PluginContext {
     logger: Logger;
     events: TypedEventEmitter;
@@ -177,7 +177,6 @@ interface ICachePlugin extends BasePlugin {
 }
 
 interface MemoryConfig {
-    userId: string;
     storage: IStoragePlugin;
     embedding: IEmbeddingPlugin;
     vector: IVectorPlugin;
@@ -260,49 +259,69 @@ declare class MemoryEngine {
     constructor(config: MemoryConfig);
     /**
      * Adds a new memory to the system.
-     * 1. Classify sector
-     * 2. Compute simhash
-     * 3. Generate embeddings
-     * 4. Store vectors
-     * 5. Store memory node
-     * 6. Create waypoint edge
      */
-    add(content: string, metadata?: Record<string, any>, tags?: string[]): Promise<MemoryNode>;
+    add(content: string, options: {
+        userId: string;
+        metadata?: Record<string, any>;
+        tags?: string[];
+    }): Promise<MemoryNode>;
     /**
      * Queries memories using a hybrid approach.
      */
-    query(queryText: string, sector?: string, limit?: number): Promise<QueryResult[]>;
+    query(queryText: string, options: {
+        userId: string;
+        sector?: string;
+        limit?: number;
+    }): Promise<QueryResult[]>;
     /**
      * Updates an existing memory's content and re-embeds it.
      */
-    update(id: string, content: string, metadata?: Record<string, any>, tags?: string[]): Promise<MemoryNode>;
+    update(id: string, content: string, options: {
+        userId: string;
+        metadata?: Record<string, any>;
+        tags?: string[];
+    }): Promise<MemoryNode>;
     /**
      * Deletes a memory and its associated vectors.
      */
-    delete(id: string): Promise<void>;
+    delete(id: string, userId: string): Promise<void>;
     /**
      * Gets all memories for the user in a given sector.
      */
-    getAll(sector: string, limit?: number): Promise<MemoryNode[]>;
+    getAll(sector: string, options: {
+        userId: string;
+        limit?: number;
+    }): Promise<MemoryNode[]>;
+    /**
+     * Gets a specific memory by ID.
+     */
+    get(id: string, options: {
+        userId: string;
+    }): Promise<MemoryNode | null>;
+    /**
+     * Manually reinforces the salience of a specific memory node.
+     */
+    reinforce(id: string, options: {
+        userId: string;
+    }): Promise<void>;
     /**
      * Runs the decay pass across all memories.
      */
-    runDecayPass(): Promise<void>;
+    runDecayPass(userId: string): Promise<void>;
 }
 
 declare class FactStore {
     private storage;
-    private userId;
-    constructor(storage: IStoragePlugin, userId: string);
+    constructor(storage: IStoragePlugin);
     /**
      * Directly inserts a fact. Usually you want `versioning.evolveFact` instead
      * to handle the auto-closing of old facts.
      */
-    insert(fact: Omit<TemporalFact, "id" | "userId">): Promise<TemporalFact>;
+    insert(fact: Omit<TemporalFact, "id">): Promise<TemporalFact>;
     /**
      * Marks a fact as no longer valid as of right now.
      */
-    invalidate(id: string): Promise<void>;
+    invalidate(id: string, userId: string): Promise<void>;
 }
 
 declare class MemoryMinusOne {
@@ -318,28 +337,52 @@ declare class MemoryMinusOne {
     init(): Promise<void>;
     destroy(): Promise<void>;
     get eventsEmitter(): TypedEventEmitter;
-    add(content: string, metadata?: Record<string, any>, tags?: string[]): Promise<MemoryNode>;
-    query(queryText: string, sector?: string, limit?: number): Promise<QueryResult[]>;
-    reflect(): Promise<void>;
-    decay(): Promise<void>;
+    add(content: string, options: {
+        userId: string;
+        metadata?: Record<string, any>;
+        tags?: string[];
+    }): Promise<MemoryNode>;
+    query(queryText: string, options: {
+        userId: string;
+        sector?: string;
+        limit?: number;
+    }): Promise<QueryResult[]>;
+    get(id: string, options: {
+        userId: string;
+    }): Promise<MemoryNode | null>;
+    getAll(sector: string, options: {
+        userId: string;
+        limit?: number;
+    }): Promise<MemoryNode[]>;
+    reinforce(id: string, options: {
+        userId: string;
+    }): Promise<void>;
+    reflect(userId: string): Promise<void>;
+    decay(userId: string): Promise<void>;
     get facts(): {
-        insert: (fact: any) => Promise<TemporalFact>;
-        invalidate: (id: string) => Promise<void>;
-        evolve: (subject: string, predicate: string, object: string, confidence?: number, metadata?: any) => Promise<TemporalFact>;
+        insert: (fact: Omit<TemporalFact, "id">) => Promise<TemporalFact>;
+        invalidate: (id: string, userId: string) => Promise<void>;
+        evolve: (subject: string, predicate: string, object: string, options: {
+            userId: string;
+            confidence?: number;
+            metadata?: any;
+        }) => Promise<TemporalFact>;
         query: {
-            at: (timeMs: number) => Promise<TemporalFact[]>;
-            current: () => Promise<TemporalFact[]>;
-            active: (s: string, p: string) => Promise<TemporalFact | null>;
-            compare: (t1: number, t2: number) => Promise<{
+            at: (timeMs: number, userId: string) => Promise<TemporalFact[]>;
+            current: (userId: string) => Promise<TemporalFact[]>;
+            active: (s: string, p: string, userId: string) => Promise<TemporalFact | null>;
+            compare: (t1: number, t2: number, userId: string) => Promise<{
                 added: TemporalFact[];
                 removed: TemporalFact[];
-                changed: TemporalFact[];
-                unchanged: TemporalFact[];
+                changed: {
+                    old: TemporalFact;
+                    new: TemporalFact;
+                }[];
             }>;
         };
-        timeline: (subject: string) => Promise<{
-            time: number;
-            type: "created" | "invalidated";
+        timeline: (subject: string, userId: string) => Promise<{
+            timestamp: number;
+            description: string;
             fact: TemporalFact;
         }[]>;
     };

@@ -3,6 +3,9 @@ var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __esm = (fn, res) => function __init() {
+  return fn && (res = (0, fn[__getOwnPropNames(fn)[0]])(fn = 0)), res;
+};
 var __export = (target, all) => {
   for (var name in all)
     __defProp(target, name, { get: all[name], enumerable: true });
@@ -16,6 +19,121 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+
+// src/core/clock.ts
+var defaultClock, activeClock, clock;
+var init_clock = __esm({
+  "src/core/clock.ts"() {
+    "use strict";
+    defaultClock = {
+      now: () => Date.now()
+    };
+    activeClock = defaultClock;
+    clock = {
+      now: () => activeClock.now(),
+      /** Override the clock for testing */
+      setClock: (newClock) => {
+        activeClock = newClock;
+      },
+      /** Restore the default clock */
+      restore: () => {
+        activeClock = defaultClock;
+      }
+    };
+  }
+});
+
+// src/engine/waypoints.ts
+var waypoints_exports = {};
+__export(waypoints_exports, {
+  WAYPOINT_PARAMS: () => WAYPOINT_PARAMS,
+  createSingleWaypoint: () => createSingleWaypoint,
+  expandViaWaypoints: () => expandViaWaypoints,
+  reinforceNodeSalience: () => reinforceNodeSalience,
+  reinforcePath: () => reinforcePath
+});
+async function createSingleWaypoint(newId, newVector, userId, storage, bestMatchId, bestMatchSimilarity) {
+  const now = clock.now();
+  let dstId = newId;
+  let weight = WAYPOINT_PARAMS.defaultWeight;
+  if (bestMatchId && bestMatchSimilarity && bestMatchSimilarity >= WAYPOINT_PARAMS.similarityThreshold) {
+    dstId = bestMatchId;
+    weight = bestMatchSimilarity;
+  }
+  const edge = {
+    srcId: newId,
+    dstId,
+    userId,
+    weight,
+    createdAt: now,
+    updatedAt: now
+  };
+  await storage.insertWaypoint(edge);
+  return edge;
+}
+async function expandViaWaypoints(initialIds, userId, storage, maxExpansions = 10) {
+  const expanded = [];
+  const visited = /* @__PURE__ */ new Set();
+  for (const id of initialIds) {
+    expanded.push({ id, weight: 1, path: [id] });
+    visited.add(id);
+  }
+  const queue = [...expanded];
+  let expansions = 0;
+  while (queue.length > 0 && expansions < maxExpansions) {
+    const current = queue.shift();
+    const neighbors = await storage.getNeighbors(current.id, userId);
+    for (const neighbor of neighbors) {
+      if (visited.has(neighbor.dstId)) continue;
+      const neighborWeight = Math.min(1, Math.max(0, neighbor.weight || 0));
+      const expansionWeight = current.weight * neighborWeight * 0.8;
+      if (expansionWeight < 0.1) continue;
+      const expandedItem = {
+        id: neighbor.dstId,
+        weight: expansionWeight,
+        path: [...current.path, neighbor.dstId]
+      };
+      expanded.push(expandedItem);
+      visited.add(neighbor.dstId);
+      queue.push(expandedItem);
+      expansions++;
+    }
+  }
+  return expanded;
+}
+async function reinforcePath(path, storage, userId) {
+  if (path.length < 2) return;
+  for (let i = 0; i < path.length - 1; i++) {
+    const srcId = path[i];
+    const dstId = path[i + 1];
+    const neighbors = await storage.getNeighbors(srcId, userId);
+    const edge = neighbors.find((n) => n.dstId === dstId);
+    if (edge) {
+      edge.weight = Math.min(WAYPOINT_PARAMS.maxWeight, edge.weight + WAYPOINT_PARAMS.reinforcementBoost);
+      await storage.insertWaypoint(edge);
+    }
+  }
+}
+async function reinforceNodeSalience(memory, storage, eta = 0.1) {
+  const newSalience = Math.min(1, memory.salience + eta * (1 - memory.salience));
+  memory.salience = newSalience;
+  memory.lastSeenAt = clock.now();
+  await storage.updateMemory(memory);
+}
+var WAYPOINT_PARAMS;
+var init_waypoints = __esm({
+  "src/engine/waypoints.ts"() {
+    "use strict";
+    init_clock();
+    WAYPOINT_PARAMS = {
+      similarityThreshold: 0.75,
+      defaultWeight: 1,
+      crossSectorWeight: 0.5,
+      reinforcementBoost: 0.05,
+      maxWeight: 1
+    };
+  }
+});
 
 // src/index.ts
 var index_exports = {};
@@ -44,7 +162,6 @@ module.exports = __toCommonJS(index_exports);
 
 // src/core/config.ts
 function validateConfig(config) {
-  if (!config.userId) throw new Error("MemoryConfig requires a valid userId");
   if (!config.storage) throw new Error("MemoryConfig requires a storage plugin");
   if (!config.embedding) throw new Error("MemoryConfig requires an embedding plugin");
   if (!config.vector) throw new Error("MemoryConfig requires a vector plugin");
@@ -257,82 +374,11 @@ function computeSimhash(text) {
   return hash.padStart(16, "0");
 }
 
-// src/core/clock.ts
-var defaultClock = {
-  now: () => Date.now()
-};
-var activeClock = defaultClock;
-var clock = {
-  now: () => activeClock.now(),
-  /** Override the clock for testing */
-  setClock: (newClock) => {
-    activeClock = newClock;
-  },
-  /** Restore the default clock */
-  restore: () => {
-    activeClock = defaultClock;
-  }
-};
-
-// src/engine/waypoints.ts
-var WAYPOINT_PARAMS = {
-  similarityThreshold: 0.75,
-  defaultWeight: 1,
-  crossSectorWeight: 0.5,
-  reinforcementBoost: 0.05,
-  maxWeight: 1
-};
-async function createSingleWaypoint(newId, newVector, userId, storage, bestMatchId, bestMatchSimilarity) {
-  const now = clock.now();
-  let dstId = newId;
-  let weight = WAYPOINT_PARAMS.defaultWeight;
-  if (bestMatchId && bestMatchSimilarity && bestMatchSimilarity >= WAYPOINT_PARAMS.similarityThreshold) {
-    dstId = bestMatchId;
-    weight = bestMatchSimilarity;
-  }
-  const edge = {
-    srcId: newId,
-    dstId,
-    userId,
-    weight,
-    createdAt: now,
-    updatedAt: now
-  };
-  await storage.insertWaypoint(edge);
-  return edge;
-}
-async function expandViaWaypoints(initialIds, userId, storage, maxExpansions = 10) {
-  const expanded = [];
-  const visited = /* @__PURE__ */ new Set();
-  for (const id of initialIds) {
-    expanded.push({ id, weight: 1, path: [id] });
-    visited.add(id);
-  }
-  const queue = [...expanded];
-  let expansions = 0;
-  while (queue.length > 0 && expansions < maxExpansions) {
-    const current = queue.shift();
-    const neighbors = await storage.getNeighbors(current.id, userId);
-    for (const neighbor of neighbors) {
-      if (visited.has(neighbor.dstId)) continue;
-      const neighborWeight = Math.min(1, Math.max(0, neighbor.weight || 0));
-      const expansionWeight = current.weight * neighborWeight * 0.8;
-      if (expansionWeight < 0.1) continue;
-      const expandedItem = {
-        id: neighbor.dstId,
-        weight: expansionWeight,
-        path: [...current.path, neighbor.dstId]
-      };
-      expanded.push(expandedItem);
-      visited.add(neighbor.dstId);
-      queue.push(expandedItem);
-      expansions++;
-    }
-  }
-  return expanded;
-}
+// src/engine/memory.ts
+init_waypoints();
 
 // src/engine/scoring.ts
+init_clock();
 var SCORING_WEIGHTS = {
   similarity: 0.35,
   overlap: 0.2,
@@ -387,6 +433,7 @@ function cosineSimilarity(a, b) {
 }
 
 // src/engine/memory.ts
+init_clock();
 var MemoryEngine = class {
   constructor(config) {
     this.config = config;
@@ -394,26 +441,21 @@ var MemoryEngine = class {
   config;
   /**
    * Adds a new memory to the system.
-   * 1. Classify sector
-   * 2. Compute simhash
-   * 3. Generate embeddings
-   * 4. Store vectors
-   * 5. Store memory node
-   * 6. Create waypoint edge
    */
-  async add(content, metadata, tags = []) {
+  async add(content, options) {
+    const { userId, metadata = {}, tags = [] } = options;
     const classification = classifyContent(content, metadata);
     const simhash = computeSimhash(content);
     const id = crypto.randomUUID();
     const now = clock.now();
     const memory = {
       id,
-      userId: this.config.userId,
+      userId,
       content,
       primarySector: classification.primarySector,
       sectors: classification.sectors,
       tags,
-      metadata: metadata || {},
+      metadata,
       simhash,
       salience: 1,
       // starts hot
@@ -428,9 +470,9 @@ var MemoryEngine = class {
     let bestMatchSim = -1;
     for (const sector of classification.sectors) {
       const { vector, dim } = await this.config.embedding.embed(content, sector);
-      await this.config.vector.storeVector(id, sector, this.config.userId, vector, dim);
+      await this.config.vector.storeVector(id, sector, userId, vector, dim);
       if (sector === classification.primarySector) {
-        const neighbors = await this.config.vector.search(vector, sector, this.config.userId, 1);
+        const neighbors = await this.config.vector.search(vector, sector, userId, 1);
         if (neighbors.length > 0 && neighbors[0].id !== id) {
           bestMatchId = neighbors[0].id;
           bestMatchSim = neighbors[0].score;
@@ -438,23 +480,24 @@ var MemoryEngine = class {
       }
     }
     await this.config.storage.insertMemory(memory);
-    await createSingleWaypoint(id, [], this.config.userId, this.config.storage, bestMatchId, bestMatchSim);
+    await createSingleWaypoint(id, [], userId, this.config.storage, bestMatchId, bestMatchSim);
     return memory;
   }
   /**
    * Queries memories using a hybrid approach.
    */
-  async query(queryText, sector, limit = 5) {
+  async query(queryText, options) {
+    const { userId, sector, limit = 5 } = options;
     const targetSector = sector || classifyContent(queryText).primarySector;
     const { vector } = await this.config.embedding.embed(queryText, targetSector);
-    const vectorHits = await this.config.vector.search(vector, targetSector, this.config.userId, limit * 2);
+    const vectorHits = await this.config.vector.search(vector, targetSector, userId, limit * 2);
     const initialIds = vectorHits.map((h) => h.id);
-    const expanded = await expandViaWaypoints(initialIds, this.config.userId, this.config.storage, limit);
+    const expanded = await expandViaWaypoints(initialIds, userId, this.config.storage, limit);
     const queryTokens = new Set(queryText.toLowerCase().split(/\W+/));
     const results = [];
     const candidateIds = /* @__PURE__ */ new Set([...initialIds, ...expanded.map((e) => e.id)]);
     for (const id of candidateIds) {
-      const mem = await this.config.storage.getMemory(id, this.config.userId);
+      const mem = await this.config.storage.getMemory(id, userId);
       if (!mem) continue;
       const vHit = vectorHits.find((h) => h.id === id);
       const similarity = vHit ? vHit.score : 0.5;
@@ -479,8 +522,9 @@ var MemoryEngine = class {
   /**
    * Updates an existing memory's content and re-embeds it.
    */
-  async update(id, content, metadata, tags) {
-    const existing = await this.config.storage.getMemory(id, this.config.userId);
+  async update(id, content, options) {
+    const { userId, metadata, tags } = options;
+    const existing = await this.config.storage.getMemory(id, userId);
     if (!existing) throw new Error(`Memory ${id} not found`);
     const classification = classifyContent(content, metadata || existing.metadata);
     const simhash = computeSimhash(content);
@@ -497,11 +541,11 @@ var MemoryEngine = class {
       lastSeenAt: clock.now()
     };
     for (const sector of existing.sectors) {
-      await this.config.vector.deleteVector(id, sector, this.config.userId);
+      await this.config.vector.deleteVector(id, sector, userId);
     }
     for (const sector of classification.sectors) {
       const { vector, dim } = await this.config.embedding.embed(content, sector);
-      await this.config.vector.storeVector(id, sector, this.config.userId, vector, dim);
+      await this.config.vector.storeVector(id, sector, userId, vector, dim);
     }
     await this.config.storage.updateMemory(memory);
     return memory;
@@ -509,35 +553,50 @@ var MemoryEngine = class {
   /**
    * Deletes a memory and its associated vectors.
    */
-  async delete(id) {
-    const existing = await this.config.storage.getMemory(id, this.config.userId);
+  async delete(id, userId) {
+    const existing = await this.config.storage.getMemory(id, userId);
     if (!existing) return;
     for (const sector of existing.sectors) {
-      await this.config.vector.deleteVector(id, sector, this.config.userId);
+      await this.config.vector.deleteVector(id, sector, userId);
     }
-    await this.config.storage.deleteMemory(id, this.config.userId);
+    await this.config.storage.deleteMemory(id, userId);
   }
   /**
    * Gets all memories for the user in a given sector.
    */
-  async getAll(sector, limit = 100) {
-    return this.config.storage.getMemoriesBySector(sector, this.config.userId, limit);
+  async getAll(sector, options) {
+    return this.config.storage.getMemoriesBySector(sector, options.userId, options.limit || 100);
+  }
+  /**
+   * Gets a specific memory by ID.
+   */
+  async get(id, options) {
+    return this.config.storage.getMemory(id, options.userId);
+  }
+  /**
+   * Manually reinforces the salience of a specific memory node.
+   */
+  async reinforce(id, options) {
+    const memory = await this.config.storage.getMemory(id, options.userId);
+    if (memory) {
+      const { reinforceNodeSalience: reinforceNodeSalience2 } = await Promise.resolve().then(() => (init_waypoints(), waypoints_exports));
+      await reinforceNodeSalience2(memory, this.config.storage);
+    }
   }
   /**
    * Runs the decay pass across all memories.
    */
-  async runDecayPass() {
+  async runDecayPass(userId) {
   }
 };
 
 // src/temporal/facts.ts
+init_clock();
 var FactStore = class {
-  constructor(storage, userId) {
+  constructor(storage) {
     this.storage = storage;
-    this.userId = userId;
   }
   storage;
-  userId;
   /**
    * Directly inserts a fact. Usually you want `versioning.evolveFact` instead 
    * to handle the auto-closing of old facts.
@@ -545,8 +604,7 @@ var FactStore = class {
   async insert(fact) {
     const newFact = {
       ...fact,
-      id: crypto.randomUUID(),
-      userId: this.userId
+      id: crypto.randomUUID()
     };
     await this.storage.insertFact(newFact);
     return newFact;
@@ -554,27 +612,27 @@ var FactStore = class {
   /**
    * Marks a fact as no longer valid as of right now.
    */
-  async invalidate(id) {
-    await this.storage.invalidateFact(id, this.userId, clock.now());
+  async invalidate(id, userId) {
+    await this.storage.invalidateFact(id, userId, clock.now());
   }
 };
 
 // src/temporal/versioning.ts
+init_clock();
 var FactVersioning = class {
-  constructor(storage, userId) {
+  constructor(storage) {
     this.storage = storage;
-    this.userId = userId;
   }
   storage;
-  userId;
   /**
    * Sets a new fact using the Slowly Changing Dimension (SCD) pattern.
    * If an active fact exists for the same subject/predicate, it is closed (validTo = now).
    * Then the new fact is inserted.
    */
-  async evolveFact(subject, predicate, object, confidence = 1, metadata) {
+  async evolveFact(subject, predicate, object, options) {
+    const { userId, confidence = 1, metadata } = options;
     const now = clock.now();
-    const active = await this.storage.getActiveFact(subject, predicate, this.userId);
+    const active = await this.storage.getActiveFact(subject, predicate, userId);
     if (active && active.object === object) {
       return active;
     }
@@ -584,7 +642,7 @@ var FactVersioning = class {
     }
     const newFact = {
       id: crypto.randomUUID(),
-      userId: this.userId,
+      userId,
       subject,
       predicate,
       object,
@@ -600,106 +658,85 @@ var FactVersioning = class {
 
 // src/temporal/query.ts
 var FactQuery = class {
-  constructor(storage, userId) {
+  constructor(storage) {
     this.storage = storage;
-    this.userId = userId;
   }
   storage;
-  userId;
   /**
-   * Gets all facts that were true at a specific point in time.
+   * Gets the state of the knowledge graph at a specific point in time.
+   * Returns only facts that were valid at `targetTimeMs`.
    */
-  async atPointInTime(targetTimeMs) {
-    return this.storage.queryFacts(this.userId, { at: targetTimeMs });
+  async atPointInTime(targetTimeMs, userId) {
+    return this.storage.queryFacts(userId, { at: targetTimeMs });
   }
   /**
-   * Gets all currently active facts (validTo is null).
+   * Gets the current, active state of the knowledge graph.
    */
-  async current() {
-    const allFacts = await this.storage.queryFacts(this.userId, {});
+  async current(userId) {
+    const allFacts = await this.storage.queryFacts(userId, {});
     return allFacts.filter((f) => f.validTo === null);
   }
   /**
-   * Finds the currently active fact for a specific subject and predicate.
+   * Gets the currently active fact for a subject/predicate.
    */
-  async activeFact(subject, predicate) {
-    return this.storage.getActiveFact(subject, predicate, this.userId);
+  async activeFact(subject, predicate, userId) {
+    return this.storage.getActiveFact(subject, predicate, userId);
   }
   /**
-   * Compares the knowledge state between two points in time.
+   * Compares the knowledge state between two time points.
+   * Returns facts that were added, removed, or changed.
    */
-  async compareTimePoints(t1, t2) {
-    const factsT1 = await this.atPointInTime(t1);
-    const factsT2 = await this.atPointInTime(t2);
-    const mapT1 = new Map(factsT1.map((f) => [`${f.subject}:${f.predicate}`, f]));
-    const mapT2 = new Map(factsT2.map((f) => [`${f.subject}:${f.predicate}`, f]));
-    const result = {
-      added: [],
-      removed: [],
-      changed: [],
-      unchanged: []
-    };
-    for (const [key, f2] of mapT2.entries()) {
-      const f1 = mapT1.get(key);
-      if (!f1) {
-        result.added.push(f2);
-      } else if (f1.object === f2.object) {
-        result.unchanged.push(f2);
-      } else {
-        result.changed.push(f2);
+  async compareTimePoints(timeA, timeB, userId) {
+    const stateA = await this.atPointInTime(timeA, userId);
+    const stateB = await this.atPointInTime(timeB, userId);
+    const added = stateB.filter((b) => !stateA.some((a) => a.id === b.id));
+    const removed = stateA.filter((a) => !stateB.some((b) => b.id === a.id));
+    const changed = [];
+    for (const a of stateA) {
+      const b = stateB.find((b2) => b2.subject === a.subject && b2.predicate === a.predicate);
+      if (b && b.id !== a.id) {
+        changed.push({ old: a, new: b });
       }
     }
-    for (const [key, f1] of mapT1.entries()) {
-      if (!mapT2.has(key)) {
-        result.removed.push(f1);
-      }
-    }
-    return result;
+    return { added, removed, changed };
   }
 };
 
 // src/temporal/timeline.ts
 var FactTimeline = class {
-  constructor(storage, userId) {
+  constructor(storage) {
     this.storage = storage;
-    this.userId = userId;
   }
   storage;
-  userId;
   /**
-   * Gets the full history of changes for a specific subject and predicate,
-   * sorted chronologically.
+   * Generates a chronological history of a specific property for a subject.
+   * e.g. "Where has Bob lived over time?"
    */
-  async getSubjectPredicateHistory(subject, predicate) {
-    const facts = await this.storage.queryFacts(this.userId, { subject, predicate });
+  async getPropertyHistory(subject, predicate, userId) {
+    const facts = await this.storage.queryFacts(userId, { subject, predicate });
     return facts.sort((a, b) => a.validFrom - b.validFrom);
   }
   /**
-   * Calculates the change frequency (volatility) of a fact.
-   * High volatility means this fact changes often (e.g. current location).
+   * Returns a chronological feed of all events/changes for a subject.
    */
-  async getVolatility(subject, predicate) {
-    const history = await this.getSubjectPredicateHistory(subject, predicate);
-    if (history.length < 2) return 0;
-    const firstTime = history[0].validFrom;
-    const lastTime = history[history.length - 1].validFrom;
-    const duration = lastTime - firstTime;
-    if (duration === 0) return 0;
-    return (history.length - 1) / (duration / (1e3 * 60 * 60 * 24));
-  }
-  /**
-   * Generates a chronological timeline of events for a given subject.
-   */
-  async getSubjectTimeline(subject) {
-    const facts = await this.storage.queryFacts(this.userId, { subject });
+  async getSubjectTimeline(subject, userId) {
+    const facts = await this.storage.queryFacts(userId, { subject });
     const events = [];
     for (const fact of facts) {
-      events.push({ time: fact.validFrom, type: "created", fact });
+      events.push({
+        timestamp: fact.validFrom,
+        description: `Started: ${fact.subject} ${fact.predicate} ${fact.object}`,
+        fact
+      });
       if (fact.validTo !== null) {
-        events.push({ time: fact.validTo, type: "invalidated", fact });
+        events.push({
+          timestamp: fact.validTo,
+          description: `Ended: ${fact.subject} ${fact.predicate} ${fact.object}`,
+          fact
+        });
       }
     }
-    return events.sort((a, b) => a.time - b.time);
+    return events.sort((a, b) => a.timestamp - b.timestamp);
   }
 };
 
@@ -736,6 +773,9 @@ var PluginError = class extends MemoryMinusOneError {
     this.name = "PluginError";
   }
 };
+
+// src/index.ts
+init_clock();
 
 // src/plugins/embedding/synthetic.ts
 function syntheticEmbedding(dim = 768) {
@@ -921,6 +961,7 @@ function memoryVectorStore() {
 }
 
 // src/plugins/cache/lru.ts
+init_clock();
 function lruCache(options = {}) {
   const maxSize = options.maxSize || 1e3;
   const defaultTtlSeconds = options.defaultTtlSeconds || 3600;
@@ -998,10 +1039,10 @@ var MemoryMinusOne = class {
     await this.config.vector.init?.(ctx);
     await this.config.cache?.init?.(ctx);
     this.engine = new MemoryEngine(this.config);
-    this.factStore = new FactStore(this.config.storage, this.config.userId);
-    this.factVersioning = new FactVersioning(this.config.storage, this.config.userId);
-    this.factQuery = new FactQuery(this.config.storage, this.config.userId);
-    this.factTimeline = new FactTimeline(this.config.storage, this.config.userId);
+    this.factStore = new FactStore(this.config.storage);
+    this.factVersioning = new FactVersioning(this.config.storage);
+    this.factQuery = new FactQuery(this.config.storage);
+    this.factTimeline = new FactTimeline(this.config.storage);
     this.logger.info("engine", "Initialization complete");
   }
   async destroy() {
@@ -1015,29 +1056,38 @@ var MemoryMinusOne = class {
     return this.events;
   }
   // Core Engine Methods
-  async add(content, metadata, tags = []) {
-    return this.engine.add(content, metadata, tags);
+  async add(content, options) {
+    return this.engine.add(content, options);
   }
-  async query(queryText, sector, limit = 5) {
-    return this.engine.query(queryText, sector, limit);
+  async query(queryText, options) {
+    return this.engine.query(queryText, options);
   }
-  async reflect() {
+  async get(id, options) {
+    return this.engine.get(id, options);
   }
-  async decay() {
+  async getAll(sector, options) {
+    return this.engine.getAll(sector, options);
+  }
+  async reinforce(id, options) {
+    return this.engine.reinforce(id, options);
+  }
+  async reflect(userId) {
+  }
+  async decay(userId) {
   }
   // Facts namespace
   get facts() {
     return {
       insert: async (fact) => this.factStore.insert(fact),
-      invalidate: async (id) => this.factStore.invalidate(id),
-      evolve: async (subject, predicate, object, confidence, metadata) => this.factVersioning.evolveFact(subject, predicate, object, confidence, metadata),
+      invalidate: async (id, userId) => this.factStore.invalidate(id, userId),
+      evolve: async (subject, predicate, object, options) => this.factVersioning.evolveFact(subject, predicate, object, options),
       query: {
-        at: async (timeMs) => this.factQuery.atPointInTime(timeMs),
-        current: async () => this.factQuery.current(),
-        active: async (s, p) => this.factQuery.activeFact(s, p),
-        compare: async (t1, t2) => this.factQuery.compareTimePoints(t1, t2)
+        at: async (timeMs, userId) => this.factQuery.atPointInTime(timeMs, userId),
+        current: async (userId) => this.factQuery.current(userId),
+        active: async (s, p, userId) => this.factQuery.activeFact(s, p, userId),
+        compare: async (t1, t2, userId) => this.factQuery.compareTimePoints(t1, t2, userId)
       },
-      timeline: async (subject) => this.factTimeline.getSubjectTimeline(subject)
+      timeline: async (subject, userId) => this.factTimeline.getSubjectTimeline(subject, userId)
     };
   }
 };

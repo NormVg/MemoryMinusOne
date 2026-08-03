@@ -19,11 +19,11 @@ export async function runLongMemEvalBenchmark(memory: MemoryMinusOne, dataset: L
     // 1. Ingest dialogue history
     for (const turn of session.dialogue_history) {
       // Simple format: "User: Hello" or "Assistant: Hi"
-      await memory.add(`${turn.role}: ${turn.content}`);
+      await memory.add(`${turn.role}: ${turn.content}`, { userId: "longmem_eval" });
     }
     
     // 2. Retrieve for the question
-    const retrieved = await memory.query(session.question, undefined, 5);
+    const retrieved = await memory.query(session.question, { userId: "longmem_eval", limit: 5 });
     const retrievedContext = retrieved.map(r => r.memory.content);
     
     // 3. Evaluate

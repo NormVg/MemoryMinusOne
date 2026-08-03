@@ -48,14 +48,15 @@ async function runE2E() {
     model: ollama.embedding('nomic-embed-text')
   });
 
-  const config = {
-    userId: "e2e_benchmark_user_" + Date.now(), // fresh user each run to avoid collision
+  // 1. Initialize Memory Engine
+  const memory = createMemory({
     storage,
-    vector,
     embedding,
-  };
+    vector
+  });
+  await memory.init();
 
-  const engine = new MemoryEngine(config);
+  const testUserId = "e2e_benchmark_user_" + Date.now();
 
   // 1. Data Ingestion
   console.log("\n[1] Ingesting multi-hop facts into Neon Postgres...");
@@ -67,7 +68,7 @@ async function runE2E() {
 
   const startInsert = performance.now();
   for (const fact of facts) {
-    await engine.add(fact);
+    await memory.add(fact, { userId: testUserId });
   }
   const endInsert = performance.now();
   console.log(`- Inserted facts in ${(endInsert - startInsert).toFixed(2)}ms`);

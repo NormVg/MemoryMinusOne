@@ -1,0 +1,31 @@
+{
+  "name": "@memory-minus-one/cache-redis",
+  "version": "0.1.0",
+  "description": "Upstash Redis cache plugin for MemoryMinusOne — serverless-safe, HTTP-based",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch"
+  },
+  "dependencies": {
+    "@memory-minus-one/core": "workspace:*"
+  },
+  "peerDependencies": {
+    "@upstash/redis": "^1.34.0"
+  },
+  "devDependencies": {
+    "@upstash/redis": "^1.34.0",
+    "tsup": "^8.5.0",
+    "typescript": "^5.8.3"
+  }
+}

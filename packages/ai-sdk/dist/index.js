@@ -54,21 +54,30 @@ function aiSdkEmbedding(options) {
 // src/tool.ts
 var import_ai2 = require("ai");
 var import_zod = require("zod");
-function memoryTool(memoryInstance) {
+function memoryTool(memoryInstance, userId) {
   return (0, import_ai2.tool)({
     description: "Access and store long-term memory for the user. Use this to remember facts, preferences, and events.",
     parameters: import_zod.z.object({
-      action: import_zod.z.enum(["add", "query"]),
-      content: import_zod.z.string().describe("The memory content to store or the search query to retrieve memories")
+      action: import_zod.z.enum(["add", "query", "list", "get", "reinforce"]),
+      content: import_zod.z.string().describe("The memory content to store, query, or the sector to list, or ID to get/reinforce")
     }),
     execute: async ({ action, content }) => {
       try {
         if (action === "add") {
-          const result = await memoryInstance.add(content);
+          const result = await memoryInstance.add(content, { userId });
           return { success: true, memoryId: result.id, sector: result.primarySector };
         } else if (action === "query") {
-          const results = await memoryInstance.query(content, void 0, 5);
-          return { success: true, memories: results.map((r) => ({ content: r.memory.content, score: r.score })) };
+          const results = await memoryInstance.query(content, { userId, limit: 5 });
+          return { success: true, memories: results.map((r) => ({ id: r.memory.id, content: r.memory.content, score: r.score })) };
+        } else if (action === "list") {
+          const results = await memoryInstance.getAll(content, { userId, limit: 10 });
+          return { success: true, memories: results.map((m) => ({ id: m.id, content: m.content })) };
+        } else if (action === "get") {
+          const result = await memoryInstance.get(content, { userId });
+          return { success: !!result, memory: result ? { id: result.id, content: result.content } : null };
+        } else if (action === "reinforce") {
+          await memoryInstance.reinforce(content, { userId });
+          return { success: true, message: "Memory reinforced successfully" };
         }
       } catch (e) {
         return { success: false, error: e.message };

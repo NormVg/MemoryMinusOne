@@ -11,29 +11,52 @@ interface AiSdkEmbeddingOptions {
  */
 declare function aiSdkEmbedding(options: AiSdkEmbeddingOptions): IEmbeddingPlugin;
 
-declare function memoryTool(memoryInstance: MemoryMinusOne): ai.CoreTool<z.ZodObject<{
-    action: z.ZodEnum<["add", "query"]>;
+declare function memoryTool(memoryInstance: MemoryMinusOne, userId: string): ai.CoreTool<z.ZodObject<{
+    action: z.ZodEnum<["add", "query", "list", "get", "reinforce"]>;
     content: z.ZodString;
 }, "strip", z.ZodTypeAny, {
-    action: "add" | "query";
+    action: "add" | "query" | "list" | "get" | "reinforce";
     content: string;
 }, {
-    action: "add" | "query";
+    action: "add" | "query" | "list" | "get" | "reinforce";
     content: string;
 }>, {
     success: boolean;
     memoryId: string;
     sector: string;
     memories?: undefined;
+    memory?: undefined;
+    message?: undefined;
     error?: undefined;
 } | {
     success: boolean;
     memories: {
+        id: any;
         content: any;
-        score: any;
     }[];
     memoryId?: undefined;
     sector?: undefined;
+    memory?: undefined;
+    message?: undefined;
+    error?: undefined;
+} | {
+    success: boolean;
+    memory: {
+        id: string;
+        content: string;
+    } | null;
+    memoryId?: undefined;
+    sector?: undefined;
+    memories?: undefined;
+    message?: undefined;
+    error?: undefined;
+} | {
+    success: boolean;
+    message: string;
+    memoryId?: undefined;
+    sector?: undefined;
+    memories?: undefined;
+    memory?: undefined;
     error?: undefined;
 } | {
     success: boolean;
@@ -41,9 +64,11 @@ declare function memoryTool(memoryInstance: MemoryMinusOne): ai.CoreTool<z.ZodOb
     memoryId?: undefined;
     sector?: undefined;
     memories?: undefined;
+    memory?: undefined;
+    message?: undefined;
 } | undefined> & {
     execute: (args: {
-        action: "add" | "query";
+        action: "add" | "query" | "list" | "get" | "reinforce";
         content: string;
     }, options: {
         abortSignal?: AbortSignal;
@@ -52,15 +77,38 @@ declare function memoryTool(memoryInstance: MemoryMinusOne): ai.CoreTool<z.ZodOb
         memoryId: string;
         sector: string;
         memories?: undefined;
+        memory?: undefined;
+        message?: undefined;
         error?: undefined;
     } | {
         success: boolean;
         memories: {
+            id: any;
             content: any;
-            score: any;
         }[];
         memoryId?: undefined;
         sector?: undefined;
+        memory?: undefined;
+        message?: undefined;
+        error?: undefined;
+    } | {
+        success: boolean;
+        memory: {
+            id: string;
+            content: string;
+        } | null;
+        memoryId?: undefined;
+        sector?: undefined;
+        memories?: undefined;
+        message?: undefined;
+        error?: undefined;
+    } | {
+        success: boolean;
+        message: string;
+        memoryId?: undefined;
+        sector?: undefined;
+        memories?: undefined;
+        memory?: undefined;
         error?: undefined;
     } | {
         success: boolean;
@@ -68,6 +116,8 @@ declare function memoryTool(memoryInstance: MemoryMinusOne): ai.CoreTool<z.ZodOb
         memoryId?: undefined;
         sector?: undefined;
         memories?: undefined;
+        memory?: undefined;
+        message?: undefined;
     } | undefined>;
 };
 

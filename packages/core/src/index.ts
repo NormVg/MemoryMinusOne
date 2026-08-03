@@ -40,10 +40,10 @@ export class MemoryMinusOne {
     await this.config.cache?.init?.(ctx);
     
     this.engine = new MemoryEngine(this.config);
-    this.factStore = new FactStore(this.config.storage, this.config.userId);
-    this.factVersioning = new FactVersioning(this.config.storage, this.config.userId);
-    this.factQuery = new FactQuery(this.config.storage, this.config.userId);
-    this.factTimeline = new FactTimeline(this.config.storage, this.config.userId);
+    this.factStore = new FactStore(this.config.storage);
+    this.factVersioning = new FactVersioning(this.config.storage);
+    this.factQuery = new FactQuery(this.config.storage);
+    this.factTimeline = new FactTimeline(this.config.storage);
 
     this.logger.info("engine", "Initialization complete");
   }
@@ -61,36 +61,48 @@ export class MemoryMinusOne {
   }
 
   // Core Engine Methods
-  async add(content: string, metadata?: Record<string, any>, tags: string[] = []) {
-    return this.engine.add(content, metadata, tags);
+  async add(content: string, options: { userId: string; metadata?: Record<string, any>; tags?: string[] }) {
+    return this.engine.add(content, options);
   }
 
-  async query(queryText: string, sector?: string, limit: number = 5) {
-    return this.engine.query(queryText, sector, limit);
+  async query(queryText: string, options: { userId: string; sector?: string; limit?: number }) {
+    return this.engine.query(queryText, options);
   }
 
-  async reflect() {
+  async get(id: string, options: { userId: string }) {
+    return this.engine.get(id, options);
+  }
+
+  async getAll(sector: string, options: { userId: string; limit?: number }) {
+    return this.engine.getAll(sector, options);
+  }
+
+  async reinforce(id: string, options: { userId: string }) {
+    return this.engine.reinforce(id, options);
+  }
+
+  async reflect(userId: string) {
     // TODO: delegate to reflection engine
   }
   
-  async decay() {
+  async decay(userId: string) {
     // TODO: delegate to decay pass
   }
 
   // Facts namespace
   get facts() {
     return {
-      insert: async (fact: any) => this.factStore.insert(fact),
-      invalidate: async (id: string) => this.factStore.invalidate(id),
-      evolve: async (subject: string, predicate: string, object: string, confidence?: number, metadata?: any) => 
-        this.factVersioning.evolveFact(subject, predicate, object, confidence, metadata),
+      insert: async (fact: Omit<import("./core/types").TemporalFact, "id">) => this.factStore.insert(fact),
+      invalidate: async (id: string, userId: string) => this.factStore.invalidate(id, userId),
+      evolve: async (subject: string, predicate: string, object: string, options: { userId: string; confidence?: number; metadata?: any }) => 
+        this.factVersioning.evolveFact(subject, predicate, object, options),
       query: {
-        at: async (timeMs: number) => this.factQuery.atPointInTime(timeMs),
-        current: async () => this.factQuery.current(),
-        active: async (s: string, p: string) => this.factQuery.activeFact(s, p),
-        compare: async (t1: number, t2: number) => this.factQuery.compareTimePoints(t1, t2),
+        at: async (timeMs: number, userId: string) => this.factQuery.atPointInTime(timeMs, userId),
+        current: async (userId: string) => this.factQuery.current(userId),
+        active: async (s: string, p: string, userId: string) => this.factQuery.activeFact(s, p, userId),
+        compare: async (t1: number, t2: number, userId: string) => this.factQuery.compareTimePoints(t1, t2, userId),
       },
-      timeline: async (subject: string) => this.factTimeline.getSubjectTimeline(subject),
+      timeline: async (subject: string, userId: string) => this.factTimeline.getSubjectTimeline(subject, userId),
     };
   }
 }
