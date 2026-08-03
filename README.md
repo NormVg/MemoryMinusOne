@@ -81,36 +81,67 @@ const mem = createMemory({
 ## Architecture
 
 ```mermaid
-flowchart LR
-    %% Style Definitions
-    classDef facade fill:#1e293b,stroke:#3b82f6,stroke-width:2px,color:#f8fafc;
-    classDef core fill:#0f172a,stroke:#334155,stroke-width:1px,color:#e2e8f0;
-    classDef plugin fill:#1e1b4b,stroke:#6366f1,stroke-width:1px,color:#e0e7ff;
-    classDef external fill:#0f2942,stroke:#0284c7,stroke-width:1px,color:#e0f2fe;
+flowchart TD
+    %% Styling Classes
+    classDef input fill:#f8fafc,stroke:#cbd5e1,stroke-width:1px,color:#0f172a;
+    classDef classifier fill:#e0f2fe,stroke:#0284c7,stroke-width:1px,color:#0369a1;
+    classDef sector fill:#fff7ed,stroke:#f97316,stroke-width:1px,color:#ea580c;
+    classDef db fill:#fce7f3,stroke:#db2777,stroke-width:1px,color:#be185d;
+    classDef recallNode fill:#faf5ff,stroke:#9333ea,stroke-width:1px,color:#6b21a8;
+    classDef factsNode fill:#f0f9ff,stroke:#0284c7,stroke-width:1px,color:#0369a1;
+    classDef processing fill:#f0f9ff,stroke:#0284c7,stroke-width:1px,color:#0369a1;
+    classDef trace fill:#f0fdf4,stroke:#16a34a,stroke-width:1px,color:#15803d;
 
-    Agent([Agent / LLM App]) --> MMO[MemoryMinusOne Facade]:::facade
-    
-    subgraph Core ["Cognitive Core"]
-        direction TB
-        Engine["Memory Engine<br/>(Recall & Decay)"]:::core
-        Graph["Waypoint Graph<br/>(Spreading Activation)"]:::core
-        Facts["Temporal Facts<br/>(SCD Versioning)"]:::core
-    end
-    
-    subgraph Plugins ["Plugin Layer (Swappable)"]
-        direction TB
-        Storage["Storage<br/>(Drizzle / Custom)"]:::plugin
-        Embedding["Embedding<br/>(AI SDK / Custom)"]:::plugin
-        Vector["Vector<br/>(pgvector / Custom)"]:::plugin
-        Cache["Cache<br/>(Redis / Custom)"]:::plugin
+    Input["Input / Query"]:::input --> Classifier["Sector Classifier"]:::classifier
+
+    Classifier --> Sector1["Episodic"]:::sector
+    Classifier --> Sector2["Semantic"]:::sector
+    Classifier --> Sector3["Procedural"]:::sector
+    Classifier --> Sector4["Emotional"]:::sector
+    Classifier --> Sector5["Reflective"]:::sector
+
+    Sector1 --> Embed["Embedding Engine"]:::classifier
+    Sector2 --> Embed
+    Sector3 --> Embed
+    Sector4 --> Embed
+    Sector5 --> Embed
+
+    Embed --> DB[(SQLite/Postgres<br/>Memories / Vectors / Waypoints)]:::db
+    Embed --> TemporalDB[(Temporal Graph)]:::db
+
+    subgraph RecallEngine ["Recall Engine"]
+        direction TD
+        VReq["Vector Search"]:::recallNode
+        WaypointGraph["Waypoint Graph"]:::recallNode
+        Decay["Decay Engine"]:::recallNode
+        CompositeScore["Composite Scoring"]:::recallNode
     end
 
-    MMO --> Core
-    Core --> Plugins
+    subgraph TemporalKG ["Temporal KG"]
+        direction TD
+        Facts["Facts"]:::factsNode
+        Timeline["Timeline"]:::factsNode
+    end
+
+    DB --> VReq
+    DB --> WaypointGraph
+    DB --> Decay
+
+    TemporalDB --> Facts
+    Facts --> Timeline
+
+    VReq --> CompositeScore
+    WaypointGraph --> CompositeScore
+    Decay --> CompositeScore
+    Timeline --> CompositeScore
+
+    CompositeScore --> Consolidation["Consolidation"]:::processing
+    Consolidation --> Reflection["Reflection"]:::processing
+    Reflection --> Trace["Recall + Trace"]:::trace
+
+    Trace -.->|Reinforce| WaypointGraph
+    Trace -.->|Salience| Decay
 ```
-
-
-
 
 ## Packages
 
