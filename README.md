@@ -210,4 +210,4 @@ switch (args.action) {
 
 ## License
 
-MIT
+Apache 2.0
