@@ -1,0 +1,24 @@
+[
+  {
+    "id": "locomo_001",
+    "context": [
+      "On March 12th, Alex signed a contract with Globex Corp for 12 months.",
+      "Globex Corp was acquired by Initech on June 4th.",
+      "Alex's contract includes a clause that voids the agreement upon acquisition.",
+      "Alex sent an email on June 5th asking about his employment status."
+    ],
+    "question": "Is Alex still under contract with Globex Corp after June 4th? Why?",
+    "expected_answer": "No, because the contract was voided due to the acquisition by Initech."
+  },
+  {
+    "id": "locomo_002",
+    "context": [
+      "The server migration started on Friday at 10 PM.",
+      "Database 1 finished migrating at 11:30 PM.",
+      "Database 2 encountered an error and required a manual restart at 12:15 AM.",
+      "The total migration is complete when all databases are online."
+    ],
+    "question": "Was the server migration completed before midnight?",
+    "expected_answer": "No, because Database 2 encountered an error and needed a restart at 12:15 AM."
+  }
+]

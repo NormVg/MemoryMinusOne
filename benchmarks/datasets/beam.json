@@ -1,0 +1,12 @@
+[
+  {
+    "skill": "contradiction resolution",
+    "context": [
+      "Project Alpha is scheduled for Q3.",
+      "Due to budget cuts, all Q3 projects are moved to Q4.",
+      "Project Alpha is given a special exemption and will remain in Q3."
+    ],
+    "question": "When is Project Alpha scheduled?",
+    "expected_answer": "Q3, due to a special exemption despite budget cuts."
+  }
+]
