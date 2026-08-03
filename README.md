@@ -80,30 +80,33 @@ const mem = createMemory({
 
 ## Architecture
 
+```mermaid
+flowchart TB
+    subgraph MemoryMinusOne ["MemoryMinusOne"]
+        direction TB
+        subgraph CoreEngine ["Core Engine"]
+            direction TB
+            Engine["Engine<br/>• add()<br/>• query()<br/>• get()<br/>• reinforce()"]
+            Facts["Facts Namespace<br/>• evolve()<br/>• timeline()<br/>• query()"]
+        end
+        
+        Classifier["Sector Classifier<br/>(auto-classify)"]
+        WaypointGraph["Waypoint Graph<br/>(spreading activation)"]
+    end
+
+    subgraph PluginLayer ["Plugin Layer (Swappable Interfaces)"]
+        direction LR
+        Storage["IStoragePlugin<br/>(Drizzle / In-Memory)"]
+        Embedding["IEmbeddingPlugin<br/>(AI SDK / Synthetic)"]
+        Vector["IVectorPlugin<br/>(pgvector / In-Memory)"]
+        Cache["ICachePlugin<br/>(Upstash / LRU / None)"]
+    end
+
+    CoreEngine --> PluginLayer
+    Classifier --> CoreEngine
+    WaypointGraph --> CoreEngine
 ```
-┌─────────────────────────────────────────────────────┐
-│                  MemoryMinusOne                     │
-│                                                     │
-│  ┌──────────┐  ┌──────────┐  ┌───────────────────┐ │
-│  │  Engine   │  │  Facts   │  │  Sector Classifier│ │
-│  │          │  │ Temporal  │  │  (auto-classify)  │ │
-│  │ add()    │  │ evolve()  │  └───────────────────┘ │
-│  │ query()  │  │ timeline()│                        │
-│  │ get()    │  │ query()   │  ┌───────────────────┐ │
-│  │ reinforce│  └──────────┘  │  Waypoint Graph    │ │
-│  └──────────┘                │  (spreading activ.)│ │
-│                              └───────────────────┘ │
-├─────────────────────────────────────────────────────┤
-│                  Plugin Layer                       │
-│                                                     │
-│  ┌──────────┐ ┌──────────┐ ┌────────┐ ┌─────────┐ │
-│  │ Storage  │ │Embedding │ │ Vector │ │  Cache  │ │
-│  │ Plugin   │ │ Plugin   │ │ Plugin │ │  Plugin │ │
-│  └──────────┘ └──────────┘ └────────┘ └─────────┘ │
-│   Drizzle/     AI SDK/      pgvector/   Upstash/   │
-│   In-Memory    Synthetic    In-Memory   LRU/None   │
-└─────────────────────────────────────────────────────┘
-```
+
 
 ## Packages
 
