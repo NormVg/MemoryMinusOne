@@ -34,7 +34,8 @@ Score 1.0 if the memories contain all required facts to fully answer the questio
 Score 0.5 if the memories contain partial information.
 Score 0.0 if the memories do not contain the necessary information.
 
-Provide your reasoning and the final score.
+Provide your reasoning and the final score. 
+IMPORTANT: You MUST output ONLY a valid JSON object matching the schema. Do NOT wrap the JSON in markdown code blocks (e.g. \`\`\`json). Do NOT output any other conversational text.
 `;
 
   try {

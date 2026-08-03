@@ -13,16 +13,18 @@ export async function runBeamBenchmark(memory: MemoryMinusOne, dataset: BeamData
   
   let totalScore = 0;
   
-  for (const item of dataset) {
+  for (let index = 0; index < dataset.length; index++) {
+    const item = dataset[index];
+    const userId = `beam_eval_${index}`;
     console.log(`\nEvaluating BEAM Skill [${item.skill}]: ${item.question}`);
     
     // 1. Ingest context
     for (const fact of item.context) {
-      await memory.add(fact, { userId: "beam_eval" });
+      await memory.add(fact, { userId });
     }
     
     // 2. Retrieve
-    const retrieved = await memory.query(item.question, { userId: "beam_eval", limit: 5 });
+    const retrieved = await memory.query(item.question, { userId, limit: 5 });
     const retrievedContext = retrieved.map(r => r.memory.content);
     
     // 3. Evaluate

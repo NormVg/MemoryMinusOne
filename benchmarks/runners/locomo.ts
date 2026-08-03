@@ -18,11 +18,11 @@ export async function runLocomoBenchmark(memory: MemoryMinusOne, dataset: Locomo
     
     // 1. Ingest context
     for (const fact of item.context) {
-      await memory.add(fact, { userId: "locomo_eval" });
+      await memory.add(fact, { userId: item.id });
     }
     
     // 2. Retrieve
-    const retrieved = await memory.query(item.question, { userId: "locomo_eval", limit: 5 });
+    const retrieved = await memory.query(item.question, { userId: item.id, limit: 5 });
     const retrievedContext = retrieved.map(r => r.memory.content);
     
     // 3. Evaluate
