@@ -8,7 +8,9 @@
     "build": "pnpm -r build",
     "test": "vitest run",
     "typecheck": "pnpm -r typecheck",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "benchmark:fetch": "tsx benchmarks/scripts/fetch-datasets.ts",
+    "benchmark:accuracy": "tsx benchmarks/run-accuracy.ts"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",

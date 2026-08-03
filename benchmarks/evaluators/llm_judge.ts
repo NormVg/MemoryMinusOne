@@ -3,7 +3,7 @@ import { createOllama } from 'ollama-ai-provider';
 import { z } from 'zod';
 
 const ollama = createOllama({
-  baseURL: 'https://gateway.pin.localhost/ollama',
+  baseURL: 'http://localhost:11434/api',
 });
 
 // We use the same model as the rest of the project
