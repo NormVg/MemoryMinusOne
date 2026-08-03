@@ -7,3 +7,6 @@ dist
 .scrap
 raw_chat_history.txt
 coverage
+patches
+AGENTS.md
+skills-lock.json
