@@ -78,6 +78,18 @@ const mem = createMemory({
 });
 ```
 
+## Benchmarks
+
+MemoryMinusOne has been evaluated on the **LOCOMO (Long-term Conversational Memory)** dataset. With strict precision constraints (`Top-10` recall cutoff) using local `embeddinggemma:latest` and `gemma4:31b-cloud` as the evaluator:
+
+- **Overall Accuracy**: **52.1%**
+- **Single-hop**: **61.2%**
+- **Multi-hop**: **59.9%**
+
+Because this memory architecture relies on highly specific hierarchical caching rather than brute-force retrieval (like Top-50/Top-200), these results establish a strong baseline for on-device, small-model memory efficiency.
+
+Read the [Full Benchmark Report](./BENCHMARKS.md) for the complete breakdown.
+
 ## Architecture
 
 ```mermaid
