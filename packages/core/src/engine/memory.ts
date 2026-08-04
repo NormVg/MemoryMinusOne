@@ -12,12 +12,12 @@ export class MemoryEngine {
   /**
    * Adds a new memory to the system.
    */
-  async add(content: string, options: { userId: string; metadata?: Record<string, any>; tags?: string[] }): Promise<MemoryNode> {
-    const { userId, metadata = {}, tags = [] } = options;
+  async add(content: string, options: { userId: string; metadata?: Record<string, any>; tags?: string[]; timestamp?: number }): Promise<MemoryNode> {
+    const { userId, metadata = {}, tags = [], timestamp } = options;
     const classification = classifyContent(content, metadata);
     const simhash = computeSimhash(content);
     const id = crypto.randomUUID();
-    const now = clock.now();
+    const now = timestamp || clock.now();
     
     // Create memory node
     const memory: MemoryNode = {
@@ -109,14 +109,18 @@ export class MemoryEngine {
         matchType: vHit ? "semantic" : "waypoint",
         path: eHit ? eHit.path : [id]
       });
-      
-      // Update last seen to prevent decay
-      mem.lastSeenAt = clock.now();
-      await this.config.storage.updateMemory(mem);
     }
     
     results.sort((a, b) => b.score - a.score);
-    return results.slice(0, limit);
+    const topResults = results.slice(0, limit);
+    
+    // Update last seen to prevent decay only for returned results
+    for (const res of topResults) {
+      res.memory.lastSeenAt = clock.now();
+      await this.config.storage.updateMemory(res.memory);
+    }
+    
+    return topResults;
   }
 
   /**

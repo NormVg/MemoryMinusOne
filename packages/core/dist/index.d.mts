@@ -264,6 +264,7 @@ declare class MemoryEngine {
         userId: string;
         metadata?: Record<string, any>;
         tags?: string[];
+        timestamp?: number;
     }): Promise<MemoryNode>;
     /**
      * Queries memories using a hybrid approach.

@@ -221,19 +221,55 @@ function computeSimhash(text) {
 
 // src/engine/scoring.ts
 var SCORING_WEIGHTS = {
-  similarity: 0.35,
+  similarity: 0.5,
   overlap: 0.2,
-  waypoint: 0.15,
-  recency: 0.1,
-  tag_match: 0.2
+  waypoint: 0.1,
+  recency: 0.05,
+  tag_match: 0.15
 };
+var STOPWORDS = /* @__PURE__ */ new Set([
+  "a",
+  "an",
+  "and",
+  "are",
+  "as",
+  "at",
+  "be",
+  "but",
+  "by",
+  "for",
+  "if",
+  "in",
+  "into",
+  "is",
+  "it",
+  "no",
+  "not",
+  "of",
+  "on",
+  "or",
+  "such",
+  "that",
+  "the",
+  "their",
+  "then",
+  "there",
+  "these",
+  "they",
+  "this",
+  "to",
+  "was",
+  "will",
+  "with",
+  "user"
+]);
 var HYBRID_PARAMS = {
   tau: 3,
   t_days: 7,
   t_max_days: 60
 };
-function sigmoid(x) {
-  return 1 / (1 + Math.exp(-x));
+function clamp(x) {
+  return Math.max(0, Math.min(1, x));
 }
 function boostedSim(s) {
   return 1 - Math.exp(-HYBRID_PARAMS.tau * s);
@@ -250,14 +286,17 @@ function computeTokenOverlap(queryTokens, memTokens) {
   if (queryTokens.size === 0) return 0;
   let overlap = 0;
   for (const t of queryTokens) {
+    if (STOPWORDS.has(t.toLowerCase())) continue;
     if (memTokens.has(t)) overlap++;
   }
-  return overlap / queryTokens.size;
+  const validQueryTokens = Array.from(queryTokens).filter((t) => !STOPWORDS.has(t.toLowerCase())).length;
+  if (validQueryTokens === 0) return 0;
+  return overlap / validQueryTokens;
 }
 function computeHybridScore(similarity, tokenOverlap, waypointWeight, recencyScore, tagMatchScore = 0, keywordScore = 0) {
   const s_p = boostedSim(similarity);
   const raw = SCORING_WEIGHTS.similarity * s_p + SCORING_WEIGHTS.overlap * tokenOverlap + SCORING_WEIGHTS.waypoint * waypointWeight + SCORING_WEIGHTS.recency * recencyScore + SCORING_WEIGHTS.tag_match * tagMatchScore + keywordScore;
-  return sigmoid(raw);
+  return clamp(raw);
 }
 function cosineSimilarity(a, b) {
   if (a.length !== b.length) return 0;
@@ -283,11 +322,11 @@ var MemoryEngine = class {
    * Adds a new memory to the system.
    */
   async add(content, options) {
-    const { userId, metadata = {}, tags = [] } = options;
+    const { userId, metadata = {}, tags = [], timestamp } = options;
     const classification = classifyContent(content, metadata);
     const simhash = computeSimhash(content);
     const id = crypto.randomUUID();
-    const now = clock.now();
+    const now = timestamp || clock.now();
     const memory = {
       id,
       userId,
@@ -328,10 +367,23 @@ var MemoryEngine = class {
    */
   async query(queryText, options) {
     const { userId, sector, limit = 5 } = options;
-    const targetSector = sector || classifyContent(queryText).primarySector;
-    const { vector } = await this.config.embedding.embed(queryText, targetSector);
-    const vectorHits = await this.config.vector.search(vector, targetSector, userId, limit * 2);
-    const initialIds = vectorHits.map((h) => h.id);
+    const classification = classifyContent(queryText);
+    const targetSectors = sector ? [sector] : classification.sectors;
+    const vectorHits = [];
+    let primaryVector = [];
+    for (const targetSector of targetSectors) {
+      const { vector } = await this.config.embedding.embed(queryText, targetSector);
+      if (targetSector === classification.primarySector) primaryVector = vector;
+      const hits = await this.config.vector.search(vector, targetSector, userId, limit * 2);
+      vectorHits.push(...hits);
+    }
+    const uniqueHits = /* @__PURE__ */ new Map();
+    for (const hit of vectorHits) {
+      if (!uniqueHits.has(hit.id) || uniqueHits.get(hit.id) < hit.score) {
+        uniqueHits.set(hit.id, hit.score);
+      }
+    }
+    const initialIds = Array.from(uniqueHits.keys());
     const expanded = await expandViaWaypoints(initialIds, userId, this.config.storage, limit);
     const queryTokens = new Set(queryText.toLowerCase().split(/\W+/));
     const results = [];
@@ -339,8 +391,8 @@ var MemoryEngine = class {
     for (const id of candidateIds) {
       const mem = await this.config.storage.getMemory(id, userId);
       if (!mem) continue;
-      const vHit = vectorHits.find((h) => h.id === id);
-      const similarity = vHit ? vHit.score : 0.5;
+      const simScore = uniqueHits.get(id);
+      const similarity = simScore !== void 0 ? simScore : 0.5;
       const eHit = expanded.find((h) => h.id === id);
       const waypointWeight = eHit ? eHit.weight : 0;
       const memTokens = new Set(mem.content.toLowerCase().split(/\W+/));
@@ -350,14 +402,17 @@ var MemoryEngine = class {
       results.push({
         memory: mem,
         score,
-        matchType: vHit ? "semantic" : "waypoint",
+        matchType: uniqueHits.has(id) ? "semantic" : "waypoint",
         path: eHit ? eHit.path : [id]
       });
-      mem.lastSeenAt = clock.now();
-      await this.config.storage.updateMemory(mem);
     }
     results.sort((a, b) => b.score - a.score);
-    return results.slice(0, limit);
+    const topResults = results.slice(0, limit);
+    for (const res of topResults) {
+      res.memory.lastSeenAt = clock.now();
+      await this.config.storage.updateMemory(res.memory);
+    }
+    return topResults;
   }
   /**
    * Updates an existing memory's content and re-embeds it.
