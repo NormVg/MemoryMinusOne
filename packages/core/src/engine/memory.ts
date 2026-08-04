@@ -70,11 +70,24 @@ export class MemoryEngine {
    */
   async query(queryText: string, options: { userId: string; sector?: string; limit?: number }): Promise<QueryResult[]> {
     const { userId, sector, limit = 5 } = options;
-    const targetSector = sector || classifyContent(queryText).primarySector;
-    const { vector } = await this.config.embedding.embed(queryText, targetSector);
+    const classification = classifyContent(queryText);
+    const primarySector = sector || classification.primarySector;
     
-    // 1. Vector search
-    const vectorHits = await this.config.vector.search(vector, targetSector, userId, limit * 2);
+    // 1. Vector search — primary sector + semantic fallback (max 2 sectors)
+    const searchSectors = [primarySector];
+    if (primarySector !== "semantic") searchSectors.push("semantic");
+    
+    const allHits: Map<string, number> = new Map();
+    for (const s of searchSectors) {
+      const { vector } = await this.config.embedding.embed(queryText, s);
+      const hits = await this.config.vector.search(vector, s, userId, limit * 4);
+      for (const h of hits) {
+        if (!allHits.has(h.id) || allHits.get(h.id)! < h.score) {
+          allHits.set(h.id, h.score);
+        }
+      }
+    }
+    const vectorHits = Array.from(allHits.entries()).map(([id, score]) => ({ id, score }));
     
     // 2. Expand via waypoints
     const initialIds = vectorHits.map(h => h.id);

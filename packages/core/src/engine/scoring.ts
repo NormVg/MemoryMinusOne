@@ -1,12 +1,22 @@
 import { clock } from "../core/clock";
 
 export const SCORING_WEIGHTS = {
-  similarity: 0.35,
-  overlap: 0.2,
+  similarity: 0.50,
+  overlap: 0.25,
   waypoint: 0.15,
-  recency: 0.1,
-  tag_match: 0.2,
+  recency: 0.0,
+  tag_match: 0.10,
 };
+
+const STOPWORDS = new Set([
+  "a", "an", "and", "are", "as", "at", "be", "but", "by", "for",
+  "if", "in", "into", "is", "it", "no", "not", "of", "on", "or",
+  "such", "that", "the", "their", "then", "there", "these",
+  "they", "this", "to", "was", "will", "with", "what", "when",
+  "where", "who", "how", "did", "does", "do", "has", "have",
+  "had", "been", "would", "could", "should", "can", "may",
+  "user", "about", "from", "which", "some", "any", "all"
+]);
 
 export const HYBRID_PARAMS = {
   tau: 3,
@@ -14,9 +24,9 @@ export const HYBRID_PARAMS = {
   t_max_days: 60,
 };
 
-/** Sigmoid function to normalize scores to 0-1 */
+/** Linear clamp to normalize scores to 0-1 */
 export function sigmoid(x: number): number {
-  return 1 / (1 + Math.exp(-x));
+  return Math.max(0, Math.min(1, x));
 }
 
 /** Boosts similarity score non-linearly using tau */
@@ -45,9 +55,11 @@ export function computeTokenOverlap(queryTokens: Set<string>, memTokens: Set<str
   if (queryTokens.size === 0) return 0;
   let overlap = 0;
   for (const t of queryTokens) {
+    if (STOPWORDS.has(t)) continue;
     if (memTokens.has(t)) overlap++;
   }
-  return overlap / queryTokens.size;
+  const meaningful = [...queryTokens].filter(t => !STOPWORDS.has(t)).length;
+  return meaningful === 0 ? 0 : overlap / meaningful;
 }
 
 /**

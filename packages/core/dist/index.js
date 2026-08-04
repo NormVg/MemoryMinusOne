@@ -381,10 +381,10 @@ init_waypoints();
 init_clock();
 var SCORING_WEIGHTS = {
   similarity: 0.5,
-  overlap: 0.2,
-  waypoint: 0.1,
-  recency: 0.05,
-  tag_match: 0.15
+  overlap: 0.25,
+  waypoint: 0.15,
+  recency: 0,
+  tag_match: 0.1
 };
 var STOPWORDS = /* @__PURE__ */ new Set([
   "a",
@@ -420,14 +420,37 @@ var STOPWORDS = /* @__PURE__ */ new Set([
   "was",
   "will",
   "with",
-  "user"
+  "what",
+  "when",
+  "where",
+  "who",
+  "how",
+  "did",
+  "does",
+  "do",
+  "has",
+  "have",
+  "had",
+  "been",
+  "would",
+  "could",
+  "should",
+  "can",
+  "may",
+  "user",
+  "about",
+  "from",
+  "which",
+  "some",
+  "any",
+  "all"
 ]);
 var HYBRID_PARAMS = {
   tau: 3,
   t_days: 7,
   t_max_days: 60
 };
-function clamp(x) {
+function sigmoid(x) {
   return Math.max(0, Math.min(1, x));
 }
 function boostedSim(s) {
@@ -445,17 +468,16 @@ function computeTokenOverlap(queryTokens, memTokens) {
   if (queryTokens.size === 0) return 0;
   let overlap = 0;
   for (const t of queryTokens) {
-    if (STOPWORDS.has(t.toLowerCase())) continue;
+    if (STOPWORDS.has(t)) continue;
     if (memTokens.has(t)) overlap++;
   }
-  const validQueryTokens = Array.from(queryTokens).filter((t) => !STOPWORDS.has(t.toLowerCase())).length;
-  if (validQueryTokens === 0) return 0;
-  return overlap / validQueryTokens;
+  const meaningful = [...queryTokens].filter((t) => !STOPWORDS.has(t)).length;
+  return meaningful === 0 ? 0 : overlap / meaningful;
 }
 function computeHybridScore(similarity, tokenOverlap, waypointWeight, recencyScore, tagMatchScore = 0, keywordScore = 0) {
   const s_p = boostedSim(similarity);
   const raw = SCORING_WEIGHTS.similarity * s_p + SCORING_WEIGHTS.overlap * tokenOverlap + SCORING_WEIGHTS.waypoint * waypointWeight + SCORING_WEIGHTS.recency * recencyScore + SCORING_WEIGHTS.tag_match * tagMatchScore + keywordScore;
-  return clamp(raw);
+  return sigmoid(raw);
 }
 function cosineSimilarity(a, b) {
   if (a.length !== b.length) return 0;
@@ -528,22 +550,21 @@ var MemoryEngine = class {
   async query(queryText, options) {
     const { userId, sector, limit = 5 } = options;
     const classification = classifyContent(queryText);
-    const targetSectors = sector ? [sector] : classification.sectors;
-    const vectorHits = [];
-    let primaryVector = [];
-    for (const targetSector of targetSectors) {
-      const { vector } = await this.config.embedding.embed(queryText, targetSector);
-      if (targetSector === classification.primarySector) primaryVector = vector;
-      const hits = await this.config.vector.search(vector, targetSector, userId, limit * 2);
-      vectorHits.push(...hits);
-    }
-    const uniqueHits = /* @__PURE__ */ new Map();
-    for (const hit of vectorHits) {
-      if (!uniqueHits.has(hit.id) || uniqueHits.get(hit.id) < hit.score) {
-        uniqueHits.set(hit.id, hit.score);
+    const primarySector = sector || classification.primarySector;
+    const searchSectors = [primarySector];
+    if (primarySector !== "semantic") searchSectors.push("semantic");
+    const allHits = /* @__PURE__ */ new Map();
+    for (const s of searchSectors) {
+      const { vector } = await this.config.embedding.embed(queryText, s);
+      const hits = await this.config.vector.search(vector, s, userId, limit * 4);
+      for (const h of hits) {
+        if (!allHits.has(h.id) || allHits.get(h.id) < h.score) {
+          allHits.set(h.id, h.score);
+        }
       }
     }
-    const initialIds = Array.from(uniqueHits.keys());
+    const vectorHits = Array.from(allHits.entries()).map(([id, score]) => ({ id, score }));
+    const initialIds = vectorHits.map((h) => h.id);
     const expanded = await expandViaWaypoints(initialIds, userId, this.config.storage, limit);
     const queryTokens = new Set(queryText.toLowerCase().split(/\W+/));
     const results = [];
@@ -551,8 +572,8 @@ var MemoryEngine = class {
     for (const id of candidateIds) {
       const mem = await this.config.storage.getMemory(id, userId);
       if (!mem) continue;
-      const simScore = uniqueHits.get(id);
-      const similarity = simScore !== void 0 ? simScore : 0.5;
+      const vHit = vectorHits.find((h) => h.id === id);
+      const similarity = vHit ? vHit.score : 0.5;
       const eHit = expanded.find((h) => h.id === id);
       const waypointWeight = eHit ? eHit.weight : 0;
       const memTokens = new Set(mem.content.toLowerCase().split(/\W+/));
@@ -562,7 +583,7 @@ var MemoryEngine = class {
       results.push({
         memory: mem,
         score,
-        matchType: uniqueHits.has(id) ? "semantic" : "waypoint",
+        matchType: vHit ? "semantic" : "waypoint",
         path: eHit ? eHit.path : [id]
       });
     }
