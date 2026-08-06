@@ -504,8 +504,13 @@ var MemoryEngine = class {
    * Adds a new memory to the system.
    */
   async add(content, options) {
+<<<<<<< Updated upstream
     const { userId, metadata = {}, tags = [], timestamp } = options;
     const classification = classifyContent(content, metadata);
+=======
+    const { userId, metadata = {}, tags = [], sector } = options;
+    const classification = sector ? { primarySector: sector, sectors: [sector] } : classifyContent(content, metadata);
+>>>>>>> Stashed changes
     const simhash = computeSimhash(content);
     const id = crypto.randomUUID();
     const now = timestamp || clock.now();
@@ -529,11 +534,11 @@ var MemoryEngine = class {
     };
     let bestMatchId;
     let bestMatchSim = -1;
-    for (const sector of classification.sectors) {
-      const { vector, dim } = await this.config.embedding.embed(content, sector);
-      await this.config.vector.storeVector(id, sector, userId, vector, dim);
-      if (sector === classification.primarySector) {
-        const neighbors = await this.config.vector.search(vector, sector, userId, 1);
+    for (const sector2 of classification.sectors) {
+      const { vector, dim } = await this.config.embedding.embed(content, sector2);
+      await this.config.vector.storeVector(id, sector2, userId, vector, dim);
+      if (sector2 === classification.primarySector) {
+        const neighbors = await this.config.vector.search(vector, sector2, userId, 1);
         if (neighbors.length > 0 && neighbors[0].id !== id) {
           bestMatchId = neighbors[0].id;
           bestMatchSim = neighbors[0].score;

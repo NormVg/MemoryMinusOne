@@ -264,7 +264,11 @@ declare class MemoryEngine {
         userId: string;
         metadata?: Record<string, any>;
         tags?: string[];
+<<<<<<< Updated upstream
         timestamp?: number;
+=======
+        sector?: string;
+>>>>>>> Stashed changes
     }): Promise<MemoryNode>;
     /**
      * Queries memories using a hybrid approach.
@@ -342,6 +346,7 @@ declare class MemoryMinusOne {
         userId: string;
         metadata?: Record<string, any>;
         tags?: string[];
+        sector?: string;
     }): Promise<MemoryNode>;
     query(queryText: string, options: {
         userId: string;

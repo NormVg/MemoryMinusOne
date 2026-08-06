@@ -13,7 +13,6 @@
     "events": "^3.3.0"
   },
   "devDependencies": {
-    "ollama-ai-provider": "^1.2.0",
     "tsup": "^8.0.2",
     "typescript": "^5.4.5",
     "vitest": "^1.6.0"

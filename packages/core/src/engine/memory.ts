@@ -12,9 +12,17 @@ export class MemoryEngine {
   /**
    * Adds a new memory to the system.
    */
+<<<<<<< Updated upstream
   async add(content: string, options: { userId: string; metadata?: Record<string, any>; tags?: string[]; timestamp?: number }): Promise<MemoryNode> {
     const { userId, metadata = {}, tags = [], timestamp } = options;
     const classification = classifyContent(content, metadata);
+=======
+  async add(content: string, options: { userId: string; metadata?: Record<string, any>; tags?: string[]; sector?: string }): Promise<MemoryNode> {
+    const { userId, metadata = {}, tags = [], sector } = options;
+    const classification = sector 
+      ? { primarySector: sector, sectors: [sector] }
+      : classifyContent(content, metadata);
+>>>>>>> Stashed changes
     const simhash = computeSimhash(content);
     const id = crypto.randomUUID();
     const now = timestamp || clock.now();

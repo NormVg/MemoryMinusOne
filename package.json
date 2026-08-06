@@ -9,7 +9,11 @@
     "test": "vitest run",
     "typecheck": "pnpm -r typecheck",
     "lint": "eslint .",
+<<<<<<< Updated upstream
     "benchmark:server": "tsx benchmarks/server.ts"
+=======
+    "benchmark": "cd "
+>>>>>>> Stashed changes
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
@@ -19,8 +23,11 @@
     "dotenv": "^17.4.2",
     "drizzle-kit": "^0.31.10",
     "drizzle-orm": "^0.30.10",
+<<<<<<< Updated upstream
     "express": "^5.2.1",
     "ollama-ai-provider": "^1.2.0",
+=======
+>>>>>>> Stashed changes
     "pg": "^8.22.0",
     "tsup": "^8.0.2",
     "tsx": "^4.23.5",

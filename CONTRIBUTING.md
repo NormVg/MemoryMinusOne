@@ -28,7 +28,6 @@ packages/
 ├── ai-sdk/        # Vercel AI SDK embedding + tools
 ├── cache-redis/   # Upstash Redis cache plugin
 └── eve/           # Eve agent tool wrapper
-benchmarks/        # E2E tests and benchmark runners
 ```
 
 ## Making Changes
@@ -36,7 +35,7 @@ benchmarks/        # E2E tests and benchmark runners
 1. **Fork** the repo and create a branch from `master`.
 2. **Write code** — follow the existing patterns in the codebase.
 3. **Build** — run `pnpm run build` and make sure it passes.
-4. **Test** — run `pnpm test` or the relevant benchmark.
+4. **Test** — run `pnpm test`.
 5. **Commit** — use [conventional commits](https://www.conventionalcommits.org/) (`feat:`, `fix:`, `chore:`, `docs:`).
 6. **Open a PR** — describe what you changed and why.
 

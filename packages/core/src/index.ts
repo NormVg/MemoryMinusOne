@@ -61,7 +61,7 @@ export class MemoryMinusOne {
   }
 
   // Core Engine Methods
-  async add(content: string, options: { userId: string; metadata?: Record<string, any>; tags?: string[] }) {
+  async add(content: string, options: { userId: string; metadata?: Record<string, any>; tags?: string[]; sector?: string }) {
     return this.engine.add(content, options);
   }
 
