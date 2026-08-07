@@ -56,6 +56,23 @@ export function pgvectorSearch(options: PgvectorSearchOptions): IVectorPlugin {
       return res;
     },
 
+    async getVectorsForId(id: string, userId: string) {
+      const res = await db
+        .select({
+          sector: schema.vectors.sector,
+          vector: schema.vectors.vec,
+          dim: schema.vectors.dim
+        })
+        .from(schema.vectors)
+        .where(
+          and(
+            eq(schema.vectors.id, id),
+            eq(schema.vectors.userId, userId)
+          )
+        );
+      return res;
+    },
+
     async deleteVector(id: string, sector: string, userId: string) {
       await db
         .delete(schema.vectors)

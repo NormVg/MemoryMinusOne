@@ -71,6 +71,17 @@ interface MemoryEvents {
         durationMs: number;
         changes: number;
     };
+    "decay:skipped": {
+        userId: string;
+        reason: string;
+    };
+    "decay:completed": {
+        userId: string;
+        processed: number;
+        compressed: number;
+        fingerprinted: number;
+        durationMs: number;
+    };
     "fact:set": {
         id: string;
         userId: string;
@@ -139,6 +150,7 @@ interface IStoragePlugin extends BasePlugin {
     updateMemory(memory: MemoryNode): Promise<void>;
     getMemory(id: string, userId: string): Promise<MemoryNode | null>;
     getMemoriesBySector(sector: string, userId: string, limit: number): Promise<MemoryNode[]>;
+    getMemoriesByUser?(userId: string, limit: number, offset?: number): Promise<MemoryNode[]>;
     deleteMemory(id: string, userId: string): Promise<void>;
     insertWaypoint(edge: WaypointEdge): Promise<void>;
     getNeighbors(srcId: string, userId: string): Promise<WaypointEdge[]>;
@@ -168,6 +180,11 @@ interface IVectorPlugin extends BasePlugin {
     search(vector: number[], sector: string, userId: string, limit: number): Promise<Array<{
         id: string;
         score: number;
+    }>>;
+    getVectorsForId?(id: string, userId: string): Promise<Array<{
+        sector: string;
+        vector: number[];
+        dim: number;
     }>>;
     deleteVector(id: string, sector: string, userId: string): Promise<void>;
 }

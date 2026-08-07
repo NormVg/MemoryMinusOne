@@ -66,6 +66,17 @@ export function drizzleStorage(options: DrizzleStorageOptions): IStoragePlugin {
       return res;
     },
 
+    async getMemoriesByUser(userId: string, limit: number, offset: number = 0) {
+      const res = await db
+        .select()
+        .from(schema.memories)
+        .where(eq(schema.memories.userId, userId))
+        .orderBy(schema.memories.createdAt)
+        .limit(limit)
+        .offset(offset);
+      return res;
+    },
+
     async deleteMemory(id: string, userId: string) {
       await db
         .delete(schema.memories)

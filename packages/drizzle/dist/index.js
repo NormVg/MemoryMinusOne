@@ -159,6 +159,19 @@ function pgvectorSearch(options) {
       ).orderBy(import_drizzle_orm.sql`${schema.vectors.vec} <=> ${vecString}::vector`).limit(limit);
       return res;
     },
+    async getVectorsForId(id, userId) {
+      const res = await db.select({
+        sector: schema.vectors.sector,
+        vector: schema.vectors.vec,
+        dim: schema.vectors.dim
+      }).from(schema.vectors).where(
+        (0, import_drizzle_orm.and)(
+          (0, import_drizzle_orm.eq)(schema.vectors.id, id),
+          (0, import_drizzle_orm.eq)(schema.vectors.userId, userId)
+        )
+      );
+      return res;
+    },
     async deleteVector(id, sector, userId) {
       await db.delete(schema.vectors).where(
         (0, import_drizzle_orm.and)(
@@ -209,6 +222,10 @@ function drizzleStorage(options) {
           import_drizzle_orm2.sql`${schema.memories.sectors} ? ${sector}`
         )
       ).limit(limit);
+      return res;
+    },
+    async getMemoriesByUser(userId, limit, offset = 0) {
+      const res = await db.select().from(schema.memories).where((0, import_drizzle_orm2.eq)(schema.memories.userId, userId)).orderBy(schema.memories.createdAt).limit(limit).offset(offset);
       return res;
     },
     async deleteMemory(id, userId) {

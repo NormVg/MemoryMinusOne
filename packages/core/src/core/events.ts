@@ -5,6 +5,8 @@ export interface MemoryEvents {
   "memory:queried": { query: string; userId: string; results: number; durationMs: number };
   "memory:deleted": { id: string; userId: string };
   "decay:cycle": { segments: number; durationMs: number; changes: number };
+  "decay:skipped": { userId: string; reason: string };
+  "decay:completed": { userId: string; processed: number; compressed: number; fingerprinted: number; durationMs: number };
   "fact:set": { id: string; userId: string; subject: string; predicate: string; object: string };
   "fact:superseded": { oldId: string; newId: string; userId: string };
   "waypoint:created": { srcId: string; dstId: string; userId: string; weight: number };

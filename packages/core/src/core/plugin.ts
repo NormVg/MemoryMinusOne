@@ -18,6 +18,7 @@ export interface IStoragePlugin extends BasePlugin {
   updateMemory(memory: MemoryNode): Promise<void>;
   getMemory(id: string, userId: string): Promise<MemoryNode | null>;
   getMemoriesBySector(sector: string, userId: string, limit: number): Promise<MemoryNode[]>;
+  getMemoriesByUser?(userId: string, limit: number, offset?: number): Promise<MemoryNode[]>;
   deleteMemory(id: string, userId: string): Promise<void>;
 
   // Waypoints
@@ -41,6 +42,7 @@ export interface IEmbeddingPlugin extends BasePlugin {
 export interface IVectorPlugin extends BasePlugin {
   storeVector(id: string, sector: string, userId: string, vector: number[], dim: number): Promise<void>;
   search(vector: number[], sector: string, userId: string, limit: number): Promise<Array<{ id: string; score: number }>>;
+  getVectorsForId?(id: string, userId: string): Promise<Array<{ sector: string; vector: number[]; dim: number }>>;
   deleteVector(id: string, sector: string, userId: string): Promise<void>;
 }
 

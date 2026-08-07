@@ -6,6 +6,8 @@ import { createSingleWaypoint, expandViaWaypoints } from "./waypoints";
 import { computeHybridScore, computeTokenOverlap, calcRecencyScore, cosineSimilarity } from "./scoring";
 import { computeCombinedKeywordScore } from "./keyword";
 import { reinforcePath, reinforceNodeSalience } from "./waypoints";
+import { calcDecay } from "./decay";
+import { compressVector, fingerprintMemory, extractEssence } from "./compression";
 import { clock } from "../core/clock";
 import { TypedEventEmitter } from "../core/events";
 
@@ -283,6 +285,82 @@ export class MemoryEngine {
    * Runs the decay pass across all memories.
    */
   async runDecayPass(userId: string): Promise<void> {
-    // TODO: implement decay logic across all memories
+    if (!this.config.storage.getMemoriesByUser) {
+      this.events.emit("decay:skipped", { userId, reason: "Storage plugin lacks getMemoriesByUser" });
+      return;
+    }
+
+    const startTime = clock.now();
+    let processed = 0;
+    let compressed = 0;
+    let fingerprinted = 0;
+
+    const limit = 100;
+    let offset = 0;
+    let hasMore = true;
+
+    while (hasMore) {
+      const memories = await this.config.storage.getMemoriesByUser(userId, limit, offset);
+      if (memories.length === 0) {
+        hasMore = false;
+        break;
+      }
+
+      for (const memory of memories) {
+        processed++;
+        const newSalience = calcDecay(
+          memory.primarySector,
+          memory.salience,
+          memory.lastSeenAt,
+          memory.coactivations,
+          memory.metadata?.consolidated === true
+        );
+
+        if (newSalience !== memory.salience) {
+          memory.salience = newSalience;
+          memory.updatedAt = clock.now();
+          await this.config.storage.updateMemory(memory);
+        }
+
+        // Apply compression and fingerprinting based on salience
+        if (newSalience < 0.3) {
+          // Deep cold - Fingerprint memory
+          if (this.config.vector.getVectorsForId) {
+            const vectors = await this.config.vector.getVectorsForId(memory.id, userId);
+            for (const v of vectors) {
+              if (v.dim > 32) {
+                const essence = extractEssence(memory.content, 200);
+                const fingerprint = fingerprintMemory(memory.id, essence);
+                await this.config.vector.storeVector(memory.id, v.sector, userId, fingerprint, 32);
+                fingerprinted++;
+              }
+            }
+          }
+        } else if (newSalience < 0.7) {
+          // Warm - Compress vector
+          if (this.config.vector.getVectorsForId) {
+            const vectors = await this.config.vector.getVectorsForId(memory.id, userId);
+            for (const v of vectors) {
+              // Only compress if it hasn't been compressed down to 256 or lower already
+              if (v.dim > 256) {
+                const compressedVec = compressVector(v.vector, 256);
+                await this.config.vector.storeVector(memory.id, v.sector, userId, compressedVec, 256);
+                compressed++;
+              }
+            }
+          }
+        }
+      }
+
+      offset += limit;
+    }
+
+    this.events.emit("decay:completed", {
+      userId,
+      processed,
+      compressed,
+      fingerprinted,
+      durationMs: clock.now() - startTime
+    });
   }
 }

@@ -579,6 +579,125 @@ function computeCombinedKeywordScore(query, memoryContent) {
 
 // src/engine/memory.ts
 init_waypoints();
+
+// src/engine/decay.ts
+init_clock();
+var DECAY_PARAMS = {
+  alphaReinforce: 0.08,
+  minSalience: 0.01,
+  fastDecayRate: 0.015,
+  slowDecayRate: 2e-3,
+  consolidationCoeff: 0.4
+};
+function classifyTier(salience, daysSince, coactivations) {
+  if (daysSince < 6 && (coactivations > 5 || salience > 0.7)) return "hot";
+  if (daysSince < 6 || salience > 0.4) return "warm";
+  return "cold";
+}
+function calcDecay(sector, initialSalience, lastSeenAt, coactivations = 0, consolidated = false) {
+  const now = clock.now();
+  const daysSince = Math.max(0, (now - lastSeenAt) / (1e3 * 60 * 60 * 24));
+  let sal = initialSalience * (1 + Math.log(1 + coactivations));
+  sal = Math.max(0, Math.min(1, sal));
+  const tier = classifyTier(sal, daysSince, coactivations);
+  let lambda = 0.05;
+  if (tier === "hot") lambda = 5e-3;
+  else if (tier === "warm") lambda = 0.02;
+  const f = Math.exp(-lambda * (daysSince / (sal + 0.1)));
+  let newSalience = sal * f;
+  if (consolidated) {
+    const retention = Math.exp(-DECAY_PARAMS.fastDecayRate * daysSince) + DECAY_PARAMS.consolidationCoeff * Math.exp(-DECAY_PARAMS.slowDecayRate * daysSince);
+    newSalience = Math.max(newSalience, initialSalience * retention);
+  }
+  const cfg = SECTOR_CONFIGS[sector];
+  if (cfg) {
+    const secLambda = cfg.decayLambda;
+    const sectorDecay = initialSalience * Math.exp(-secLambda * daysSince) + DECAY_PARAMS.alphaReinforce * (1 - Math.exp(-secLambda * daysSince));
+    newSalience = (newSalience + sectorDecay) / 2;
+  }
+  return Math.max(DECAY_PARAMS.minSalience, Math.min(1, newSalience));
+}
+
+// src/engine/compression.ts
+function compressVector(vec, targetDim) {
+  if (vec.length <= targetDim) return vec;
+  const compressed = new Float32Array(targetDim);
+  const bucketSize = vec.length / targetDim;
+  for (let i = 0; i < targetDim; i++) {
+    const start = Math.floor(i * bucketSize);
+    const end = Math.floor((i + 1) * bucketSize);
+    let sum = 0, count = 0;
+    for (let j = start; j < end && j < vec.length; j++) {
+      sum += vec[j];
+      count++;
+    }
+    compressed[i] = count > 0 ? sum / count : 0;
+  }
+  let norm = 0;
+  for (let i = 0; i < targetDim; i++) norm += compressed[i] * compressed[i];
+  norm = Math.sqrt(norm);
+  if (norm > 0) {
+    for (let i = 0; i < targetDim; i++) {
+      compressed[i] /= norm;
+    }
+  }
+  return Array.from(compressed);
+}
+function extractEssence(rawText, maxLength) {
+  if (rawText.length <= maxLength) return rawText;
+  const sentences = rawText.split(/(?<=[.!?])\s+/).map((s) => s.trim()).filter((s) => s.length > 10);
+  if (sentences.length === 0) return rawText.slice(0, maxLength);
+  const scoreSentence = (s, idx) => {
+    let sc = 0;
+    if (idx === 0) sc += 10;
+    if (idx === 1) sc += 5;
+    if (/\d{4}-\d{2}-\d{2}/.test(s)) sc += 7;
+    if (/\$\d+|\d+\s*(miles|dollars|years|months|km)/.test(s)) sc += 4;
+    if (/\b(bought|purchased|visited|went|got|received|paid|learned|discovered|found|saw|met)\b/i.test(s)) sc += 4;
+    if (s.length < 80) sc += 2;
+    return sc;
+  };
+  const scored = sentences.map((s, idx) => ({
+    text: s,
+    score: scoreSentence(s, idx),
+    originalIndex: idx
+  }));
+  scored.sort((a, b) => b.score - a.score);
+  const selected = [];
+  let currentLen = 0;
+  const firstSent = scored.find((s) => s.originalIndex === 0);
+  if (firstSent && firstSent.text.length < maxLength) {
+    selected.push(firstSent);
+    currentLen += firstSent.text.length;
+  }
+  for (const item of scored) {
+    if (item.originalIndex === 0) continue;
+    if (currentLen + item.text.length + 2 <= maxLength) {
+      selected.push(item);
+      currentLen += item.text.length + 2;
+    }
+  }
+  selected.sort((a, b) => a.originalIndex - b.originalIndex);
+  return selected.map((s) => s.text).join(" ");
+}
+function fnv32a(str) {
+  let hash = 2166136261;
+  for (let i = 0; i < str.length; i++) {
+    hash ^= str.charCodeAt(i);
+    hash += (hash << 1) + (hash << 4) + (hash << 7) + (hash << 8) + (hash << 24);
+  }
+  return hash >>> 0;
+}
+function fingerprintMemory(id, essence) {
+  const hash = fnv32a(id + essence);
+  const vec = new Float32Array(32);
+  for (let i = 0; i < 32; i++) {
+    vec[i] = hash >> i & 1;
+  }
+  return Array.from(vec);
+}
+
+// src/engine/memory.ts
 init_clock();
 var MemoryEngine = class {
   constructor(config, events) {
@@ -801,6 +920,71 @@ var MemoryEngine = class {
    * Runs the decay pass across all memories.
    */
   async runDecayPass(userId) {
+    if (!this.config.storage.getMemoriesByUser) {
+      this.events.emit("decay:skipped", { userId, reason: "Storage plugin lacks getMemoriesByUser" });
+      return;
+    }
+    const startTime = clock.now();
+    let processed = 0;
+    let compressed = 0;
+    let fingerprinted = 0;
+    const limit = 100;
+    let offset = 0;
+    let hasMore = true;
+    while (hasMore) {
+      const memories = await this.config.storage.getMemoriesByUser(userId, limit, offset);
+      if (memories.length === 0) {
+        hasMore = false;
+        break;
+      }
+      for (const memory of memories) {
+        processed++;
+        const newSalience = calcDecay(
+          memory.primarySector,
+          memory.salience,
+          memory.lastSeenAt,
+          memory.coactivations,
+          memory.metadata?.consolidated === true
+        );
+        if (newSalience !== memory.salience) {
+          memory.salience = newSalience;
+          memory.updatedAt = clock.now();
+          await this.config.storage.updateMemory(memory);
+        }
+        if (newSalience < 0.3) {
+          if (this.config.vector.getVectorsForId) {
+            const vectors = await this.config.vector.getVectorsForId(memory.id, userId);
+            for (const v of vectors) {
+              if (v.dim > 32) {
+                const essence = extractEssence(memory.content, 200);
+                const fingerprint = fingerprintMemory(memory.id, essence);
+                await this.config.vector.storeVector(memory.id, v.sector, userId, fingerprint, 32);
+                fingerprinted++;
+              }
+            }
+          }
+        } else if (newSalience < 0.7) {
+          if (this.config.vector.getVectorsForId) {
+            const vectors = await this.config.vector.getVectorsForId(memory.id, userId);
+            for (const v of vectors) {
+              if (v.dim > 256) {
+                const compressedVec = compressVector(v.vector, 256);
+                await this.config.vector.storeVector(memory.id, v.sector, userId, compressedVec, 256);
+                compressed++;
+              }
+            }
+          }
+        }
+      }
+      offset += limit;
+    }
+    this.events.emit("decay:completed", {
+      userId,
+      processed,
+      compressed,
+      fingerprinted,
+      durationMs: clock.now() - startTime
+    });
   }
 };
 
