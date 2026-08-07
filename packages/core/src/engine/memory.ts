@@ -11,14 +11,21 @@ import { compressVector, fingerprintMemory, extractEssence } from "./compression
 import { clusterMemories, calcReflectionSalience } from "./reflection";
 import { performSpreadingActivationRetrieval } from "./activation";
 import { EntityStore } from "./entities";
+import { extractFactsFromText } from "../temporal/extraction";
+import { FactVersioning } from "../temporal/versioning";
+import { FactQuery } from "../temporal/query";
 import { clock } from "../core/clock";
 import { TypedEventEmitter } from "../core/events";
 
 export class MemoryEngine {
   private entityStore: EntityStore;
+  private factVersioning: FactVersioning;
+  private factQuery: FactQuery;
 
   constructor(private config: MemoryConfig, private events: TypedEventEmitter) {
     this.entityStore = new EntityStore(config.embedding, config.vector);
+    this.factVersioning = new FactVersioning(config.storage, events);
+    this.factQuery = new FactQuery(config.storage);
   }
 
   /**
@@ -84,6 +91,12 @@ export class MemoryEngine {
 
     // Stage 8: Extract and store entities
     await this.entityStore.processAndStoreEntities(id, content, userId);
+
+    // Stage 9: Extract and upsert temporal facts
+    const facts = extractFactsFromText(content);
+    for (const fact of facts) {
+      await this.factVersioning.evolveFact(fact.subject, fact.predicate, fact.object, { userId });
+    }
 
     this.events.emit("waypoint:created", {
       srcId: edge.srcId,
@@ -170,6 +183,45 @@ export class MemoryEngine {
     const queryTokens = new Set(queryText.toLowerCase().split(/\W+/));
     const results: QueryResult[] = [];
     
+    // Stage 9: Inject active facts into the query context
+    // Find active facts whose subject or object matches any query token
+    // For benchmark simplicity, we'll just get all active facts for the user
+    // and filter them by simple keyword match.
+    // In a real system, we might embed facts or use a graph query.
+    const allFacts = await this.config.storage.queryFacts(userId, {});
+    const relevantFacts = allFacts.filter(f => 
+      f.validTo === null && Array.from(queryTokens).some(token => 
+        token.length > 3 && (f.subject.toLowerCase().includes(token) || f.object.toLowerCase().includes(token))
+      )
+    );
+
+    // We'll append relevant facts as synthetic "memories" with matchType="semantic" or a new "fact" matchType
+    for (const fact of relevantFacts) {
+      const factMemory: MemoryNode = {
+        id: fact.id,
+        userId,
+        content: `Fact: ${fact.subject} ${fact.predicate} ${fact.object}`,
+        primarySector: "fact",
+        sectors: ["fact"],
+        tags: [],
+        metadata: fact.metadata || {},
+        salience: fact.confidence,
+        decayLambda: 0,
+        version: 1,
+        createdAt: fact.validFrom,
+        updatedAt: fact.validFrom,
+        lastSeenAt: clock.now(),
+        coactivations: 0
+      };
+      
+      results.push({
+        memory: factMemory,
+        score: fact.confidence * 0.9, // high base score for facts
+        matchType: "semantic",
+        path: [fact.id]
+      });
+    }
+
     // Stage 8: Compute entity boosts
     const entityBoosts = await this.entityStore.computeEntityBoosts(queryText, userId, 10);
     

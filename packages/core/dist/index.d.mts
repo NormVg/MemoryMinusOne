@@ -276,6 +276,8 @@ declare class MemoryEngine {
     private config;
     private events;
     private entityStore;
+    private factVersioning;
+    private factQuery;
     constructor(config: MemoryConfig, events: TypedEventEmitter);
     /**
      * Adds a new memory to the system.

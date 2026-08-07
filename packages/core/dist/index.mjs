@@ -724,16 +724,146 @@ var EntityStore = class {
   }
 };
 
+// src/temporal/extraction.ts
+function extractFactsFromText(text) {
+  const facts = [];
+  const lines = text.split(/[.\n]/);
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed) continue;
+    const iAmMatch = trimmed.match(/\bI (am|was) (.+)/i);
+    if (iAmMatch) {
+      facts.push({ subject: "user", predicate: iAmMatch[1].toLowerCase(), object: iAmMatch[2].trim() });
+      continue;
+    }
+    const myIsMatch = trimmed.match(/\bMy (.+?) (is|was) (.+)/i);
+    if (myIsMatch) {
+      facts.push({ subject: "user's " + myIsMatch[1].trim().toLowerCase(), predicate: myIsMatch[2].toLowerCase(), object: myIsMatch[3].trim() });
+      continue;
+    }
+    const iVerbMatch = trimmed.match(/\bI (like|love|hate|want|need|have|live in|moved to|work at) (.+)/i);
+    if (iVerbMatch) {
+      facts.push({ subject: "user", predicate: iVerbMatch[1].toLowerCase(), object: iVerbMatch[2].trim() });
+      continue;
+    }
+  }
+  return facts;
+}
+
+// src/temporal/versioning.ts
+var FactVersioning = class {
+  constructor(storage, events) {
+    this.storage = storage;
+    this.events = events;
+  }
+  storage;
+  events;
+  /**
+   * Sets a new fact using the Slowly Changing Dimension (SCD) pattern.
+   * If an active fact exists for the same subject/predicate, it is closed (validTo = now).
+   * Then the new fact is inserted.
+   */
+  async evolveFact(subject, predicate, object, options) {
+    const { userId, confidence = 1, metadata } = options;
+    const now = clock.now();
+    const active = await this.storage.getActiveFact(subject, predicate, userId);
+    if (active && active.object === object) {
+      return active;
+    }
+    if (active) {
+      active.validTo = now - 1;
+      await this.storage.updateFact(active);
+    }
+    const newFact = {
+      id: crypto.randomUUID(),
+      userId,
+      subject,
+      predicate,
+      object,
+      validFrom: now,
+      validTo: null,
+      confidence,
+      metadata
+    };
+    await this.storage.insertFact(newFact);
+    this.events.emit("fact:set", {
+      id: newFact.id,
+      userId: newFact.userId,
+      subject: newFact.subject,
+      predicate: newFact.predicate,
+      object: newFact.object
+    });
+    if (active) {
+      this.events.emit("fact:superseded", {
+        oldId: active.id,
+        newId: newFact.id,
+        userId: newFact.userId
+      });
+    }
+    return newFact;
+  }
+};
+
+// src/temporal/query.ts
+var FactQuery = class {
+  constructor(storage) {
+    this.storage = storage;
+  }
+  storage;
+  /**
+   * Gets the state of the knowledge graph at a specific point in time.
+   * Returns only facts that were valid at `targetTimeMs`.
+   */
+  async atPointInTime(targetTimeMs, userId) {
+    return this.storage.queryFacts(userId, { at: targetTimeMs });
+  }
+  /**
+   * Gets the current, active state of the knowledge graph.
+   */
+  async current(userId) {
+    const allFacts = await this.storage.queryFacts(userId, {});
+    return allFacts.filter((f) => f.validTo === null);
+  }
+  /**
+   * Gets the currently active fact for a subject/predicate.
+   */
+  async activeFact(subject, predicate, userId) {
+    return this.storage.getActiveFact(subject, predicate, userId);
+  }
+  /**
+   * Compares the knowledge state between two time points.
+   * Returns facts that were added, removed, or changed.
+   */
+  async compareTimePoints(timeA, timeB, userId) {
+    const stateA = await this.atPointInTime(timeA, userId);
+    const stateB = await this.atPointInTime(timeB, userId);
+    const added = stateB.filter((b) => !stateA.some((a) => a.id === b.id));
+    const removed = stateA.filter((a) => !stateB.some((b) => b.id === a.id));
+    const changed = [];
+    for (const a of stateA) {
+      const b = stateB.find((b2) => b2.subject === a.subject && b2.predicate === a.predicate);
+      if (b && b.id !== a.id) {
+        changed.push({ old: a, new: b });
+      }
+    }
+    return { added, removed, changed };
+  }
+};
+
 // src/engine/memory.ts
 var MemoryEngine = class {
   constructor(config, events) {
     this.config = config;
     this.events = events;
     this.entityStore = new EntityStore(config.embedding, config.vector);
+    this.factVersioning = new FactVersioning(config.storage, events);
+    this.factQuery = new FactQuery(config.storage);
   }
   config;
   events;
   entityStore;
+  factVersioning;
+  factQuery;
   /**
    * Adds a new memory to the system.
    */
@@ -782,6 +912,10 @@ var MemoryEngine = class {
     await this.config.storage.insertMemory(memory);
     const edge = await createSingleWaypoint(id, [], userId, this.config.storage, bestMatchId, bestMatchSim);
     await this.entityStore.processAndStoreEntities(id, content, userId);
+    const facts = extractFactsFromText(content);
+    for (const fact of facts) {
+      await this.factVersioning.evolveFact(fact.subject, fact.predicate, fact.object, { userId });
+    }
     this.events.emit("waypoint:created", {
       srcId: edge.srcId,
       dstId: edge.dstId,
@@ -850,6 +984,37 @@ var MemoryEngine = class {
     }
     const queryTokens = new Set(queryText.toLowerCase().split(/\W+/));
     const results = [];
+    const allFacts = await this.config.storage.queryFacts(userId, {});
+    const relevantFacts = allFacts.filter(
+      (f) => f.validTo === null && Array.from(queryTokens).some(
+        (token) => token.length > 3 && (f.subject.toLowerCase().includes(token) || f.object.toLowerCase().includes(token))
+      )
+    );
+    for (const fact of relevantFacts) {
+      const factMemory = {
+        id: fact.id,
+        userId,
+        content: `Fact: ${fact.subject} ${fact.predicate} ${fact.object}`,
+        primarySector: "fact",
+        sectors: ["fact"],
+        tags: [],
+        metadata: fact.metadata || {},
+        salience: fact.confidence,
+        decayLambda: 0,
+        version: 1,
+        createdAt: fact.validFrom,
+        updatedAt: fact.validFrom,
+        lastSeenAt: clock.now(),
+        coactivations: 0
+      };
+      results.push({
+        memory: factMemory,
+        score: fact.confidence * 0.9,
+        // high base score for facts
+        matchType: "semantic",
+        path: [fact.id]
+      });
+    }
     const entityBoosts = await this.entityStore.computeEntityBoosts(queryText, userId, 10);
     const candidateIds = /* @__PURE__ */ new Set([...vectorHits.map((h) => h.id), ...expanded.map((e) => e.id), ...entityBoosts.keys()]);
     for (const id of candidateIds) {
@@ -1138,106 +1303,6 @@ var FactStore = class {
    */
   async invalidate(id, userId) {
     await this.storage.invalidateFact(id, userId, clock.now());
-  }
-};
-
-// src/temporal/versioning.ts
-var FactVersioning = class {
-  constructor(storage, events) {
-    this.storage = storage;
-    this.events = events;
-  }
-  storage;
-  events;
-  /**
-   * Sets a new fact using the Slowly Changing Dimension (SCD) pattern.
-   * If an active fact exists for the same subject/predicate, it is closed (validTo = now).
-   * Then the new fact is inserted.
-   */
-  async evolveFact(subject, predicate, object, options) {
-    const { userId, confidence = 1, metadata } = options;
-    const now = clock.now();
-    const active = await this.storage.getActiveFact(subject, predicate, userId);
-    if (active && active.object === object) {
-      return active;
-    }
-    if (active) {
-      active.validTo = now - 1;
-      await this.storage.updateFact(active);
-    }
-    const newFact = {
-      id: crypto.randomUUID(),
-      userId,
-      subject,
-      predicate,
-      object,
-      validFrom: now,
-      validTo: null,
-      confidence,
-      metadata
-    };
-    await this.storage.insertFact(newFact);
-    this.events.emit("fact:set", {
-      id: newFact.id,
-      userId: newFact.userId,
-      subject: newFact.subject,
-      predicate: newFact.predicate,
-      object: newFact.object
-    });
-    if (active) {
-      this.events.emit("fact:superseded", {
-        oldId: active.id,
-        newId: newFact.id,
-        userId: newFact.userId
-      });
-    }
-    return newFact;
-  }
-};
-
-// src/temporal/query.ts
-var FactQuery = class {
-  constructor(storage) {
-    this.storage = storage;
-  }
-  storage;
-  /**
-   * Gets the state of the knowledge graph at a specific point in time.
-   * Returns only facts that were valid at `targetTimeMs`.
-   */
-  async atPointInTime(targetTimeMs, userId) {
-    return this.storage.queryFacts(userId, { at: targetTimeMs });
-  }
-  /**
-   * Gets the current, active state of the knowledge graph.
-   */
-  async current(userId) {
-    const allFacts = await this.storage.queryFacts(userId, {});
-    return allFacts.filter((f) => f.validTo === null);
-  }
-  /**
-   * Gets the currently active fact for a subject/predicate.
-   */
-  async activeFact(subject, predicate, userId) {
-    return this.storage.getActiveFact(subject, predicate, userId);
-  }
-  /**
-   * Compares the knowledge state between two time points.
-   * Returns facts that were added, removed, or changed.
-   */
-  async compareTimePoints(timeA, timeB, userId) {
-    const stateA = await this.atPointInTime(timeA, userId);
-    const stateB = await this.atPointInTime(timeB, userId);
-    const added = stateB.filter((b) => !stateA.some((a) => a.id === b.id));
-    const removed = stateA.filter((a) => !stateB.some((b) => b.id === a.id));
-    const changed = [];
-    for (const a of stateA) {
-      const b = stateB.find((b2) => b2.subject === a.subject && b2.predicate === a.predicate);
-      if (b && b.id !== a.id) {
-        changed.push({ old: a, new: b });
-      }
-    }
-    return { added, removed, changed };
   }
 };
 
