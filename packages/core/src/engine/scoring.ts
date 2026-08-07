@@ -1,4 +1,5 @@
 import { clock } from "../core/clock";
+import { SECTOR_INDEX_MAPPING_FOR_MATRIX_LOOKUP, SECTORAL_INTERDEPENDENCE_MATRIX_FOR_COGNITIVE_RESONANCE } from "./sectors";
 
 export const SCORING_WEIGHTS = {
   similarity: 0.45,
@@ -103,4 +104,38 @@ export function cosineSimilarity(a: number[], b: number[]): number {
   }
   if (normA === 0 || normB === 0) return 0;
   return dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
+}
+
+/**
+ * Applies cognitive resonance penalty/boost based on the cross-sector interdependence matrix.
+ */
+export function calcCrossSectorResonanceScore(
+  memorySector: string,
+  querySector: string,
+  baseSimilarity: number
+): number {
+  const si = SECTOR_INDEX_MAPPING_FOR_MATRIX_LOOKUP[memorySector] ?? 1;
+  const ti = SECTOR_INDEX_MAPPING_FOR_MATRIX_LOOKUP[querySector] ?? 1;
+  return baseSimilarity * SECTORAL_INTERDEPENDENCE_MATRIX_FOR_COGNITIVE_RESONANCE[si][ti];
+}
+
+/**
+ * Computes a fused vector score from multiple memory vectors across sectors.
+ * Takes the max resonance-adjusted similarity score.
+ */
+export function calcMultiVecFusionScore(
+  queryVectors: Record<string, number[]>,
+  memoryVectors: Array<{ sector: string; vector: number[] }>
+): number {
+  let maxScore = 0;
+  for (const mv of memoryVectors) {
+    for (const [qSector, qVector] of Object.entries(queryVectors)) {
+      const sim = cosineSimilarity(qVector, mv.vector);
+      const resonance = calcCrossSectorResonanceScore(mv.sector, qSector, sim);
+      if (resonance > maxScore) {
+        maxScore = resonance;
+      }
+    }
+  }
+  return maxScore;
 }

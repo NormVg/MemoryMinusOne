@@ -3,7 +3,7 @@ import { MemoryNode, QueryResult } from "../core/types";
 import { classifyContent } from "./sectors";
 import { computeSimhash } from "./simhash";
 import { createSingleWaypoint, expandViaWaypoints } from "./waypoints";
-import { computeHybridScore, computeTokenOverlap, calcRecencyScore, cosineSimilarity } from "./scoring";
+import { computeHybridScore, computeTokenOverlap, calcRecencyScore, cosineSimilarity, calcMultiVecFusionScore } from "./scoring";
 import { computeCombinedKeywordScore } from "./keyword";
 import { reinforcePath, reinforceNodeSalience } from "./waypoints";
 import { calcDecay } from "./decay";
@@ -52,8 +52,12 @@ export class MemoryEngine {
     let bestMatchId: string | undefined;
     let bestMatchSim = -1;
 
-    for (const sector of classification.sectors) {
-      const { vector, dim } = await this.config.embedding.embed(content, sector);
+    const contentBatch = classification.sectors.map(() => content);
+    const { vectors, dim } = await this.config.embedding.embedBatch(contentBatch, classification.primarySector);
+
+    for (let i = 0; i < classification.sectors.length; i++) {
+      const sector = classification.sectors[i];
+      const vector = vectors[i];
       await this.config.vector.storeVector(id, sector, userId, vector, dim);
       
       // Optionally find nearest neighbor in primary sector for waypoint linking
@@ -117,10 +121,18 @@ export class MemoryEngine {
     const searchSectors = [primarySector];
     if (primarySector !== "semantic") searchSectors.push("semantic");
     
+    // Batch embed the query for all search sectors
+    const queryTexts = searchSectors.map(() => queryText);
+    const { vectors: qVectors } = await this.config.embedding.embedBatch(queryTexts, primarySector);
+    
+    const queryVectors: Record<string, number[]> = {};
+    for (let i = 0; i < searchSectors.length; i++) {
+      queryVectors[searchSectors[i]] = qVectors[i];
+    }
+    
     const allHits: Map<string, number> = new Map();
     for (const s of searchSectors) {
-      const { vector } = await this.config.embedding.embed(queryText, s);
-      const hits = await this.config.vector.search(vector, s, userId, limit * 4);
+      const hits = await this.config.vector.search(queryVectors[s], s, userId, limit * 4);
       for (const h of hits) {
         if (!allHits.has(h.id) || allHits.get(h.id)! < h.score) {
           allHits.set(h.id, h.score);
@@ -152,7 +164,16 @@ export class MemoryEngine {
       if (!mem) continue;
       
       const vHit = vectorHits.find(h => h.id === id);
-      const similarity = vHit ? vHit.score : 0.5;
+      
+      // Compute fused multi-vector similarity score
+      // We need the memory's vector across all its sectors
+      let fusedSimilarity = vHit ? vHit.score : 0.5;
+      if (this.config.vector.getVectorsForId) {
+        const memVecs = await this.config.vector.getVectorsForId(id, userId);
+        if (memVecs.length > 0) {
+          fusedSimilarity = calcMultiVecFusionScore(queryVectors, memVecs);
+        }
+      }
       
       const eHit = expanded.find(h => h.id === id);
       const waypointWeight = eHit ? eHit.weight : 0;
@@ -163,7 +184,7 @@ export class MemoryEngine {
       
       const keywordScore = computeCombinedKeywordScore(queryText, mem.content);
       
-      const score = computeHybridScore(similarity, overlap, waypointWeight, recency, 0, keywordScore);
+      const score = computeHybridScore(fusedSimilarity, overlap, waypointWeight, recency, 0, keywordScore);
       
       results.push({
         memory: mem,
@@ -233,8 +254,11 @@ export class MemoryEngine {
     for (const sector of existing.sectors) {
       await this.config.vector.deleteVector(id, sector, userId);
     }
-    for (const sector of classification.sectors) {
-      const { vector, dim } = await this.config.embedding.embed(content, sector);
+    const contentBatch = classification.sectors.map(() => content);
+    const { vectors, dim } = await this.config.embedding.embedBatch(contentBatch, classification.primarySector);
+    for (let i = 0; i < classification.sectors.length; i++) {
+      const sector = classification.sectors[i];
+      const vector = vectors[i];
       await this.config.vector.storeVector(id, sector, userId, vector, dim);
     }
 

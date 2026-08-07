@@ -299,6 +299,25 @@ var SECTOR_CONFIGS = {
   }
 };
 var SECTORS = Object.keys(SECTOR_CONFIGS);
+var SECTOR_INDEX_MAPPING_FOR_MATRIX_LOOKUP = {
+  episodic: 0,
+  semantic: 1,
+  procedural: 2,
+  emotional: 3,
+  reflective: 4
+};
+var SECTORAL_INTERDEPENDENCE_MATRIX_FOR_COGNITIVE_RESONANCE = [
+  [1, 0.7, 0.3, 0.6, 0.6],
+  // episodic
+  [0.7, 1, 0.4, 0.7, 0.8],
+  // semantic
+  [0.3, 0.4, 1, 0.5, 0.2],
+  // procedural
+  [0.6, 0.7, 0.5, 1, 0.8],
+  // emotional
+  [0.6, 0.8, 0.2, 0.8, 1]
+  // reflective
+];
 function classifyContent(content, metadata) {
   if (metadata?.sector && SECTORS.includes(metadata.sector)) {
     return {
@@ -493,6 +512,24 @@ function cosineSimilarity(a, b) {
   }
   if (normA === 0 || normB === 0) return 0;
   return dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
+}
+function calcCrossSectorResonanceScore(memorySector, querySector, baseSimilarity) {
+  const si = SECTOR_INDEX_MAPPING_FOR_MATRIX_LOOKUP[memorySector] ?? 1;
+  const ti = SECTOR_INDEX_MAPPING_FOR_MATRIX_LOOKUP[querySector] ?? 1;
+  return baseSimilarity * SECTORAL_INTERDEPENDENCE_MATRIX_FOR_COGNITIVE_RESONANCE[si][ti];
+}
+function calcMultiVecFusionScore(queryVectors, memoryVectors) {
+  let maxScore = 0;
+  for (const mv of memoryVectors) {
+    for (const [qSector, qVector] of Object.entries(queryVectors)) {
+      const sim = cosineSimilarity(qVector, mv.vector);
+      const resonance = calcCrossSectorResonanceScore(mv.sector, qSector, sim);
+      if (resonance > maxScore) {
+        maxScore = resonance;
+      }
+    }
+  }
+  return maxScore;
 }
 
 // src/engine/keyword.ts
@@ -782,8 +819,11 @@ var MemoryEngine = class {
     };
     let bestMatchId;
     let bestMatchSim = -1;
-    for (const sector2 of classification.sectors) {
-      const { vector, dim } = await this.config.embedding.embed(content, sector2);
+    const contentBatch = classification.sectors.map(() => content);
+    const { vectors, dim } = await this.config.embedding.embedBatch(contentBatch, classification.primarySector);
+    for (let i = 0; i < classification.sectors.length; i++) {
+      const sector2 = classification.sectors[i];
+      const vector = vectors[i];
       await this.config.vector.storeVector(id, sector2, userId, vector, dim);
       if (sector2 === classification.primarySector) {
         const neighbors = await this.config.vector.search(vector, sector2, userId, 1);
@@ -832,10 +872,15 @@ var MemoryEngine = class {
     }
     const searchSectors = [primarySector];
     if (primarySector !== "semantic") searchSectors.push("semantic");
+    const queryTexts = searchSectors.map(() => queryText);
+    const { vectors: qVectors } = await this.config.embedding.embedBatch(queryTexts, primarySector);
+    const queryVectors = {};
+    for (let i = 0; i < searchSectors.length; i++) {
+      queryVectors[searchSectors[i]] = qVectors[i];
+    }
     const allHits = /* @__PURE__ */ new Map();
     for (const s of searchSectors) {
-      const { vector } = await this.config.embedding.embed(queryText, s);
-      const hits = await this.config.vector.search(vector, s, userId, limit * 4);
+      const hits = await this.config.vector.search(queryVectors[s], s, userId, limit * 4);
       for (const h of hits) {
         if (!allHits.has(h.id) || allHits.get(h.id) < h.score) {
           allHits.set(h.id, h.score);
@@ -858,14 +903,20 @@ var MemoryEngine = class {
       const mem = await this.config.storage.getMemory(id, userId);
       if (!mem) continue;
       const vHit = vectorHits.find((h) => h.id === id);
-      const similarity = vHit ? vHit.score : 0.5;
+      let fusedSimilarity = vHit ? vHit.score : 0.5;
+      if (this.config.vector.getVectorsForId) {
+        const memVecs = await this.config.vector.getVectorsForId(id, userId);
+        if (memVecs.length > 0) {
+          fusedSimilarity = calcMultiVecFusionScore(queryVectors, memVecs);
+        }
+      }
       const eHit = expanded.find((h) => h.id === id);
       const waypointWeight = eHit ? eHit.weight : 0;
       const memTokens = new Set(mem.content.toLowerCase().split(/\W+/));
       const overlap = computeTokenOverlap(queryTokens, memTokens);
       const recency = calcRecencyScore(mem.lastSeenAt);
       const keywordScore = computeCombinedKeywordScore(queryText, mem.content);
-      const score = computeHybridScore(similarity, overlap, waypointWeight, recency, 0, keywordScore);
+      const score = computeHybridScore(fusedSimilarity, overlap, waypointWeight, recency, 0, keywordScore);
       results.push({
         memory: mem,
         score,
@@ -920,8 +971,11 @@ var MemoryEngine = class {
     for (const sector of existing.sectors) {
       await this.config.vector.deleteVector(id, sector, userId);
     }
-    for (const sector of classification.sectors) {
-      const { vector, dim } = await this.config.embedding.embed(content, sector);
+    const contentBatch = classification.sectors.map(() => content);
+    const { vectors, dim } = await this.config.embedding.embedBatch(contentBatch, classification.primarySector);
+    for (let i = 0; i < classification.sectors.length; i++) {
+      const sector = classification.sectors[i];
+      const vector = vectors[i];
       await this.config.vector.storeVector(id, sector, userId, vector, dim);
     }
     await this.config.storage.updateMemory(memory);

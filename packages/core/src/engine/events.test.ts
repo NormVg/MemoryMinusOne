@@ -14,6 +14,10 @@ describe("events", () => {
       } as any,
       embedding: {
         embed: vi.fn().mockResolvedValue({ vector: [1, 2, 3], dim: 3 }),
+        embedBatch: vi.fn().mockImplementation(async (texts) => ({
+          vectors: texts.map(() => [1, 2, 3]),
+          dim: 3
+        })),
       } as any,
       vector: {
         storeVector: vi.fn(),

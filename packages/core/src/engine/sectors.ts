@@ -79,6 +79,30 @@ export const SECTOR_CONFIGS: Record<string, SectorConfig> = {
 
 export const SECTORS = Object.keys(SECTOR_CONFIGS);
 
+export const SECTOR_INDEX_MAPPING_FOR_MATRIX_LOOKUP: Record<string, number> = {
+  episodic: 0,
+  semantic: 1,
+  procedural: 2,
+  emotional: 3,
+  reflective: 4,
+};
+
+export const SECTORAL_INTERDEPENDENCE_MATRIX_FOR_COGNITIVE_RESONANCE = [
+  [1.0, 0.7, 0.3, 0.6, 0.6], // episodic
+  [0.7, 1.0, 0.4, 0.7, 0.8], // semantic
+  [0.3, 0.4, 1.0, 0.5, 0.2], // procedural
+  [0.6, 0.7, 0.5, 1.0, 0.8], // emotional
+  [0.6, 0.8, 0.2, 0.8, 1.0], // reflective
+];
+
+export const SECTOR_RELATIONSHIPS: Record<string, Record<string, number>> = {
+  semantic: { procedural: 0.8, episodic: 0.6, reflective: 0.7, emotional: 0.4 },
+  procedural: { semantic: 0.8, episodic: 0.6, reflective: 0.6, emotional: 0.3 },
+  episodic: { reflective: 0.8, semantic: 0.6, procedural: 0.6, emotional: 0.7 },
+  reflective: { episodic: 0.8, semantic: 0.7, procedural: 0.6, emotional: 0.6 },
+  emotional: { episodic: 0.7, reflective: 0.6, semantic: 0.4, procedural: 0.3 },
+};
+
 export function classifyContent(content: string, metadata?: Record<string, any>): SectorClassification {
   if (metadata?.sector && SECTORS.includes(metadata.sector)) {
     return {
