@@ -83,67 +83,73 @@ const mem = createMemory({
 ## Architecture
 
 ```mermaid
-flowchart TD
+flowchart LR
     %% Styling Classes
     classDef facade fill:#0f172a,stroke:#3b82f6,stroke-width:2px,color:#f8fafc;
     classDef api fill:#1e293b,stroke:#64748b,stroke-width:1px,color:#f1f5f9;
-    classDef engine fill:#312e81,stroke:#6366f1,stroke-width:1px,color:#e0e7ff;
     classDef module fill:#1e1b4b,stroke:#818cf8,stroke-width:1px,color:#c7d2fe;
+    classDef engine fill:#312e81,stroke:#6366f1,stroke-width:1px,color:#e0e7ff;
     classDef pluginInterface fill:#064e3b,stroke:#10b981,stroke-width:2px,color:#ecfdf5,stroke-dasharray: 5 5;
     classDef implementation fill:#022c22,stroke:#059669,stroke-width:1px,color:#d1fae5;
     classDef database fill:#450a0a,stroke:#ef4444,stroke-width:2px,color:#fef2f2;
 
-    UserApp(["Your App (Nuxt / Next.js / Express)"]) --> Facade
+    %% 1. Application Layer
+    UserApp(["Your App (Nuxt/Next.js)"])
+    Facade["MemoryMinusOne<br/>(Facade)"]:::facade
+    UserApp --> Facade
 
-    subgraph MemoryMinusOne [MemoryMinusOne SDK]
-        Facade["MemoryMinusOne (Facade)"]:::facade
+    %% 2. API Layer
+    subgraph API [Core API]
+        direction TB
+        AddAPI["add()"]:::api
+        QueryAPI["query()"]:::api
+        MaintAPI["runMaintenance()"]:::api
+    end
+    
+    Facade --> AddAPI & QueryAPI & MaintAPI
+
+    %% 3. Cognitive Engine Layer
+    subgraph Engine [Cognitive Engine Modules]
+        direction TB
+        Sectorizer["Sectorizer & Dedup"]:::module
+        GraphBuilder["Waypoint Graph Builder"]:::module
         
-        %% Core APIs
-        Facade --> AddAPI["add()"]:::api
-        Facade --> QueryAPI["query()"]:::api
-        Facade --> MaintAPI["runMaintenance()"]:::api
+        SemanticSearch["Vector Semantic Search"]:::module
+        GraphTraverse["Spreading Activation"]:::module
+        KeywordMatch["BM25 Keyword Scoring"]:::module
+        HybridScoring["Hybrid Scorer<br/>(Recency, Fusion, Trace)"]:::engine
         
-        %% Cognitive Engine Modules
-        subgraph CognitiveEngine [Cognitive Engine]
-            direction TB
-            AddAPI --> Sectorizer["Sectorizer & Dedup"]:::module
-            AddAPI --> GraphBuilder["Waypoint Graph Builder"]:::module
-            
-            QueryAPI --> SemanticSearch["Vector Semantic Search"]:::module
-            QueryAPI --> GraphTraverse["Spreading Activation (Graph)"]:::module
-            QueryAPI --> KeywordMatch["BM25 Keyword Scoring"]:::module
-            
-            SemanticSearch --> HybridScoring["Hybrid Scorer<br/>(Recency, Fusion, Trace)"]:::engine
-            GraphTraverse --> HybridScoring
-            KeywordMatch --> HybridScoring
-            
-            MaintAPI --> DecayEngine["Memory Decay & Compression"]:::module
-            MaintAPI --> ReflectionEngine["Cluster Reflection & Consolidation"]:::module
-        end
+        DecayEngine["Decay & Compression"]:::module
+        ReflectionEngine["Cluster & Consolidation"]:::module
     end
 
-    %% Plugin Architecture
-    subgraph PluginLayer [Swappable Plugin Contracts]
-        direction LR
+    AddAPI --> Sectorizer & GraphBuilder
+    
+    QueryAPI --> SemanticSearch & GraphTraverse & KeywordMatch
+    SemanticSearch & GraphTraverse & KeywordMatch --> HybridScoring
+    
+    MaintAPI --> DecayEngine & ReflectionEngine
+
+    %% 4. Plugin Contracts Layer
+    subgraph Plugins [Swappable Plugin Contracts]
+        direction TB
         IStorage[["IStoragePlugin"]]:::pluginInterface
         IEmbed[["IEmbeddingPlugin"]]:::pluginInterface
         IVector[["IVectorPlugin"]]:::pluginInterface
         ICache[["ICachePlugin"]]:::pluginInterface
     end
 
-    %% Wiring Engine to Plugins
-    Sectorizer -.-> IStorage
-    Sectorizer -.-> IEmbed
+    %% Internal Wiring (Cognitive Engine to Plugins)
+    Sectorizer -.-> IStorage & IEmbed
     GraphBuilder -.-> IStorage
-    SemanticSearch -.-> IVector
-    SemanticSearch -.-> IEmbed
-    DecayEngine -.-> IStorage
-    DecayEngine -.-> IVector
+    SemanticSearch -.-> IVector & IEmbed
+    DecayEngine -.-> IStorage & IVector
     QueryAPI -.-> ICache
 
-    %% Concrete Implementations
+    %% 5. Concrete Implementations Layer
     subgraph Implementations [Concrete Providers]
-        Drizzle["Drizzle (SQLite/Postgres)"]:::implementation
+        direction TB
+        Drizzle["Drizzle"]:::implementation
         AISDK["Vercel AI SDK"]:::implementation
         Synthetic["Synthetic (TF-IDF)"]:::implementation
         PgVector["pgvector"]:::implementation
@@ -151,15 +157,21 @@ flowchart TD
     end
 
     IStorage --> Drizzle
-    IEmbed --> AISDK
-    IEmbed --> Synthetic
+    IEmbed --> AISDK & Synthetic
     IVector --> PgVector
     ICache --> Upstash
 
-    %% External Infrastructure
-    Drizzle ==> DB[(Relational DB)]:::database
-    PgVector ==> VectorDB[(Vector DB)]:::database
-    Upstash ==> Redis[(Redis Cache)]:::database
+    %% 6. Physical Infrastructure Layer
+    subgraph Infrastructure [Physical Infrastructure]
+        direction TB
+        DB[(Relational DB)]:::database
+        VectorDB[(Vector DB)]:::database
+        Redis[(Redis Cache)]:::database
+    end
+
+    Drizzle ==> DB
+    PgVector ==> VectorDB
+    Upstash ==> Redis
 ```
 
 ## API
