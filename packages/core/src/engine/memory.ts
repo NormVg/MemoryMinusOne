@@ -201,6 +201,23 @@ export class MemoryEngine {
     for (const res of topResults) {
       res.memory.lastSeenAt = clock.now();
       res.memory.coactivations += 1;
+      
+      // Stage 6: Decay regeneration on query hit
+      if (this.config.vector.getVectorsForId) {
+        const vecs = await this.config.vector.getVectorsForId(res.memory.id, userId);
+        if (vecs.length > 0 && vecs[0].dim <= 64) {
+          // It was fingerprinted. Re-embed to full resolution and boost salience!
+          const contentBatch = res.memory.sectors.map(() => res.memory.content);
+          const { vectors, dim } = await this.config.embedding.embedBatch(contentBatch, res.memory.primarySector);
+          
+          for (let i = 0; i < res.memory.sectors.length; i++) {
+            await this.config.vector.storeVector(res.memory.id, res.memory.sectors[i], userId, vectors[i], dim);
+          }
+          
+          res.memory.salience = 1.0; // "Un-decay" completely
+        }
+      }
+      
       await this.config.storage.updateMemory(res.memory);
       
       // Reinforce path if it was found via waypoints
