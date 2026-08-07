@@ -39,9 +39,9 @@ export class MemoryMinusOne {
     await this.config.vector.init?.(ctx);
     await this.config.cache?.init?.(ctx);
     
-    this.engine = new MemoryEngine(this.config);
-    this.factStore = new FactStore(this.config.storage);
-    this.factVersioning = new FactVersioning(this.config.storage);
+    this.engine = new MemoryEngine(this.config, this.events);
+    this.factStore = new FactStore(this.config.storage, this.events);
+    this.factVersioning = new FactVersioning(this.config.storage, this.events);
     this.factQuery = new FactQuery(this.config.storage);
     this.factTimeline = new FactTimeline(this.config.storage);
 

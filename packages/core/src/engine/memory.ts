@@ -4,15 +4,18 @@ import { classifyContent } from "./sectors";
 import { computeSimhash } from "./simhash";
 import { createSingleWaypoint, expandViaWaypoints } from "./waypoints";
 import { computeHybridScore, computeTokenOverlap, calcRecencyScore, cosineSimilarity } from "./scoring";
+import { computeCombinedKeywordScore } from "./keyword";
 import { clock } from "../core/clock";
+import { TypedEventEmitter } from "../core/events";
 
 export class MemoryEngine {
-  constructor(private config: MemoryConfig) {}
+  constructor(private config: MemoryConfig, private events: TypedEventEmitter) {}
 
   /**
    * Adds a new memory to the system.
    */
   async add(content: string, options: { userId: string; metadata?: Record<string, any>; tags?: string[]; sector?: string; timestamp?: number }): Promise<MemoryNode> {
+    const startTime = clock.now();
     const { userId, metadata = {}, tags = [], sector, timestamp } = options;
     const classification = sector
       ? { primarySector: sector, sectors: [sector] }
@@ -37,6 +40,7 @@ export class MemoryEngine {
       createdAt: now,
       updatedAt: now,
       lastSeenAt: now,
+      coactivations: 0,
     };
 
     // Embed and store vectors
@@ -62,7 +66,21 @@ export class MemoryEngine {
     await this.config.storage.insertMemory(memory);
 
     // Create waypoint
-    await createSingleWaypoint(id, [], userId, this.config.storage, bestMatchId, bestMatchSim);
+    const edge = await createSingleWaypoint(id, [], userId, this.config.storage, bestMatchId, bestMatchSim);
+
+    this.events.emit("waypoint:created", {
+      srcId: edge.srcId,
+      dstId: edge.dstId,
+      userId: edge.userId,
+      weight: edge.weight
+    });
+
+    this.events.emit("memory:added", {
+      id,
+      userId,
+      sector: classification.primarySector,
+      durationMs: clock.now() - startTime
+    });
 
     return memory;
   }
@@ -71,6 +89,7 @@ export class MemoryEngine {
    * Queries memories using a hybrid approach.
    */
   async query(queryText: string, options: { userId: string; sector?: string; limit?: number }): Promise<QueryResult[]> {
+    const startTime = clock.now();
     const { userId, sector, limit = 5 } = options;
     const classification = classifyContent(queryText);
     const primarySector = sector || classification.primarySector;
@@ -116,7 +135,9 @@ export class MemoryEngine {
       const overlap = computeTokenOverlap(queryTokens, memTokens);
       const recency = calcRecencyScore(mem.lastSeenAt);
       
-      const score = computeHybridScore(similarity, overlap, waypointWeight, recency);
+      const keywordScore = computeCombinedKeywordScore(queryText, mem.content);
+      
+      const score = computeHybridScore(similarity, overlap, waypointWeight, recency, 0, keywordScore);
       
       results.push({
         memory: mem,
@@ -129,11 +150,19 @@ export class MemoryEngine {
     results.sort((a, b) => b.score - a.score);
     const topResults = results.slice(0, limit);
     
-    // Update last seen to prevent decay only for returned results
+    // Update last seen and coactivations to prevent decay only for returned results
     for (const res of topResults) {
       res.memory.lastSeenAt = clock.now();
+      res.memory.coactivations += 1;
       await this.config.storage.updateMemory(res.memory);
     }
+    
+    this.events.emit("memory:queried", {
+      query: queryText,
+      userId,
+      results: topResults.length,
+      durationMs: clock.now() - startTime
+    });
     
     return topResults;
   }
@@ -160,6 +189,7 @@ export class MemoryEngine {
       version: existing.version + 1,
       updatedAt: clock.now(),
       lastSeenAt: clock.now(),
+      coactivations: existing.coactivations || 0,
     };
 
     for (const sector of existing.sectors) {
@@ -185,6 +215,8 @@ export class MemoryEngine {
       await this.config.vector.deleteVector(id, sector, userId);
     }
     await this.config.storage.deleteMemory(id, userId);
+    
+    this.events.emit("memory:deleted", { id, userId });
   }
 
   /**

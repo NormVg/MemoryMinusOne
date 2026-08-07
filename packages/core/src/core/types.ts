@@ -13,6 +13,7 @@ export interface MemoryNode {
   createdAt: number;
   updatedAt: number;
   lastSeenAt: number;
+  coactivations: number;
 }
 
 export interface WaypointEdge {

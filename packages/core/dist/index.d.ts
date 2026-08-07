@@ -15,6 +15,7 @@ interface MemoryNode {
     createdAt: number;
     updatedAt: number;
     lastSeenAt: number;
+    coactivations: number;
 }
 interface WaypointEdge {
     srcId: string;
@@ -256,7 +257,8 @@ declare function noCache(): ICachePlugin;
 
 declare class MemoryEngine {
     private config;
-    constructor(config: MemoryConfig);
+    private events;
+    constructor(config: MemoryConfig, events: TypedEventEmitter);
     /**
      * Adds a new memory to the system.
      */
@@ -314,7 +316,8 @@ declare class MemoryEngine {
 
 declare class FactStore {
     private storage;
-    constructor(storage: IStoragePlugin);
+    private events;
+    constructor(storage: IStoragePlugin, events: TypedEventEmitter);
     /**
      * Directly inserts a fact. Usually you want `versioning.evolveFact` instead
      * to handle the auto-closing of old facts.

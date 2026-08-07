@@ -1,10 +1,10 @@
 import { clock } from "../core/clock";
 
 export const SCORING_WEIGHTS = {
-  similarity: 0.50,
-  overlap: 0.25,
+  similarity: 0.45,
+  overlap: 0.20,
   waypoint: 0.15,
-  recency: 0.0,
+  recency: 0.10,
   tag_match: 0.10,
 };
 
@@ -24,9 +24,12 @@ export const HYBRID_PARAMS = {
   t_max_days: 60,
 };
 
-/** Linear clamp to normalize scores to 0-1 */
+/** True logistic sigmoid to normalize scores to 0-1 */
 export function sigmoid(x: number): number {
-  return Math.max(0, Math.min(1, x));
+  // Guard against overflow
+  if (x > 20) return 1;
+  if (x < -20) return 0;
+  return 1 / (1 + Math.exp(-x));
 }
 
 /** Boosts similarity score non-linearly using tau */

@@ -221,10 +221,10 @@ function computeSimhash(text) {
 
 // src/engine/scoring.ts
 var SCORING_WEIGHTS = {
-  similarity: 0.5,
-  overlap: 0.25,
+  similarity: 0.45,
+  overlap: 0.2,
   waypoint: 0.15,
-  recency: 0,
+  recency: 0.1,
   tag_match: 0.1
 };
 var STOPWORDS = /* @__PURE__ */ new Set([
@@ -292,7 +292,9 @@ var HYBRID_PARAMS = {
   t_max_days: 60
 };
 function sigmoid(x) {
-  return Math.max(0, Math.min(1, x));
+  if (x > 20) return 1;
+  if (x < -20) return 0;
+  return 1 / (1 + Math.exp(-x));
 }
 function boostedSim(s) {
   return 1 - Math.exp(-HYBRID_PARAMS.tau * s);
@@ -334,16 +336,101 @@ function cosineSimilarity(a, b) {
   return dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
 }
 
+// src/engine/keyword.ts
+function tokenize(text) {
+  return text.toLowerCase().replace(/[^\w\s]/g, "").split(/\s+/).filter((t) => t.trim().length > 0);
+}
+function extractKeywords(text, minLength = 3) {
+  const tokens = tokenize(text);
+  const keywords = /* @__PURE__ */ new Set();
+  for (const token of tokens) {
+    if (token.length >= minLength) {
+      keywords.add(token);
+      if (token.length >= 3) {
+        for (let i = 0; i <= token.length - 3; i++) {
+          keywords.add(token.slice(i, i + 3));
+        }
+      }
+    }
+  }
+  for (let i = 0; i < tokens.length - 1; i++) {
+    const bigram = `${tokens[i]}_${tokens[i + 1]}`;
+    if (bigram.length >= minLength) {
+      keywords.add(bigram);
+    }
+  }
+  for (let i = 0; i < tokens.length - 2; i++) {
+    const trigram = `${tokens[i]}_${tokens[i + 1]}_${tokens[i + 2]}`;
+    keywords.add(trigram);
+  }
+  return keywords;
+}
+function computeKeywordOverlap(queryKeywords, contentKeywords) {
+  let matches = 0;
+  let totalWeight = 0;
+  for (const qk of queryKeywords) {
+    const weight = qk.includes("_") ? 2 : 1;
+    if (contentKeywords.has(qk)) {
+      matches += weight;
+    }
+    totalWeight += weight;
+  }
+  if (totalWeight === 0) return 0;
+  return matches / totalWeight;
+}
+function exactPhraseMatch(query, content) {
+  const qNorm = query.toLowerCase().trim();
+  const cNorm = content.toLowerCase();
+  return cNorm.includes(qNorm);
+}
+function computeBm25Score(queryTerms, contentTerms, corpusSize = 1e4, avgDocLength = 100) {
+  const k1 = 1.5;
+  const b = 0.75;
+  const termFreq = /* @__PURE__ */ new Map();
+  for (const term of contentTerms) {
+    termFreq.set(term, (termFreq.get(term) || 0) + 1);
+  }
+  const docLength = contentTerms.length;
+  let score = 0;
+  for (const qTerm of queryTerms) {
+    const tf = termFreq.get(qTerm) || 0;
+    if (tf === 0) continue;
+    const idf = Math.log((corpusSize + 1) / (tf + 0.5));
+    const numerator = tf * (k1 + 1);
+    const denominator = tf + k1 * (1 - b + b * (docLength / avgDocLength));
+    score += idf * (numerator / denominator);
+  }
+  return score;
+}
+function computeCombinedKeywordScore(query, memoryContent) {
+  let totalScore = 0;
+  if (exactPhraseMatch(query, memoryContent)) {
+    totalScore += 1;
+  }
+  const queryKeywords = extractKeywords(query);
+  const contentKeywords = extractKeywords(memoryContent);
+  const keywordScore = computeKeywordOverlap(queryKeywords, contentKeywords);
+  totalScore += keywordScore * 0.8;
+  const queryTerms = tokenize(query);
+  const contentTerms = tokenize(memoryContent);
+  const bm25Score = computeBm25Score(queryTerms, contentTerms);
+  totalScore += Math.min(1, bm25Score / 10) * 0.5;
+  return totalScore;
+}
+
 // src/engine/memory.ts
 var MemoryEngine = class {
-  constructor(config) {
+  constructor(config, events) {
     this.config = config;
+    this.events = events;
   }
   config;
+  events;
   /**
    * Adds a new memory to the system.
    */
   async add(content, options) {
+    const startTime = clock.now();
     const { userId, metadata = {}, tags = [], sector, timestamp } = options;
     const classification = sector ? { primarySector: sector, sectors: [sector] } : classifyContent(content, metadata);
     const simhash = computeSimhash(content);
@@ -365,7 +452,8 @@ var MemoryEngine = class {
       version: 1,
       createdAt: now,
       updatedAt: now,
-      lastSeenAt: now
+      lastSeenAt: now,
+      coactivations: 0
     };
     let bestMatchId;
     let bestMatchSim = -1;
@@ -381,13 +469,26 @@ var MemoryEngine = class {
       }
     }
     await this.config.storage.insertMemory(memory);
-    await createSingleWaypoint(id, [], userId, this.config.storage, bestMatchId, bestMatchSim);
+    const edge = await createSingleWaypoint(id, [], userId, this.config.storage, bestMatchId, bestMatchSim);
+    this.events.emit("waypoint:created", {
+      srcId: edge.srcId,
+      dstId: edge.dstId,
+      userId: edge.userId,
+      weight: edge.weight
+    });
+    this.events.emit("memory:added", {
+      id,
+      userId,
+      sector: classification.primarySector,
+      durationMs: clock.now() - startTime
+    });
     return memory;
   }
   /**
    * Queries memories using a hybrid approach.
    */
   async query(queryText, options) {
+    const startTime = clock.now();
     const { userId, sector, limit = 5 } = options;
     const classification = classifyContent(queryText);
     const primarySector = sector || classification.primarySector;
@@ -419,7 +520,8 @@ var MemoryEngine = class {
       const memTokens = new Set(mem.content.toLowerCase().split(/\W+/));
       const overlap = computeTokenOverlap(queryTokens, memTokens);
       const recency = calcRecencyScore(mem.lastSeenAt);
-      const score = computeHybridScore(similarity, overlap, waypointWeight, recency);
+      const keywordScore = computeCombinedKeywordScore(queryText, mem.content);
+      const score = computeHybridScore(similarity, overlap, waypointWeight, recency, 0, keywordScore);
       results.push({
         memory: mem,
         score,
@@ -431,8 +533,15 @@ var MemoryEngine = class {
     const topResults = results.slice(0, limit);
     for (const res of topResults) {
       res.memory.lastSeenAt = clock.now();
+      res.memory.coactivations += 1;
       await this.config.storage.updateMemory(res.memory);
     }
+    this.events.emit("memory:queried", {
+      query: queryText,
+      userId,
+      results: topResults.length,
+      durationMs: clock.now() - startTime
+    });
     return topResults;
   }
   /**
@@ -454,7 +563,8 @@ var MemoryEngine = class {
       simhash,
       version: existing.version + 1,
       updatedAt: clock.now(),
-      lastSeenAt: clock.now()
+      lastSeenAt: clock.now(),
+      coactivations: existing.coactivations || 0
     };
     for (const sector of existing.sectors) {
       await this.config.vector.deleteVector(id, sector, userId);
@@ -476,6 +586,7 @@ var MemoryEngine = class {
       await this.config.vector.deleteVector(id, sector, userId);
     }
     await this.config.storage.deleteMemory(id, userId);
+    this.events.emit("memory:deleted", { id, userId });
   }
   /**
    * Gets all memories for the user in a given sector.
@@ -508,10 +619,12 @@ var MemoryEngine = class {
 
 // src/temporal/facts.ts
 var FactStore = class {
-  constructor(storage) {
+  constructor(storage, events) {
     this.storage = storage;
+    this.events = events;
   }
   storage;
+  events;
   /**
    * Directly inserts a fact. Usually you want `versioning.evolveFact` instead 
    * to handle the auto-closing of old facts.
@@ -522,6 +635,13 @@ var FactStore = class {
       id: crypto.randomUUID()
     };
     await this.storage.insertFact(newFact);
+    this.events.emit("fact:set", {
+      id: newFact.id,
+      userId: newFact.userId,
+      subject: newFact.subject,
+      predicate: newFact.predicate,
+      object: newFact.object
+    });
     return newFact;
   }
   /**
@@ -534,10 +654,12 @@ var FactStore = class {
 
 // src/temporal/versioning.ts
 var FactVersioning = class {
-  constructor(storage) {
+  constructor(storage, events) {
     this.storage = storage;
+    this.events = events;
   }
   storage;
+  events;
   /**
    * Sets a new fact using the Slowly Changing Dimension (SCD) pattern.
    * If an active fact exists for the same subject/predicate, it is closed (validTo = now).
@@ -566,6 +688,20 @@ var FactVersioning = class {
       metadata
     };
     await this.storage.insertFact(newFact);
+    this.events.emit("fact:set", {
+      id: newFact.id,
+      userId: newFact.userId,
+      subject: newFact.subject,
+      predicate: newFact.predicate,
+      object: newFact.object
+    });
+    if (active) {
+      this.events.emit("fact:superseded", {
+        oldId: active.id,
+        newId: newFact.id,
+        userId: newFact.userId
+      });
+    }
     return newFact;
   }
 };
@@ -948,9 +1084,9 @@ var MemoryMinusOne = class {
     await this.config.embedding.init?.(ctx);
     await this.config.vector.init?.(ctx);
     await this.config.cache?.init?.(ctx);
-    this.engine = new MemoryEngine(this.config);
-    this.factStore = new FactStore(this.config.storage);
-    this.factVersioning = new FactVersioning(this.config.storage);
+    this.engine = new MemoryEngine(this.config, this.events);
+    this.factStore = new FactStore(this.config.storage, this.events);
+    this.factVersioning = new FactVersioning(this.config.storage, this.events);
     this.factQuery = new FactQuery(this.config.storage);
     this.factTimeline = new FactTimeline(this.config.storage);
     this.logger.info("engine", "Initialization complete");

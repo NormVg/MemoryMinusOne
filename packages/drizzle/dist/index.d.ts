@@ -178,6 +178,18 @@ declare function createSchema(prefix?: string): {
                 enumValues: undefined;
                 baseColumn: never;
             }, {}, {}>;
+            coactivations: drizzle_orm_pg_core.PgColumn<{
+                name: "coactivations";
+                tableName: "memories";
+                dataType: "number";
+                columnType: "PgInteger";
+                data: number;
+                driverParam: string | number;
+                notNull: true;
+                hasDefault: true;
+                enumValues: undefined;
+                baseColumn: never;
+            }, {}, {}>;
         };
         dialect: "pg";
     }>;
@@ -613,6 +625,18 @@ declare const memories: drizzle_orm_pg_core.PgTableWithColumns<{
             driverParam: string | number;
             notNull: true;
             hasDefault: false;
+            enumValues: undefined;
+            baseColumn: never;
+        }, {}, {}>;
+        coactivations: drizzle_orm_pg_core.PgColumn<{
+            name: "coactivations";
+            tableName: "memories";
+            dataType: "number";
+            columnType: "PgInteger";
+            data: number;
+            driverParam: string | number;
+            notNull: true;
+            hasDefault: true;
             enumValues: undefined;
             baseColumn: never;
         }, {}, {}>;

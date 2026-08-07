@@ -63,7 +63,8 @@ function createSchema(prefix = "m1_") {
     version: (0, import_pg_core.integer)("version").default(1).notNull(),
     createdAt: (0, import_pg_core.bigint)("created_at", { mode: "number" }).notNull(),
     updatedAt: (0, import_pg_core.bigint)("updated_at", { mode: "number" }).notNull(),
-    lastSeenAt: (0, import_pg_core.bigint)("last_seen_at", { mode: "number" }).notNull()
+    lastSeenAt: (0, import_pg_core.bigint)("last_seen_at", { mode: "number" }).notNull(),
+    coactivations: (0, import_pg_core.integer)("coactivations").default(0).notNull()
   });
   const vectors2 = pgTable("vectors", {
     id: (0, import_pg_core.text)("id").notNull(),

@@ -15,10 +15,10 @@ declare function memoryTool(memoryInstance: MemoryMinusOne, userId: string): ai.
     action: z.ZodEnum<["add", "query", "list", "get", "reinforce"]>;
     content: z.ZodString;
 }, "strip", z.ZodTypeAny, {
-    action: "add" | "query" | "list" | "get" | "reinforce";
+    action: "query" | "add" | "list" | "get" | "reinforce";
     content: string;
 }, {
-    action: "add" | "query" | "list" | "get" | "reinforce";
+    action: "query" | "add" | "list" | "get" | "reinforce";
     content: string;
 }>, {
     success: boolean;
@@ -68,7 +68,7 @@ declare function memoryTool(memoryInstance: MemoryMinusOne, userId: string): ai.
     message?: undefined;
 } | undefined> & {
     execute: (args: {
-        action: "add" | "query" | "list" | "get" | "reinforce";
+        action: "query" | "add" | "list" | "get" | "reinforce";
         content: string;
     }, options: {
         abortSignal?: AbortSignal;

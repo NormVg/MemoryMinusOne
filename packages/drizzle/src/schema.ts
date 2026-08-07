@@ -38,6 +38,7 @@ export function createSchema(prefix: string = "m1_") {
     createdAt: bigint("created_at", { mode: "number" }).notNull(),
     updatedAt: bigint("updated_at", { mode: "number" }).notNull(),
     lastSeenAt: bigint("last_seen_at", { mode: "number" }).notNull(),
+    coactivations: integer("coactivations").default(0).notNull(),
   });
 
   const vectors = pgTable("vectors", {

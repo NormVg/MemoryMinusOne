@@ -33,7 +33,8 @@ function createSchema(prefix = "m1_") {
     version: integer("version").default(1).notNull(),
     createdAt: bigint("created_at", { mode: "number" }).notNull(),
     updatedAt: bigint("updated_at", { mode: "number" }).notNull(),
-    lastSeenAt: bigint("last_seen_at", { mode: "number" }).notNull()
+    lastSeenAt: bigint("last_seen_at", { mode: "number" }).notNull(),
+    coactivations: integer("coactivations").default(0).notNull()
   });
   const vectors2 = pgTable("vectors", {
     id: text("id").notNull(),
