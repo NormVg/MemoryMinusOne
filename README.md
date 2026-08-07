@@ -85,53 +85,81 @@ const mem = createMemory({
 ```mermaid
 flowchart TD
     %% Styling Classes
-    classDef input fill:#f8fafc,stroke:#cbd5e1,stroke-width:1px,color:#0f172a;
-    classDef router fill:#e0f2fe,stroke:#0284c7,stroke-width:1px,color:#0369a1;
-    classDef db fill:#fce7f3,stroke:#db2777,stroke-width:1px,color:#be185d;
-    classDef engine fill:#faf5ff,stroke:#9333ea,stroke-width:1px,color:#6b21a8;
-    classDef facts fill:#f0f9ff,stroke:#0284c7,stroke-width:1px,color:#0369a1;
-    classDef plugin fill:#eff6ff,stroke:#2563eb,stroke-width:1px,color:#1d4ed8;
-    classDef outputNode fill:#f0fdf4,stroke:#16a34a,stroke-width:1px,color:#15803d;
-    classDef facade fill:#fef08a,stroke:#ca8a04,stroke-width:2px,color:#854d0e;
+    classDef facade fill:#0f172a,stroke:#3b82f6,stroke-width:2px,color:#f8fafc;
+    classDef api fill:#1e293b,stroke:#64748b,stroke-width:1px,color:#f1f5f9;
+    classDef engine fill:#312e81,stroke:#6366f1,stroke-width:1px,color:#e0e7ff;
+    classDef module fill:#1e1b4b,stroke:#818cf8,stroke-width:1px,color:#c7d2fe;
+    classDef pluginInterface fill:#064e3b,stroke:#10b981,stroke-width:2px,color:#ecfdf5,stroke-dasharray: 5 5;
+    classDef implementation fill:#022c22,stroke:#059669,stroke-width:1px,color:#d1fae5;
+    classDef database fill:#450a0a,stroke:#ef4444,stroke-width:2px,color:#fef2f2;
 
-    Input["Your App (Nuxt/Next/Express)"]:::input --> Facade["MemoryMinusOne Facade"]:::facade
+    UserApp(["Your App (Nuxt / Next.js / Express)"]) --> Facade
 
-    subgraph FacadeLayer ["MemoryMinusOne"]
-        direction TD
+    subgraph MemoryMinusOne [MemoryMinusOne SDK]
+        Facade["MemoryMinusOne (Facade)"]:::facade
         
-        AddPipe["Add pipeline<br/>(classify → simhash → dedup → embed per sector → store → waypoint)"]:::engine
-        QueryPipe["Query pipeline<br/>(cache → embed all → vector search → adaptive expand → hybrid score w/ BM25, tags, recency, fusion, resonance → z-score → trace reinforce → events)"]:::engine
-        Maintenance["Maintenance<br/>(decay pass: segment batch → calcDecay → compress → fingerprint → regen<br/>reflection pass: cluster → consolidate → boost)"]:::engine
+        %% Core APIs
+        Facade --> AddAPI["add()"]:::api
+        Facade --> QueryAPI["query()"]:::api
+        Facade --> MaintAPI["runMaintenance()"]:::api
         
-        subgraph TemporalFacts ["Temporal facts"]
-            FactStore["FactStore / Query / Timeline"]:::facts
+        %% Cognitive Engine Modules
+        subgraph CognitiveEngine [Cognitive Engine]
+            direction TB
+            AddAPI --> Sectorizer["Sectorizer & Dedup"]:::module
+            AddAPI --> GraphBuilder["Waypoint Graph Builder"]:::module
+            
+            QueryAPI --> SemanticSearch["Vector Semantic Search"]:::module
+            QueryAPI --> GraphTraverse["Spreading Activation (Graph)"]:::module
+            QueryAPI --> KeywordMatch["BM25 Keyword Scoring"]:::module
+            
+            SemanticSearch --> HybridScoring["Hybrid Scorer<br/>(Recency, Fusion, Trace)"]:::engine
+            GraphTraverse --> HybridScoring
+            KeywordMatch --> HybridScoring
+            
+            MaintAPI --> DecayEngine["Memory Decay & Compression"]:::module
+            MaintAPI --> ReflectionEngine["Cluster Reflection & Consolidation"]:::module
         end
     end
-    
-    Facade --> AddPipe
-    Facade --> QueryPipe
-    Facade --> Maintenance
-    Facade --> TemporalFacts
 
-    %% Plugin Boundary Layer
-    subgraph PluginBoundary ["Plugin Contracts Boundary (Swappable Interfaces)"]
+    %% Plugin Architecture
+    subgraph PluginLayer [Swappable Plugin Contracts]
         direction LR
-        IStore["IStoragePlugin<br/>(drizzleStorage)"]:::plugin
-        IEmbed["IEmbeddingPlugin<br/>(aiSdkEmbedding / syntheticEmbedding)"]:::plugin
-        IVec["IVectorPlugin<br/>(memoryVectorStore / pgvector)"]:::plugin
-        ICache["ICachePlugin<br/>(upstashCache / lruCache / noCache)"]:::plugin
-        IRerank["IRerankerPlugin"]:::plugin
+        IStorage[["IStoragePlugin"]]:::pluginInterface
+        IEmbed[["IEmbeddingPlugin"]]:::pluginInterface
+        IVector[["IVectorPlugin"]]:::pluginInterface
+        ICache[["ICachePlugin"]]:::pluginInterface
     end
 
-    AddPipe -.-> PluginBoundary
-    QueryPipe -.-> PluginBoundary
-    Maintenance -.-> PluginBoundary
-    TemporalFacts -.-> PluginBoundary
+    %% Wiring Engine to Plugins
+    Sectorizer -.-> IStorage
+    Sectorizer -.-> IEmbed
+    GraphBuilder -.-> IStorage
+    SemanticSearch -.-> IVector
+    SemanticSearch -.-> IEmbed
+    DecayEngine -.-> IStorage
+    DecayEngine -.-> IVector
+    QueryAPI -.-> ICache
 
-    PluginBoundary --> DB[(Vector DB / RDBMS)]:::db
-    PluginBoundary --> Cache[(Redis Cache)]:::db
-    
-    CrossCutting["Cross-cutting: Clock, TypedEventEmitter (8 events), MemoryMinusOneError"]:::input
+    %% Concrete Implementations
+    subgraph Implementations [Concrete Providers]
+        Drizzle["Drizzle (SQLite/Postgres)"]:::implementation
+        AISDK["Vercel AI SDK"]:::implementation
+        Synthetic["Synthetic (TF-IDF)"]:::implementation
+        PgVector["pgvector"]:::implementation
+        Upstash["Upstash Redis"]:::implementation
+    end
+
+    IStorage --> Drizzle
+    IEmbed --> AISDK
+    IEmbed --> Synthetic
+    IVector --> PgVector
+    ICache --> Upstash
+
+    %% External Infrastructure
+    Drizzle ==> DB[(Relational DB)]:::database
+    PgVector ==> VectorDB[(Vector DB)]:::database
+    Upstash ==> Redis[(Redis Cache)]:::database
 ```
 
 ## API
