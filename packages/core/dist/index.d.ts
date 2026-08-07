@@ -44,7 +44,7 @@ interface SectorClassification {
 interface QueryResult {
     memory: MemoryNode;
     score: number;
-    matchType: "semantic" | "keyword" | "waypoint";
+    matchType: "semantic" | "keyword" | "waypoint" | "entity";
     path?: string[];
 }
 type DecayTier = "hot" | "warm" | "cold";
@@ -275,6 +275,7 @@ declare function noCache(): ICachePlugin;
 declare class MemoryEngine {
     private config;
     private events;
+    private entityStore;
     constructor(config: MemoryConfig, events: TypedEventEmitter);
     /**
      * Adds a new memory to the system.

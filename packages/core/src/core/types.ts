@@ -46,7 +46,7 @@ export interface SectorClassification {
 export interface QueryResult {
   memory: MemoryNode;
   score: number;
-  matchType: "semantic" | "keyword" | "waypoint";
+  matchType: "semantic" | "keyword" | "waypoint" | "entity";
   path?: string[];
 }
 

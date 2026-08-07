@@ -10,11 +10,16 @@ import { calcDecay } from "./decay";
 import { compressVector, fingerprintMemory, extractEssence } from "./compression";
 import { clusterMemories, calcReflectionSalience } from "./reflection";
 import { performSpreadingActivationRetrieval } from "./activation";
+import { EntityStore } from "./entities";
 import { clock } from "../core/clock";
 import { TypedEventEmitter } from "../core/events";
 
 export class MemoryEngine {
-  constructor(private config: MemoryConfig, private events: TypedEventEmitter) {}
+  private entityStore: EntityStore;
+
+  constructor(private config: MemoryConfig, private events: TypedEventEmitter) {
+    this.entityStore = new EntityStore(config.embedding, config.vector);
+  }
 
   /**
    * Adds a new memory to the system.
@@ -76,6 +81,9 @@ export class MemoryEngine {
 
     // Create waypoint
     const edge = await createSingleWaypoint(id, [], userId, this.config.storage, bestMatchId, bestMatchSim);
+
+    // Stage 8: Extract and store entities
+    await this.entityStore.processAndStoreEntities(id, content, userId);
 
     this.events.emit("waypoint:created", {
       srcId: edge.srcId,
@@ -162,8 +170,11 @@ export class MemoryEngine {
     const queryTokens = new Set(queryText.toLowerCase().split(/\W+/));
     const results: QueryResult[] = [];
     
+    // Stage 8: Compute entity boosts
+    const entityBoosts = await this.entityStore.computeEntityBoosts(queryText, userId, 10);
+    
     // Create a map to combine hits
-    const candidateIds = new Set([...vectorHits.map(h => h.id), ...expanded.map(e => e.id)]);
+    const candidateIds = new Set([...vectorHits.map(h => h.id), ...expanded.map(e => e.id), ...entityBoosts.keys()]);
     
     for (const id of candidateIds) {
       const mem = await this.config.storage.getMemory(id, userId);
@@ -189,13 +200,14 @@ export class MemoryEngine {
       const recency = calcRecencyScore(mem.lastSeenAt);
       
       const keywordScore = computeCombinedKeywordScore(queryText, mem.content);
+      const entityBoost = entityBoosts.get(mem.id) || 0;
       
-      const score = computeHybridScore(fusedSimilarity, overlap, waypointWeight, recency, 0, keywordScore);
+      const score = computeHybridScore(fusedSimilarity, overlap, waypointWeight, recency, 0, keywordScore) + entityBoost;
       
       results.push({
         memory: mem,
         score,
-        matchType: vHit ? "semantic" : "waypoint",
+        matchType: vHit ? "semantic" : entityBoost > 0 ? "entity" : "waypoint",
         path: eHit ? eHit.path : [id]
       });
     }
@@ -284,6 +296,9 @@ export class MemoryEngine {
       const vector = vectors[i];
       await this.config.vector.storeVector(id, sector, userId, vector, dim);
     }
+
+    // Stage 8: Update entities (for now simply add the new ones)
+    await this.entityStore.processAndStoreEntities(id, content, userId);
 
     await this.config.storage.updateMemory(memory);
     return memory;

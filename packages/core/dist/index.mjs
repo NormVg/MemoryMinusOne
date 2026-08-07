@@ -645,14 +645,95 @@ async function performSpreadingActivationRetrieval(initialIds, userId, storage, 
   return activation;
 }
 
+// src/engine/entities.ts
+function extractEntities(text) {
+  const entities = /* @__PURE__ */ new Set();
+  const quotedRegex = /"([^"]+)"/g;
+  let match;
+  while ((match = quotedRegex.exec(text)) !== null) {
+    if (match[1].length > 2) {
+      entities.add(match[1].trim());
+    }
+  }
+  const singleQuotedRegex = /'([^']+)'/g;
+  while ((match = singleQuotedRegex.exec(text)) !== null) {
+    if (match[1].length > 2) {
+      entities.add(match[1].trim());
+    }
+  }
+  const properRegex = /([A-Z][a-z]+(?:\s+[A-Z][a-z]+)+)/g;
+  while ((match = properRegex.exec(text)) !== null) {
+    entities.add(match[1].trim());
+  }
+  const idRegex = /\b([a-z]+(?:[A-Z][a-z]+)+|[A-Z][a-z]+(?:[A-Z][a-z]+)+|[a-z]+(?:_[a-z]+)+|[A-Z]+(?:_[A-Z]+)+)\b/g;
+  while ((match = idRegex.exec(text)) !== null) {
+    entities.add(match[1].trim());
+  }
+  return Array.from(entities);
+}
+var EntityStore = class {
+  constructor(embedding, vector) {
+    this.embedding = embedding;
+    this.vector = vector;
+  }
+  embedding;
+  vector;
+  /**
+   * Extracts and stores entities in a secondary vector namespace.
+   * We use "entity" as the sector name for isolation.
+   */
+  async processAndStoreEntities(memoryId, content, userId) {
+    const entities = extractEntities(content);
+    if (entities.length === 0) return;
+    const { vectors, dim } = await this.embedding.embedBatch(entities, "entity");
+    for (let i = 0; i < entities.length; i++) {
+      const entityId = `entity_${memoryId}_${crypto.randomUUID()}`;
+      await this.vector.storeVector(entityId, "entity", userId, vectors[i], dim);
+    }
+  }
+  /**
+   * Queries the entity store and computes a hub-dampened boost for memory IDs.
+   */
+  async computeEntityBoosts(queryText, userId, limit = 10) {
+    const queryEntities = extractEntities(queryText);
+    const boosts = /* @__PURE__ */ new Map();
+    if (queryEntities.length === 0) return boosts;
+    const { vectors } = await this.embedding.embedBatch(queryEntities, "entity");
+    const allHits = [];
+    for (const vec of vectors) {
+      const hits = await this.vector.search(vec, "entity", userId, limit);
+      allHits.push(...hits);
+    }
+    const memoryHitCounts = /* @__PURE__ */ new Map();
+    for (const hit of allHits) {
+      const parts = hit.id.split("_");
+      if (parts.length >= 2) {
+        const memoryId = parts[1];
+        const count = memoryHitCounts.get(memoryId) || 0;
+        memoryHitCounts.set(memoryId, count + 1);
+        const existingScore = boosts.get(memoryId) || 0;
+        boosts.set(memoryId, existingScore + hit.score);
+      }
+    }
+    for (const [memoryId, totalScore] of boosts) {
+      const count = memoryHitCounts.get(memoryId);
+      const dampenedScore = totalScore / Math.sqrt(count);
+      boosts.set(memoryId, dampenedScore * 0.1);
+    }
+    return boosts;
+  }
+};
+
 // src/engine/memory.ts
 var MemoryEngine = class {
   constructor(config, events) {
     this.config = config;
     this.events = events;
+    this.entityStore = new EntityStore(config.embedding, config.vector);
   }
   config;
   events;
+  entityStore;
   /**
    * Adds a new memory to the system.
    */
@@ -700,6 +781,7 @@ var MemoryEngine = class {
     }
     await this.config.storage.insertMemory(memory);
     const edge = await createSingleWaypoint(id, [], userId, this.config.storage, bestMatchId, bestMatchSim);
+    await this.entityStore.processAndStoreEntities(id, content, userId);
     this.events.emit("waypoint:created", {
       srcId: edge.srcId,
       dstId: edge.dstId,
@@ -768,7 +850,8 @@ var MemoryEngine = class {
     }
     const queryTokens = new Set(queryText.toLowerCase().split(/\W+/));
     const results = [];
-    const candidateIds = /* @__PURE__ */ new Set([...vectorHits.map((h) => h.id), ...expanded.map((e) => e.id)]);
+    const entityBoosts = await this.entityStore.computeEntityBoosts(queryText, userId, 10);
+    const candidateIds = /* @__PURE__ */ new Set([...vectorHits.map((h) => h.id), ...expanded.map((e) => e.id), ...entityBoosts.keys()]);
     for (const id of candidateIds) {
       const mem = await this.config.storage.getMemory(id, userId);
       if (!mem) continue;
@@ -786,11 +869,12 @@ var MemoryEngine = class {
       const overlap = computeTokenOverlap(queryTokens, memTokens);
       const recency = calcRecencyScore(mem.lastSeenAt);
       const keywordScore = computeCombinedKeywordScore(queryText, mem.content);
-      const score = computeHybridScore(fusedSimilarity, overlap, waypointWeight, recency, 0, keywordScore);
+      const entityBoost = entityBoosts.get(mem.id) || 0;
+      const score = computeHybridScore(fusedSimilarity, overlap, waypointWeight, recency, 0, keywordScore) + entityBoost;
       results.push({
         memory: mem,
         score,
-        matchType: vHit ? "semantic" : "waypoint",
+        matchType: vHit ? "semantic" : entityBoost > 0 ? "entity" : "waypoint",
         path: eHit ? eHit.path : [id]
       });
     }
@@ -859,6 +943,7 @@ var MemoryEngine = class {
       const vector = vectors[i];
       await this.config.vector.storeVector(id, sector, userId, vector, dim);
     }
+    await this.entityStore.processAndStoreEntities(id, content, userId);
     await this.config.storage.updateMemory(memory);
     return memory;
   }
