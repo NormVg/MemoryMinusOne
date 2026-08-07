@@ -77,7 +77,8 @@ export class MemoryMinusOneProvider implements Provider {
     const results = await this.mem.query(query, { 
       userId: options.containerTag,
       sector: "benchmark",
-      limit: options.limit || 30
+      limit: options.limit || 30,
+      expansion: "spreading"
     })
 
     return results

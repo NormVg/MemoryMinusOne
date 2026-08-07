@@ -618,6 +618,33 @@ function calcReflectionSalience(cluster, nowMs) {
   return Math.min(1, salience);
 }
 
+// src/engine/activation.ts
+var GAMMA_ATTENUATION_CONSTANT_FOR_GRAPH_DISTANCE = 0.35;
+async function performSpreadingActivationRetrieval(initialIds, userId, storage, maxDepth = 3) {
+  const activation = /* @__PURE__ */ new Map();
+  for (const id of initialIds) {
+    activation.set(id, 1);
+  }
+  for (let i = 0; i < maxDepth; i++) {
+    const nextUpdates = /* @__PURE__ */ new Map();
+    for (const [nodeId, energy] of activation) {
+      if (energy <= 0.05) continue;
+      const neighbors = await storage.getNeighbors(nodeId, userId);
+      for (const edge of neighbors) {
+        const attenuation = Math.exp(-GAMMA_ATTENUATION_CONSTANT_FOR_GRAPH_DISTANCE * 1);
+        const propagatedEnergy = edge.weight * energy * attenuation;
+        const existing = nextUpdates.get(edge.dstId) || 0;
+        nextUpdates.set(edge.dstId, existing + propagatedEnergy);
+      }
+    }
+    for (const [id, newEnergy] of nextUpdates) {
+      const current = activation.get(id) || 0;
+      activation.set(id, Math.max(current, newEnergy));
+    }
+  }
+  return activation;
+}
+
 // src/engine/memory.ts
 var MemoryEngine = class {
   constructor(config, events) {
@@ -692,10 +719,10 @@ var MemoryEngine = class {
    */
   async query(queryText, options) {
     const startTime = clock.now();
-    const { userId, sector, limit = 5 } = options;
+    const { userId, sector, limit = 5, expansion = "bfs" } = options;
     const classification = classifyContent(queryText);
     const primarySector = sector || classification.primarySector;
-    const cacheKey = `q:${userId}:${computeSimhash(queryText)}:${limit}:${primarySector}`;
+    const cacheKey = `q:${userId}:${computeSimhash(queryText)}:${limit}:${primarySector}:${expansion}`;
     if (this.config.cache) {
       const cached = await this.config.cache.get(cacheKey);
       if (cached) {
@@ -732,7 +759,12 @@ var MemoryEngine = class {
     const avgTop = topScores.length > 0 ? topScores.reduce((sum, score) => sum + score, 0) / topScores.length : 0;
     if (avgTop < 0.55) {
       const initialIds = vectorHits.map((h) => h.id);
-      expanded = await expandViaWaypoints(initialIds, userId, this.config.storage, limit);
+      if (expansion === "spreading") {
+        const spreadingEnergy = await performSpreadingActivationRetrieval(initialIds, userId, this.config.storage);
+        expanded = Array.from(spreadingEnergy.entries()).map(([id, energy]) => ({ id, weight: energy, path: [id] }));
+      } else {
+        expanded = await expandViaWaypoints(initialIds, userId, this.config.storage, limit);
+      }
     }
     const queryTokens = new Set(queryText.toLowerCase().split(/\W+/));
     const results = [];
@@ -767,6 +799,17 @@ var MemoryEngine = class {
     for (const res of topResults) {
       res.memory.lastSeenAt = clock.now();
       res.memory.coactivations += 1;
+      if (this.config.vector.getVectorsForId) {
+        const vecs = await this.config.vector.getVectorsForId(res.memory.id, userId);
+        if (vecs.length > 0 && vecs[0].dim <= 64) {
+          const contentBatch = res.memory.sectors.map(() => res.memory.content);
+          const { vectors, dim } = await this.config.embedding.embedBatch(contentBatch, res.memory.primarySector);
+          for (let i = 0; i < res.memory.sectors.length; i++) {
+            await this.config.vector.storeVector(res.memory.id, res.memory.sectors[i], userId, vectors[i], dim);
+          }
+          res.memory.salience = 1;
+        }
+      }
       await this.config.storage.updateMemory(res.memory);
       if (res.matchType === "waypoint" && res.path && res.path.length > 1) {
         await reinforcePath(res.path, this.config.storage, res.memory.userId);

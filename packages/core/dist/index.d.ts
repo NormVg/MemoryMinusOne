@@ -293,6 +293,7 @@ declare class MemoryEngine {
         userId: string;
         sector?: string;
         limit?: number;
+        expansion?: "bfs" | "spreading";
     }): Promise<QueryResult[]>;
     /**
      * Updates an existing memory's content and re-embeds it.
@@ -373,6 +374,7 @@ declare class MemoryMinusOne {
         userId: string;
         sector?: string;
         limit?: number;
+        expansion?: "bfs" | "spreading";
     }): Promise<QueryResult[]>;
     get(id: string, options: {
         userId: string;

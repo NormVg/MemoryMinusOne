@@ -65,7 +65,7 @@ export class MemoryMinusOne {
     return this.engine.add(content, options);
   }
 
-  async query(queryText: string, options: { userId: string; sector?: string; limit?: number }) {
+  async query(queryText: string, options: { userId: string; sector?: string; limit?: number; expansion?: "bfs" | "spreading" }) {
     return this.engine.query(queryText, options);
   }
 

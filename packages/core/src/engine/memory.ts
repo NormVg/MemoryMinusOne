@@ -9,6 +9,7 @@ import { reinforcePath, reinforceNodeSalience } from "./waypoints";
 import { calcDecay } from "./decay";
 import { compressVector, fingerprintMemory, extractEssence } from "./compression";
 import { clusterMemories, calcReflectionSalience } from "./reflection";
+import { performSpreadingActivationRetrieval } from "./activation";
 import { clock } from "../core/clock";
 import { TypedEventEmitter } from "../core/events";
 
@@ -96,14 +97,14 @@ export class MemoryEngine {
   /**
    * Queries memories using a hybrid approach.
    */
-  async query(queryText: string, options: { userId: string; sector?: string; limit?: number }): Promise<QueryResult[]> {
+  async query(queryText: string, options: { userId: string; sector?: string; limit?: number; expansion?: "bfs" | "spreading" }): Promise<QueryResult[]> {
     const startTime = clock.now();
-    const { userId, sector, limit = 5 } = options;
+    const { userId, sector, limit = 5, expansion = "bfs" } = options;
     const classification = classifyContent(queryText);
     const primarySector = sector || classification.primarySector;
     
     // Check cache
-    const cacheKey = `q:${userId}:${computeSimhash(queryText)}:${limit}:${primarySector}`;
+    const cacheKey = `q:${userId}:${computeSimhash(queryText)}:${limit}:${primarySector}:${expansion}`;
     if (this.config.cache) {
       const cached = await this.config.cache.get<QueryResult[]>(cacheKey);
       if (cached) {
@@ -149,7 +150,12 @@ export class MemoryEngine {
     
     if (avgTop < 0.55) {
       const initialIds = vectorHits.map(h => h.id);
-      expanded = await expandViaWaypoints(initialIds, userId, this.config.storage, limit);
+      if (expansion === "spreading") {
+        const spreadingEnergy = await performSpreadingActivationRetrieval(initialIds, userId, this.config.storage);
+        expanded = Array.from(spreadingEnergy.entries()).map(([id, energy]) => ({ id, weight: energy, path: [id] }));
+      } else {
+        expanded = await expandViaWaypoints(initialIds, userId, this.config.storage, limit);
+      }
     }
     
     // 3. Re-score
