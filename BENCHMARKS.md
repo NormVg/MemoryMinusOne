@@ -1,14 +1,14 @@
 # MemoryMinusOne Benchmark Results
 
 ## Goal
-The goal of this benchmark run was to evaluate **MemoryMinusOne's** recall and memory synthesis capabilities against the **LOCOMO dataset (1,540 questions across 10 conversations)**, establishing the official baseline accuracy for this local-first Hierarchical Memory Decomposition (HMD) architecture.
+The goal of this benchmark run was to evaluate **MemoryMinusOne's** recall and memory synthesis capabilities across multiple datasets (**LOCOMO**, **ConvoMem**, and **LongMemEval**), establishing the official baseline accuracy for the new Plugin-First architecture prior to the full Hierarchical Sectored Graph (HSG) engine port.
 
 ## Execution Setup
-To respect Ollama Cloud Free Tier limits (1 concurrent slot per key), the benchmark was massively parallelized:
-- **Backend Memory Server:** Local MemoryMinusOne in-memory vector store running on `localhost:8888`.
-- **Embeddings:** Local `embeddinggemma:latest` (zero API cost, extremely fast on-device).
-- **LLM Engine:** `gemma4:31b-cloud` via `https://ollama.com/v1`.
-- **Concurrency:** 5 background processes running in parallel across 5 separate API keys.
+The benchmark was executed using the newly integrated `memorybench` automated test runner:
+- **Test Runner:** `memorybench` (Embedded SDK execution, evaluating `core` directly).
+- **Embeddings:** Local `embeddinggemma:latest` (zero API cost, fast on-device processing).
+- **Answering Model:** `gemma4:31b-cloud` via Cloud API.
+- **Judge Model:** `gpt-oss:120b-cloud` via Cloud API.
 - **Retrieval Cutoff:** `top-k = 10` (Testing strict precision rather than brute-force recall).
 
 ---
