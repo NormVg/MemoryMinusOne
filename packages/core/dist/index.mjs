@@ -2,7 +2,9 @@ import {
   clock,
   createSingleWaypoint,
   defaultClock,
-  expandViaWaypoints
+  expandViaWaypoints,
+  reinforceNodeSalience,
+  reinforcePath
 } from "./chunk-J63H25QI.mjs";
 
 // src/core/config.ts
@@ -492,6 +494,19 @@ var MemoryEngine = class {
     const { userId, sector, limit = 5 } = options;
     const classification = classifyContent(queryText);
     const primarySector = sector || classification.primarySector;
+    const cacheKey = `q:${userId}:${computeSimhash(queryText)}:${limit}:${primarySector}`;
+    if (this.config.cache) {
+      const cached = await this.config.cache.get(cacheKey);
+      if (cached) {
+        this.events.emit("memory:queried", {
+          query: queryText,
+          userId,
+          results: cached.length,
+          durationMs: clock.now() - startTime
+        });
+        return cached;
+      }
+    }
     const searchSectors = [primarySector];
     if (primarySector !== "semantic") searchSectors.push("semantic");
     const allHits = /* @__PURE__ */ new Map();
@@ -505,11 +520,17 @@ var MemoryEngine = class {
       }
     }
     const vectorHits = Array.from(allHits.entries()).map(([id, score]) => ({ id, score }));
-    const initialIds = vectorHits.map((h) => h.id);
-    const expanded = await expandViaWaypoints(initialIds, userId, this.config.storage, limit);
+    vectorHits.sort((a, b) => b.score - a.score);
+    let expanded = [];
+    const topScores = vectorHits.slice(0, 3).map((h) => h.score);
+    const avgTop = topScores.length > 0 ? topScores.reduce((sum, score) => sum + score, 0) / topScores.length : 0;
+    if (avgTop < 0.55) {
+      const initialIds = vectorHits.map((h) => h.id);
+      expanded = await expandViaWaypoints(initialIds, userId, this.config.storage, limit);
+    }
     const queryTokens = new Set(queryText.toLowerCase().split(/\W+/));
     const results = [];
-    const candidateIds = /* @__PURE__ */ new Set([...initialIds, ...expanded.map((e) => e.id)]);
+    const candidateIds = /* @__PURE__ */ new Set([...vectorHits.map((h) => h.id), ...expanded.map((e) => e.id)]);
     for (const id of candidateIds) {
       const mem = await this.config.storage.getMemory(id, userId);
       if (!mem) continue;
@@ -535,6 +556,13 @@ var MemoryEngine = class {
       res.memory.lastSeenAt = clock.now();
       res.memory.coactivations += 1;
       await this.config.storage.updateMemory(res.memory);
+      if (res.matchType === "waypoint" && res.path && res.path.length > 1) {
+        await reinforcePath(res.path, this.config.storage, res.memory.userId);
+      }
+      await reinforceNodeSalience(res.memory, this.config.storage);
+    }
+    if (this.config.cache) {
+      await this.config.cache.set(cacheKey, topResults, 300);
     }
     this.events.emit("memory:queried", {
       query: queryText,
@@ -606,8 +634,8 @@ var MemoryEngine = class {
   async reinforce(id, options) {
     const memory = await this.config.storage.getMemory(id, options.userId);
     if (memory) {
-      const { reinforceNodeSalience } = await import("./waypoints-WBWJDKC7.mjs");
-      await reinforceNodeSalience(memory, this.config.storage);
+      const { reinforceNodeSalience: reinforceNodeSalience2 } = await import("./waypoints-WBWJDKC7.mjs");
+      await reinforceNodeSalience2(memory, this.config.storage);
     }
   }
   /**

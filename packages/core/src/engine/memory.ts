@@ -5,6 +5,7 @@ import { computeSimhash } from "./simhash";
 import { createSingleWaypoint, expandViaWaypoints } from "./waypoints";
 import { computeHybridScore, computeTokenOverlap, calcRecencyScore, cosineSimilarity } from "./scoring";
 import { computeCombinedKeywordScore } from "./keyword";
+import { reinforcePath, reinforceNodeSalience } from "./waypoints";
 import { clock } from "../core/clock";
 import { TypedEventEmitter } from "../core/events";
 
@@ -94,6 +95,21 @@ export class MemoryEngine {
     const classification = classifyContent(queryText);
     const primarySector = sector || classification.primarySector;
     
+    // Check cache
+    const cacheKey = `q:${userId}:${computeSimhash(queryText)}:${limit}:${primarySector}`;
+    if (this.config.cache) {
+      const cached = await this.config.cache.get<QueryResult[]>(cacheKey);
+      if (cached) {
+        this.events.emit("memory:queried", {
+          query: queryText,
+          userId,
+          results: cached.length,
+          durationMs: clock.now() - startTime
+        });
+        return cached;
+      }
+    }
+    
     // 1. Vector search — primary sector + semantic fallback (max 2 sectors)
     const searchSectors = [primarySector];
     if (primarySector !== "semantic") searchSectors.push("semantic");
@@ -109,17 +125,24 @@ export class MemoryEngine {
       }
     }
     const vectorHits = Array.from(allHits.entries()).map(([id, score]) => ({ id, score }));
+    vectorHits.sort((a, b) => b.score - a.score);
     
-    // 2. Expand via waypoints
-    const initialIds = vectorHits.map(h => h.id);
-    const expanded = await expandViaWaypoints(initialIds, userId, this.config.storage, limit);
+    // 2. Adaptive Waypoint Expansion
+    let expanded: Array<{ id: string; weight: number; path: string[] }> = [];
+    const topScores = vectorHits.slice(0, 3).map(h => h.score);
+    const avgTop = topScores.length > 0 ? topScores.reduce((sum, score) => sum + score, 0) / topScores.length : 0;
+    
+    if (avgTop < 0.55) {
+      const initialIds = vectorHits.map(h => h.id);
+      expanded = await expandViaWaypoints(initialIds, userId, this.config.storage, limit);
+    }
     
     // 3. Re-score
     const queryTokens = new Set(queryText.toLowerCase().split(/\W+/));
     const results: QueryResult[] = [];
     
     // Create a map to combine hits
-    const candidateIds = new Set([...initialIds, ...expanded.map(e => e.id)]);
+    const candidateIds = new Set([...vectorHits.map(h => h.id), ...expanded.map(e => e.id)]);
     
     for (const id of candidateIds) {
       const mem = await this.config.storage.getMemory(id, userId);
@@ -155,6 +178,18 @@ export class MemoryEngine {
       res.memory.lastSeenAt = clock.now();
       res.memory.coactivations += 1;
       await this.config.storage.updateMemory(res.memory);
+      
+      // Reinforce path if it was found via waypoints
+      if (res.matchType === "waypoint" && res.path && res.path.length > 1) {
+        await reinforcePath(res.path, this.config.storage, res.memory.userId);
+      }
+      
+      // Also reinforce the node salience itself
+      await reinforceNodeSalience(res.memory, this.config.storage);
+    }
+    
+    if (this.config.cache) {
+      await this.config.cache.set(cacheKey, topResults, 300); // 5 min TTL
     }
     
     this.events.emit("memory:queried", {
