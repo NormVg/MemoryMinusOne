@@ -83,7 +83,7 @@ const mem = createMemory({
 ## Architecture
 
 ```mermaid
-flowchart LR
+flowchart TD
     %% Styling Classes
     classDef facade fill:#0f172a,stroke:#3b82f6,stroke-width:2px,color:#f8fafc;
     classDef api fill:#1e293b,stroke:#64748b,stroke-width:1px,color:#f1f5f9;
@@ -100,7 +100,7 @@ flowchart LR
 
     %% 2. API Layer
     subgraph API [Core API]
-        direction TB
+        direction LR
         AddAPI["add()"]:::api
         QueryAPI["query()"]:::api
         MaintAPI["runMaintenance()"]:::api
@@ -110,7 +110,7 @@ flowchart LR
 
     %% 3. Cognitive Engine Layer
     subgraph Engine [Cognitive Engine Modules]
-        direction TB
+        direction LR
         Sectorizer["Sectorizer & Dedup"]:::module
         GraphBuilder["Waypoint Graph Builder"]:::module
         
@@ -132,7 +132,7 @@ flowchart LR
 
     %% 4. Plugin Contracts Layer
     subgraph Plugins [Swappable Plugin Contracts]
-        direction TB
+        direction LR
         IStorage[["IStoragePlugin"]]:::pluginInterface
         IEmbed[["IEmbeddingPlugin"]]:::pluginInterface
         IVector[["IVectorPlugin"]]:::pluginInterface
@@ -148,7 +148,7 @@ flowchart LR
 
     %% 5. Concrete Implementations Layer
     subgraph Implementations [Concrete Providers]
-        direction TB
+        direction LR
         Drizzle["Drizzle"]:::implementation
         AISDK["Vercel AI SDK"]:::implementation
         Synthetic["Synthetic (TF-IDF)"]:::implementation
@@ -163,7 +163,7 @@ flowchart LR
 
     %% 6. Physical Infrastructure Layer
     subgraph Infrastructure [Physical Infrastructure]
-        direction TB
+        direction LR
         DB[(Relational DB)]:::database
         VectorDB[(Vector DB)]:::database
         Redis[(Redis Cache)]:::database
