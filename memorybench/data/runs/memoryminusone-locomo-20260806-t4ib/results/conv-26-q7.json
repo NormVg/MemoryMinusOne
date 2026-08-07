@@ -1,0 +1,10 @@
+{
+  "questionId": "conv-26-q7",
+  "question": "What is Caroline's relationship status?",
+  "questionType": "single-hop",
+  "groundTruth": "Single",
+  "containerTag": "conv-26-q7-memoryminusone-locomo-20260806-t4ib",
+  "timestamp": "2026-08-06T18:15:25.864Z",
+  "durationMs": 90,
+  "results": []
+}

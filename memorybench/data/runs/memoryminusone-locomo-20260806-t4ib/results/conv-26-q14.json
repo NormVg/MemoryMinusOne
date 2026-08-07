@@ -1,0 +1,10 @@
+{
+  "questionId": "conv-26-q14",
+  "question": "Would Caroline still want to pursue counseling as a career if she hadn't received support growing up?",
+  "questionType": "temporal",
+  "groundTruth": "Likely no",
+  "containerTag": "conv-26-q14-memoryminusone-locomo-20260806-t4ib",
+  "timestamp": "2026-08-06T18:15:26.240Z",
+  "durationMs": 87,
+  "results": []
+}

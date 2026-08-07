@@ -1,0 +1,38 @@
+{
+  "questionId": "convomem-abstention_evidence-1719",
+  "question": "Which specific dog park do Fenwick and I visit most frequently?",
+  "questionType": "abstention_evidence",
+  "groundTruth": "There is no information in prior conversations to answer this question",
+  "containerTag": "convomem-abstention_evidence-1719-memoryminusone-convomem-20260806-3knw",
+  "timestamp": "2026-08-06T19:07:55.203Z",
+  "durationMs": 293,
+  "results": [
+    {
+      "memory": {
+        "id": "045232d8-43f2-4216-bb29-3de476bbe3a8",
+        "userId": "convomem-abstention_evidence-1719-memoryminusone-convomem-20260806-3knw",
+        "content": "Here is the session as a stringified JSON:\n[{\"role\":\"user\",\"content\":\"Hey, how's it going today?\"},{\"role\":\"assistant\",\"content\":\"Hi Elena! It's going well, thanks for asking. How about you?\"},{\"role\":\"user\",\"content\":\"Pretty good! Just getting ready for the weekend. I'm looking forward to some downtime.\"},{\"role\":\"assistant\",\"content\":\"That sounds nice. Do you have any plans?\"},{\"role\":\"user\",\"content\":\"Yeah, I love taking Fenwick to the dog park on weekends. It's become a part of our routine, and he really enjoys playing with other dogs there.\"},{\"role\":\"assistant\",\"content\":\"That sounds like a lot of fun for both of you! How's Fenwick doing these days?\"},{\"role\":\"user\",\"content\":\"He's doing great! He's full of energy and keeps me on my toes. It's amazing how much joy he brings.\"},{\"role\":\"assistant\",\"content\":\"That's wonderful to hear. Dogs really do have a way of brightening up our lives.\"},{\"role\":\"user\",\"content\":\"Absolutely. Plus, it's a great way for me to unwind after a busy week at work.\"},{\"role\":\"assistant\",\"content\":\"I can imagine. How's everything going at work lately?\"},{\"role\":\"user\",\"content\":\"It's been busy, but in a good way. We're working on some new initiatives for employee engagement, which is exciting.\"},{\"role\":\"assistant\",\"content\":\"That sounds interesting. Are you finding it challenging to balance everything?\"},{\"role\":\"user\",\"content\":\"A bit, but I've learned to manage my time better. Having a routine with Fenwick helps a lot.\"},{\"role\":\"assistant\",\"content\":\"Routines can be really grounding. Do you have any other weekend rituals?\"},{\"role\":\"user\",\"content\":\"Not really, just the usual errands and maybe some pottery if I have the time.\"},{\"role\":\"assistant\",\"content\":\"Pottery sounds like a great creative outlet. How's that going?\"},{\"role\":\"user\",\"content\":\"It's going well! It's a nice way to disconnect and focus on something tactile.\"},{\"role\":\"assistant\",\"content\":\"That's great to hear. It's important to have those moments of relaxation.\"},{\"role\":\"user\",\"content\":\"Definitely. Anyway, I should get back to work. Thanks for the chat!\"},{\"role\":\"assistant\",\"content\":\"Anytime, Elena. Have a great weekend with Fenwick!\"}]",
+        "primarySector": "benchmark",
+        "sectors": [
+          "benchmark"
+        ],
+        "tags": [],
+        "metadata": {
+          "sessionId": "convomem-abstention_evidence-1719-session-0"
+        },
+        "simhash": "a3b00000a3b00000",
+        "salience": 1,
+        "decayLambda": 0.01,
+        "version": 1,
+        "createdAt": 1786043235115,
+        "updatedAt": 1786043235115,
+        "lastSeenAt": 1786043275203
+      },
+      "score": 0.6477001472341899,
+      "matchType": "semantic",
+      "path": [
+        "045232d8-43f2-4216-bb29-3de476bbe3a8"
+      ]
+    }
+  ]
+}

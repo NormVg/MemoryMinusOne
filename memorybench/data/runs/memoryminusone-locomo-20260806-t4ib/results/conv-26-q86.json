@@ -1,0 +1,10 @@
+{
+  "questionId": "conv-26-q86",
+  "question": "What type of individuals does the adoption agency Caroline is considering support?",
+  "questionType": "world-knowledge",
+  "groundTruth": "LGBTQ+ individuals",
+  "containerTag": "conv-26-q86-memoryminusone-locomo-20260806-t4ib",
+  "timestamp": "2026-08-06T18:15:26.986Z",
+  "durationMs": 82,
+  "results": []
+}

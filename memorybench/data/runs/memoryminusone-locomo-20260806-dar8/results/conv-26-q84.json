@@ -1,0 +1,291 @@
+{
+  "questionId": "conv-26-q84",
+  "question": "How does Melanie prioritize self-care?",
+  "questionType": "world-knowledge",
+  "groundTruth": "by carving out some me-time each day for activities like running, reading, or playing the violin",
+  "containerTag": "conv-26-q84-memoryminusone-locomo-20260806-dar8",
+  "timestamp": "2026-08-06T18:30:27.333Z",
+  "durationMs": 89,
+  "results": [
+    {
+      "memory": {
+        "id": "c39ea4e9-15c3-4ad5-8291-b4f4e3f5072b",
+        "userId": "conv-26-q84-memoryminusone-locomo-20260806-dar8",
+        "content": "Here is the date the following session took place: 3:31 pm on 23 August, 2023\n\nHere is the session as a stringified JSON:\n[{\"role\":\"user\",\"content\":\"Hi Melanie! Hope you're doing good. Guess what I did this week? I took the first step towards becoming a mom - I applied to adoption agencies! It's a big decision, but I think I'm ready to give all my love to a child. I got lots of help from this adoption advice/assistance group I attended. It was great!\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Caroline, congrats! So proud of you for taking this step. How does it feel? Also, do you have any pets?\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Thanks, Mel! Exciting but kinda nerve-wracking. Parenting's such a big responsibility. And yup, I do- Oscar, my guinea pig. He's been great. How are your pets?\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Yeah, it's normal to be both excited and nervous with a big decision. And thanks for asking, they're good- we got another cat named Bailey too. Here's a pic of Oliver. Can you show me one of Oscar?\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"He's so cute! What’s the funniest thing Oliver's done? And sure, check out this pic of him eating parsley! Veggies are his fave!\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Oliver's hilarious! He hid his bone in my slipper once! Cute, right? Almost as silly as when I got to feed a horse a carrot. \",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"That's so funny! I used to go horseback riding with my dad when I was a kid, we'd go through the fields, feeling the wind. It was so special. I've always had a love for horses!\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Wow, that sounds great - I agree, they're awesome. Here's a photo of my horse painting I did recently.\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Wow, Melanie, that's amazing! Love all the details and how you got the horse's grace and strength. Do you like painting animals?\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Thanks, Caroline! Glad you like it. Yeah, I love to. It's peaceful and special. Horses have such grace! Do you like to paint too?\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Painting's great for expressing myself. I love creating art! Here's a recent self-portrait I made last week.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Caroline, that's great! The blue's really powerful, huh? How'd you feel while painting it?\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Thanks, Mel! I felt liberated and empowered doing it. Painting helps me explore my identity and be true to myself. It's definitely therapeutic.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Wow, Caroline, that's great! Art's awesome for showing us who we really are and getting in touch with ourselves. What else helps you out?\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Thanks, Melanie. Art gives me a sense of freedom, but so does having supportive people around, promoting LGBTQ rights and being true to myself. I want to live authentically and help others to do the same.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Wow, Caroline! That's amazing. You really care about being real and helping others. Wishing you the best on your adoption journey!\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Thanks, Melanie! I really appreciate it. Excited for the future! Bye!\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Bye Caroline. I'm here for you. Take care of yourself.\",\"speaker\":\"Melanie\"}]",
+        "primarySector": "benchmark",
+        "sectors": [
+          "benchmark"
+        ],
+        "tags": [],
+        "metadata": {
+          "sessionId": "conv-26-session_13",
+          "date": "2023-08-23T15:31:00.000Z"
+        },
+        "simhash": "bb618000bb618000",
+        "salience": 1,
+        "decayLambda": 0.01,
+        "version": 1,
+        "createdAt": 1786040967499,
+        "updatedAt": 1786040967499,
+        "lastSeenAt": 1786041027330
+      },
+      "score": 0.6590314087921598,
+      "matchType": "semantic",
+      "path": [
+        "c39ea4e9-15c3-4ad5-8291-b4f4e3f5072b"
+      ]
+    },
+    {
+      "memory": {
+        "id": "04fe2c7a-459d-4ab1-bcce-f0bbd4afbdb3",
+        "userId": "conv-26-q84-memoryminusone-locomo-20260806-dar8",
+        "content": "Here is the date the following session took place: 10:37 am on 27 June, 2023\n\nHere is the session as a stringified JSON:\n[{\"role\":\"user\",\"content\":\"Hey Melanie! Long time no talk! A lot's been going on in my life! Take a look at this.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Hey, Caroline! Nice to hear from you! Love the necklace, any special meaning to it?\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Thanks, Melanie! This necklace is super special to me - a gift from my grandma in my home country, Sweden. She gave it to me when I was young, and it stands for love, faith and strength. It's like a reminder of my roots and all the love and support I get from my family.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"That's gorgeous, Caroline! It's awesome what items can mean so much to us, right? Got any other objects that you treasure, like that necklace?\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Yep, Melanie! I've got some other stuff with sentimental value, like my hand-painted bowl. A friend made it for my 18th birthday ten years ago. The pattern and colors are awesome-- it reminds me of art and self-expression.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"That sounds great, Caroline! It's awesome having stuff around that make us think of good connections and times. Actually, I just took my fam camping in the mountains last week - it was a really nice time together!\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Sounds great, Mel. Glad you made some new family mems. How was it? Anything fun?\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"It was an awesome time, Caroline! We explored nature, roasted marshmallows around the campfire and even went on a hike. The view from the top was amazing! The 2 younger kids love nature. It was so special having these moments together as a family - I'll never forget it!\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"That's awesome, Melanie! Family moments like that are so special. Glad y'all had such a great time.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Thanks, Caroline! Family time matters to me. What's up with you lately?\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Lately, I've been looking into counseling and mental health as a career. I want to help people who have gone through the same things as me.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Sounds great! What kind of counseling and mental health services do you want to persue?\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"I'm still figuring out the details, but I'm thinking of working with trans people, helping them accept themselves and supporting their mental health. Last Friday, I went to an LGBTQ+ counseling workshop and it was really enlightening. They talked about different therapeutic methods and how to best work with trans people. Seeing how passionate these pros were about making a safe space for people like me was amazing.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Woah, Caroline, it sounds like you're doing some impressive work. It's inspiring to see your dedication to helping others. What motivated you to pursue counseling?\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Thanks, Melanie. It really mattered. My own journey and the support I got made a huge difference. Now I want to help people go through it too. I saw how counseling and support groups improved my life, so I started caring more about mental health and understanding myself. Now I'm passionate about creating a safe, inviting place for people to grow.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Wow, Caroline! You've gained so much from your own experience. Your passion and hard work to help others is awesome. Keep it up, you're making a big impact!\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Thanks, Melanie! Your kind words mean a lot.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Congrats Caroline! Good on you for going after what you really care about.\",\"speaker\":\"Melanie\"}]",
+        "primarySector": "benchmark",
+        "sectors": [
+          "benchmark"
+        ],
+        "tags": [],
+        "metadata": {
+          "sessionId": "conv-26-session_4",
+          "date": "2023-06-27T10:37:00.000Z"
+        },
+        "simhash": "21f0800021f08000",
+        "salience": 1,
+        "decayLambda": 0.01,
+        "version": 1,
+        "createdAt": 1786040965670,
+        "updatedAt": 1786040965670,
+        "lastSeenAt": 1786041027329
+      },
+      "score": 0.656550776753852,
+      "matchType": "semantic",
+      "path": [
+        "04fe2c7a-459d-4ab1-bcce-f0bbd4afbdb3"
+      ]
+    },
+    {
+      "memory": {
+        "id": "5b64f4d1-9be9-49da-8569-82d681ad3944",
+        "userId": "conv-26-q84-memoryminusone-locomo-20260806-dar8",
+        "content": "Here is the date the following session took place: 10:31 am on 13 October, 2023\n\nHere is the session as a stringified JSON:\n[{\"role\":\"user\",\"content\":\"Hey Mel, what's up? Long time no see! I just contacted my mentor for adoption advice. I'm ready to be a mom and share my love and family. It's a great feeling. Anything new with you? Anything exciting going on?\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Hey Caroline! Great to hear from you! Wow, what an amazing journey. Congrats!\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Thanks, Melanie! I'm stoked to start this new chapter. It's been a dream to adopt and provide a safe, loving home for kids who need it. Do you have any experience with adoption, or know anyone who's gone through the process?\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Yeah, a buddy of mine adopted last year. It was a long process, but now they're super happy with their new kid. Makes me feel like maybe I should do it too!\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"That's great news about your friend! It can be tough, but so worth it. It's a great way to add to your family and show your love. If you ever do it, let me know — I'd love to help in any way I can.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Thanks, Caroline! Appreciate your help. Got any tips for getting started on it?\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Yep! Do your research and find an adoption agency or lawyer. They'll help with the process and provide all the info. Gather documents like references, financial info and medical checks. Don't forget to prepare emotionally, since the wait can be hard. It's all worth it in the end though.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Thanks for the tip, Caroline. Doing research and readying myself emotionally makes sense. I'll do that. BTW, recently I had a setback. Last month I got hurt and had to take a break from pottery, which I use for self-expression and peace.\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Oh man, sorry to hear that, Melanie. I hope you're okay. Pottery's a great way to relax, so it must have been tough taking a break. Need any help?\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Thanks, Caroline. It was tough, but I'm doing ok. Been reading that book you recommended a while ago and painting to keep busy.\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Cool that you have creative outlets. Got any paintings to show? I'd love to check them out.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Yeah, Here's one I did last week. It's inspired by the sunsets. The colors make me feel calm. What have you been up to lately, artistically?\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Wow Mel, that's stunning! Love the colors and the chilled-out sunset vibe. What made you paint it? I've been trying out abstract stuff recently. It's kinda freeing, just putting my feelings on the canvas without too much of a plan. It's like a cool form of self-expression.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Thanks, Caroline! I painted it because it was calming. I've done an abstract painting too, take a look! I love how art lets us get our emotions out.\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Wow, that looks great! The blue adds so much to it. What feelings were you hoping to portray?\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"I wanted a peaceful blue streaks to show tranquility. Blue calms me, so I wanted the painting to have a serene vibe while still having lots of vibrant colors.\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Yeah, it's very calming. It's awesome how art can show emotions. By the way, I went to a poetry reading last Fri - it was really powerful! Ever been to one?\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Nope, never been to something like that. What was it about? What made it so special?\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"It was a transgender poetry reading where transgender people shared their stories through poetry. It was extra special 'cause it was a safe place for self-expression and it was really empowering to hear others share and celebrate their identities.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Wow, sounds amazing! What was the event like? Those posters are great!\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"The room was electric with energy and support! The posters were amazing, so much pride and strength! It inspired me to make some art.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"That's awesome, Caroline! You drew it? What does it mean to you?\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Thanks, Melanie! Yeah, I drew it. It stands for freedom and being real. It's like a nudge to always stay true to myself and embrace my womanhood.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"I love it. Showing off our true selves is the best thing ever.\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Yep, Melanie! Being ourselves is such a great feeling. It's an ongoing adventure of learning and growing.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Yep, Caroline. Life's about learning and exploring. Glad we can be on this trip together.\",\"speaker\":\"Melanie\"}]",
+        "primarySector": "benchmark",
+        "sectors": [
+          "benchmark"
+        ],
+        "tags": [],
+        "metadata": {
+          "sessionId": "conv-26-session_17",
+          "date": "2023-10-13T10:31:00.000Z"
+        },
+        "simhash": "b3308000b3308000",
+        "salience": 1,
+        "decayLambda": 0.01,
+        "version": 1,
+        "createdAt": 1786040968439,
+        "updatedAt": 1786040968439,
+        "lastSeenAt": 1786041027329
+      },
+      "score": 0.6546274612252736,
+      "matchType": "semantic",
+      "path": [
+        "5b64f4d1-9be9-49da-8569-82d681ad3944"
+      ]
+    },
+    {
+      "memory": {
+        "id": "f492a0d3-88a3-4487-aa75-6dd1e5389ec1",
+        "userId": "conv-26-q84-memoryminusone-locomo-20260806-dar8",
+        "content": "Here is the date the following session took place: 4:33 pm on 12 July, 2023\n\nHere is the session as a stringified JSON:\n[{\"role\":\"user\",\"content\":\"Hey Mel, great to chat with you again! So much has happened since we last spoke - I went to an LGBTQ conference two days ago and it was really special. I got the chance to meet and connect with people who've gone through similar journeys. It was such a welcoming environment and I felt totally accepted. I'm really thankful for this amazing community - it's shown me how important it is to fight for trans rights and spread awareness.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Wow, Caroline, that sounds awesome! So glad you felt accepted and supported. Events like these are great for reminding us of how strong community can be!\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Yeah, it's true! Having people who back you makes such a huge difference. It's great to see how far LGBTQ rights have come, but there's still plenty of progress to be made. I wanna help make a difference.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Wow, Caroline. We've come so far, but there's more to do. Your drive to help is awesome! What's your plan to pitch in?\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Thanks, Mell! I'm still looking into counseling and mental health jobs. It's important to me that people have someone to talk to, and I want to help make that happen.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Wow, Caroline! You're so inspiring for wanting to help others with their mental health. What's pushing you to keep going forward with it?\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"I struggled with mental health, and support I got was really helpful. It made me realize how important it is for others to have a support system. So, I started looking into counseling and mental health career options, so I could help other people on their own journeys like I was helped.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Caroline, so glad you got the support! Your experience really brought you to where you need to be. You're gonna make a huge difference! This book I read last year reminds me to always pursue my dreams, just like you are doing!🌟\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Thanks so much, Mel! Seeing this pic just made me appreciate my love of reading even more. Books guide me, motivate me and help me discover who I am. They're a huge part of my journey, and this one's reminding me to keep going and never give up!\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Wow, Caroline! Books have such an awesome power! Which one has been your favorite guide?\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"I loved \\\"Becoming Nicole\\\" by Amy Ellis Nutt. It's a real inspiring true story about a trans girl and her family. It made me feel connected and gave me a lot of hope for my own path. Highly recommend it for sure!\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"That sounds awesome! What did you take away from it to use in your life?\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"It taught me self-acceptance and how to find support. It also showed me that tough times don't last - hope and love exist. Pets bring so much joy too, though.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Caroline, those lessons are great - self-acceptance and finding support are key. Plus pets are awesome for joy and comfort, can't agree more! \",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"That's so nice! What pet do you have?\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"We've got a pup and a kitty. That's the dog, and here's our cat! They brighten up our day and always make us smile.\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Ah, they're adorable! What are their names? Pets sure do bring so much joy to us!\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Luna and Oliver! They are so sweet and playful - they really liven up the house! Just got some new shoes, too!\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Love that purple color! For walking or running?\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Thanks, Caroline! These are for running. Been running longer since our last chat - a great way to destress and clear my mind.\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Wow! What got you into running?\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"I've been running farther to de-stress, which has been great for my headspace.\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Cool, Melanie! Running can really boost your mood. Keep it up!\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Thanks, Caroline! This has been great for my mental health. I'm gonna keep it up.\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Awesome, Melanie! Mental health's a priority, so make sure you take care of yourself.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Caroline, thanks! Mental health is important to me, and it's made such an improvement!\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Glad it helped ya, Melanie!\",\"speaker\":\"Caroline\"}]",
+        "primarySector": "benchmark",
+        "sectors": [
+          "benchmark"
+        ],
+        "tags": [],
+        "metadata": {
+          "sessionId": "conv-26-session_7",
+          "date": "2023-07-12T16:33:00.000Z"
+        },
+        "simhash": "b1608000b1608000",
+        "salience": 1,
+        "decayLambda": 0.01,
+        "version": 1,
+        "createdAt": 1786040966206,
+        "updatedAt": 1786040966206,
+        "lastSeenAt": 1786041027330
+      },
+      "score": 0.6531273153659964,
+      "matchType": "semantic",
+      "path": [
+        "f492a0d3-88a3-4487-aa75-6dd1e5389ec1"
+      ]
+    },
+    {
+      "memory": {
+        "id": "d22d1d6a-01d1-4372-a968-579ff8a4bd6c",
+        "userId": "conv-26-q84-memoryminusone-locomo-20260806-dar8",
+        "content": "Here is the date the following session took place: 2:24 pm on 14 August, 2023\n\nHere is the session as a stringified JSON:\n[{\"role\":\"assistant\",\"content\":\"Hey Caroline! Last night was amazing! We celebrated my daughter's birthday with a concert surrounded by music, joy and the warm summer breeze. Seeing my kids' smiles was so awesome, and I'm so thankful for our special moments together.\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Wow, sounds wonderful! Your love for your kids is so awesome. What concert was it? The advocacy event was a cool experience - so much love and support, amazing!\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Thanks, Caroline! It was Matt Patterson, he is so talented! His voice and songs were amazing. What's up with you? Anything interesting going on?\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Wow, Mel, glad you had a blast at the concert. A lot's happened since we talked. I went to a pride parade last Friday and it was awesome - so much energy and love everywhere. Really made me proud and reminded me how important it is to keep standing up for equality.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Wow, that's awesome! How did it feel being part of that community?\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"It was so inspiring, Mel! Check out the crowd. People of all kinds celebrating love and acceptance - it really pushed me to keep fighting for LGBTQ rights.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Wow, Caroline! That sounds awesome. This pic's from last night - looks like everyone was having a blast! Reminds me it's important to cultivate a loving and accepting environment for our kids. How do you stay inclusive in your work as an artist?\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"That pic is cool! Representing inclusivity and diversity in my art is important to me. I also use it to speak up for the LGBTQ+ community and push for acceptance. Here's a recent painting!\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Wow, that rocks! What's the main idea of your art?\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"My art is about expressing my trans experience. It's my way of showing my story and helping people understand the trans community.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Your art's amazing, Caroline. I love how you use it to tell your stories and teach people about trans folks. I'd love to see another painting of yours!\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Thanks, Melanie. Here's one- 'Embracing Identity' is all about finding comfort and love in being yourself. The woman in the painting stands for the journey of acceptance. My aim was to show warmth, love and self-acceptance.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Wow, Caroline, that's gorgeous! I love the self-acceptance and love theme. How does art help you with your self-discovery and acceptance journey?\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Art's allowed me to explore my transition and my changing body. It's been a great way to work through stuff I'm going through. I love that it teaches me to accept the beauty of imperfections.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Wow, Caroline, that's so cool! Art can be so healing and a way to really connect with who you are. It's awesome that beauty can be found in the imperfections. We're all individual and wonderfully imperfect. Thanks for sharing it with me!\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Thanks, Melanie. It means a lot to share this with you.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Great chatting with you! Feel free to reach out any time.\",\"speaker\":\"Melanie\"}]",
+        "primarySector": "benchmark",
+        "sectors": [
+          "benchmark"
+        ],
+        "tags": [],
+        "metadata": {
+          "sessionId": "conv-26-session_11",
+          "date": "2023-08-14T14:24:00.000Z"
+        },
+        "simhash": "d3b48000d3b48000",
+        "salience": 1,
+        "decayLambda": 0.01,
+        "version": 1,
+        "createdAt": 1786040967112,
+        "updatedAt": 1786040967112,
+        "lastSeenAt": 1786041027331
+      },
+      "score": 0.6519242395899572,
+      "matchType": "semantic",
+      "path": [
+        "d22d1d6a-01d1-4372-a968-579ff8a4bd6c"
+      ]
+    },
+    {
+      "memory": {
+        "id": "b98d69c3-9b25-49db-aead-30ca19c5e93b",
+        "userId": "conv-26-q84-memoryminusone-locomo-20260806-dar8",
+        "content": "Here is the date the following session took place: 1:56 pm on 8 May, 2023\n\nHere is the session as a stringified JSON:\n[{\"role\":\"user\",\"content\":\"Hey Mel! Good to see you! How have you been?\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Hey Caroline! Good to see you! I'm swamped with the kids & work. What's up with you? Anything new?\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"I went to a LGBTQ support group yesterday and it was so powerful.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Wow, that's cool, Caroline! What happened that was so awesome? Did you hear any inspiring stories?\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"The transgender stories were so inspiring! I was so happy and thankful for all the support.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Wow, love that painting! So cool you found such a helpful group. What's it done for you?\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"The support group has made me feel accepted and given me courage to embrace myself.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"That's really cool. You've got guts. What now?\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Gonna continue my edu and check out career options, which is pretty exciting!\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Wow, Caroline! What kinda jobs are you thinkin' of? Anything that stands out?\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"I'm keen on counseling or working in mental health - I'd love to support those with similar issues.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"You'd be a great counselor! Your empathy and understanding will really help the people you work with. By the way, take a look at this.\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Thanks, Melanie! That's really sweet. Is this your own painting?\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Yeah, I painted that lake sunrise last year! It's special to me.\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Wow, Melanie! The colors really blend nicely. Painting looks like a great outlet for expressing yourself.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Thanks, Caroline! Painting's a fun way to express my feelings and get creative. It's a great way to relax after a long day.\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Totally agree, Mel. Relaxing and expressing ourselves is key. Well, I'm off to go do some research.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Yep, Caroline. Taking care of ourselves is vital. I'm off to go swimming with the kids. Talk to you soon!\",\"speaker\":\"Melanie\"}]",
+        "primarySector": "benchmark",
+        "sectors": [
+          "benchmark"
+        ],
+        "tags": [],
+        "metadata": {
+          "sessionId": "conv-26-session_1",
+          "date": "2023-05-08T13:56:00.000Z"
+        },
+        "simhash": "f1210000f1210000",
+        "salience": 1,
+        "decayLambda": 0.01,
+        "version": 1,
+        "createdAt": 1786040965018,
+        "updatedAt": 1786040965018,
+        "lastSeenAt": 1786041027329
+      },
+      "score": 0.650277149121342,
+      "matchType": "semantic",
+      "path": [
+        "b98d69c3-9b25-49db-aead-30ca19c5e93b"
+      ]
+    },
+    {
+      "memory": {
+        "id": "489318d2-3675-4391-bd8c-41971d7c57a6",
+        "userId": "conv-26-q84-memoryminusone-locomo-20260806-dar8",
+        "content": "Here is the date the following session took place: 1:14 pm on 25 May, 2023\n\nHere is the session as a stringified JSON:\n[{\"role\":\"assistant\",\"content\":\"Hey Caroline, since we last chatted, I've had a lot of things happening to me. I ran a charity race for mental health last Saturday – it was really rewarding. Really made me think about taking care of our minds.\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"That charity race sounds great, Mel! Making a difference & raising awareness for mental health is super rewarding - I'm really proud of you for taking part!\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Thanks, Caroline! The event was really thought-provoking. I'm starting to realize that self-care is really important. It's a journey for me, but when I look after myself, I'm able to better look after my family.\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"I totally agree, Melanie. Taking care of ourselves is so important - even if it's not always easy. Great that you're prioritizing self-care.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Yeah, it's tough. So I'm carving out some me-time each day - running, reading, or playing my violin - which refreshes me and helps me stay present for my fam!\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"That's great, Mel! Taking time for yourself is so important. You're doing an awesome job looking after yourself and your family!\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Thanks, Caroline. It's still a work in progress, but I'm doing my best. My kids are so excited about summer break! We're thinking about going camping next month. Any fun plans for the summer?\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Researching adoption agencies — it's been a dream to have a family and give a loving home to kids who need it.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Wow, Caroline! That's awesome! Taking in kids in need - you're so kind. Your future family is gonna be so lucky to have you!\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Thanks, Mel! My goal is to give kids a loving home. I'm truly grateful for all the support I've got from friends and mentors. Now the hard work starts to turn my dream into a reality. And here's one of the adoption agencies I'm looking into. It's a lot to take in, but I'm feeling hopeful and optimistic.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Wow, that agency looks great! What made you pick it?\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"I chose them 'cause they help LGBTQ+ folks with adoption. Their inclusivity and support really spoke to me.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"That's great, Caroline! Loving the inclusivity and support. Anything you're excited for in the adoption process?\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"I'm thrilled to make a family for kids who need one. It'll be tough as a single parent, but I'm up for the challenge!\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"You're doing something amazing! Creating a family for those kids is so lovely. You'll be an awesome mom! Good luck!\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Thanks, Melanie! Your kind words really mean a lot. I'll do my best to make sure these kids have a safe and loving home.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"No doubts, Caroline. You have such a caring heart - they'll get all the love and stability they need! Excited for this new chapter!\",\"speaker\":\"Melanie\"}]",
+        "primarySector": "benchmark",
+        "sectors": [
+          "benchmark"
+        ],
+        "tags": [],
+        "metadata": {
+          "sessionId": "conv-26-session_2",
+          "date": "2023-05-25T13:14:00.000Z"
+        },
+        "simhash": "9130800091308000",
+        "salience": 1,
+        "decayLambda": 0.01,
+        "version": 1,
+        "createdAt": 1786040965224,
+        "updatedAt": 1786040965224,
+        "lastSeenAt": 1786041027329
+      },
+      "score": 0.6496861302656429,
+      "matchType": "semantic",
+      "path": [
+        "489318d2-3675-4391-bd8c-41971d7c57a6"
+      ]
+    },
+    {
+      "memory": {
+        "id": "0b1c6be8-4139-4aaf-b178-534ac3d13d22",
+        "userId": "conv-26-q84-memoryminusone-locomo-20260806-dar8",
+        "content": "Here is the date the following session took place: 9:55 am on 22 October, 2023\n\nHere is the session as a stringified JSON:\n[{\"role\":\"user\",\"content\":\"Woohoo Melanie! I passed the adoption agency interviews last Friday! I'm so excited and thankful. This is a big move towards my goal of having a family.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Congrats, Caroline! Adoption sounds awesome. I'm so happy for you. These figurines I bought yesterday remind me of family love. Tell me, what's your vision for the future?\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Thanks so much, Melanie! It's beautiful! It really brings home how much love's in families - both blood and the ones we choose. I hope to build my own family and put a roof over kids who haven't had that before. For me, adoption is a way of giving back and showing love and acceptance.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Wow, Caroline, that's awesome. Giving a home to needy kids is such a loving way to build a family. Those kids will be so supported and happy in their new home.\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Thanks, Melanie. My dream is to create a safe and loving home for these kids. Love and acceptance should be everyone's right, and I want them to experience it.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"I totally agree, Caroline. Everyone deserves that. It's awesome to see how passionate you are about helping these kids.\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Thanks, Mel. Finding self-acceptance was a long process, but now I'm ready to offer love and support to those who need it. It's empowering to make a positive difference in someone's life.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"That must have been tough for you, Caroline. Respect for finding acceptance and helping others with what you've been through. You're so strong and inspiring.\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Thanks, Melanie. Transitioning wasn't easy and acceptance wasn't either, but the help I got from friends, family and people I looked up to was invaluable. They boosted me through tough times and helped me find out who I really am. That's why I want to pass that same support to anyone who needs it. Bringing others comfort and helping them grow brings me such joy.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"I'm so happy for you, Caroline. You found your true self and now you're helping others. You're so inspiring!\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Thanks, Melanie. Your support really means a lot. This journey has been amazing and I'm grateful I get to share it and help others with theirs. It's a real gift.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Absolutely! I'm so glad we can always be there for each other.\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Glad you agree, Caroline. Appreciate the support of those close to me. Their encouragement made me who I am.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Glad you had support. Being yourself is great!\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Yeah, that's true! It's so freeing to just be yourself and live honestly. We can really accept who we are and be content.\",\"speaker\":\"Caroline\"}]",
+        "primarySector": "benchmark",
+        "sectors": [
+          "benchmark"
+        ],
+        "tags": [],
+        "metadata": {
+          "sessionId": "conv-26-session_19",
+          "date": "2023-10-22T09:55:00.000Z"
+        },
+        "simhash": "31b0800031b08000",
+        "salience": 1,
+        "decayLambda": 0.01,
+        "version": 1,
+        "createdAt": 1786040968892,
+        "updatedAt": 1786040968892,
+        "lastSeenAt": 1786041027331
+      },
+      "score": 0.6453633257095778,
+      "matchType": "semantic",
+      "path": [
+        "0b1c6be8-4139-4aaf-b178-534ac3d13d22"
+      ]
+    },
+    {
+      "memory": {
+        "id": "eb11f872-2cd7-489b-b2a7-3cfe301c577e",
+        "userId": "conv-26-q84-memoryminusone-locomo-20260806-dar8",
+        "content": "Here is the date the following session took place: 12:09 am on 13 September, 2023\n\nHere is the session as a stringified JSON:\n[{\"role\":\"user\",\"content\":\"Hey Mel, long time no chat! I had a wicked day out with the gang last weekend - we went biking and saw some pretty cool stuff. It was so refreshing, and the pic I'm sending is just stunning, eh?\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Hey Caroline! It's so good to hear from you! That pic is so beautiful, the colors really pop. Biking sounds like a great way to get out in nature. We went camping with the kids a few weeks ago, had a blast exploring the forest and hiking. Nature can be so refreshing for your soul. Any plans coming up?\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Melanie, that photo's amazing! I love all the yellow leaves, it looks so cozy. That sounds like fun! Seeing how excited they get for the little things is awesome, it's so contagious.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Thanks, Caroline! It's awesome seeing the kids get excited learning something new about nature. Those moments make being a parent worth it. We roasted marshmallows and shared stories around the campfire. Those simple moments make the best memories. What inspires you with your volunteering?\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"I'm inspired seeing my work make a difference for the LGBTQ+ community. Knowing I'm helping create a more loving world is amazing. I'm really thankful for my friends, family and mentors' support. It inspires me to keep making art, too.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Wow, Caroline, that looks awesome! I love how it shows the togetherness and power you were talking about. How long have you been creating art?\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Since I was 17 or so. I find it soempowering and cathartic. It's amazing how art can show things that are hard to put into words. How long have you been into art?\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Seven years now, and I've finally found my real muses: painting and pottery. It's so calming and satisfying. Check out my pottery creation in the pic!\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Melanie, those bowls are amazing! They each have such cool designs. I love that you chose pottery for your art. Painting and drawing have helped me express my feelings and explore my gender identity. Creating art was really important to me during my transition - it helped me understand and accept myself. I'm so grateful.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Thanks, Caroline! It has really helped me out. I love how it's both a creative outlet and a form of therapy. Have you ever thought about trying it or another art form?\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"I haven't done pottery yet, but I'm game for trying new art. I might try it sometime! Check out this piece I made!\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Wow, Caroline! This painting is awesome. Love the red and blue. What gave you the idea?\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Thanks, Melanie! I made this painting to show my path as a trans woman. The red and blue are for the binary gender system, and the mix of colors means smashing that rigid thinking. It's a reminder to love my authentic self - it's taken a while to get here but I'm finally proud of who I am.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Wow, Caro, that painting is amazing! You've made so much progress. I'm super proud of you for being your true self. What effect has the journey had on your relationships?\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Thanks, Melanie. It's definitely changed them. Some close friends kept supporting me, but a few weren't able to handle it. It wasn't easy, but I'm much happier being around those who accept and love me. Now my relationships feel more genuine.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Caroline, it's got to be tough dealing with those changes. Glad you've found people who uplift and accept you! Here's to a good time at the café last weekend - they even had thoughtful signs like this! It brings me so much happiness.\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Whoa, Mel, that sign looks serious. Did anything happen?\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"The sign was just a precaution, I had a great time. But thank you for your concern, you're so thoughtful!\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Phew! Glad it all worked out and you had a good time at the park!\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Yeah, it was so much fun! Those joyful moments definitely show us life's beauty.\",\"speaker\":\"Melanie\"}]",
+        "primarySector": "benchmark",
+        "sectors": [
+          "benchmark"
+        ],
+        "tags": [],
+        "metadata": {
+          "sessionId": "conv-26-session_16",
+          "date": "2023-09-13T00:09:00.000Z"
+        },
+        "simhash": "3132800031328000",
+        "salience": 1,
+        "decayLambda": 0.01,
+        "version": 1,
+        "createdAt": 1786040968214,
+        "updatedAt": 1786040968214,
+        "lastSeenAt": 1786041027331
+      },
+      "score": 0.6451297759422887,
+      "matchType": "semantic",
+      "path": [
+        "eb11f872-2cd7-489b-b2a7-3cfe301c577e"
+      ]
+    },
+    {
+      "memory": {
+        "id": "7e9f1f54-895f-47f0-940f-d3d5b0304774",
+        "userId": "conv-26-q84-memoryminusone-locomo-20260806-dar8",
+        "content": "Here is the date the following session took place: 8:18 pm on 6 July, 2023\n\nHere is the session as a stringified JSON:\n[{\"role\":\"user\",\"content\":\"Hey Mel! Long time no talk. Lots has been going on since then!\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Hey Caroline! Missed you. Anything new? Spill the beans!\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Since our last chat, I've been looking into counseling or mental health work more. I'm passionate about helping people and making a positive impact. It's tough, but really rewarding too. Anything new happening with you?\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"That's awesome, Caroline! Congrats on following your dreams. Yesterday I took the kids to the museum - it was so cool spending time with them and seeing their eyes light up!\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Melanie, that's a great pic! That must have been awesome. What were they so stoked about?\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"They were stoked for the dinosaur exhibit! They love learning about animals and the bones were so cool. It reminds me why I love being a mom.\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Being a mom is awesome. I'm creating a library for when I have kids. I'm really looking forward to reading to them and opening up their minds.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Sounds great! What kind of books you got in your library?\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"I've got lots of kids' books- classics, stories from different cultures, educational books, all of that. What's a favorite book you remember from your childhood?\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"I loved reading \\\"Charlotte's Web\\\" as a kid. It was so cool seeing how friendship and compassion can make a difference.\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Wow, that's great! It sure shows how important friendship and compassion are. It's made me appreciate how lucky I am to have my friends and family helping with my transition. They make all the difference. We even had a picnic last week!\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"That's a gorgeous photo, Caroline! Wow, the love around you is awesome. How have your friends and fam been helping you out with your transition?\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"Thanks, Melanie! This support network has been amazing. They've been there for me every step of the way giving me love, guidance, and acceptance. I couldn't have done it without them.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Wow, Caroline! It's great you have people to support you, that's really awesome!\",\"speaker\":\"Melanie\"},{\"role\":\"user\",\"content\":\"I'm so lucky to have such a great support system around me. Their love and encouragement has really helped me accept and grow into my true self. They've been instrumental in my transition.\",\"speaker\":\"Caroline\"},{\"role\":\"assistant\",\"content\":\"Glad you have support, Caroline! Unconditional love is so important. Here's a pic of my family camping at the beach. We love it, it brings us closer!\",\"speaker\":\"Melanie\"}]",
+        "primarySector": "benchmark",
+        "sectors": [
+          "benchmark"
+        ],
+        "tags": [],
+        "metadata": {
+          "sessionId": "conv-26-session_6",
+          "date": "2023-07-06T20:18:00.000Z"
+        },
+        "simhash": "5030800050308000",
+        "salience": 1,
+        "decayLambda": 0.01,
+        "version": 1,
+        "createdAt": 1786040966037,
+        "updatedAt": 1786040966037,
+        "lastSeenAt": 1786041027332
+      },
+      "score": 0.6450715839736065,
+      "matchType": "semantic",
+      "path": [
+        "7e9f1f54-895f-47f0-940f-d3d5b0304774"
+      ]
+    }
+  ]
+}

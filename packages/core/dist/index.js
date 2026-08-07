@@ -504,16 +504,11 @@ var MemoryEngine = class {
    * Adds a new memory to the system.
    */
   async add(content, options) {
-<<<<<<< Updated upstream
-    const { userId, metadata = {}, tags = [], timestamp } = options;
-    const classification = classifyContent(content, metadata);
-=======
-    const { userId, metadata = {}, tags = [], sector } = options;
+    const { userId, metadata = {}, tags = [], sector, timestamp } = options;
     const classification = sector ? { primarySector: sector, sectors: [sector] } : classifyContent(content, metadata);
->>>>>>> Stashed changes
     const simhash = computeSimhash(content);
     const id = crypto.randomUUID();
-    const now = timestamp || clock.now();
+    const now = timestamp ?? clock.now();
     const memory = {
       id,
       userId,

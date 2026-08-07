@@ -1,0 +1,10 @@
+{
+  "questionId": "conv-26-q4",
+  "question": "What is Caroline's identity?",
+  "questionType": "single-hop",
+  "groundTruth": "Transgender woman",
+  "containerTag": "conv-26-q4-memoryminusone-locomo-20260806-t4ib",
+  "timestamp": "2026-08-06T18:15:25.594Z",
+  "durationMs": 83,
+  "results": []
+}

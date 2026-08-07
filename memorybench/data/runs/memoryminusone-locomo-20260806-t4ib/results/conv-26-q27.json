@@ -1,0 +1,10 @@
+{
+  "questionId": "conv-26-q27",
+  "question": "Would Caroline pursue writing as a career option?",
+  "questionType": "temporal",
+  "groundTruth": "LIkely no; though she likes reading, she wants to be a counselor",
+  "containerTag": "conv-26-q27-memoryminusone-locomo-20260806-t4ib",
+  "timestamp": "2026-08-06T18:15:26.427Z",
+  "durationMs": 91,
+  "results": []
+}

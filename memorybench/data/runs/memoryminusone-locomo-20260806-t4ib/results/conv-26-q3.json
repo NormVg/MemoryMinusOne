@@ -1,0 +1,10 @@
+{
+  "questionId": "conv-26-q3",
+  "question": "What did Caroline research?",
+  "questionType": "single-hop",
+  "groundTruth": "Adoption agencies",
+  "containerTag": "conv-26-q3-memoryminusone-locomo-20260806-t4ib",
+  "timestamp": "2026-08-06T18:15:25.508Z",
+  "durationMs": 82,
+  "results": []
+}

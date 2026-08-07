@@ -1,0 +1,10 @@
+{
+  "questionId": "conv-26-q11",
+  "question": "Where did Caroline move from 4 years ago?",
+  "questionType": "single-hop",
+  "groundTruth": "Sweden",
+  "containerTag": "conv-26-q11-memoryminusone-locomo-20260806-t4ib",
+  "timestamp": "2026-08-06T18:15:26.063Z",
+  "durationMs": 100,
+  "results": []
+}

@@ -1,0 +1,10 @@
+{
+  "questionId": "conv-26-q156",
+  "question": "What is Melanie excited about in her adoption process?",
+  "questionType": "adversarial",
+  "groundTruth": "undefined",
+  "containerTag": "conv-26-q156-memoryminusone-locomo-20260806-t4ib",
+  "timestamp": "2026-08-06T18:15:27.426Z",
+  "durationMs": 86,
+  "results": []
+}

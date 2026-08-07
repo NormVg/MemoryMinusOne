@@ -1,0 +1,10 @@
+{
+  "questionId": "conv-26-q85",
+  "question": "What are Caroline's plans for the summer?",
+  "questionType": "world-knowledge",
+  "groundTruth": "researching adoption agencies",
+  "containerTag": "conv-26-q85-memoryminusone-locomo-20260806-t4ib",
+  "timestamp": "2026-08-06T18:15:26.900Z",
+  "durationMs": 90,
+  "results": []
+}

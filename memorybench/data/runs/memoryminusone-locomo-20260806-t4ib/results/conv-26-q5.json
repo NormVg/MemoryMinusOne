@@ -1,0 +1,10 @@
+{
+  "questionId": "conv-26-q5",
+  "question": "When did Melanie run a charity race?",
+  "questionType": "multi-hop",
+  "groundTruth": "The sunday before 25 May 2023",
+  "containerTag": "conv-26-q5-memoryminusone-locomo-20260806-t4ib",
+  "timestamp": "2026-08-06T18:15:25.681Z",
+  "durationMs": 83,
+  "results": []
+}

@@ -2,7 +2,7 @@
 /supermemory/
 /supermemory_assets/
 /node_modules
-/data/
+
 /rmscripts/
 
 .env

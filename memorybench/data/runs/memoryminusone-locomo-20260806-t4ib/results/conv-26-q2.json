@@ -1,0 +1,10 @@
+{
+  "questionId": "conv-26-q2",
+  "question": "What fields would Caroline be likely to pursue in her educaton?",
+  "questionType": "temporal",
+  "groundTruth": "Psychology, counseling certification",
+  "containerTag": "conv-26-q2-memoryminusone-locomo-20260806-t4ib",
+  "timestamp": "2026-08-06T18:15:25.424Z",
+  "durationMs": 83,
+  "results": []
+}

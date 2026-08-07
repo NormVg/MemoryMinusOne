@@ -1,0 +1,38 @@
+{
+  "questionId": "convomem-abstention_evidence-1715",
+  "question": "What is the name of the third-party recruiting agency that sourced the final candidates for the new Marketing Operations position?",
+  "questionType": "abstention_evidence",
+  "groundTruth": "There is no information in prior conversations to answer this question",
+  "containerTag": "convomem-abstention_evidence-1715-memoryminusone-convomem-20260806-3knw",
+  "timestamp": "2026-08-06T19:07:53.303Z",
+  "durationMs": 681,
+  "results": [
+    {
+      "memory": {
+        "id": "5749604e-adc7-4495-82ae-fd8ef279372a",
+        "userId": "convomem-abstention_evidence-1715-memoryminusone-convomem-20260806-3knw",
+        "content": "Here is the session as a stringified JSON:\n[{\"role\":\"user\",\"content\":\"Hey, Assistant! I just wanted to touch base on the hiring process for the new Marketing Operations role.\"},{\"role\":\"assistant\",\"content\":\"Hi Anya! Sure, how's everything going with that?\"},{\"role\":\"user\",\"content\":\"It's been quite a journey, but we're finally wrapping things up.\"},{\"role\":\"assistant\",\"content\":\"That's great to hear! Have you made a final decision yet?\"},{\"role\":\"user\",\"content\":\"Yes, we have. Just wanted to close the loop on this – the interview process for the new Marketing Operations hire is complete. The candidates sourced by the third-party agency were excellent, and we have a final decision. I'll follow up with the hiring committee's recommendation shortly.\"},{\"role\":\"assistant\",\"content\":\"Fantastic! It's always a relief to find the right fit. How did the team feel about the candidates?\"},{\"role\":\"user\",\"content\":\"Everyone was quite impressed. The agency did a great job in understanding our needs.\"},{\"role\":\"assistant\",\"content\":\"That's good to know. Do you think you'll use the same agency for future hires?\"},{\"role\":\"user\",\"content\":\"Possibly. It depends on how this new hire settles in and the feedback we get from the team.\"},{\"role\":\"assistant\",\"content\":\"Makes sense. It's always good to evaluate based on outcomes.\"},{\"role\":\"user\",\"content\":\"Exactly. By the way, I need to prepare the offer letter soon. There's a lot to finalize.\"},{\"role\":\"assistant\",\"content\":\"If you need any help with that, let me know. I'm here to assist.\"},{\"role\":\"user\",\"content\":\"Thanks, I appreciate it. I'll probably need some help with the onboarding checklist later.\"},{\"role\":\"assistant\",\"content\":\"No problem at all. Just give me a shout when you're ready.\"},{\"role\":\"user\",\"content\":\"Will do. Thanks for being so supportive throughout this process.\"},{\"role\":\"assistant\",\"content\":\"Anytime, Anya. It's always a pleasure working with you.\"},{\"role\":\"user\",\"content\":\"Likewise! I'll keep you posted on any updates.\"},{\"role\":\"assistant\",\"content\":\"Looking forward to it. Have a great day!\"},{\"role\":\"user\",\"content\":\"You too, Assistant!\"}]",
+        "primarySector": "benchmark",
+        "sectors": [
+          "benchmark"
+        ],
+        "tags": [],
+        "metadata": {
+          "sessionId": "convomem-abstention_evidence-1715-session-0"
+        },
+        "simhash": "bd308000bd308000",
+        "salience": 1,
+        "decayLambda": 0.01,
+        "version": 1,
+        "createdAt": 1786043227855,
+        "updatedAt": 1786043227855,
+        "lastSeenAt": 1786043273303
+      },
+      "score": 0.6568500939594895,
+      "matchType": "semantic",
+      "path": [
+        "5749604e-adc7-4495-82ae-fd8ef279372a"
+      ]
+    }
+  ]
+}

@@ -23,11 +23,13 @@ MemoryMinusOne is a TypeScript SDK that gives your AI agents persistent, long-te
 - ⚡ **Serverless-ready** — HTTP-based plugins (Upstash Redis, Neon Postgres) work on Cloudflare Workers, Vercel Edge, AWS Lambda
 - 🛠️ **LLM tool-ready** — Drop-in tool definitions for Vercel AI SDK, Eve, or raw OpenAI function calling
 
-## Quickstart
+## Install
 
 ```bash
 pnpm add @memory-minus-one/core
 ```
+
+## Quickstart
 
 ```typescript
 import { createMemory, memoryStorage, syntheticEmbedding, memoryVectorStore } from "@memory-minus-one/core";
@@ -78,18 +80,6 @@ const mem = createMemory({
 });
 ```
 
-## Benchmarks
-
-MemoryMinusOne has been evaluated on the **LOCOMO (Long-term Conversational Memory)** dataset. With strict precision constraints (`Top-10` recall cutoff) using local `embeddinggemma:latest` and `gemma4:31b-cloud` as the evaluator:
-
-- **Overall Accuracy**: **52.1%**
-- **Single-hop**: **61.2%**
-- **Multi-hop**: **59.9%**
-
-Because this memory architecture relies on highly specific hierarchical caching rather than brute-force retrieval (like Top-50/Top-200), these results establish a strong baseline for on-device, small-model memory efficiency.
-
-Read the [Full Benchmark Report](./BENCHMARKS.md) for the complete breakdown.
-
 ## Architecture
 
 ```mermaid
@@ -102,64 +92,47 @@ flowchart TD
     classDef facts fill:#f0f9ff,stroke:#0284c7,stroke-width:1px,color:#0369a1;
     classDef plugin fill:#eff6ff,stroke:#2563eb,stroke-width:1px,color:#1d4ed8;
     classDef outputNode fill:#f0fdf4,stroke:#16a34a,stroke-width:1px,color:#15803d;
+    classDef facade fill:#fef08a,stroke:#ca8a04,stroke-width:2px,color:#854d0e;
 
-    Input["API Call / Query"]:::input --> Sectors["Sector Router"]:::router
+    Input["Your App (Nuxt/Next/Express)"]:::input --> Facade["MemoryMinusOne Facade"]:::facade
 
-    subgraph CoreEngine ["Cognitive Core"]
+    subgraph FacadeLayer ["MemoryMinusOne"]
         direction TD
-        VReq["Vector Search"]:::engine
-        WaypointGraph["Waypoint Graph"]:::engine
-        Decay["Decay Engine"]:::engine
-        Scoring["Composite Scoring"]:::engine
+        
+        AddPipe["Add pipeline<br/>(classify → simhash → dedup → embed per sector → store → waypoint)"]:::engine
+        QueryPipe["Query pipeline<br/>(cache → embed all → vector search → adaptive expand → hybrid score w/ BM25, tags, recency, fusion, resonance → z-score → trace reinforce → events)"]:::engine
+        Maintenance["Maintenance<br/>(decay pass: segment batch → calcDecay → compress → fingerprint → regen<br/>reflection pass: cluster → consolidate → boost)"]:::engine
+        
+        subgraph TemporalFacts ["Temporal facts"]
+            FactStore["FactStore / Query / Timeline"]:::facts
+        end
     end
+    
+    Facade --> AddPipe
+    Facade --> QueryPipe
+    Facade --> Maintenance
+    Facade --> TemporalFacts
 
-    subgraph TemporalSystem ["Temporal Facts"]
-        direction TD
-        Facts["Fact Store"]:::facts
-        Timeline["Timeline Versioning"]:::facts
-    end
-
-    subgraph PluginLayer ["Plugin Layer (Swappable Interfaces)"]
+    %% Plugin Boundary Layer
+    subgraph PluginBoundary ["Plugin Contracts Boundary (Swappable Interfaces)"]
         direction LR
-        IStore["IStoragePlugin"]:::plugin
-        IEmbed["IEmbeddingPlugin"]:::plugin
-        IVec["IVectorPlugin"]:::plugin
-        ICache["ICachePlugin"]:::plugin
+        IStore["IStoragePlugin<br/>(drizzleStorage)"]:::plugin
+        IEmbed["IEmbeddingPlugin<br/>(aiSdkEmbedding / syntheticEmbedding)"]:::plugin
+        IVec["IVectorPlugin<br/>(memoryVectorStore / pgvector)"]:::plugin
+        ICache["ICachePlugin<br/>(upstashCache / lruCache / noCache)"]:::plugin
+        IRerank["IRerankerPlugin"]:::plugin
     end
 
-    Sectors --> IEmbed
-    IEmbed --> DB[(Drizzle DB<br/>Memories / Waypoints / Facts)]:::db
-    IEmbed --> Cache[(Upstash Cache)]:::db
+    AddPipe -.-> PluginBoundary
+    QueryPipe -.-> PluginBoundary
+    Maintenance -.-> PluginBoundary
+    TemporalFacts -.-> PluginBoundary
 
-    DB --> VReq
-    DB --> WaypointGraph
-    DB --> Decay
-    DB --> Facts
-
-    Facts --> Timeline
-
-    VReq --> Scoring
-    WaypointGraph --> Scoring
-    Decay --> Scoring
-    Timeline --> Scoring
-
-    Scoring --> Cache
-    Scoring --> Result["QueryResult[]"]:::outputNode
-
-    Result -.->|Reinforce Node| WaypointGraph
-    Result -.->|Update Salience| Decay
+    PluginBoundary --> DB[(Vector DB / RDBMS)]:::db
+    PluginBoundary --> Cache[(Redis Cache)]:::db
+    
+    CrossCutting["Cross-cutting: Clock, TypedEventEmitter (8 events), MemoryMinusOneError"]:::input
 ```
-
-
-## Packages
-
-| Package | Description | Install |
-|---|---|---|
-| `@memory-minus-one/core` | Engine, plugin system, built-in in-memory plugins | `pnpm add @memory-minus-one/core` |
-| `@memory-minus-one/drizzle` | Drizzle ORM storage + pgvector plugin | `pnpm add @memory-minus-one/drizzle` |
-| `@memory-minus-one/ai-sdk` | Vercel AI SDK embedding plugin + LLM tools | `pnpm add @memory-minus-one/ai-sdk` |
-| `@memory-minus-one/cache-redis` | Upstash Redis cache (serverless-safe, HTTP) | `pnpm add @memory-minus-one/cache-redis` |
-| `@memory-minus-one/eve` | Eve agent framework tool wrapper | `pnpm add @memory-minus-one/eve` |
 
 ## API
 
@@ -167,10 +140,10 @@ flowchart TD
 
 ```typescript
 // Store a memory
-await mem.add(content, { userId, metadata?, tags? })
+await mem.add(content, { userId, metadata?, tags?, sector?, timestamp? })
 
 // Semantic search
-await mem.query(queryText, { userId, sector?, limit? })
+await mem.query(queryText, { userId, sector?, limit?, rerank?, explain?, expansion? })
 
 // Get by ID
 await mem.get(id, { userId })
@@ -223,10 +196,11 @@ export function myCustomCache(): ICachePlugin {
 
 | Interface | Methods |
 |---|---|
-| `IStoragePlugin` | `insertMemory`, `updateMemory`, `getMemory`, `getMemoriesBySector`, `deleteMemory`, `insertWaypoint`, `getNeighbors`, `pruneWaypoints`, `insertFact`, `updateFact`, `getActiveFact`, `queryFacts`, `invalidateFact` |
+| `IStoragePlugin` | `insertMemory`, `updateMemory`, `getMemory`, `getMemoriesBySector`, `deleteMemory`, `insertWaypoint`, `getNeighbors`, `pruneWaypoints`, `insertFact`, `updateFact`, `getActiveFact`, `queryFacts`, `invalidateFact`, `getMemoriesByUser?` |
 | `IEmbeddingPlugin` | `embed`, `embedBatch` |
-| `IVectorPlugin` | `storeVector`, `search`, `deleteVector` |
+| `IVectorPlugin` | `storeVector`, `search`, `deleteVector`, `getVectorsForId?` |
 | `ICachePlugin` | `get`, `set`, `delete` |
+| `IRerankerPlugin` | `rerank` |
 
 ## Using with LLMs
 
@@ -242,6 +216,16 @@ const result = await generateText({
 });
 ```
 
+### Eve Agent Framework
+
+```typescript
+import { eveMemoryTool } from "@memory-minus-one/eve";
+
+const agent = new Eve({
+  tools: [eveMemoryTool(mem)],
+});
+```
+
 ### Raw OpenAI / Any Provider
 
 ```typescript
@@ -253,6 +237,16 @@ switch (args.action) {
   case "reinforce": await mem.reinforce(args.content, { userId }); break;
 }
 ```
+
+## Benchmarks Summary
+
+| Dataset | Judge Model | Accuracy |
+|---------|-------------|----------|
+| **LoCoMo** | `gpt-oss:120b-cloud` | **77.1%** |
+| **ConvoMem** | `gpt-oss:120b-cloud` | **88.1%** |
+| **LongMemEval** | `gpt-oss:120b-cloud` | **76.2%** |
+
+Read the [Full Benchmark Report](./BENCHMARKS.md) for the complete breakdown.
 
 ## License
 

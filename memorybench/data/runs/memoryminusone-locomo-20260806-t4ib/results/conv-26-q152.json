@@ -1,0 +1,10 @@
+{
+  "questionId": "conv-26-q152",
+  "question": "What did Caroline realize after her charity race?",
+  "questionType": "adversarial",
+  "groundTruth": "undefined",
+  "containerTag": "conv-26-q152-memoryminusone-locomo-20260806-t4ib",
+  "timestamp": "2026-08-06T18:15:27.074Z",
+  "durationMs": 84,
+  "results": []
+}

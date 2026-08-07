@@ -1,0 +1,10 @@
+{
+  "questionId": "conv-26-q1",
+  "question": "When did Melanie paint a sunrise?",
+  "questionType": "multi-hop",
+  "groundTruth": "2022",
+  "containerTag": "conv-26-q1-memoryminusone-locomo-20260806-t4ib",
+  "timestamp": "2026-08-06T18:15:25.338Z",
+  "durationMs": 82,
+  "results": []
+}

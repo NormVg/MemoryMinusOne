@@ -1,0 +1,10 @@
+{
+  "questionId": "conv-26-q154",
+  "question": "What type of individuals does the adoption agency Melanie is considering support?",
+  "questionType": "adversarial",
+  "groundTruth": "undefined",
+  "containerTag": "conv-26-q154-memoryminusone-locomo-20260806-t4ib",
+  "timestamp": "2026-08-06T18:15:27.248Z",
+  "durationMs": 84,
+  "results": []
+}

@@ -1,7 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "Shell(git:*)"
+      "Shell(git:*)",
+      "Shell(grep:*)",
+      "Shell(pnpm:*)",
+      "Shell(node -e console.log(require('./package.json').scripts))"
     ],
     "deny": [],
     "defaultMode": "default"

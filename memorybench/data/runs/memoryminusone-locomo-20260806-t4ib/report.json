@@ -1,0 +1,985 @@
+{
+  "provider": "memoryminusone",
+  "benchmark": "locomo",
+  "runId": "memoryminusone-locomo-20260806-t4ib",
+  "dataSourceRunId": "memoryminusone-locomo-20260806-t4ib",
+  "judge": "phi4-mini",
+  "answeringModel": "phi4-mini",
+  "timestamp": "2026-08-06T18:16:29.568Z",
+  "summary": {
+    "totalQuestions": 25,
+    "correctCount": 12,
+    "accuracy": 0.48
+  },
+  "latency": {
+    "ingest": {
+      "min": 5318,
+      "max": 9529,
+      "mean": 7152,
+      "median": 6596,
+      "p95": 9348,
+      "p99": 9529,
+      "stdDev": 1373,
+      "count": 25
+    },
+    "indexing": {
+      "min": 1,
+      "max": 1,
+      "mean": 1,
+      "median": 1,
+      "p95": 1,
+      "p99": 1,
+      "stdDev": 0,
+      "count": 8
+    },
+    "search": {
+      "min": 82,
+      "max": 100,
+      "mean": 88,
+      "median": 86,
+      "p95": 97,
+      "p99": 100,
+      "stdDev": 5,
+      "count": 25
+    },
+    "answer": {
+      "min": 564,
+      "max": 3855,
+      "mean": 741,
+      "median": 597,
+      "p95": 715,
+      "p99": 3855,
+      "stdDev": 637,
+      "count": 25
+    },
+    "evaluate": {
+      "min": 1394,
+      "max": 2556,
+      "mean": 1738,
+      "median": 1702,
+      "p95": 2217,
+      "p99": 2556,
+      "stdDev": 261,
+      "count": 25
+    },
+    "total": {
+      "min": 7571,
+      "max": 11944,
+      "mean": 9719,
+      "median": 9462,
+      "p95": 11916,
+      "p99": 11944,
+      "stdDev": 1471,
+      "count": 25
+    }
+  },
+  "tokens": {
+    "totalTokens": 4213,
+    "basePromptTokens": 4213,
+    "contextTokens": 0,
+    "avgTokensPerQuestion": 169,
+    "avgBasePromptTokens": 169,
+    "avgContextTokens": 0
+  },
+  "memscore": "48% / 88ms / 0tok",
+  "memscoreComponents": {
+    "quality": 48,
+    "latencyMs": 88,
+    "contextTokens": 0
+  },
+  "retrieval": {
+    "hitAtK": 0,
+    "precisionAtK": 0,
+    "recallAtK": 0,
+    "f1AtK": 0,
+    "mrr": 0,
+    "ndcg": 0,
+    "k": 0
+  },
+  "byQuestionType": {
+    "multi-hop": {
+      "total": 5,
+      "correct": 1,
+      "accuracy": 0.2,
+      "latency": {
+        "search": {
+          "min": 82,
+          "max": 97,
+          "mean": 88,
+          "median": 86,
+          "p95": 97,
+          "p99": 97,
+          "stdDev": 6,
+          "count": 5
+        },
+        "answer": {
+          "min": 564,
+          "max": 3855,
+          "mean": 1234,
+          "median": 585,
+          "p95": 3855,
+          "p99": 3855,
+          "stdDev": 1311,
+          "count": 5
+        },
+        "total": {
+          "min": 8128,
+          "max": 11944,
+          "mean": 9408,
+          "median": 9089,
+          "p95": 11944,
+          "p99": 11944,
+          "stdDev": 1319,
+          "count": 5
+        }
+      },
+      "retrieval": {
+        "hitAtK": 0,
+        "precisionAtK": 0,
+        "recallAtK": 0,
+        "f1AtK": 0,
+        "mrr": 0,
+        "ndcg": 0,
+        "k": 0
+      }
+    },
+    "temporal": {
+      "total": 5,
+      "correct": 0,
+      "accuracy": 0,
+      "latency": {
+        "search": {
+          "min": 83,
+          "max": 91,
+          "mean": 88,
+          "median": 89,
+          "p95": 91,
+          "p99": 91,
+          "stdDev": 3,
+          "count": 5
+        },
+        "answer": {
+          "min": 568,
+          "max": 610,
+          "mean": 593,
+          "median": 595,
+          "p95": 610,
+          "p99": 610,
+          "stdDev": 14,
+          "count": 5
+        },
+        "total": {
+          "min": 8908,
+          "max": 11916,
+          "mean": 10548,
+          "median": 10453,
+          "p95": 11916,
+          "p99": 11916,
+          "stdDev": 1082,
+          "count": 5
+        }
+      },
+      "retrieval": {
+        "hitAtK": 0,
+        "precisionAtK": 0,
+        "recallAtK": 0,
+        "f1AtK": 0,
+        "mrr": 0,
+        "ndcg": 0,
+        "k": 0
+      }
+    },
+    "single-hop": {
+      "total": 5,
+      "correct": 4,
+      "accuracy": 0.8,
+      "latency": {
+        "search": {
+          "min": 82,
+          "max": 100,
+          "mean": 88,
+          "median": 84,
+          "p95": 100,
+          "p99": 100,
+          "stdDev": 7,
+          "count": 5
+        },
+        "answer": {
+          "min": 572,
+          "max": 590,
+          "mean": 577,
+          "median": 574,
+          "p95": 590,
+          "p99": 590,
+          "stdDev": 7,
+          "count": 5
+        },
+        "total": {
+          "min": 8606,
+          "max": 10631,
+          "mean": 9200,
+          "median": 8661,
+          "p95": 10631,
+          "p99": 10631,
+          "stdDev": 784,
+          "count": 5
+        }
+      },
+      "retrieval": {
+        "hitAtK": 0,
+        "precisionAtK": 0,
+        "recallAtK": 0,
+        "f1AtK": 0,
+        "mrr": 0,
+        "ndcg": 0,
+        "k": 0
+      }
+    },
+    "world-knowledge": {
+      "total": 5,
+      "correct": 2,
+      "accuracy": 0.4,
+      "latency": {
+        "search": {
+          "min": 82,
+          "max": 95,
+          "mean": 89,
+          "median": 90,
+          "p95": 95,
+          "p99": 95,
+          "stdDev": 4,
+          "count": 5
+        },
+        "answer": {
+          "min": 605,
+          "max": 699,
+          "mean": 637,
+          "median": 635,
+          "p95": 699,
+          "p99": 699,
+          "stdDev": 33,
+          "count": 5
+        },
+        "total": {
+          "min": 10687,
+          "max": 11776,
+          "mean": 11340,
+          "median": 11573,
+          "p95": 11776,
+          "p99": 11776,
+          "stdDev": 452,
+          "count": 5
+        }
+      },
+      "retrieval": {
+        "hitAtK": 0,
+        "precisionAtK": 0,
+        "recallAtK": 0,
+        "f1AtK": 0,
+        "mrr": 0,
+        "ndcg": 0,
+        "k": 0
+      }
+    },
+    "adversarial": {
+      "total": 5,
+      "correct": 5,
+      "accuracy": 1,
+      "latency": {
+        "search": {
+          "min": 84,
+          "max": 86,
+          "mean": 85,
+          "median": 84,
+          "p95": 86,
+          "p99": 86,
+          "stdDev": 1,
+          "count": 5
+        },
+        "answer": {
+          "min": 637,
+          "max": 715,
+          "mean": 665,
+          "median": 660,
+          "p95": 715,
+          "p99": 715,
+          "stdDev": 27,
+          "count": 5
+        },
+        "total": {
+          "min": 7571,
+          "max": 9860,
+          "mean": 8099,
+          "median": 7711,
+          "p95": 9860,
+          "p99": 9860,
+          "stdDev": 882,
+          "count": 5
+        }
+      },
+      "retrieval": {
+        "hitAtK": 0,
+        "precisionAtK": 0,
+        "recallAtK": 0,
+        "f1AtK": 0,
+        "mrr": 0,
+        "ndcg": 0,
+        "k": 0
+      }
+    }
+  },
+  "questionTypeRegistry": {
+    "single-hop": {
+      "id": "single-hop",
+      "alias": "single",
+      "description": "Single-hop fact recall"
+    },
+    "multi-hop": {
+      "id": "multi-hop",
+      "alias": "multi",
+      "description": "Multi-hop reasoning across sessions"
+    },
+    "temporal": {
+      "id": "temporal",
+      "alias": "temporal",
+      "description": "Temporal reasoning"
+    },
+    "world-knowledge": {
+      "id": "world-knowledge",
+      "alias": "world",
+      "description": "Commonsense/world knowledge"
+    },
+    "adversarial": {
+      "id": "adversarial",
+      "alias": "adversarial",
+      "description": "Adversarial (unanswerable)"
+    }
+  },
+  "evaluations": [
+    {
+      "questionId": "conv-26-q0",
+      "questionType": "multi-hop",
+      "question": "When did Caroline go to the LGBTQ support group?",
+      "score": 0,
+      "label": "incorrect",
+      "explanation": "The system does not provide an answer.",
+      "hypothesis": "I don't know",
+      "groundTruth": "7 May 2023",
+      "searchResults": [],
+      "searchDurationMs": 97,
+      "answerDurationMs": 3855,
+      "totalDurationMs": 11944,
+      "retrievalMetrics": {
+        "hitAtK": 0,
+        "precisionAtK": 0,
+        "recallAtK": 0,
+        "f1AtK": 0,
+        "mrr": 0,
+        "ndcg": 0,
+        "k": 0,
+        "relevantRetrieved": 0,
+        "totalRelevant": 1
+      }
+    },
+    {
+      "questionId": "conv-26-q1",
+      "questionType": "multi-hop",
+      "question": "When did Melanie paint a sunrise?",
+      "score": 0,
+      "label": "incorrect",
+      "explanation": "The system correctly identified that it doesn't have enough information to determine when 'Melanie painted a sunrise'.",
+      "hypothesis": "I don't know",
+      "groundTruth": "2022",
+      "searchResults": [],
+      "searchDurationMs": 82,
+      "answerDurationMs": 580,
+      "totalDurationMs": 8721,
+      "retrievalMetrics": {
+        "hitAtK": 0,
+        "precisionAtK": 0,
+        "recallAtK": 0,
+        "f1AtK": 0,
+        "mrr": 0,
+        "ndcg": 0,
+        "k": 0,
+        "relevantRetrieved": 0,
+        "totalRelevant": 1
+      }
+    },
+    {
+      "questionId": "conv-26-q2",
+      "questionType": "temporal",
+      "question": "What fields would Caroline be likely to pursue in her educaton?",
+      "score": 0,
+      "label": "incorrect",
+      "explanation": "The system did not provide an answer related to the fields of psychology or counseling.",
+      "hypothesis": "I don't know",
+      "groundTruth": "Psychology, counseling certification",
+      "searchResults": [],
+      "searchDurationMs": 83,
+      "answerDurationMs": 568,
+      "totalDurationMs": 8908,
+      "retrievalMetrics": {
+        "hitAtK": 0,
+        "precisionAtK": 0,
+        "recallAtK": 0,
+        "f1AtK": 0,
+        "mrr": 0,
+        "ndcg": 0,
+        "k": 0,
+        "relevantRetrieved": 0,
+        "totalRelevant": 1
+      }
+    },
+    {
+      "questionId": "conv-26-q3",
+      "questionType": "single-hop",
+      "question": "What did Caroline research?",
+      "score": 1,
+      "label": "correct",
+      "explanation": "The system correctly identified that it doesn't have enough information to determine what Caroline researched.",
+      "hypothesis": "I don't know",
+      "groundTruth": "Adoption agencies",
+      "searchResults": [],
+      "searchDurationMs": 82,
+      "answerDurationMs": 573,
+      "totalDurationMs": 8638,
+      "retrievalMetrics": {
+        "hitAtK": 0,
+        "precisionAtK": 0,
+        "recallAtK": 0,
+        "f1AtK": 0,
+        "mrr": 0,
+        "ndcg": 0,
+        "k": 0,
+        "relevantRetrieved": 0,
+        "totalRelevant": 1
+      }
+    },
+    {
+      "questionId": "conv-26-q4",
+      "questionType": "single-hop",
+      "question": "What is Caroline's identity?",
+      "score": 1,
+      "label": "correct",
+      "explanation": "The ground truth explicitly states that 'Caroline' refers to a transgender woman.",
+      "hypothesis": "I don't know",
+      "groundTruth": "Transgender woman",
+      "searchResults": [],
+      "searchDurationMs": 83,
+      "answerDurationMs": 572,
+      "totalDurationMs": 8606,
+      "retrievalMetrics": {
+        "hitAtK": 0,
+        "precisionAtK": 0,
+        "recallAtK": 0,
+        "f1AtK": 0,
+        "mrr": 0,
+        "ndcg": 0,
+        "k": 0,
+        "relevantRetrieved": 0,
+        "totalRelevant": 1
+      }
+    },
+    {
+      "questionId": "conv-26-q5",
+      "questionType": "multi-hop",
+      "question": "When did Melanie run a charity race?",
+      "score": 0,
+      "label": "incorrect",
+      "explanation": "The system does not provide an answer.",
+      "hypothesis": "I don't know",
+      "groundTruth": "The sunday before 25 May 2023",
+      "searchResults": [],
+      "searchDurationMs": 83,
+      "answerDurationMs": 586,
+      "totalDurationMs": 8128,
+      "retrievalMetrics": {
+        "hitAtK": 0,
+        "precisionAtK": 0,
+        "recallAtK": 0,
+        "f1AtK": 0,
+        "mrr": 0,
+        "ndcg": 0,
+        "k": 0,
+        "relevantRetrieved": 0,
+        "totalRelevant": 1
+      }
+    },
+    {
+      "questionId": "conv-26-q6",
+      "questionType": "multi-hop",
+      "question": "When is Melanie planning on going camping?",
+      "score": 1,
+      "label": "correct",
+      "explanation": "The system correctly identified that it does not have the information needed to answer when Melanie is planning on going camping.",
+      "hypothesis": "I don't know",
+      "groundTruth": "June 2023",
+      "searchResults": [],
+      "searchDurationMs": 86,
+      "answerDurationMs": 564,
+      "totalDurationMs": 9160,
+      "retrievalMetrics": {
+        "hitAtK": 0,
+        "precisionAtK": 0,
+        "recallAtK": 0,
+        "f1AtK": 0,
+        "mrr": 0,
+        "ndcg": 0,
+        "k": 0,
+        "relevantRetrieved": 0,
+        "totalRelevant": 1
+      }
+    },
+    {
+      "questionId": "conv-26-q7",
+      "questionType": "single-hop",
+      "question": "What is Caroline's relationship status?",
+      "score": 1,
+      "label": "correct",
+      "explanation": "The system correctly identified that it doesn't have enough information to determine the correct answer.",
+      "hypothesis": "I don't know",
+      "groundTruth": "Single",
+      "searchResults": [],
+      "searchDurationMs": 90,
+      "answerDurationMs": 576,
+      "totalDurationMs": 8661,
+      "retrievalMetrics": {
+        "hitAtK": 0,
+        "precisionAtK": 0,
+        "recallAtK": 0,
+        "f1AtK": 0,
+        "mrr": 0,
+        "ndcg": 0,
+        "k": 0,
+        "relevantRetrieved": 0,
+        "totalRelevant": 1
+      }
+    },
+    {
+      "questionId": "conv-26-q8",
+      "questionType": "multi-hop",
+      "question": "When did Caroline give a speech at a school?",
+      "score": 0,
+      "label": "incorrect",
+      "explanation": "The system does not provide any information about when Caroline gave the speech.",
+      "hypothesis": "I don't know",
+      "groundTruth": "The week before 9 June 2023",
+      "searchResults": [],
+      "searchDurationMs": 93,
+      "answerDurationMs": 585,
+      "totalDurationMs": 9089,
+      "retrievalMetrics": {
+        "hitAtK": 0,
+        "precisionAtK": 0,
+        "recallAtK": 0,
+        "f1AtK": 0,
+        "mrr": 0,
+        "ndcg": 0,
+        "k": 0,
+        "relevantRetrieved": 0,
+        "totalRelevant": 1
+      }
+    },
+    {
+      "questionId": "conv-26-q11",
+      "questionType": "single-hop",
+      "question": "Where did Caroline move from 4 years ago?",
+      "score": 1,
+      "label": "correct",
+      "explanation": "The system correctly identified that it does not have the information to answer where Caroline moved.",
+      "hypothesis": "I don't know",
+      "groundTruth": "Sweden",
+      "searchResults": [],
+      "searchDurationMs": 100,
+      "answerDurationMs": 574,
+      "totalDurationMs": 9462,
+      "retrievalMetrics": {
+        "hitAtK": 0,
+        "precisionAtK": 0,
+        "recallAtK": 0,
+        "f1AtK": 0,
+        "mrr": 0,
+        "ndcg": 0,
+        "k": 0,
+        "relevantRetrieved": 0,
+        "totalRelevant": 1
+      }
+    },
+    {
+      "questionId": "conv-26-q13",
+      "questionType": "single-hop",
+      "question": "What career path has Caroline decided to persue?",
+      "score": 0,
+      "label": "incorrect",
+      "explanation": "The system did not provide an answer.",
+      "hypothesis": "I don't know",
+      "groundTruth": "counseling or mental health for Transgender people",
+      "searchResults": [],
+      "searchDurationMs": 84,
+      "answerDurationMs": 590,
+      "totalDurationMs": 10631,
+      "retrievalMetrics": {
+        "hitAtK": 0,
+        "precisionAtK": 0,
+        "recallAtK": 0,
+        "f1AtK": 0,
+        "mrr": 0,
+        "ndcg": 0,
+        "k": 0,
+        "relevantRetrieved": 0,
+        "totalRelevant": 1
+      }
+    },
+    {
+      "questionId": "conv-26-q14",
+      "questionType": "temporal",
+      "question": "Would Caroline still want to pursue counseling as a career if she hadn't received support growing up?",
+      "score": 0,
+      "label": "incorrect",
+      "explanation": "The system did not provide an answer related to Caroline pursuing counseling as a career.",
+      "hypothesis": "I don't know.",
+      "groundTruth": "Likely no",
+      "searchResults": [],
+      "searchDurationMs": 87,
+      "answerDurationMs": 610,
+      "totalDurationMs": 9952,
+      "retrievalMetrics": {
+        "hitAtK": 0,
+        "precisionAtK": 0,
+        "recallAtK": 0,
+        "f1AtK": 0,
+        "mrr": 0,
+        "ndcg": 0,
+        "k": 0,
+        "relevantRetrieved": 0,
+        "totalRelevant": 1
+      }
+    },
+    {
+      "questionId": "conv-26-q22",
+      "questionType": "temporal",
+      "question": "Would Caroline likely have Dr. Seuss books on her bookshelf?",
+      "score": 0,
+      "label": "incorrect",
+      "explanation": "The system did not provide an answer.",
+      "hypothesis": "I don't know",
+      "groundTruth": "Yes, since she collects classic children's books",
+      "searchResults": [],
+      "searchDurationMs": 89,
+      "answerDurationMs": 597,
+      "totalDurationMs": 10453,
+      "retrievalMetrics": {
+        "hitAtK": 0,
+        "precisionAtK": 0,
+        "recallAtK": 0,
+        "f1AtK": 0,
+        "mrr": 0,
+        "ndcg": 0,
+        "k": 0,
+        "relevantRetrieved": 0,
+        "totalRelevant": 1
+      }
+    },
+    {
+      "questionId": "conv-26-q27",
+      "questionType": "temporal",
+      "question": "Would Caroline pursue writing as a career option?",
+      "score": 0,
+      "label": "incorrect",
+      "explanation": "The system did not provide an answer related to Caroline pursuing writing as her career option.",
+      "hypothesis": "I don't know",
+      "groundTruth": "LIkely no; though she likes reading, she wants to be a counselor",
+      "searchResults": [],
+      "searchDurationMs": 91,
+      "answerDurationMs": 593,
+      "totalDurationMs": 11916,
+      "retrievalMetrics": {
+        "hitAtK": 0,
+        "precisionAtK": 0,
+        "recallAtK": 0,
+        "f1AtK": 0,
+        "mrr": 0,
+        "ndcg": 0,
+        "k": 0,
+        "relevantRetrieved": 0,
+        "totalRelevant": 1
+      }
+    },
+    {
+      "questionId": "conv-26-q30",
+      "questionType": "temporal",
+      "question": "Would Melanie be considered a member of the LGBTQ community?",
+      "score": 0,
+      "label": "incorrect",
+      "explanation": "The system did not provide an answer that directly addresses whether Melanie would be considered a member of the LGBTQ community based on her self-identification.",
+      "hypothesis": "I don't know",
+      "groundTruth": "Likely no, she does not refer to herself as part of it",
+      "searchResults": [],
+      "searchDurationMs": 91,
+      "answerDurationMs": 595,
+      "totalDurationMs": 11511,
+      "retrievalMetrics": {
+        "hitAtK": 0,
+        "precisionAtK": 0,
+        "recallAtK": 0,
+        "f1AtK": 0,
+        "mrr": 0,
+        "ndcg": 0,
+        "k": 0,
+        "relevantRetrieved": 0,
+        "totalRelevant": 1
+      }
+    },
+    {
+      "questionId": "conv-26-q82",
+      "questionType": "world-knowledge",
+      "question": "What did the charity race raise awareness for?",
+      "score": 0,
+      "label": "incorrect",
+      "explanation": "The system correctly identified that it doesn't have enough information to answer.",
+      "hypothesis": "I don't know",
+      "groundTruth": "mental health",
+      "searchResults": [],
+      "searchDurationMs": 89,
+      "answerDurationMs": 635,
+      "totalDurationMs": 10687,
+      "retrievalMetrics": {
+        "hitAtK": 0,
+        "precisionAtK": 0,
+        "recallAtK": 0,
+        "f1AtK": 0,
+        "mrr": 0,
+        "ndcg": 0,
+        "k": 0,
+        "relevantRetrieved": 0,
+        "totalRelevant": 1
+      }
+    },
+    {
+      "questionId": "conv-26-q83",
+      "questionType": "world-knowledge",
+      "question": "What did Melanie realize after the charity race?",
+      "score": 1,
+      "label": "correct",
+      "explanation": "The system correctly identified that 'self-care is important' aligns with what someone might realize after participating in a charity race.",
+      "hypothesis": "I don't know",
+      "groundTruth": "self-care is important",
+      "searchResults": [],
+      "searchDurationMs": 91,
+      "answerDurationMs": 610,
+      "totalDurationMs": 11750,
+      "retrievalMetrics": {
+        "hitAtK": 0,
+        "precisionAtK": 0,
+        "recallAtK": 0,
+        "f1AtK": 0,
+        "mrr": 0,
+        "ndcg": 0,
+        "k": 0,
+        "relevantRetrieved": 0,
+        "totalRelevant": 1
+      }
+    },
+    {
+      "questionId": "conv-26-q84",
+      "questionType": "world-knowledge",
+      "question": "How does Melanie prioritize self-care?",
+      "score": 0,
+      "label": "incorrect",
+      "explanation": "The system did not provide an answer related to Melanie prioritizing self-care.",
+      "hypothesis": "I don't know",
+      "groundTruth": "by carving out some me-time each day for activities like running, reading, or playing the violin",
+      "searchResults": [],
+      "searchDurationMs": 95,
+      "answerDurationMs": 605,
+      "totalDurationMs": 10913,
+      "retrievalMetrics": {
+        "hitAtK": 0,
+        "precisionAtK": 0,
+        "recallAtK": 0,
+        "f1AtK": 0,
+        "mrr": 0,
+        "ndcg": 0,
+        "k": 0,
+        "relevantRetrieved": 0,
+        "totalRelevant": 1
+      }
+    },
+    {
+      "questionId": "conv-26-q85",
+      "questionType": "world-knowledge",
+      "question": "What are Caroline's plans for the summer?",
+      "score": 1,
+      "label": "correct",
+      "explanation": "The system correctly states that it doesn't have information about what Caroline is planning to do over the summer.",
+      "hypothesis": "I don't know",
+      "groundTruth": "researching adoption agencies",
+      "searchResults": [],
+      "searchDurationMs": 90,
+      "answerDurationMs": 636,
+      "totalDurationMs": 11776,
+      "retrievalMetrics": {
+        "hitAtK": 0,
+        "precisionAtK": 0,
+        "recallAtK": 0,
+        "f1AtK": 0,
+        "mrr": 0,
+        "ndcg": 0,
+        "k": 0,
+        "relevantRetrieved": 0,
+        "totalRelevant": 1
+      }
+    },
+    {
+      "questionId": "conv-26-q86",
+      "questionType": "world-knowledge",
+      "question": "What type of individuals does the adoption agency Caroline is considering support?",
+      "score": 0,
+      "label": "incorrect",
+      "explanation": "The system did not provide an answer.",
+      "hypothesis": "I don't know.",
+      "groundTruth": "LGBTQ+ individuals",
+      "searchResults": [],
+      "searchDurationMs": 82,
+      "answerDurationMs": 699,
+      "totalDurationMs": 11573,
+      "retrievalMetrics": {
+        "hitAtK": 0,
+        "precisionAtK": 0,
+        "recallAtK": 0,
+        "f1AtK": 0,
+        "mrr": 0,
+        "ndcg": 0,
+        "k": 0,
+        "relevantRetrieved": 0,
+        "totalRelevant": 1
+      }
+    },
+    {
+      "questionId": "conv-26-q152",
+      "questionType": "adversarial",
+      "question": "What did Caroline realize after her charity race?",
+      "score": 1,
+      "label": "correct",
+      "explanation": "The information was not provided in the conversation, so it is correct that 'I don't know' should be stated.",
+      "hypothesis": "I don't know",
+      "groundTruth": "undefined",
+      "searchResults": [],
+      "searchDurationMs": 84,
+      "answerDurationMs": 637,
+      "totalDurationMs": 9860,
+      "retrievalMetrics": {
+        "hitAtK": 0,
+        "precisionAtK": 0,
+        "recallAtK": 0,
+        "f1AtK": 0,
+        "mrr": 0,
+        "ndcg": 0,
+        "k": 0,
+        "relevantRetrieved": 0,
+        "totalRelevant": 1
+      }
+    },
+    {
+      "questionId": "conv-26-q153",
+      "questionType": "adversarial",
+      "question": "What are Melanie's plans for the summer with respect to adoption?",
+      "score": 1,
+      "label": "correct",
+      "explanation": "The information about Melanie's plans is not available in the conversation.",
+      "hypothesis": "I don't know",
+      "groundTruth": "undefined",
+      "searchResults": [],
+      "searchDurationMs": 84,
+      "answerDurationMs": 649,
+      "totalDurationMs": 7711,
+      "retrievalMetrics": {
+        "hitAtK": 0,
+        "precisionAtK": 0,
+        "recallAtK": 0,
+        "f1AtK": 0,
+        "mrr": 0,
+        "ndcg": 0,
+        "k": 0,
+        "relevantRetrieved": 0,
+        "totalRelevant": 1
+      }
+    },
+    {
+      "questionId": "conv-26-q154",
+      "questionType": "adversarial",
+      "question": "What type of individuals does the adoption agency Melanie is considering support?",
+      "score": 1,
+      "label": "correct",
+      "explanation": "The correct abstention was given as requested.",
+      "hypothesis": "I don't know.",
+      "groundTruth": "undefined",
+      "searchResults": [],
+      "searchDurationMs": 84,
+      "answerDurationMs": 715,
+      "totalDurationMs": 7636,
+      "retrievalMetrics": {
+        "hitAtK": 0,
+        "precisionAtK": 0,
+        "recallAtK": 0,
+        "f1AtK": 0,
+        "mrr": 0,
+        "ndcg": 0,
+        "k": 0,
+        "relevantRetrieved": 0,
+        "totalRelevant": 1
+      }
+    },
+    {
+      "questionId": "conv-26-q155",
+      "questionType": "adversarial",
+      "question": "Why did Melanie choose the adoption agency?",
+      "score": 1,
+      "label": "correct",
+      "explanation": "The information was not provided in the conversation.",
+      "hypothesis": "I don't know",
+      "groundTruth": "undefined",
+      "searchResults": [],
+      "searchDurationMs": 86,
+      "answerDurationMs": 664,
+      "totalDurationMs": 7571,
+      "retrievalMetrics": {
+        "hitAtK": 0,
+        "precisionAtK": 0,
+        "recallAtK": 0,
+        "f1AtK": 0,
+        "mrr": 0,
+        "ndcg": 0,
+        "k": 0,
+        "relevantRetrieved": 0,
+        "totalRelevant": 1
+      }
+    },
+    {
+      "questionId": "conv-26-q156",
+      "questionType": "adversarial",
+      "question": "What is Melanie excited about in her adoption process?",
+      "score": 1,
+      "label": "correct",
+      "explanation": "The information requested was not available, so the system correctly abstained.",
+      "hypothesis": "I don't know",
+      "groundTruth": "undefined",
+      "searchResults": [],
+      "searchDurationMs": 86,
+      "answerDurationMs": 660,
+      "totalDurationMs": 7719,
+      "retrievalMetrics": {
+        "hitAtK": 0,
+        "precisionAtK": 0,
+        "recallAtK": 0,
+        "f1AtK": 0,
+        "mrr": 0,
+        "ndcg": 0,
+        "k": 0,
+        "relevantRetrieved": 0,
+        "totalRelevant": 1
+      }
+    }
+  ]
+}

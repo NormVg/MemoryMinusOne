@@ -1,0 +1,10 @@
+{
+  "questionId": "conv-26-q82",
+  "question": "What did the charity race raise awareness for?",
+  "questionType": "world-knowledge",
+  "groundTruth": "mental health",
+  "containerTag": "conv-26-q82-memoryminusone-locomo-20260806-t4ib",
+  "timestamp": "2026-08-06T18:15:26.613Z",
+  "durationMs": 89,
+  "results": []
+}

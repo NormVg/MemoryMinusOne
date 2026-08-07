@@ -1,0 +1,10 @@
+{
+  "questionId": "conv-26-q22",
+  "question": "Would Caroline likely have Dr. Seuss books on her bookshelf?",
+  "questionType": "temporal",
+  "groundTruth": "Yes, since she collects classic children's books",
+  "containerTag": "conv-26-q22-memoryminusone-locomo-20260806-t4ib",
+  "timestamp": "2026-08-06T18:15:26.332Z",
+  "durationMs": 89,
+  "results": []
+}

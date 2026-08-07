@@ -1,0 +1,10 @@
+{
+  "questionId": "conv-26-q8",
+  "question": "When did Caroline give a speech at a school?",
+  "questionType": "multi-hop",
+  "groundTruth": "The week before 9 June 2023",
+  "containerTag": "conv-26-q8-memoryminusone-locomo-20260806-t4ib",
+  "timestamp": "2026-08-06T18:15:25.960Z",
+  "durationMs": 93,
+  "results": []
+}

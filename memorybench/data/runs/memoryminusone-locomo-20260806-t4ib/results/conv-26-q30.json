@@ -1,0 +1,10 @@
+{
+  "questionId": "conv-26-q30",
+  "question": "Would Melanie be considered a member of the LGBTQ community?",
+  "questionType": "temporal",
+  "groundTruth": "Likely no, she does not refer to herself as part of it",
+  "containerTag": "conv-26-q30-memoryminusone-locomo-20260806-t4ib",
+  "timestamp": "2026-08-06T18:15:26.521Z",
+  "durationMs": 91,
+  "results": []
+}

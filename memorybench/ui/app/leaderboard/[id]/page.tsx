@@ -172,7 +172,6 @@ export default function LeaderboardEntryPage() {
           <StatsGrid cards={statsCards} />
           <AccuracyByType byQuestionType={entry.byQuestionType} />
           <LatencyTable latency={entry.latencyStats} />
-          <RetrievalMetrics retrieval={entry.retrieval} byQuestionType={entry.byQuestionType} />
         </div>
       )}
 

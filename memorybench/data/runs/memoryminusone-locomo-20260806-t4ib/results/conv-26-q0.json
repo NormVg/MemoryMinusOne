@@ -1,0 +1,10 @@
+{
+  "questionId": "conv-26-q0",
+  "question": "When did Caroline go to the LGBTQ support group?",
+  "questionType": "multi-hop",
+  "groundTruth": "7 May 2023",
+  "containerTag": "conv-26-q0-memoryminusone-locomo-20260806-t4ib",
+  "timestamp": "2026-08-06T18:15:25.253Z",
+  "durationMs": 97,
+  "results": []
+}

@@ -1,0 +1,10 @@
+{
+  "questionId": "conv-26-q6",
+  "question": "When is Melanie planning on going camping?",
+  "questionType": "multi-hop",
+  "groundTruth": "June 2023",
+  "containerTag": "conv-26-q6-memoryminusone-locomo-20260806-t4ib",
+  "timestamp": "2026-08-06T18:15:25.770Z",
+  "durationMs": 86,
+  "results": []
+}

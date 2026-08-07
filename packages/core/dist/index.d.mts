@@ -264,11 +264,8 @@ declare class MemoryEngine {
         userId: string;
         metadata?: Record<string, any>;
         tags?: string[];
-<<<<<<< Updated upstream
-        timestamp?: number;
-=======
         sector?: string;
->>>>>>> Stashed changes
+        timestamp?: number;
     }): Promise<MemoryNode>;
     /**
      * Queries memories using a hybrid approach.

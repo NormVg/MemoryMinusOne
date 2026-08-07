@@ -1,0 +1,38 @@
+{
+  "questionId": "convomem-user_evidence-5",
+  "question": "What did I identify as the main reason for the success of my last email marketing campaign?",
+  "questionType": "user_evidence",
+  "groundTruth": "The main reason for the success of the last campaign was the 'hyper-personalized subject lines'.",
+  "containerTag": "convomem-user_evidence-5-memoryminusone-convomem-20260806-3knw",
+  "timestamp": "2026-08-06T19:07:45.768Z",
+  "durationMs": 145,
+  "results": [
+    {
+      "memory": {
+        "id": "61e837ce-4fee-40b1-9fff-8291c9d97d64",
+        "userId": "convomem-user_evidence-5-memoryminusone-convomem-20260806-3knw",
+        "content": "Here is the session as a stringified JSON:\n[{\"role\":\"user\",\"content\":\"Hey, I've been thinking about the last email campaign we did. It was quite a success, wasn't it?\"},{\"role\":\"assistant\",\"content\":\"Absolutely, Emma! The engagement metrics were impressive. What do you think contributed most to its success?\"},{\"role\":\"user\",\"content\":\"I believe the main reason my previous campaign was so successful was the 'hyper-personalized subject lines'.\"},{\"role\":\"assistant\",\"content\":\"That makes a lot of sense. Personalized subject lines can really grab attention and increase open rates.\"},{\"role\":\"user\",\"content\":\"Exactly. I spent a lot of time analyzing our CRM data to segment the audience effectively.\"},{\"role\":\"assistant\",\"content\":\"Your attention to detail really paid off. Are you planning to use a similar strategy for the next campaign?\"},{\"role\":\"user\",\"content\":\"Yes, I'm thinking of refining the personalization even further. Maybe incorporate some dynamic content based on user behavior.\"},{\"role\":\"assistant\",\"content\":\"That sounds like a great idea. Dynamic content can make emails feel even more relevant to the recipient.\"},{\"role\":\"user\",\"content\":\"Do you have any suggestions on tools or techniques to enhance personalization?\"},{\"role\":\"assistant\",\"content\":\"You might want to look into AI-driven platforms that offer predictive analytics. They can help tailor content based on user interactions.\"},{\"role\":\"user\",\"content\":\"That's a good point. I'll research some options. Thanks for the tip!\"},{\"role\":\"assistant\",\"content\":\"Anytime, Emma. Let me know if you need help with anything else.\"},{\"role\":\"user\",\"content\":\"Will do. I'm excited to see how the next campaign turns out.\"},{\"role\":\"assistant\",\"content\":\"I'm sure it will be another success. You've got a great strategy in place.\"},{\"role\":\"user\",\"content\":\"Thanks! I'll keep you updated on the progress.\"},{\"role\":\"assistant\",\"content\":\"Looking forward to it. Have a great day, Emma!\"},{\"role\":\"user\",\"content\":\"You too!\"}]",
+        "primarySector": "benchmark",
+        "sectors": [
+          "benchmark"
+        ],
+        "tags": [],
+        "metadata": {
+          "sessionId": "convomem-user_evidence-5-session-0"
+        },
+        "simhash": "7121800071218000",
+        "salience": 1,
+        "decayLambda": 0.01,
+        "version": 1,
+        "createdAt": 1786043190831,
+        "updatedAt": 1786043190831,
+        "lastSeenAt": 1786043265768
+      },
+      "score": 0.6624908786533663,
+      "matchType": "semantic",
+      "path": [
+        "61e837ce-4fee-40b1-9fff-8291c9d97d64"
+      ]
+    }
+  ]
+}

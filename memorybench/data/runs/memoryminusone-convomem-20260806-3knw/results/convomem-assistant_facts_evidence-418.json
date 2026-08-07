@@ -1,0 +1,38 @@
+{
+  "questionId": "convomem-assistant_facts_evidence-418",
+  "question": "Can you remind me of the yoga studio you suggested for restorative and calming classes?",
+  "questionType": "assistant_facts_evidence",
+  "groundTruth": "The yoga studio I recommended is 'Tranquil Flow Yoga Studio'.",
+  "containerTag": "convomem-assistant_facts_evidence-418-memoryminusone-convomem-20260806-3knw",
+  "timestamp": "2026-08-06T19:07:47.366Z",
+  "durationMs": 155,
+  "results": [
+    {
+      "memory": {
+        "id": "f42f6b79-9af4-46ba-83e7-674d898bb621",
+        "userId": "convomem-assistant_facts_evidence-418-memoryminusone-convomem-20260806-3knw",
+        "content": "Here is the session as a stringified JSON:\n[{\"role\":\"user\",\"content\":\"Hey, I just wrapped up a really hectic week. Crisis management at 2 AM is not fun!\"},{\"role\":\"assistant\",\"content\":\"That sounds intense, Sarah. How are you holding up?\"},{\"role\":\"user\",\"content\":\"I'm okay, just exhausted. I need to find a way to unwind this weekend.\"},{\"role\":\"assistant\",\"content\":\"Have you considered doing something relaxing, like yoga or meditation?\"},{\"role\":\"user\",\"content\":\"Yoga sounds like a good idea. I haven't done it in a while.\"},{\"role\":\"assistant\",\"content\":\"I recommend checking out 'Tranquil Flow Yoga Studio' in your neighborhood. They offer some of the best restorative and calming classes, perfect for unwinding after a hectic week.\"},{\"role\":\"user\",\"content\":\"That sounds perfect. I'll look them up and see if I can book a class.\"},{\"role\":\"assistant\",\"content\":\"Great! Let me know how it goes. It's important to take some time for yourself.\"},{\"role\":\"user\",\"content\":\"Absolutely. Thanks for the suggestion!\"},{\"role\":\"assistant\",\"content\":\"You're welcome, Sarah. If you need any more recommendations, feel free to ask.\"},{\"role\":\"user\",\"content\":\"Will do. Have a good day!\"},{\"role\":\"assistant\",\"content\":\"You too! Take care.\"}]",
+        "primarySector": "benchmark",
+        "sectors": [
+          "benchmark"
+        ],
+        "tags": [],
+        "metadata": {
+          "sessionId": "convomem-assistant_facts_evidence-418-session-0"
+        },
+        "simhash": "4030000040300000",
+        "salience": 1,
+        "decayLambda": 0.01,
+        "version": 1,
+        "createdAt": 1786043202894,
+        "updatedAt": 1786043202894,
+        "lastSeenAt": 1786043267366
+      },
+      "score": 0.6606202353878557,
+      "matchType": "semantic",
+      "path": [
+        "f42f6b79-9af4-46ba-83e7-674d898bb621"
+      ]
+    }
+  ]
+}

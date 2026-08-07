@@ -1,0 +1,38 @@
+{
+  "questionId": "convomem-preference_evidence-2259",
+  "question": "I'm thinking of having a few friends over, just four of us in total. I want to host a dinner party at my apartment, but I'm looking for ideas that are really low-stress and more collaborative than formal. What kind of meal should I plan?",
+  "questionType": "preference_evidence",
+  "groundTruth": "The model should recommend dinner party ideas that are inherently interactive, collaborative, and low-pressure for the host. The response must suggest meal concepts where guests can participate in the assembly of their own food. Specific examples of appropriate recommendations include a taco bar, a build-your-own-pizza night, a pasta bar with a choice of sauces and toppings, or a fondue night. The response should NOT suggest formal, multi-course meals or dishes that require complex, timed execution by the host, such as a traditional beef wellington, a multi-course French menu, or a formal roast dinner, as these conflict with the user's stated preference for relaxed, low-stress social events.",
+  "containerTag": "convomem-preference_evidence-2259-memoryminusone-convomem-20260806-3knw",
+  "timestamp": "2026-08-06T19:07:57.939Z",
+  "durationMs": 753,
+  "results": [
+    {
+      "memory": {
+        "id": "b8ccfddb-d9e1-4ab5-b422-c261226565ab",
+        "userId": "convomem-preference_evidence-2259-memoryminusone-convomem-20260806-3knw",
+        "content": "Here is the session as a stringified JSON:\n[{\"role\":\"user\",\"content\":\"Hey, I've been thinking about hosting a small dinner party at my apartment. Do you have any tips for keeping it low-stress?\"},{\"role\":\"assistant\",\"content\":\"That sounds like a great idea! Keeping it simple is key. Have you thought about what kind of meal you'd like to serve?\"},{\"role\":\"user\",\"content\":\"I'm leaning towards something interactive, where everyone can get involved. I want it to be more about the company than the food.\"},{\"role\":\"assistant\",\"content\":\"Interactive meals are perfect for that! How about a taco bar or a build-your-own-pizza night? They're fun and allow everyone to customize their meal.\"},{\"role\":\"user\",\"content\":\"I love those ideas! They're exactly the kind of relaxed vibe I'm going for. Plus, it takes the pressure off me to have everything perfect.\"},{\"role\":\"assistant\",\"content\":\"Exactly! And you can prepare most of the ingredients ahead of time, so you can enjoy the evening with your friends.\"},{\"role\":\"user\",\"content\":\"That's true. I remember how draining my cousin's huge wedding reception was. It was fun, but honestly, those massive, loud events are so draining for me. I much prefer having just a few close friends over for a relaxed evening where we can actually talk without shouting.\"},{\"role\":\"assistant\",\"content\":\"I completely understand. Smaller gatherings can be so much more intimate and enjoyable. Plus, you get to spend quality time with each guest.\"},{\"role\":\"user\",\"content\":\"Exactly. I think I'll go with the taco bar idea. It's easy to set up and everyone loves tacos.\"},{\"role\":\"assistant\",\"content\":\"Great choice! You can have a variety of toppings and let everyone build their own. It's a crowd-pleaser for sure.\"},{\"role\":\"user\",\"content\":\"Thanks for the suggestion! I'm feeling much more confident about hosting now.\"},{\"role\":\"assistant\",\"content\":\"You're welcome! I'm sure it will be a wonderful evening. Let me know if you need any more tips or ideas.\"}]",
+        "primarySector": "benchmark",
+        "sectors": [
+          "benchmark"
+        ],
+        "tags": [],
+        "metadata": {
+          "sessionId": "convomem-preference_evidence-2259-session-0"
+        },
+        "simhash": "1230880012308800",
+        "salience": 1,
+        "decayLambda": 0.01,
+        "version": 1,
+        "createdAt": 1786043245062,
+        "updatedAt": 1786043245062,
+        "lastSeenAt": 1786043277939
+      },
+      "score": 0.6678430945935396,
+      "matchType": "semantic",
+      "path": [
+        "b8ccfddb-d9e1-4ab5-b422-c261226565ab"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "questionId": "conv-26-q83",
+  "question": "What did Melanie realize after the charity race?",
+  "questionType": "world-knowledge",
+  "groundTruth": "self-care is important",
+  "containerTag": "conv-26-q83-memoryminusone-locomo-20260806-t4ib",
+  "timestamp": "2026-08-06T18:15:26.708Z",
+  "durationMs": 91,
+  "results": []
+}

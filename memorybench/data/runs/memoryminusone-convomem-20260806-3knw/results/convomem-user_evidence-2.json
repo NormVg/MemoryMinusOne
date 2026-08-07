@@ -1,0 +1,38 @@
+{
+  "questionId": "convomem-user_evidence-2",
+  "question": "What specific aesthetic did I specify for our new product photography?",
+  "questionType": "user_evidence",
+  "groundTruth": "Light and airy aesthetic with natural lighting and soft shadows.",
+  "containerTag": "convomem-user_evidence-2-memoryminusone-convomem-20260806-3knw",
+  "timestamp": "2026-08-06T19:07:44.284Z",
+  "durationMs": 785,
+  "results": [
+    {
+      "memory": {
+        "id": "5a193e83-0554-4b2c-ae41-5fbc1d1369ed",
+        "userId": "convomem-user_evidence-2-memoryminusone-convomem-20260806-3knw",
+        "content": "Here is the session as a stringified JSON:\n[{\"role\":\"user\",\"content\":\"Hey, I've been thinking about the new product photos for our upcoming collection.\"},{\"role\":\"assistant\",\"content\":\"That sounds exciting! Do you have a specific vision in mind for the photos?\"},{\"role\":\"user\",\"content\":\"Yes, I want to ensure they align with our brand's aesthetic.\"},{\"role\":\"assistant\",\"content\":\"Absolutely, maintaining a consistent aesthetic is crucial. What kind of look are you aiming for?\"},{\"role\":\"user\",\"content\":\"For the new product photos, I want a 'light and airy' aesthetic with natural lighting and soft shadows.\"},{\"role\":\"assistant\",\"content\":\"That sounds beautiful and very fitting for our brand. It should really highlight the craftsmanship of the products.\"},{\"role\":\"user\",\"content\":\"Exactly. I think it will help convey the quality and uniqueness of each piece.\"},{\"role\":\"assistant\",\"content\":\"Do you have a photographer in mind who can capture this style?\"},{\"role\":\"user\",\"content\":\"I'm reviewing a few portfolios right now. I want to make sure they can deliver the look we're going for.\"},{\"role\":\"assistant\",\"content\":\"That's a good approach. Let me know if you need any help with the selection process.\"},{\"role\":\"user\",\"content\":\"Thanks, I might take you up on that. It's important to get this right.\"},{\"role\":\"assistant\",\"content\":\"Absolutely, the right photos can make a big difference in how our products are perceived.\"},{\"role\":\"user\",\"content\":\"Yes, and I want our customers to feel the same appreciation for craftsmanship that I do.\"},{\"role\":\"assistant\",\"content\":\"I'm sure they will with the right presentation. Anything else you need to discuss about the photos?\"},{\"role\":\"user\",\"content\":\"Not at the moment, but I'll keep you updated as I make progress.\"},{\"role\":\"assistant\",\"content\":\"Sounds good. Looking forward to seeing the final results!\"}]",
+        "primarySector": "benchmark",
+        "sectors": [
+          "benchmark"
+        ],
+        "tags": [],
+        "metadata": {
+          "sessionId": "convomem-user_evidence-2-session-0"
+        },
+        "simhash": "4131800041318000",
+        "salience": 1,
+        "decayLambda": 0.01,
+        "version": 1,
+        "createdAt": 1786043184593,
+        "updatedAt": 1786043184593,
+        "lastSeenAt": 1786043264284
+      },
+      "score": 0.6645878598323539,
+      "matchType": "semantic",
+      "path": [
+        "5a193e83-0554-4b2c-ae41-5fbc1d1369ed"
+      ]
+    }
+  ]
+}

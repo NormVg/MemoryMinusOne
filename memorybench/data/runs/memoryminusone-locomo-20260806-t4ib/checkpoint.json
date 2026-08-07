@@ -1,0 +1,5595 @@
+{
+  "runId": "memoryminusone-locomo-20260806-t4ib",
+  "dataSourceRunId": "memoryminusone-locomo-20260806-t4ib",
+  "status": "completed",
+  "provider": "memoryminusone",
+  "benchmark": "locomo",
+  "judge": "phi4-mini",
+  "answeringModel": "phi4-mini",
+  "createdAt": "2026-08-06T18:12:02.224Z",
+  "updatedAt": "2026-08-06T18:16:29.588Z",
+  "sampling": {
+    "mode": "sample",
+    "sampleType": "consecutive",
+    "perCategory": 5
+  },
+  "targetQuestionIds": [
+    "conv-26-q0",
+    "conv-26-q1",
+    "conv-26-q5",
+    "conv-26-q6",
+    "conv-26-q8",
+    "conv-26-q2",
+    "conv-26-q14",
+    "conv-26-q22",
+    "conv-26-q27",
+    "conv-26-q30",
+    "conv-26-q3",
+    "conv-26-q4",
+    "conv-26-q7",
+    "conv-26-q11",
+    "conv-26-q13",
+    "conv-26-q82",
+    "conv-26-q83",
+    "conv-26-q84",
+    "conv-26-q85",
+    "conv-26-q86",
+    "conv-26-q152",
+    "conv-26-q153",
+    "conv-26-q154",
+    "conv-26-q155",
+    "conv-26-q156"
+  ],
+  "questions": {
+    "conv-26-q0": {
+      "questionId": "conv-26-q0",
+      "containerTag": "conv-26-q0-memoryminusone-locomo-20260806-t4ib",
+      "question": "When did Caroline go to the LGBTQ support group?",
+      "groundTruth": "7 May 2023",
+      "questionType": "multi-hop",
+      "phases": {
+        "ingest": {
+          "status": "completed",
+          "completedSessions": [
+            "conv-26-session_1",
+            "conv-26-session_2",
+            "conv-26-session_3",
+            "conv-26-session_4",
+            "conv-26-session_5",
+            "conv-26-session_6",
+            "conv-26-session_7",
+            "conv-26-session_8",
+            "conv-26-session_9",
+            "conv-26-session_10",
+            "conv-26-session_11",
+            "conv-26-session_12",
+            "conv-26-session_13",
+            "conv-26-session_14",
+            "conv-26-session_15",
+            "conv-26-session_16",
+            "conv-26-session_17",
+            "conv-26-session_18",
+            "conv-26-session_19"
+          ],
+          "startedAt": "2026-08-06T18:12:02.243Z",
+          "ingestResult": {
+            "documentIds": [
+              "ef762971-acf7-4a7d-a768-1ae4bbba548e",
+              "41fa9241-4381-4173-aa3c-f4e79c12e796",
+              "081101b0-46e3-4fa8-9301-85a71f02e436",
+              "9d0e0cce-fa12-41cc-ab4b-b65cbee8decb",
+              "e8c598ff-08cc-4774-ae4f-6745c19a2db5",
+              "b2529838-466e-4c97-a937-b58dd7c56d03",
+              "b5beef0d-8185-458d-a837-1c0f60ec875b",
+              "074fd8fb-9b33-4b91-a210-d6aa2d73de0c",
+              "2f976d1b-9e2d-42f4-ac9f-fc12190e30f5",
+              "0e9f8e46-df20-4273-8e5f-b23c8be4addf",
+              "96aa077f-3531-4ad3-9a78-9c9262447d5c",
+              "4d1ac484-4f64-4cde-bd2f-296e4e26eb1d",
+              "ce6a1ba7-661d-44d8-ad22-ec31c8275892",
+              "d3b98642-faf0-4d46-899f-83477cad1f08",
+              "31881b70-5b68-4c21-bb44-23c6daa014d7",
+              "8586cac2-ef68-43e9-aacc-a926355b7b29",
+              "2ce1e141-0320-4e77-a2f3-f2cf4f0cdd2a",
+              "c9dd6059-8077-4dbc-a8cb-8ddbcb43366a",
+              "18f534b4-afd9-4c5e-baeb-4c10dc580328"
+            ]
+          },
+          "completedAt": "2026-08-06T18:12:08.419Z",
+          "durationMs": 6176
+        },
+        "indexing": {
+          "status": "completed",
+          "completedIds": [
+            "ef762971-acf7-4a7d-a768-1ae4bbba548e",
+            "41fa9241-4381-4173-aa3c-f4e79c12e796",
+            "081101b0-46e3-4fa8-9301-85a71f02e436",
+            "9d0e0cce-fa12-41cc-ab4b-b65cbee8decb",
+            "e8c598ff-08cc-4774-ae4f-6745c19a2db5",
+            "b2529838-466e-4c97-a937-b58dd7c56d03",
+            "b5beef0d-8185-458d-a837-1c0f60ec875b",
+            "074fd8fb-9b33-4b91-a210-d6aa2d73de0c",
+            "2f976d1b-9e2d-42f4-ac9f-fc12190e30f5",
+            "0e9f8e46-df20-4273-8e5f-b23c8be4addf",
+            "96aa077f-3531-4ad3-9a78-9c9262447d5c",
+            "4d1ac484-4f64-4cde-bd2f-296e4e26eb1d",
+            "ce6a1ba7-661d-44d8-ad22-ec31c8275892",
+            "d3b98642-faf0-4d46-899f-83477cad1f08",
+            "31881b70-5b68-4c21-bb44-23c6daa014d7",
+            "8586cac2-ef68-43e9-aacc-a926355b7b29",
+            "2ce1e141-0320-4e77-a2f3-f2cf4f0cdd2a",
+            "c9dd6059-8077-4dbc-a8cb-8ddbcb43366a",
+            "18f534b4-afd9-4c5e-baeb-4c10dc580328"
+          ],
+          "failedIds": [],
+          "startedAt": "2026-08-06T18:15:25.127Z",
+          "completedAt": "2026-08-06T18:15:25.127Z",
+          "durationMs": 0
+        },
+        "search": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:25.156Z",
+          "resultFile": "data/runs/memoryminusone-locomo-20260806-t4ib/results/conv-26-q0.json",
+          "results": [],
+          "completedAt": "2026-08-06T18:15:25.254Z",
+          "durationMs": 97
+        },
+        "answer": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:27.432Z",
+          "hypothesis": "I don't know",
+          "promptTokens": 168,
+          "basePromptTokens": 168,
+          "contextTokens": 0,
+          "completedAt": "2026-08-06T18:15:31.287Z",
+          "durationMs": 3855
+        },
+        "evaluate": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:46.038Z",
+          "score": 0,
+          "label": "incorrect",
+          "explanation": "The system does not provide an answer.",
+          "retrievalMetrics": {
+            "hitAtK": 0,
+            "precisionAtK": 0,
+            "recallAtK": 0,
+            "f1AtK": 0,
+            "mrr": 0,
+            "ndcg": 0,
+            "k": 0,
+            "relevantRetrieved": 0,
+            "totalRelevant": 1
+          },
+          "completedAt": "2026-08-06T18:15:47.854Z",
+          "durationMs": 1816
+        }
+      },
+      "sessions": [
+        {
+          "sessionId": "conv-26-session_1",
+          "date": "2023-05-08T13:56:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_2",
+          "date": "2023-05-25T13:14:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_3",
+          "date": "2023-06-09T19:55:00.000Z",
+          "messageCount": 23
+        },
+        {
+          "sessionId": "conv-26-session_4",
+          "date": "2023-06-27T10:37:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_5",
+          "date": "2023-07-03T13:36:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_6",
+          "date": "2023-07-06T20:18:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_7",
+          "date": "2023-07-12T16:33:00.000Z",
+          "messageCount": 27
+        },
+        {
+          "sessionId": "conv-26-session_8",
+          "date": "2023-07-15T13:51:00.000Z",
+          "messageCount": 39
+        },
+        {
+          "sessionId": "conv-26-session_9",
+          "date": "2023-07-17T14:31:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_10",
+          "date": "2023-07-20T20:56:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_11",
+          "date": "2023-08-14T14:24:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_12",
+          "date": "2023-08-17T13:50:00.000Z",
+          "messageCount": 21
+        },
+        {
+          "sessionId": "conv-26-session_13",
+          "date": "2023-08-23T15:31:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_14",
+          "date": "2023-08-25T13:33:00.000Z",
+          "messageCount": 35
+        },
+        {
+          "sessionId": "conv-26-session_15",
+          "date": "2023-08-28T15:19:00.000Z",
+          "messageCount": 28
+        },
+        {
+          "sessionId": "conv-26-session_16",
+          "date": "2023-09-13T00:09:00.000Z",
+          "messageCount": 20
+        },
+        {
+          "sessionId": "conv-26-session_17",
+          "date": "2023-10-13T10:31:00.000Z",
+          "messageCount": 26
+        },
+        {
+          "sessionId": "conv-26-session_18",
+          "date": "2023-10-20T18:55:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_19",
+          "date": "2023-10-22T09:55:00.000Z",
+          "messageCount": 15
+        }
+      ]
+    },
+    "conv-26-q1": {
+      "questionId": "conv-26-q1",
+      "containerTag": "conv-26-q1-memoryminusone-locomo-20260806-t4ib",
+      "question": "When did Melanie paint a sunrise?",
+      "groundTruth": "2022",
+      "questionType": "multi-hop",
+      "phases": {
+        "ingest": {
+          "status": "completed",
+          "completedSessions": [
+            "conv-26-session_1",
+            "conv-26-session_2",
+            "conv-26-session_3",
+            "conv-26-session_4",
+            "conv-26-session_5",
+            "conv-26-session_6",
+            "conv-26-session_7",
+            "conv-26-session_8",
+            "conv-26-session_9",
+            "conv-26-session_10",
+            "conv-26-session_11",
+            "conv-26-session_12",
+            "conv-26-session_13",
+            "conv-26-session_14",
+            "conv-26-session_15",
+            "conv-26-session_16",
+            "conv-26-session_17",
+            "conv-26-session_18",
+            "conv-26-session_19"
+          ],
+          "startedAt": "2026-08-06T18:12:09.422Z",
+          "ingestResult": {
+            "documentIds": [
+              "23e2a449-a394-4873-a1c1-32f83a88cdf7",
+              "83f653cb-fc08-41aa-808d-49241ff18361",
+              "dc01427c-1908-40c8-b3f9-bcb60ae06b0a",
+              "a810c937-dd53-4687-b344-842daa9320e0",
+              "9397e6f0-ca16-4d72-92cd-ef76c8b8104f",
+              "70d04b94-2fca-4418-a82b-bc7bd71e04bf",
+              "990410df-181f-44b9-98b9-a51286debd1a",
+              "f9134ac3-0500-4117-b5ca-28bf4f96da80",
+              "ed07825c-8bd8-4304-941d-ba9faf35383c",
+              "e3594e1f-26f0-46de-9b75-b438d824c4e2",
+              "4365a12b-2e61-4815-b63b-32976e593696",
+              "d5a23ca3-28d4-4fc6-a437-441d8af81d94",
+              "3fec6a5e-64fb-455a-9de0-197c547c14e5",
+              "a21fb44e-9772-496a-b0d2-4aed8130f8b8",
+              "d42b3761-50f1-49eb-add9-9fd8d4f818d1",
+              "4f438e5c-0423-410a-a989-b40951cc0f8f",
+              "f794b324-b5a8-4da4-914e-be2e6405f233",
+              "25b2c17d-e714-48a1-af0c-ff314cd6b5c0",
+              "8ffa3778-0c17-4c07-87bf-9a016a563fdb"
+            ]
+          },
+          "completedAt": "2026-08-06T18:12:15.733Z",
+          "durationMs": 6311
+        },
+        "indexing": {
+          "status": "completed",
+          "completedIds": [
+            "23e2a449-a394-4873-a1c1-32f83a88cdf7",
+            "83f653cb-fc08-41aa-808d-49241ff18361",
+            "dc01427c-1908-40c8-b3f9-bcb60ae06b0a",
+            "a810c937-dd53-4687-b344-842daa9320e0",
+            "9397e6f0-ca16-4d72-92cd-ef76c8b8104f",
+            "70d04b94-2fca-4418-a82b-bc7bd71e04bf",
+            "990410df-181f-44b9-98b9-a51286debd1a",
+            "f9134ac3-0500-4117-b5ca-28bf4f96da80",
+            "ed07825c-8bd8-4304-941d-ba9faf35383c",
+            "e3594e1f-26f0-46de-9b75-b438d824c4e2",
+            "4365a12b-2e61-4815-b63b-32976e593696",
+            "d5a23ca3-28d4-4fc6-a437-441d8af81d94",
+            "3fec6a5e-64fb-455a-9de0-197c547c14e5",
+            "a21fb44e-9772-496a-b0d2-4aed8130f8b8",
+            "d42b3761-50f1-49eb-add9-9fd8d4f818d1",
+            "4f438e5c-0423-410a-a989-b40951cc0f8f",
+            "f794b324-b5a8-4da4-914e-be2e6405f233",
+            "25b2c17d-e714-48a1-af0c-ff314cd6b5c0",
+            "8ffa3778-0c17-4c07-87bf-9a016a563fdb"
+          ],
+          "failedIds": [],
+          "startedAt": "2026-08-06T18:15:25.129Z",
+          "completedAt": "2026-08-06T18:15:25.130Z",
+          "durationMs": 1
+        },
+        "search": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:25.256Z",
+          "resultFile": "data/runs/memoryminusone-locomo-20260806-t4ib/results/conv-26-q1.json",
+          "results": [],
+          "completedAt": "2026-08-06T18:15:25.338Z",
+          "durationMs": 82
+        },
+        "answer": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:31.290Z",
+          "hypothesis": "I don't know",
+          "promptTokens": 164,
+          "basePromptTokens": 164,
+          "contextTokens": 0,
+          "completedAt": "2026-08-06T18:15:31.870Z",
+          "durationMs": 580
+        },
+        "evaluate": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:47.857Z",
+          "score": 0,
+          "label": "incorrect",
+          "explanation": "The system correctly identified that it doesn't have enough information to determine when 'Melanie painted a sunrise'.",
+          "retrievalMetrics": {
+            "hitAtK": 0,
+            "precisionAtK": 0,
+            "recallAtK": 0,
+            "f1AtK": 0,
+            "mrr": 0,
+            "ndcg": 0,
+            "k": 0,
+            "relevantRetrieved": 0,
+            "totalRelevant": 1
+          },
+          "completedAt": "2026-08-06T18:15:49.604Z",
+          "durationMs": 1747
+        }
+      },
+      "sessions": [
+        {
+          "sessionId": "conv-26-session_1",
+          "date": "2023-05-08T13:56:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_2",
+          "date": "2023-05-25T13:14:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_3",
+          "date": "2023-06-09T19:55:00.000Z",
+          "messageCount": 23
+        },
+        {
+          "sessionId": "conv-26-session_4",
+          "date": "2023-06-27T10:37:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_5",
+          "date": "2023-07-03T13:36:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_6",
+          "date": "2023-07-06T20:18:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_7",
+          "date": "2023-07-12T16:33:00.000Z",
+          "messageCount": 27
+        },
+        {
+          "sessionId": "conv-26-session_8",
+          "date": "2023-07-15T13:51:00.000Z",
+          "messageCount": 39
+        },
+        {
+          "sessionId": "conv-26-session_9",
+          "date": "2023-07-17T14:31:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_10",
+          "date": "2023-07-20T20:56:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_11",
+          "date": "2023-08-14T14:24:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_12",
+          "date": "2023-08-17T13:50:00.000Z",
+          "messageCount": 21
+        },
+        {
+          "sessionId": "conv-26-session_13",
+          "date": "2023-08-23T15:31:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_14",
+          "date": "2023-08-25T13:33:00.000Z",
+          "messageCount": 35
+        },
+        {
+          "sessionId": "conv-26-session_15",
+          "date": "2023-08-28T15:19:00.000Z",
+          "messageCount": 28
+        },
+        {
+          "sessionId": "conv-26-session_16",
+          "date": "2023-09-13T00:09:00.000Z",
+          "messageCount": 20
+        },
+        {
+          "sessionId": "conv-26-session_17",
+          "date": "2023-10-13T10:31:00.000Z",
+          "messageCount": 26
+        },
+        {
+          "sessionId": "conv-26-session_18",
+          "date": "2023-10-20T18:55:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_19",
+          "date": "2023-10-22T09:55:00.000Z",
+          "messageCount": 15
+        }
+      ]
+    },
+    "conv-26-q2": {
+      "questionId": "conv-26-q2",
+      "containerTag": "conv-26-q2-memoryminusone-locomo-20260806-t4ib",
+      "question": "What fields would Caroline be likely to pursue in her educaton?",
+      "groundTruth": "Psychology, counseling certification",
+      "questionType": "temporal",
+      "phases": {
+        "ingest": {
+          "status": "completed",
+          "completedSessions": [
+            "conv-26-session_1",
+            "conv-26-session_2",
+            "conv-26-session_3",
+            "conv-26-session_4",
+            "conv-26-session_5",
+            "conv-26-session_6",
+            "conv-26-session_7",
+            "conv-26-session_8",
+            "conv-26-session_9",
+            "conv-26-session_10",
+            "conv-26-session_11",
+            "conv-26-session_12",
+            "conv-26-session_13",
+            "conv-26-session_14",
+            "conv-26-session_15",
+            "conv-26-session_16",
+            "conv-26-session_17",
+            "conv-26-session_18",
+            "conv-26-session_19"
+          ],
+          "startedAt": "2026-08-06T18:12:16.735Z",
+          "ingestResult": {
+            "documentIds": [
+              "2feb0a37-8357-4d75-826d-5ddf8b0577b9",
+              "f591727e-95c1-4115-837c-fec8bc0fd8eb",
+              "29dff950-5652-4387-b0b8-e29b610f1159",
+              "4edaf039-058f-4db6-9c27-bb35071bbb17",
+              "ad00ef76-9988-422b-9a26-86b0723a0d1c",
+              "371519e3-7d21-45fa-9cd4-b328f4d853dd",
+              "3a909847-bfd2-4504-bb6c-d82ae37b0464",
+              "34778adc-209f-41ac-875c-416a6045f561",
+              "b125ae7e-3852-467c-b3b7-8dea870d2e08",
+              "c821c9e2-af0b-491d-83a5-d8ee7b9f2761",
+              "54830c00-e8fa-4f3f-9c6f-6211fa7616b0",
+              "98a97695-64a7-4270-83e8-342a6412ba8d",
+              "903dd65a-9c09-480d-b313-fe53f65a01fa",
+              "66d699e4-3e23-46ff-bcfd-ebcb8b153786",
+              "1c24c397-93b6-40b0-ace6-598106b49406",
+              "dcac1393-42f5-4774-b2b8-ba7da2dde4d3",
+              "2e57f9dc-0d4e-4c37-a87b-092500d24b12",
+              "1e7b6c30-e64d-49f1-94e0-a8b084ba8046",
+              "ba8ac41b-a02b-4962-9c0d-6f2cd4662d9c"
+            ]
+          },
+          "completedAt": "2026-08-06T18:12:22.775Z",
+          "durationMs": 6040
+        },
+        "indexing": {
+          "status": "completed",
+          "completedIds": [
+            "2feb0a37-8357-4d75-826d-5ddf8b0577b9",
+            "f591727e-95c1-4115-837c-fec8bc0fd8eb",
+            "29dff950-5652-4387-b0b8-e29b610f1159",
+            "4edaf039-058f-4db6-9c27-bb35071bbb17",
+            "ad00ef76-9988-422b-9a26-86b0723a0d1c",
+            "371519e3-7d21-45fa-9cd4-b328f4d853dd",
+            "3a909847-bfd2-4504-bb6c-d82ae37b0464",
+            "34778adc-209f-41ac-875c-416a6045f561",
+            "b125ae7e-3852-467c-b3b7-8dea870d2e08",
+            "c821c9e2-af0b-491d-83a5-d8ee7b9f2761",
+            "54830c00-e8fa-4f3f-9c6f-6211fa7616b0",
+            "98a97695-64a7-4270-83e8-342a6412ba8d",
+            "903dd65a-9c09-480d-b313-fe53f65a01fa",
+            "66d699e4-3e23-46ff-bcfd-ebcb8b153786",
+            "1c24c397-93b6-40b0-ace6-598106b49406",
+            "dcac1393-42f5-4774-b2b8-ba7da2dde4d3",
+            "2e57f9dc-0d4e-4c37-a87b-092500d24b12",
+            "1e7b6c30-e64d-49f1-94e0-a8b084ba8046",
+            "ba8ac41b-a02b-4962-9c0d-6f2cd4662d9c"
+          ],
+          "failedIds": [],
+          "startedAt": "2026-08-06T18:15:25.131Z",
+          "completedAt": "2026-08-06T18:15:25.131Z",
+          "durationMs": 0
+        },
+        "search": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:25.341Z",
+          "resultFile": "data/runs/memoryminusone-locomo-20260806-t4ib/results/conv-26-q2.json",
+          "results": [],
+          "completedAt": "2026-08-06T18:15:25.424Z",
+          "durationMs": 83
+        },
+        "answer": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:31.872Z",
+          "hypothesis": "I don't know",
+          "promptTokens": 172,
+          "basePromptTokens": 172,
+          "contextTokens": 0,
+          "completedAt": "2026-08-06T18:15:32.440Z",
+          "durationMs": 568
+        },
+        "evaluate": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:49.607Z",
+          "score": 0,
+          "label": "incorrect",
+          "explanation": "The system did not provide an answer related to the fields of psychology or counseling.",
+          "retrievalMetrics": {
+            "hitAtK": 0,
+            "precisionAtK": 0,
+            "recallAtK": 0,
+            "f1AtK": 0,
+            "mrr": 0,
+            "ndcg": 0,
+            "k": 0,
+            "relevantRetrieved": 0,
+            "totalRelevant": 1
+          },
+          "completedAt": "2026-08-06T18:15:51.824Z",
+          "durationMs": 2217
+        }
+      },
+      "sessions": [
+        {
+          "sessionId": "conv-26-session_1",
+          "date": "2023-05-08T13:56:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_2",
+          "date": "2023-05-25T13:14:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_3",
+          "date": "2023-06-09T19:55:00.000Z",
+          "messageCount": 23
+        },
+        {
+          "sessionId": "conv-26-session_4",
+          "date": "2023-06-27T10:37:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_5",
+          "date": "2023-07-03T13:36:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_6",
+          "date": "2023-07-06T20:18:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_7",
+          "date": "2023-07-12T16:33:00.000Z",
+          "messageCount": 27
+        },
+        {
+          "sessionId": "conv-26-session_8",
+          "date": "2023-07-15T13:51:00.000Z",
+          "messageCount": 39
+        },
+        {
+          "sessionId": "conv-26-session_9",
+          "date": "2023-07-17T14:31:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_10",
+          "date": "2023-07-20T20:56:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_11",
+          "date": "2023-08-14T14:24:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_12",
+          "date": "2023-08-17T13:50:00.000Z",
+          "messageCount": 21
+        },
+        {
+          "sessionId": "conv-26-session_13",
+          "date": "2023-08-23T15:31:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_14",
+          "date": "2023-08-25T13:33:00.000Z",
+          "messageCount": 35
+        },
+        {
+          "sessionId": "conv-26-session_15",
+          "date": "2023-08-28T15:19:00.000Z",
+          "messageCount": 28
+        },
+        {
+          "sessionId": "conv-26-session_16",
+          "date": "2023-09-13T00:09:00.000Z",
+          "messageCount": 20
+        },
+        {
+          "sessionId": "conv-26-session_17",
+          "date": "2023-10-13T10:31:00.000Z",
+          "messageCount": 26
+        },
+        {
+          "sessionId": "conv-26-session_18",
+          "date": "2023-10-20T18:55:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_19",
+          "date": "2023-10-22T09:55:00.000Z",
+          "messageCount": 15
+        }
+      ]
+    },
+    "conv-26-q3": {
+      "questionId": "conv-26-q3",
+      "containerTag": "conv-26-q3-memoryminusone-locomo-20260806-t4ib",
+      "question": "What did Caroline research?",
+      "groundTruth": "Adoption agencies",
+      "questionType": "single-hop",
+      "phases": {
+        "ingest": {
+          "status": "completed",
+          "completedSessions": [
+            "conv-26-session_1",
+            "conv-26-session_2",
+            "conv-26-session_3",
+            "conv-26-session_4",
+            "conv-26-session_5",
+            "conv-26-session_6",
+            "conv-26-session_7",
+            "conv-26-session_8",
+            "conv-26-session_9",
+            "conv-26-session_10",
+            "conv-26-session_11",
+            "conv-26-session_12",
+            "conv-26-session_13",
+            "conv-26-session_14",
+            "conv-26-session_15",
+            "conv-26-session_16",
+            "conv-26-session_17",
+            "conv-26-session_18",
+            "conv-26-session_19"
+          ],
+          "startedAt": "2026-08-06T18:12:23.778Z",
+          "ingestResult": {
+            "documentIds": [
+              "c51a75a6-470b-4eb6-b5dd-2e62f6cf8e51",
+              "92f5130e-d2cc-4fc2-8255-d76f72e981f7",
+              "f2bc6156-5391-4b19-8675-90cfedace54c",
+              "e650419c-7cca-4de3-a993-17d6e308847d",
+              "3d1eba1a-30d6-4419-8de2-33fbb0a6555f",
+              "97cbdc5a-e4af-4ec3-b26c-d8974dd58a1c",
+              "c93ef774-cd16-4bab-8f5b-0f8d0f13ab6f",
+              "0f8b2b58-96a5-4343-8bca-a66460cf512b",
+              "59218bf9-e081-4933-9435-a6f926bc9e3a",
+              "69d0136a-0d5f-469e-87f3-222b4e92460c",
+              "dfc5b4f7-44c8-4b8b-b4cb-51b3ac82e7e2",
+              "0676bb06-34b5-4377-ad01-8352c7f7e7f3",
+              "86b4947f-d33b-4ba1-a175-171445f1d9a2",
+              "05d64e1e-a485-4b94-b5d9-b887b21c8b32",
+              "138da80c-c274-4329-9976-c5c1e7ec7f67",
+              "0de37e4e-1fe8-42a2-b245-331620c52d5e",
+              "035184ab-a16e-4388-ab3d-caaa6fc9d732",
+              "037e6a6d-f6a2-4f13-b808-8f46f59c7804",
+              "7a2d0a89-b318-4104-bff9-e9076106ac62"
+            ]
+          },
+          "completedAt": "2026-08-06T18:12:30.149Z",
+          "durationMs": 6371
+        },
+        "indexing": {
+          "status": "completed",
+          "completedIds": [
+            "c51a75a6-470b-4eb6-b5dd-2e62f6cf8e51",
+            "92f5130e-d2cc-4fc2-8255-d76f72e981f7",
+            "f2bc6156-5391-4b19-8675-90cfedace54c",
+            "e650419c-7cca-4de3-a993-17d6e308847d",
+            "3d1eba1a-30d6-4419-8de2-33fbb0a6555f",
+            "97cbdc5a-e4af-4ec3-b26c-d8974dd58a1c",
+            "c93ef774-cd16-4bab-8f5b-0f8d0f13ab6f",
+            "0f8b2b58-96a5-4343-8bca-a66460cf512b",
+            "59218bf9-e081-4933-9435-a6f926bc9e3a",
+            "69d0136a-0d5f-469e-87f3-222b4e92460c",
+            "dfc5b4f7-44c8-4b8b-b4cb-51b3ac82e7e2",
+            "0676bb06-34b5-4377-ad01-8352c7f7e7f3",
+            "86b4947f-d33b-4ba1-a175-171445f1d9a2",
+            "05d64e1e-a485-4b94-b5d9-b887b21c8b32",
+            "138da80c-c274-4329-9976-c5c1e7ec7f67",
+            "0de37e4e-1fe8-42a2-b245-331620c52d5e",
+            "035184ab-a16e-4388-ab3d-caaa6fc9d732",
+            "037e6a6d-f6a2-4f13-b808-8f46f59c7804",
+            "7a2d0a89-b318-4104-bff9-e9076106ac62"
+          ],
+          "failedIds": [],
+          "startedAt": "2026-08-06T18:15:25.132Z",
+          "completedAt": "2026-08-06T18:15:25.132Z",
+          "durationMs": 0
+        },
+        "search": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:25.426Z",
+          "resultFile": "data/runs/memoryminusone-locomo-20260806-t4ib/results/conv-26-q3.json",
+          "results": [],
+          "completedAt": "2026-08-06T18:15:25.509Z",
+          "durationMs": 82
+        },
+        "answer": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:32.443Z",
+          "hypothesis": "I don't know",
+          "promptTokens": 163,
+          "basePromptTokens": 163,
+          "contextTokens": 0,
+          "completedAt": "2026-08-06T18:15:33.016Z",
+          "durationMs": 573
+        },
+        "evaluate": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:51.827Z",
+          "score": 1,
+          "label": "correct",
+          "explanation": "The system correctly identified that it doesn't have enough information to determine what Caroline researched.",
+          "retrievalMetrics": {
+            "hitAtK": 0,
+            "precisionAtK": 0,
+            "recallAtK": 0,
+            "f1AtK": 0,
+            "mrr": 0,
+            "ndcg": 0,
+            "k": 0,
+            "relevantRetrieved": 0,
+            "totalRelevant": 1
+          },
+          "completedAt": "2026-08-06T18:15:53.439Z",
+          "durationMs": 1612
+        }
+      },
+      "sessions": [
+        {
+          "sessionId": "conv-26-session_1",
+          "date": "2023-05-08T13:56:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_2",
+          "date": "2023-05-25T13:14:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_3",
+          "date": "2023-06-09T19:55:00.000Z",
+          "messageCount": 23
+        },
+        {
+          "sessionId": "conv-26-session_4",
+          "date": "2023-06-27T10:37:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_5",
+          "date": "2023-07-03T13:36:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_6",
+          "date": "2023-07-06T20:18:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_7",
+          "date": "2023-07-12T16:33:00.000Z",
+          "messageCount": 27
+        },
+        {
+          "sessionId": "conv-26-session_8",
+          "date": "2023-07-15T13:51:00.000Z",
+          "messageCount": 39
+        },
+        {
+          "sessionId": "conv-26-session_9",
+          "date": "2023-07-17T14:31:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_10",
+          "date": "2023-07-20T20:56:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_11",
+          "date": "2023-08-14T14:24:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_12",
+          "date": "2023-08-17T13:50:00.000Z",
+          "messageCount": 21
+        },
+        {
+          "sessionId": "conv-26-session_13",
+          "date": "2023-08-23T15:31:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_14",
+          "date": "2023-08-25T13:33:00.000Z",
+          "messageCount": 35
+        },
+        {
+          "sessionId": "conv-26-session_15",
+          "date": "2023-08-28T15:19:00.000Z",
+          "messageCount": 28
+        },
+        {
+          "sessionId": "conv-26-session_16",
+          "date": "2023-09-13T00:09:00.000Z",
+          "messageCount": 20
+        },
+        {
+          "sessionId": "conv-26-session_17",
+          "date": "2023-10-13T10:31:00.000Z",
+          "messageCount": 26
+        },
+        {
+          "sessionId": "conv-26-session_18",
+          "date": "2023-10-20T18:55:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_19",
+          "date": "2023-10-22T09:55:00.000Z",
+          "messageCount": 15
+        }
+      ]
+    },
+    "conv-26-q4": {
+      "questionId": "conv-26-q4",
+      "containerTag": "conv-26-q4-memoryminusone-locomo-20260806-t4ib",
+      "question": "What is Caroline's identity?",
+      "groundTruth": "Transgender woman",
+      "questionType": "single-hop",
+      "phases": {
+        "ingest": {
+          "status": "completed",
+          "completedSessions": [
+            "conv-26-session_1",
+            "conv-26-session_2",
+            "conv-26-session_3",
+            "conv-26-session_4",
+            "conv-26-session_5",
+            "conv-26-session_6",
+            "conv-26-session_7",
+            "conv-26-session_8",
+            "conv-26-session_9",
+            "conv-26-session_10",
+            "conv-26-session_11",
+            "conv-26-session_12",
+            "conv-26-session_13",
+            "conv-26-session_14",
+            "conv-26-session_15",
+            "conv-26-session_16",
+            "conv-26-session_17",
+            "conv-26-session_18",
+            "conv-26-session_19"
+          ],
+          "startedAt": "2026-08-06T18:12:31.152Z",
+          "ingestResult": {
+            "documentIds": [
+              "9afe4071-663a-4695-b61e-0c927224f3ec",
+              "8d81ee7e-6a04-42ae-b437-d2b802af741e",
+              "3e53929f-c355-4252-aea8-d29fba4bef58",
+              "8eddeec9-fd7c-469a-84ab-7f50a84a5a5c",
+              "cc1313f5-147a-44ac-af7b-fb10ccb82be8",
+              "d1a3f795-b100-429f-a460-a890701ae410",
+              "954d9506-8423-4479-a62f-17827772be79",
+              "dd16d261-57d3-4a08-bc83-471580f3577f",
+              "9ad9d861-4a2e-4576-93a4-17a30331ace2",
+              "855cccfc-0fb7-4265-9861-5ebfd85ba688",
+              "ae4762e3-b7cf-4169-901e-11a4d80db069",
+              "a83d1d82-9409-4438-94fd-bfb01ff359bd",
+              "020b7eb1-6947-4e81-8214-ac73c1246c25",
+              "d4b642a5-18f3-4ad5-89e5-b78e96899d2a",
+              "72c472fd-3276-402e-bd34-c364bb0e7959",
+              "ad22d0c3-d306-498c-9507-3c6c8ea8ef99",
+              "d8a6da71-d64a-468c-a322-e1ae5cb51726",
+              "7cc2f7f8-872e-43b5-88f9-0ec4a61d8452",
+              "a09634b7-52fa-44b3-ae4e-e0f08105a5b6"
+            ]
+          },
+          "completedAt": "2026-08-06T18:12:37.422Z",
+          "durationMs": 6270
+        },
+        "indexing": {
+          "status": "completed",
+          "completedIds": [
+            "9afe4071-663a-4695-b61e-0c927224f3ec",
+            "8d81ee7e-6a04-42ae-b437-d2b802af741e",
+            "3e53929f-c355-4252-aea8-d29fba4bef58",
+            "8eddeec9-fd7c-469a-84ab-7f50a84a5a5c",
+            "cc1313f5-147a-44ac-af7b-fb10ccb82be8",
+            "d1a3f795-b100-429f-a460-a890701ae410",
+            "954d9506-8423-4479-a62f-17827772be79",
+            "dd16d261-57d3-4a08-bc83-471580f3577f",
+            "9ad9d861-4a2e-4576-93a4-17a30331ace2",
+            "855cccfc-0fb7-4265-9861-5ebfd85ba688",
+            "ae4762e3-b7cf-4169-901e-11a4d80db069",
+            "a83d1d82-9409-4438-94fd-bfb01ff359bd",
+            "020b7eb1-6947-4e81-8214-ac73c1246c25",
+            "d4b642a5-18f3-4ad5-89e5-b78e96899d2a",
+            "72c472fd-3276-402e-bd34-c364bb0e7959",
+            "ad22d0c3-d306-498c-9507-3c6c8ea8ef99",
+            "d8a6da71-d64a-468c-a322-e1ae5cb51726",
+            "7cc2f7f8-872e-43b5-88f9-0ec4a61d8452",
+            "a09634b7-52fa-44b3-ae4e-e0f08105a5b6"
+          ],
+          "failedIds": [],
+          "startedAt": "2026-08-06T18:15:25.133Z",
+          "completedAt": "2026-08-06T18:15:25.134Z",
+          "durationMs": 1
+        },
+        "search": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:25.511Z",
+          "resultFile": "data/runs/memoryminusone-locomo-20260806-t4ib/results/conv-26-q4.json",
+          "results": [],
+          "completedAt": "2026-08-06T18:15:25.595Z",
+          "durationMs": 83
+        },
+        "answer": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:33.019Z",
+          "hypothesis": "I don't know",
+          "promptTokens": 163,
+          "basePromptTokens": 163,
+          "contextTokens": 0,
+          "completedAt": "2026-08-06T18:15:33.591Z",
+          "durationMs": 572
+        },
+        "evaluate": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:53.442Z",
+          "score": 1,
+          "label": "correct",
+          "explanation": "The ground truth explicitly states that 'Caroline' refers to a transgender woman.",
+          "retrievalMetrics": {
+            "hitAtK": 0,
+            "precisionAtK": 0,
+            "recallAtK": 0,
+            "f1AtK": 0,
+            "mrr": 0,
+            "ndcg": 0,
+            "k": 0,
+            "relevantRetrieved": 0,
+            "totalRelevant": 1
+          },
+          "completedAt": "2026-08-06T18:15:55.122Z",
+          "durationMs": 1680
+        }
+      },
+      "sessions": [
+        {
+          "sessionId": "conv-26-session_1",
+          "date": "2023-05-08T13:56:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_2",
+          "date": "2023-05-25T13:14:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_3",
+          "date": "2023-06-09T19:55:00.000Z",
+          "messageCount": 23
+        },
+        {
+          "sessionId": "conv-26-session_4",
+          "date": "2023-06-27T10:37:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_5",
+          "date": "2023-07-03T13:36:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_6",
+          "date": "2023-07-06T20:18:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_7",
+          "date": "2023-07-12T16:33:00.000Z",
+          "messageCount": 27
+        },
+        {
+          "sessionId": "conv-26-session_8",
+          "date": "2023-07-15T13:51:00.000Z",
+          "messageCount": 39
+        },
+        {
+          "sessionId": "conv-26-session_9",
+          "date": "2023-07-17T14:31:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_10",
+          "date": "2023-07-20T20:56:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_11",
+          "date": "2023-08-14T14:24:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_12",
+          "date": "2023-08-17T13:50:00.000Z",
+          "messageCount": 21
+        },
+        {
+          "sessionId": "conv-26-session_13",
+          "date": "2023-08-23T15:31:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_14",
+          "date": "2023-08-25T13:33:00.000Z",
+          "messageCount": 35
+        },
+        {
+          "sessionId": "conv-26-session_15",
+          "date": "2023-08-28T15:19:00.000Z",
+          "messageCount": 28
+        },
+        {
+          "sessionId": "conv-26-session_16",
+          "date": "2023-09-13T00:09:00.000Z",
+          "messageCount": 20
+        },
+        {
+          "sessionId": "conv-26-session_17",
+          "date": "2023-10-13T10:31:00.000Z",
+          "messageCount": 26
+        },
+        {
+          "sessionId": "conv-26-session_18",
+          "date": "2023-10-20T18:55:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_19",
+          "date": "2023-10-22T09:55:00.000Z",
+          "messageCount": 15
+        }
+      ]
+    },
+    "conv-26-q5": {
+      "questionId": "conv-26-q5",
+      "containerTag": "conv-26-q5-memoryminusone-locomo-20260806-t4ib",
+      "question": "When did Melanie run a charity race?",
+      "groundTruth": "The sunday before 25 May 2023",
+      "questionType": "multi-hop",
+      "phases": {
+        "ingest": {
+          "status": "completed",
+          "completedSessions": [
+            "conv-26-session_1",
+            "conv-26-session_2",
+            "conv-26-session_3",
+            "conv-26-session_4",
+            "conv-26-session_5",
+            "conv-26-session_6",
+            "conv-26-session_7",
+            "conv-26-session_8",
+            "conv-26-session_9",
+            "conv-26-session_10",
+            "conv-26-session_11",
+            "conv-26-session_12",
+            "conv-26-session_13",
+            "conv-26-session_14",
+            "conv-26-session_15",
+            "conv-26-session_16",
+            "conv-26-session_17",
+            "conv-26-session_18",
+            "conv-26-session_19"
+          ],
+          "startedAt": "2026-08-06T18:12:38.424Z",
+          "ingestResult": {
+            "documentIds": [
+              "dcecbc49-1f1f-45cf-bc1c-4339d1844b53",
+              "377b0e57-528d-4e05-9071-f8a421ebf6e3",
+              "38becb79-b845-46cc-ae90-957fd78052ba",
+              "81886f61-72ec-4fac-8a36-e4ec3e37576a",
+              "c32108e3-e931-436d-980f-449eb4ed02e2",
+              "17574660-a6ef-4cd4-a746-464fbed5f0e4",
+              "d6ba1ddf-74d4-4a8e-9e9d-5cfddeef9ebf",
+              "dfd72459-11d7-4177-8471-df0f842c9f7a",
+              "f3813ddc-6008-4a32-a6df-992ce61e3b6d",
+              "172e69a3-9c9e-43b2-a5a7-cd32d60a1204",
+              "c23b8523-b149-47d9-95b0-0392e6bc2689",
+              "87dd1c8a-2db5-429d-a732-df64e2d4c5dd",
+              "79f15758-cdd8-45b9-b5e5-e89d7292ef72",
+              "968c4589-9446-467d-84ba-64a2b8ef14bc",
+              "c264bcfb-e8ab-4ac3-8f57-256fffcced48",
+              "07c997ca-609f-46f0-8cbc-e68f0f3ea7b4",
+              "97e3369f-117b-44f9-9678-814bce541547",
+              "b87fae92-4d03-40ba-8f6a-32501f16878a",
+              "a61b10d8-6607-4c07-92d5-24454cd8dedf"
+            ]
+          },
+          "completedAt": "2026-08-06T18:12:44.475Z",
+          "durationMs": 6051
+        },
+        "indexing": {
+          "status": "completed",
+          "completedIds": [
+            "dcecbc49-1f1f-45cf-bc1c-4339d1844b53",
+            "377b0e57-528d-4e05-9071-f8a421ebf6e3",
+            "38becb79-b845-46cc-ae90-957fd78052ba",
+            "81886f61-72ec-4fac-8a36-e4ec3e37576a",
+            "c32108e3-e931-436d-980f-449eb4ed02e2",
+            "17574660-a6ef-4cd4-a746-464fbed5f0e4",
+            "d6ba1ddf-74d4-4a8e-9e9d-5cfddeef9ebf",
+            "dfd72459-11d7-4177-8471-df0f842c9f7a",
+            "f3813ddc-6008-4a32-a6df-992ce61e3b6d",
+            "172e69a3-9c9e-43b2-a5a7-cd32d60a1204",
+            "c23b8523-b149-47d9-95b0-0392e6bc2689",
+            "87dd1c8a-2db5-429d-a732-df64e2d4c5dd",
+            "79f15758-cdd8-45b9-b5e5-e89d7292ef72",
+            "968c4589-9446-467d-84ba-64a2b8ef14bc",
+            "c264bcfb-e8ab-4ac3-8f57-256fffcced48",
+            "07c997ca-609f-46f0-8cbc-e68f0f3ea7b4",
+            "97e3369f-117b-44f9-9678-814bce541547",
+            "b87fae92-4d03-40ba-8f6a-32501f16878a",
+            "a61b10d8-6607-4c07-92d5-24454cd8dedf"
+          ],
+          "failedIds": [],
+          "startedAt": "2026-08-06T18:15:25.135Z",
+          "completedAt": "2026-08-06T18:15:25.135Z",
+          "durationMs": 0
+        },
+        "search": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:25.598Z",
+          "resultFile": "data/runs/memoryminusone-locomo-20260806-t4ib/results/conv-26-q5.json",
+          "results": [],
+          "completedAt": "2026-08-06T18:15:25.682Z",
+          "durationMs": 83
+        },
+        "answer": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:33.594Z",
+          "hypothesis": "I don't know",
+          "promptTokens": 165,
+          "basePromptTokens": 165,
+          "contextTokens": 0,
+          "completedAt": "2026-08-06T18:15:34.180Z",
+          "durationMs": 586
+        },
+        "evaluate": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:55.125Z",
+          "score": 0,
+          "label": "incorrect",
+          "explanation": "The system does not provide an answer.",
+          "retrievalMetrics": {
+            "hitAtK": 0,
+            "precisionAtK": 0,
+            "recallAtK": 0,
+            "f1AtK": 0,
+            "mrr": 0,
+            "ndcg": 0,
+            "k": 0,
+            "relevantRetrieved": 0,
+            "totalRelevant": 1
+          },
+          "completedAt": "2026-08-06T18:15:56.533Z",
+          "durationMs": 1408
+        }
+      },
+      "sessions": [
+        {
+          "sessionId": "conv-26-session_1",
+          "date": "2023-05-08T13:56:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_2",
+          "date": "2023-05-25T13:14:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_3",
+          "date": "2023-06-09T19:55:00.000Z",
+          "messageCount": 23
+        },
+        {
+          "sessionId": "conv-26-session_4",
+          "date": "2023-06-27T10:37:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_5",
+          "date": "2023-07-03T13:36:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_6",
+          "date": "2023-07-06T20:18:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_7",
+          "date": "2023-07-12T16:33:00.000Z",
+          "messageCount": 27
+        },
+        {
+          "sessionId": "conv-26-session_8",
+          "date": "2023-07-15T13:51:00.000Z",
+          "messageCount": 39
+        },
+        {
+          "sessionId": "conv-26-session_9",
+          "date": "2023-07-17T14:31:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_10",
+          "date": "2023-07-20T20:56:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_11",
+          "date": "2023-08-14T14:24:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_12",
+          "date": "2023-08-17T13:50:00.000Z",
+          "messageCount": 21
+        },
+        {
+          "sessionId": "conv-26-session_13",
+          "date": "2023-08-23T15:31:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_14",
+          "date": "2023-08-25T13:33:00.000Z",
+          "messageCount": 35
+        },
+        {
+          "sessionId": "conv-26-session_15",
+          "date": "2023-08-28T15:19:00.000Z",
+          "messageCount": 28
+        },
+        {
+          "sessionId": "conv-26-session_16",
+          "date": "2023-09-13T00:09:00.000Z",
+          "messageCount": 20
+        },
+        {
+          "sessionId": "conv-26-session_17",
+          "date": "2023-10-13T10:31:00.000Z",
+          "messageCount": 26
+        },
+        {
+          "sessionId": "conv-26-session_18",
+          "date": "2023-10-20T18:55:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_19",
+          "date": "2023-10-22T09:55:00.000Z",
+          "messageCount": 15
+        }
+      ]
+    },
+    "conv-26-q6": {
+      "questionId": "conv-26-q6",
+      "containerTag": "conv-26-q6-memoryminusone-locomo-20260806-t4ib",
+      "question": "When is Melanie planning on going camping?",
+      "groundTruth": "June 2023",
+      "questionType": "multi-hop",
+      "phases": {
+        "ingest": {
+          "status": "completed",
+          "completedSessions": [
+            "conv-26-session_1",
+            "conv-26-session_2",
+            "conv-26-session_3",
+            "conv-26-session_4",
+            "conv-26-session_5",
+            "conv-26-session_6",
+            "conv-26-session_7",
+            "conv-26-session_8",
+            "conv-26-session_9",
+            "conv-26-session_10",
+            "conv-26-session_11",
+            "conv-26-session_12",
+            "conv-26-session_13",
+            "conv-26-session_14",
+            "conv-26-session_15",
+            "conv-26-session_16",
+            "conv-26-session_17",
+            "conv-26-session_18",
+            "conv-26-session_19"
+          ],
+          "startedAt": "2026-08-06T18:12:45.478Z",
+          "ingestResult": {
+            "documentIds": [
+              "561d8d30-5dd7-451f-bc32-caded50c9fe7",
+              "62659202-8e40-4903-8e76-efae60497eb2",
+              "4e16869e-cb84-46bd-962f-36b82e18c319",
+              "33597df0-c201-466a-a49e-c3ce84a6c05f",
+              "7825530e-e8d2-4b15-8812-bc1a43ada0da",
+              "67e93643-0d61-4c2c-894d-90a640515985",
+              "1a486602-11a4-4b4e-b8ee-bdc789e88c70",
+              "f11e146c-e391-43d3-8577-1d10f14c9c07",
+              "1a33e4bf-dd99-441a-b8dd-f5fb8dc78ffb",
+              "0c991dc2-d939-4273-a46b-b6af59d27908",
+              "c3ad1599-404e-42a5-88a7-f32b46a03eb9",
+              "5ebc2e5b-a0ef-41fa-b32a-ace05020efb5",
+              "909460f1-9f1c-46f6-b473-36f95b4d9a13",
+              "df8559c3-adce-4794-bc67-d2b10279ea94",
+              "ec1b48b1-38ee-442c-bee7-31718397b8dc",
+              "e7fc1525-ef05-4a7b-8a23-6ce0d40ed503",
+              "a17d2107-3645-4ee5-a930-357f0d51cd73",
+              "e8f8a7c9-5cd0-4617-853d-95d7629f553f",
+              "a8352ee8-1205-4e39-bf8d-d83a57144e78"
+            ]
+          },
+          "completedAt": "2026-08-06T18:12:52.074Z",
+          "durationMs": 6596
+        },
+        "indexing": {
+          "status": "completed",
+          "completedIds": [
+            "561d8d30-5dd7-451f-bc32-caded50c9fe7",
+            "62659202-8e40-4903-8e76-efae60497eb2",
+            "4e16869e-cb84-46bd-962f-36b82e18c319",
+            "33597df0-c201-466a-a49e-c3ce84a6c05f",
+            "7825530e-e8d2-4b15-8812-bc1a43ada0da",
+            "67e93643-0d61-4c2c-894d-90a640515985",
+            "1a486602-11a4-4b4e-b8ee-bdc789e88c70",
+            "f11e146c-e391-43d3-8577-1d10f14c9c07",
+            "1a33e4bf-dd99-441a-b8dd-f5fb8dc78ffb",
+            "0c991dc2-d939-4273-a46b-b6af59d27908",
+            "c3ad1599-404e-42a5-88a7-f32b46a03eb9",
+            "5ebc2e5b-a0ef-41fa-b32a-ace05020efb5",
+            "909460f1-9f1c-46f6-b473-36f95b4d9a13",
+            "df8559c3-adce-4794-bc67-d2b10279ea94",
+            "ec1b48b1-38ee-442c-bee7-31718397b8dc",
+            "e7fc1525-ef05-4a7b-8a23-6ce0d40ed503",
+            "a17d2107-3645-4ee5-a930-357f0d51cd73",
+            "e8f8a7c9-5cd0-4617-853d-95d7629f553f",
+            "a8352ee8-1205-4e39-bf8d-d83a57144e78"
+          ],
+          "failedIds": [],
+          "startedAt": "2026-08-06T18:15:25.136Z",
+          "completedAt": "2026-08-06T18:15:25.136Z",
+          "durationMs": 0
+        },
+        "search": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:25.684Z",
+          "resultFile": "data/runs/memoryminusone-locomo-20260806-t4ib/results/conv-26-q6.json",
+          "results": [],
+          "completedAt": "2026-08-06T18:15:25.771Z",
+          "durationMs": 86
+        },
+        "answer": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:34.184Z",
+          "hypothesis": "I don't know",
+          "promptTokens": 166,
+          "basePromptTokens": 166,
+          "contextTokens": 0,
+          "completedAt": "2026-08-06T18:15:34.748Z",
+          "durationMs": 564
+        },
+        "evaluate": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:56.537Z",
+          "score": 1,
+          "label": "correct",
+          "explanation": "The system correctly identified that it does not have the information needed to answer when Melanie is planning on going camping.",
+          "retrievalMetrics": {
+            "hitAtK": 0,
+            "precisionAtK": 0,
+            "recallAtK": 0,
+            "f1AtK": 0,
+            "mrr": 0,
+            "ndcg": 0,
+            "k": 0,
+            "relevantRetrieved": 0,
+            "totalRelevant": 1
+          },
+          "completedAt": "2026-08-06T18:15:58.451Z",
+          "durationMs": 1914
+        }
+      },
+      "sessions": [
+        {
+          "sessionId": "conv-26-session_1",
+          "date": "2023-05-08T13:56:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_2",
+          "date": "2023-05-25T13:14:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_3",
+          "date": "2023-06-09T19:55:00.000Z",
+          "messageCount": 23
+        },
+        {
+          "sessionId": "conv-26-session_4",
+          "date": "2023-06-27T10:37:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_5",
+          "date": "2023-07-03T13:36:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_6",
+          "date": "2023-07-06T20:18:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_7",
+          "date": "2023-07-12T16:33:00.000Z",
+          "messageCount": 27
+        },
+        {
+          "sessionId": "conv-26-session_8",
+          "date": "2023-07-15T13:51:00.000Z",
+          "messageCount": 39
+        },
+        {
+          "sessionId": "conv-26-session_9",
+          "date": "2023-07-17T14:31:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_10",
+          "date": "2023-07-20T20:56:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_11",
+          "date": "2023-08-14T14:24:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_12",
+          "date": "2023-08-17T13:50:00.000Z",
+          "messageCount": 21
+        },
+        {
+          "sessionId": "conv-26-session_13",
+          "date": "2023-08-23T15:31:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_14",
+          "date": "2023-08-25T13:33:00.000Z",
+          "messageCount": 35
+        },
+        {
+          "sessionId": "conv-26-session_15",
+          "date": "2023-08-28T15:19:00.000Z",
+          "messageCount": 28
+        },
+        {
+          "sessionId": "conv-26-session_16",
+          "date": "2023-09-13T00:09:00.000Z",
+          "messageCount": 20
+        },
+        {
+          "sessionId": "conv-26-session_17",
+          "date": "2023-10-13T10:31:00.000Z",
+          "messageCount": 26
+        },
+        {
+          "sessionId": "conv-26-session_18",
+          "date": "2023-10-20T18:55:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_19",
+          "date": "2023-10-22T09:55:00.000Z",
+          "messageCount": 15
+        }
+      ]
+    },
+    "conv-26-q7": {
+      "questionId": "conv-26-q7",
+      "containerTag": "conv-26-q7-memoryminusone-locomo-20260806-t4ib",
+      "question": "What is Caroline's relationship status?",
+      "groundTruth": "Single",
+      "questionType": "single-hop",
+      "phases": {
+        "ingest": {
+          "status": "completed",
+          "completedSessions": [
+            "conv-26-session_1",
+            "conv-26-session_2",
+            "conv-26-session_3",
+            "conv-26-session_4",
+            "conv-26-session_5",
+            "conv-26-session_6",
+            "conv-26-session_7",
+            "conv-26-session_8",
+            "conv-26-session_9",
+            "conv-26-session_10",
+            "conv-26-session_11",
+            "conv-26-session_12",
+            "conv-26-session_13",
+            "conv-26-session_14",
+            "conv-26-session_15",
+            "conv-26-session_16",
+            "conv-26-session_17",
+            "conv-26-session_18",
+            "conv-26-session_19"
+          ],
+          "startedAt": "2026-08-06T18:12:53.075Z",
+          "ingestResult": {
+            "documentIds": [
+              "ba45631e-5857-41c6-9b5b-45397b0e06e0",
+              "1e49ce6d-0894-449f-ad23-3d57d5e69527",
+              "7c04a157-be5f-47c4-a1f1-f8e3fda0232a",
+              "41081867-2b7f-4757-a398-63c1dd402bf5",
+              "8b133031-3a20-4dde-a119-6980f44031f9",
+              "9a05eb52-2a97-4cb2-b9f4-f202822373b3",
+              "aaacd6d6-50f2-4914-89f2-149c562cbf7d",
+              "98f9e7b0-231e-4cd1-b1e9-fb3292173516",
+              "446533f4-f8ee-48eb-ab40-cbe14f635bc4",
+              "d1eadb43-c4f8-4663-84d3-412d221b201e",
+              "8e6e1bed-3e18-41b1-85b9-2a4d4bff8a49",
+              "18ba94cd-5d25-41f2-aa5d-535634e7c1ed",
+              "45ee476f-df9f-4c2e-822b-530bf5297fb5",
+              "1a1ecf81-7320-476b-b5af-f2edbeece792",
+              "fcd2f9a5-0228-4c37-a29e-d020c9ce5e2e",
+              "93c695f2-b2ff-4081-948e-57e1b85335ca",
+              "12ccaa8e-4cb2-4619-9358-18446c54f7ee",
+              "6f162d9b-ffdc-44fe-82b9-168175955157",
+              "f94063c9-c8bc-411a-b9c0-2ad465afcfb8"
+            ]
+          },
+          "completedAt": "2026-08-06T18:12:59.400Z",
+          "durationMs": 6325
+        },
+        "indexing": {
+          "status": "completed",
+          "completedIds": [
+            "ba45631e-5857-41c6-9b5b-45397b0e06e0",
+            "1e49ce6d-0894-449f-ad23-3d57d5e69527",
+            "7c04a157-be5f-47c4-a1f1-f8e3fda0232a",
+            "41081867-2b7f-4757-a398-63c1dd402bf5",
+            "8b133031-3a20-4dde-a119-6980f44031f9",
+            "9a05eb52-2a97-4cb2-b9f4-f202822373b3",
+            "aaacd6d6-50f2-4914-89f2-149c562cbf7d",
+            "98f9e7b0-231e-4cd1-b1e9-fb3292173516",
+            "446533f4-f8ee-48eb-ab40-cbe14f635bc4",
+            "d1eadb43-c4f8-4663-84d3-412d221b201e",
+            "8e6e1bed-3e18-41b1-85b9-2a4d4bff8a49",
+            "18ba94cd-5d25-41f2-aa5d-535634e7c1ed",
+            "45ee476f-df9f-4c2e-822b-530bf5297fb5",
+            "1a1ecf81-7320-476b-b5af-f2edbeece792",
+            "fcd2f9a5-0228-4c37-a29e-d020c9ce5e2e",
+            "93c695f2-b2ff-4081-948e-57e1b85335ca",
+            "12ccaa8e-4cb2-4619-9358-18446c54f7ee",
+            "6f162d9b-ffdc-44fe-82b9-168175955157",
+            "f94063c9-c8bc-411a-b9c0-2ad465afcfb8"
+          ],
+          "failedIds": [],
+          "startedAt": "2026-08-06T18:15:25.137Z",
+          "completedAt": "2026-08-06T18:15:25.138Z",
+          "durationMs": 1
+        },
+        "search": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:25.773Z",
+          "resultFile": "data/runs/memoryminusone-locomo-20260806-t4ib/results/conv-26-q7.json",
+          "results": [],
+          "completedAt": "2026-08-06T18:15:25.864Z",
+          "durationMs": 90
+        },
+        "answer": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:34.751Z",
+          "hypothesis": "I don't know",
+          "promptTokens": 166,
+          "basePromptTokens": 166,
+          "contextTokens": 0,
+          "completedAt": "2026-08-06T18:15:35.327Z",
+          "durationMs": 576
+        },
+        "evaluate": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:58.454Z",
+          "score": 1,
+          "label": "correct",
+          "explanation": "The system correctly identified that it doesn't have enough information to determine the correct answer.",
+          "retrievalMetrics": {
+            "hitAtK": 0,
+            "precisionAtK": 0,
+            "recallAtK": 0,
+            "f1AtK": 0,
+            "mrr": 0,
+            "ndcg": 0,
+            "k": 0,
+            "relevantRetrieved": 0,
+            "totalRelevant": 1
+          },
+          "completedAt": "2026-08-06T18:16:00.123Z",
+          "durationMs": 1669
+        }
+      },
+      "sessions": [
+        {
+          "sessionId": "conv-26-session_1",
+          "date": "2023-05-08T13:56:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_2",
+          "date": "2023-05-25T13:14:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_3",
+          "date": "2023-06-09T19:55:00.000Z",
+          "messageCount": 23
+        },
+        {
+          "sessionId": "conv-26-session_4",
+          "date": "2023-06-27T10:37:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_5",
+          "date": "2023-07-03T13:36:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_6",
+          "date": "2023-07-06T20:18:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_7",
+          "date": "2023-07-12T16:33:00.000Z",
+          "messageCount": 27
+        },
+        {
+          "sessionId": "conv-26-session_8",
+          "date": "2023-07-15T13:51:00.000Z",
+          "messageCount": 39
+        },
+        {
+          "sessionId": "conv-26-session_9",
+          "date": "2023-07-17T14:31:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_10",
+          "date": "2023-07-20T20:56:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_11",
+          "date": "2023-08-14T14:24:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_12",
+          "date": "2023-08-17T13:50:00.000Z",
+          "messageCount": 21
+        },
+        {
+          "sessionId": "conv-26-session_13",
+          "date": "2023-08-23T15:31:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_14",
+          "date": "2023-08-25T13:33:00.000Z",
+          "messageCount": 35
+        },
+        {
+          "sessionId": "conv-26-session_15",
+          "date": "2023-08-28T15:19:00.000Z",
+          "messageCount": 28
+        },
+        {
+          "sessionId": "conv-26-session_16",
+          "date": "2023-09-13T00:09:00.000Z",
+          "messageCount": 20
+        },
+        {
+          "sessionId": "conv-26-session_17",
+          "date": "2023-10-13T10:31:00.000Z",
+          "messageCount": 26
+        },
+        {
+          "sessionId": "conv-26-session_18",
+          "date": "2023-10-20T18:55:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_19",
+          "date": "2023-10-22T09:55:00.000Z",
+          "messageCount": 15
+        }
+      ]
+    },
+    "conv-26-q8": {
+      "questionId": "conv-26-q8",
+      "containerTag": "conv-26-q8-memoryminusone-locomo-20260806-t4ib",
+      "question": "When did Caroline give a speech at a school?",
+      "groundTruth": "The week before 9 June 2023",
+      "questionType": "multi-hop",
+      "phases": {
+        "ingest": {
+          "status": "completed",
+          "completedSessions": [
+            "conv-26-session_1",
+            "conv-26-session_2",
+            "conv-26-session_3",
+            "conv-26-session_4",
+            "conv-26-session_5",
+            "conv-26-session_6",
+            "conv-26-session_7",
+            "conv-26-session_8",
+            "conv-26-session_9",
+            "conv-26-session_10",
+            "conv-26-session_11",
+            "conv-26-session_12",
+            "conv-26-session_13",
+            "conv-26-session_14",
+            "conv-26-session_15",
+            "conv-26-session_16",
+            "conv-26-session_17",
+            "conv-26-session_18",
+            "conv-26-session_19"
+          ],
+          "startedAt": "2026-08-06T18:13:00.403Z",
+          "ingestResult": {
+            "documentIds": [
+              "5e815179-09cc-4fd9-92c5-825dd1f562ad",
+              "fd0af587-79d6-4836-9167-86defb353888",
+              "7e8b3485-7f03-478b-ba97-bbf5761bf943",
+              "9959f505-9972-41f1-b38c-c1bb2d094fc1",
+              "65078019-b816-43f9-b059-56c63d069d03",
+              "14fa3246-c284-4fa3-a097-17ed82639a62",
+              "40a207ee-7030-4c27-9d22-646269c2a706",
+              "a8fbadf6-faf4-4ec0-8199-9a4497e54f42",
+              "544b03e7-c522-4948-9865-8fe6022bc55c",
+              "d9e00473-8cd0-4c5f-9592-2ba5169b23c6",
+              "f041ab29-4b8a-4000-a9d9-b058c6ad186a",
+              "3ba00948-4c9d-435c-b3ae-ca70c71e9d34",
+              "22f309b0-caa1-4aa9-b665-572a04cab126",
+              "fd3e19fa-38f6-4a07-90c1-34046bf09ae5",
+              "0f266a35-08a7-460e-8d43-f3e2539034e3",
+              "b8b0f86c-b818-4e65-9ab5-225c434aa111",
+              "278b3fe7-3867-4dce-8db4-b65207b9f9bd",
+              "51d7b10d-456c-4cc0-aee7-73a11ce6aca3",
+              "9b89b5d7-377a-4ed7-880c-b276014091f1"
+            ]
+          },
+          "completedAt": "2026-08-06T18:13:07.083Z",
+          "durationMs": 6680
+        },
+        "indexing": {
+          "status": "completed",
+          "completedIds": [
+            "5e815179-09cc-4fd9-92c5-825dd1f562ad",
+            "fd0af587-79d6-4836-9167-86defb353888",
+            "7e8b3485-7f03-478b-ba97-bbf5761bf943",
+            "9959f505-9972-41f1-b38c-c1bb2d094fc1",
+            "65078019-b816-43f9-b059-56c63d069d03",
+            "14fa3246-c284-4fa3-a097-17ed82639a62",
+            "40a207ee-7030-4c27-9d22-646269c2a706",
+            "a8fbadf6-faf4-4ec0-8199-9a4497e54f42",
+            "544b03e7-c522-4948-9865-8fe6022bc55c",
+            "d9e00473-8cd0-4c5f-9592-2ba5169b23c6",
+            "f041ab29-4b8a-4000-a9d9-b058c6ad186a",
+            "3ba00948-4c9d-435c-b3ae-ca70c71e9d34",
+            "22f309b0-caa1-4aa9-b665-572a04cab126",
+            "fd3e19fa-38f6-4a07-90c1-34046bf09ae5",
+            "0f266a35-08a7-460e-8d43-f3e2539034e3",
+            "b8b0f86c-b818-4e65-9ab5-225c434aa111",
+            "278b3fe7-3867-4dce-8db4-b65207b9f9bd",
+            "51d7b10d-456c-4cc0-aee7-73a11ce6aca3",
+            "9b89b5d7-377a-4ed7-880c-b276014091f1"
+          ],
+          "failedIds": [],
+          "startedAt": "2026-08-06T18:15:25.138Z",
+          "completedAt": "2026-08-06T18:15:25.138Z",
+          "durationMs": 0
+        },
+        "search": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:25.867Z",
+          "resultFile": "data/runs/memoryminusone-locomo-20260806-t4ib/results/conv-26-q8.json",
+          "results": [],
+          "completedAt": "2026-08-06T18:15:25.961Z",
+          "durationMs": 93
+        },
+        "answer": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:35.330Z",
+          "hypothesis": "I don't know",
+          "promptTokens": 167,
+          "basePromptTokens": 167,
+          "contextTokens": 0,
+          "completedAt": "2026-08-06T18:15:35.915Z",
+          "durationMs": 585
+        },
+        "evaluate": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:16:00.126Z",
+          "score": 0,
+          "label": "incorrect",
+          "explanation": "The system does not provide any information about when Caroline gave the speech.",
+          "retrievalMetrics": {
+            "hitAtK": 0,
+            "precisionAtK": 0,
+            "recallAtK": 0,
+            "f1AtK": 0,
+            "mrr": 0,
+            "ndcg": 0,
+            "k": 0,
+            "relevantRetrieved": 0,
+            "totalRelevant": 1
+          },
+          "completedAt": "2026-08-06T18:16:01.857Z",
+          "durationMs": 1731
+        }
+      },
+      "sessions": [
+        {
+          "sessionId": "conv-26-session_1",
+          "date": "2023-05-08T13:56:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_2",
+          "date": "2023-05-25T13:14:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_3",
+          "date": "2023-06-09T19:55:00.000Z",
+          "messageCount": 23
+        },
+        {
+          "sessionId": "conv-26-session_4",
+          "date": "2023-06-27T10:37:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_5",
+          "date": "2023-07-03T13:36:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_6",
+          "date": "2023-07-06T20:18:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_7",
+          "date": "2023-07-12T16:33:00.000Z",
+          "messageCount": 27
+        },
+        {
+          "sessionId": "conv-26-session_8",
+          "date": "2023-07-15T13:51:00.000Z",
+          "messageCount": 39
+        },
+        {
+          "sessionId": "conv-26-session_9",
+          "date": "2023-07-17T14:31:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_10",
+          "date": "2023-07-20T20:56:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_11",
+          "date": "2023-08-14T14:24:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_12",
+          "date": "2023-08-17T13:50:00.000Z",
+          "messageCount": 21
+        },
+        {
+          "sessionId": "conv-26-session_13",
+          "date": "2023-08-23T15:31:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_14",
+          "date": "2023-08-25T13:33:00.000Z",
+          "messageCount": 35
+        },
+        {
+          "sessionId": "conv-26-session_15",
+          "date": "2023-08-28T15:19:00.000Z",
+          "messageCount": 28
+        },
+        {
+          "sessionId": "conv-26-session_16",
+          "date": "2023-09-13T00:09:00.000Z",
+          "messageCount": 20
+        },
+        {
+          "sessionId": "conv-26-session_17",
+          "date": "2023-10-13T10:31:00.000Z",
+          "messageCount": 26
+        },
+        {
+          "sessionId": "conv-26-session_18",
+          "date": "2023-10-20T18:55:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_19",
+          "date": "2023-10-22T09:55:00.000Z",
+          "messageCount": 15
+        }
+      ]
+    },
+    "conv-26-q11": {
+      "questionId": "conv-26-q11",
+      "containerTag": "conv-26-q11-memoryminusone-locomo-20260806-t4ib",
+      "question": "Where did Caroline move from 4 years ago?",
+      "groundTruth": "Sweden",
+      "questionType": "single-hop",
+      "phases": {
+        "ingest": {
+          "status": "completed",
+          "completedSessions": [
+            "conv-26-session_1",
+            "conv-26-session_2",
+            "conv-26-session_3",
+            "conv-26-session_4",
+            "conv-26-session_5",
+            "conv-26-session_6",
+            "conv-26-session_7",
+            "conv-26-session_8",
+            "conv-26-session_9",
+            "conv-26-session_10",
+            "conv-26-session_11",
+            "conv-26-session_12",
+            "conv-26-session_13",
+            "conv-26-session_14",
+            "conv-26-session_15",
+            "conv-26-session_16",
+            "conv-26-session_17",
+            "conv-26-session_18",
+            "conv-26-session_19"
+          ],
+          "startedAt": "2026-08-06T18:13:08.087Z",
+          "ingestResult": {
+            "documentIds": [
+              "73f1c565-a6ea-479e-847f-4bcb03823c5b",
+              "dfa79f44-1cf4-4fa0-afda-38de9ecb71dc",
+              "f563fca6-b34f-43ba-9873-1cf46f14331c",
+              "8fded463-0cc5-4535-a438-dbd77b3fbcdd",
+              "6d0c9ee3-63a4-4676-8410-2ca1f3477049",
+              "0eb72115-806b-4fcd-9608-8f24e47e0768",
+              "9676daad-8845-492f-9697-02858cdceead",
+              "692bd580-706b-4712-88fe-78899745eedb",
+              "fcedd255-53f2-4983-bebe-646012abf1a4",
+              "28826432-f7e4-44ba-892a-7e584ebe64fc",
+              "82a99a10-7788-44c9-b505-42a60c20cc50",
+              "61981a9b-ff2f-43d5-aa66-8f952caf7074",
+              "2a0c0da1-8f6e-403e-9cff-ad5564466289",
+              "164c1a9c-7f96-47e0-81ff-a16159601e56",
+              "a7dbc910-a7ef-49c3-92ee-3d8f3a02fbc5",
+              "61d64e51-b771-4eb2-82ca-9b51afb5c424",
+              "6ac9a321-c330-4e6c-8ba2-3bdace70b4f3",
+              "e3635a86-70d1-4f22-a9a4-290dbbd143fd",
+              "e354cddb-668d-4dd2-8b50-8907e7884a01"
+            ]
+          },
+          "completedAt": "2026-08-06T18:13:15.167Z",
+          "durationMs": 7080
+        },
+        "indexing": {
+          "status": "completed",
+          "completedIds": [
+            "73f1c565-a6ea-479e-847f-4bcb03823c5b",
+            "dfa79f44-1cf4-4fa0-afda-38de9ecb71dc",
+            "f563fca6-b34f-43ba-9873-1cf46f14331c",
+            "8fded463-0cc5-4535-a438-dbd77b3fbcdd",
+            "6d0c9ee3-63a4-4676-8410-2ca1f3477049",
+            "0eb72115-806b-4fcd-9608-8f24e47e0768",
+            "9676daad-8845-492f-9697-02858cdceead",
+            "692bd580-706b-4712-88fe-78899745eedb",
+            "fcedd255-53f2-4983-bebe-646012abf1a4",
+            "28826432-f7e4-44ba-892a-7e584ebe64fc",
+            "82a99a10-7788-44c9-b505-42a60c20cc50",
+            "61981a9b-ff2f-43d5-aa66-8f952caf7074",
+            "2a0c0da1-8f6e-403e-9cff-ad5564466289",
+            "164c1a9c-7f96-47e0-81ff-a16159601e56",
+            "a7dbc910-a7ef-49c3-92ee-3d8f3a02fbc5",
+            "61d64e51-b771-4eb2-82ca-9b51afb5c424",
+            "6ac9a321-c330-4e6c-8ba2-3bdace70b4f3",
+            "e3635a86-70d1-4f22-a9a4-290dbbd143fd",
+            "e354cddb-668d-4dd2-8b50-8907e7884a01"
+          ],
+          "failedIds": [],
+          "startedAt": "2026-08-06T18:15:25.139Z",
+          "completedAt": "2026-08-06T18:15:25.139Z",
+          "durationMs": 0
+        },
+        "search": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:25.963Z",
+          "resultFile": "data/runs/memoryminusone-locomo-20260806-t4ib/results/conv-26-q11.json",
+          "results": [],
+          "completedAt": "2026-08-06T18:15:26.063Z",
+          "durationMs": 100
+        },
+        "answer": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:35.918Z",
+          "hypothesis": "I don't know",
+          "promptTokens": 166,
+          "basePromptTokens": 166,
+          "contextTokens": 0,
+          "completedAt": "2026-08-06T18:15:36.492Z",
+          "durationMs": 574
+        },
+        "evaluate": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:16:01.860Z",
+          "score": 1,
+          "label": "correct",
+          "explanation": "The system correctly identified that it does not have the information to answer where Caroline moved.",
+          "retrievalMetrics": {
+            "hitAtK": 0,
+            "precisionAtK": 0,
+            "recallAtK": 0,
+            "f1AtK": 0,
+            "mrr": 0,
+            "ndcg": 0,
+            "k": 0,
+            "relevantRetrieved": 0,
+            "totalRelevant": 1
+          },
+          "completedAt": "2026-08-06T18:16:03.568Z",
+          "durationMs": 1708
+        }
+      },
+      "sessions": [
+        {
+          "sessionId": "conv-26-session_1",
+          "date": "2023-05-08T13:56:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_2",
+          "date": "2023-05-25T13:14:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_3",
+          "date": "2023-06-09T19:55:00.000Z",
+          "messageCount": 23
+        },
+        {
+          "sessionId": "conv-26-session_4",
+          "date": "2023-06-27T10:37:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_5",
+          "date": "2023-07-03T13:36:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_6",
+          "date": "2023-07-06T20:18:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_7",
+          "date": "2023-07-12T16:33:00.000Z",
+          "messageCount": 27
+        },
+        {
+          "sessionId": "conv-26-session_8",
+          "date": "2023-07-15T13:51:00.000Z",
+          "messageCount": 39
+        },
+        {
+          "sessionId": "conv-26-session_9",
+          "date": "2023-07-17T14:31:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_10",
+          "date": "2023-07-20T20:56:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_11",
+          "date": "2023-08-14T14:24:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_12",
+          "date": "2023-08-17T13:50:00.000Z",
+          "messageCount": 21
+        },
+        {
+          "sessionId": "conv-26-session_13",
+          "date": "2023-08-23T15:31:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_14",
+          "date": "2023-08-25T13:33:00.000Z",
+          "messageCount": 35
+        },
+        {
+          "sessionId": "conv-26-session_15",
+          "date": "2023-08-28T15:19:00.000Z",
+          "messageCount": 28
+        },
+        {
+          "sessionId": "conv-26-session_16",
+          "date": "2023-09-13T00:09:00.000Z",
+          "messageCount": 20
+        },
+        {
+          "sessionId": "conv-26-session_17",
+          "date": "2023-10-13T10:31:00.000Z",
+          "messageCount": 26
+        },
+        {
+          "sessionId": "conv-26-session_18",
+          "date": "2023-10-20T18:55:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_19",
+          "date": "2023-10-22T09:55:00.000Z",
+          "messageCount": 15
+        }
+      ]
+    },
+    "conv-26-q13": {
+      "questionId": "conv-26-q13",
+      "containerTag": "conv-26-q13-memoryminusone-locomo-20260806-t4ib",
+      "question": "What career path has Caroline decided to persue?",
+      "groundTruth": "counseling or mental health for Transgender people",
+      "questionType": "single-hop",
+      "phases": {
+        "ingest": {
+          "status": "completed",
+          "completedSessions": [
+            "conv-26-session_1",
+            "conv-26-session_2",
+            "conv-26-session_3",
+            "conv-26-session_4",
+            "conv-26-session_5",
+            "conv-26-session_6",
+            "conv-26-session_7",
+            "conv-26-session_8",
+            "conv-26-session_9",
+            "conv-26-session_10",
+            "conv-26-session_11",
+            "conv-26-session_12",
+            "conv-26-session_13",
+            "conv-26-session_14",
+            "conv-26-session_15",
+            "conv-26-session_16",
+            "conv-26-session_17",
+            "conv-26-session_18",
+            "conv-26-session_19"
+          ],
+          "startedAt": "2026-08-06T18:13:16.169Z",
+          "ingestResult": {
+            "documentIds": [
+              "6fa3352a-0f38-4a74-bae0-16124e6bac10",
+              "5725f4d8-5770-4e14-8495-aadccd8d2134",
+              "1f941b58-b5fd-4ba8-9799-426807955875",
+              "e10458b7-497d-4749-a06c-17069c56348e",
+              "a9444343-b1cf-4ce3-a1cb-99a2d29c2a73",
+              "2b303154-712c-4d07-ba82-71c01485114e",
+              "c3936114-7a17-404b-a9e2-73cfccfc5dd1",
+              "649b47dd-6528-4079-a35a-4b7b6f0ca721",
+              "5ffc4a9c-a934-4f62-8d92-1d095aa9cdeb",
+              "3f785221-614d-4652-b1d7-77d5672aba2b",
+              "4836cd0f-f64c-44ed-aa90-67b07a5c8327",
+              "81aca895-3259-4df5-8fe3-616b00644b2d",
+              "21646d29-30e6-4b71-bc5e-898dee786ba1",
+              "a35030ab-df12-44f2-88f3-03a482ac02d8",
+              "95ebf193-aab5-4d6c-b3d1-7ac114c28d9c",
+              "42b45462-07e1-41e0-a86e-971ca79fb677",
+              "dd09388b-3025-4823-960d-2bc76e32df18",
+              "96cf524c-e406-421f-8cfc-50e12bdd0eb1",
+              "7fbbd680-a414-4cec-8095-cbf8f55877cc"
+            ]
+          },
+          "completedAt": "2026-08-06T18:13:24.587Z",
+          "durationMs": 8418
+        },
+        "indexing": {
+          "status": "completed",
+          "completedIds": [
+            "6fa3352a-0f38-4a74-bae0-16124e6bac10",
+            "5725f4d8-5770-4e14-8495-aadccd8d2134",
+            "1f941b58-b5fd-4ba8-9799-426807955875",
+            "e10458b7-497d-4749-a06c-17069c56348e",
+            "a9444343-b1cf-4ce3-a1cb-99a2d29c2a73",
+            "2b303154-712c-4d07-ba82-71c01485114e",
+            "c3936114-7a17-404b-a9e2-73cfccfc5dd1",
+            "649b47dd-6528-4079-a35a-4b7b6f0ca721",
+            "5ffc4a9c-a934-4f62-8d92-1d095aa9cdeb",
+            "3f785221-614d-4652-b1d7-77d5672aba2b",
+            "4836cd0f-f64c-44ed-aa90-67b07a5c8327",
+            "81aca895-3259-4df5-8fe3-616b00644b2d",
+            "21646d29-30e6-4b71-bc5e-898dee786ba1",
+            "a35030ab-df12-44f2-88f3-03a482ac02d8",
+            "95ebf193-aab5-4d6c-b3d1-7ac114c28d9c",
+            "42b45462-07e1-41e0-a86e-971ca79fb677",
+            "dd09388b-3025-4823-960d-2bc76e32df18",
+            "96cf524c-e406-421f-8cfc-50e12bdd0eb1",
+            "7fbbd680-a414-4cec-8095-cbf8f55877cc"
+          ],
+          "failedIds": [],
+          "startedAt": "2026-08-06T18:15:25.140Z",
+          "completedAt": "2026-08-06T18:15:25.141Z",
+          "durationMs": 1
+        },
+        "search": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:26.066Z",
+          "resultFile": "data/runs/memoryminusone-locomo-20260806-t4ib/results/conv-26-q13.json",
+          "results": [],
+          "completedAt": "2026-08-06T18:15:26.151Z",
+          "durationMs": 84
+        },
+        "answer": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:36.495Z",
+          "hypothesis": "I don't know",
+          "promptTokens": 168,
+          "basePromptTokens": 168,
+          "contextTokens": 0,
+          "completedAt": "2026-08-06T18:15:37.085Z",
+          "durationMs": 590
+        },
+        "evaluate": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:16:03.571Z",
+          "score": 0,
+          "label": "incorrect",
+          "explanation": "The system did not provide an answer.",
+          "retrievalMetrics": {
+            "hitAtK": 0,
+            "precisionAtK": 0,
+            "recallAtK": 0,
+            "f1AtK": 0,
+            "mrr": 0,
+            "ndcg": 0,
+            "k": 0,
+            "relevantRetrieved": 0,
+            "totalRelevant": 1
+          },
+          "completedAt": "2026-08-06T18:16:05.109Z",
+          "durationMs": 1538
+        }
+      },
+      "sessions": [
+        {
+          "sessionId": "conv-26-session_1",
+          "date": "2023-05-08T13:56:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_2",
+          "date": "2023-05-25T13:14:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_3",
+          "date": "2023-06-09T19:55:00.000Z",
+          "messageCount": 23
+        },
+        {
+          "sessionId": "conv-26-session_4",
+          "date": "2023-06-27T10:37:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_5",
+          "date": "2023-07-03T13:36:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_6",
+          "date": "2023-07-06T20:18:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_7",
+          "date": "2023-07-12T16:33:00.000Z",
+          "messageCount": 27
+        },
+        {
+          "sessionId": "conv-26-session_8",
+          "date": "2023-07-15T13:51:00.000Z",
+          "messageCount": 39
+        },
+        {
+          "sessionId": "conv-26-session_9",
+          "date": "2023-07-17T14:31:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_10",
+          "date": "2023-07-20T20:56:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_11",
+          "date": "2023-08-14T14:24:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_12",
+          "date": "2023-08-17T13:50:00.000Z",
+          "messageCount": 21
+        },
+        {
+          "sessionId": "conv-26-session_13",
+          "date": "2023-08-23T15:31:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_14",
+          "date": "2023-08-25T13:33:00.000Z",
+          "messageCount": 35
+        },
+        {
+          "sessionId": "conv-26-session_15",
+          "date": "2023-08-28T15:19:00.000Z",
+          "messageCount": 28
+        },
+        {
+          "sessionId": "conv-26-session_16",
+          "date": "2023-09-13T00:09:00.000Z",
+          "messageCount": 20
+        },
+        {
+          "sessionId": "conv-26-session_17",
+          "date": "2023-10-13T10:31:00.000Z",
+          "messageCount": 26
+        },
+        {
+          "sessionId": "conv-26-session_18",
+          "date": "2023-10-20T18:55:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_19",
+          "date": "2023-10-22T09:55:00.000Z",
+          "messageCount": 15
+        }
+      ]
+    },
+    "conv-26-q14": {
+      "questionId": "conv-26-q14",
+      "containerTag": "conv-26-q14-memoryminusone-locomo-20260806-t4ib",
+      "question": "Would Caroline still want to pursue counseling as a career if she hadn't received support growing up?",
+      "groundTruth": "Likely no",
+      "questionType": "temporal",
+      "phases": {
+        "ingest": {
+          "status": "completed",
+          "completedSessions": [
+            "conv-26-session_1",
+            "conv-26-session_2",
+            "conv-26-session_3",
+            "conv-26-session_4",
+            "conv-26-session_5",
+            "conv-26-session_6",
+            "conv-26-session_7",
+            "conv-26-session_8",
+            "conv-26-session_9",
+            "conv-26-session_10",
+            "conv-26-session_11",
+            "conv-26-session_12",
+            "conv-26-session_13",
+            "conv-26-session_14",
+            "conv-26-session_15",
+            "conv-26-session_16",
+            "conv-26-session_17",
+            "conv-26-session_18",
+            "conv-26-session_19"
+          ],
+          "startedAt": "2026-08-06T18:13:25.590Z",
+          "ingestResult": {
+            "documentIds": [
+              "c51528b8-217c-41c4-8f26-91162ab48415",
+              "0d845f75-4766-4941-be42-dff8ec1d93b9",
+              "7ff95f2e-55f3-44ca-8d71-eaaf731da735",
+              "7162d349-f384-4c0d-8efb-e75118d96dcc",
+              "c9d66247-8ddc-450f-ac94-c3b36e3416cd",
+              "18f7fd5d-2452-430e-af78-f19f7bcf4a91",
+              "f9a477e2-7324-493e-80af-2b4ea9bef5d6",
+              "69860ff0-9b61-4a0f-93f1-81be220bf39a",
+              "d40597c1-64a9-47b8-ab31-107cc935822d",
+              "d5a04ef2-6b0b-4a5e-9234-c0fd5ca9b37b",
+              "8eb7df4f-cdfe-4d3f-9905-66c565d52576",
+              "7d1973f0-a387-498d-9435-fb90c006b44f",
+              "61682375-5347-4b64-9d4d-37ebeb7e30cc",
+              "06ee9854-d6c5-4a5a-9664-34f0eb444bff",
+              "b553ef90-13fa-4ee9-9118-8a8d50fe5cf5",
+              "2779b6d4-4b52-4682-81ce-699aba46e1bc",
+              "52af2e80-7d77-4986-91a7-98fb2c570caa",
+              "4b6f0088-e412-444d-8dbf-6fce99030446",
+              "84fc2900-2d9c-49b6-b1f3-7a9f8682380b"
+            ]
+          },
+          "completedAt": "2026-08-06T18:13:33.043Z",
+          "durationMs": 7453
+        },
+        "indexing": {
+          "status": "completed",
+          "completedIds": [
+            "c51528b8-217c-41c4-8f26-91162ab48415",
+            "0d845f75-4766-4941-be42-dff8ec1d93b9",
+            "7ff95f2e-55f3-44ca-8d71-eaaf731da735",
+            "7162d349-f384-4c0d-8efb-e75118d96dcc",
+            "c9d66247-8ddc-450f-ac94-c3b36e3416cd",
+            "18f7fd5d-2452-430e-af78-f19f7bcf4a91",
+            "f9a477e2-7324-493e-80af-2b4ea9bef5d6",
+            "69860ff0-9b61-4a0f-93f1-81be220bf39a",
+            "d40597c1-64a9-47b8-ab31-107cc935822d",
+            "d5a04ef2-6b0b-4a5e-9234-c0fd5ca9b37b",
+            "8eb7df4f-cdfe-4d3f-9905-66c565d52576",
+            "7d1973f0-a387-498d-9435-fb90c006b44f",
+            "61682375-5347-4b64-9d4d-37ebeb7e30cc",
+            "06ee9854-d6c5-4a5a-9664-34f0eb444bff",
+            "b553ef90-13fa-4ee9-9118-8a8d50fe5cf5",
+            "2779b6d4-4b52-4682-81ce-699aba46e1bc",
+            "52af2e80-7d77-4986-91a7-98fb2c570caa",
+            "4b6f0088-e412-444d-8dbf-6fce99030446",
+            "84fc2900-2d9c-49b6-b1f3-7a9f8682380b"
+          ],
+          "failedIds": [],
+          "startedAt": "2026-08-06T18:15:25.142Z",
+          "completedAt": "2026-08-06T18:15:25.142Z",
+          "durationMs": 0
+        },
+        "search": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:26.153Z",
+          "resultFile": "data/runs/memoryminusone-locomo-20260806-t4ib/results/conv-26-q14.json",
+          "results": [],
+          "completedAt": "2026-08-06T18:15:26.241Z",
+          "durationMs": 87
+        },
+        "answer": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:37.088Z",
+          "hypothesis": "I don't know.",
+          "promptTokens": 181,
+          "basePromptTokens": 181,
+          "contextTokens": 0,
+          "completedAt": "2026-08-06T18:15:37.698Z",
+          "durationMs": 610
+        },
+        "evaluate": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:16:05.112Z",
+          "score": 0,
+          "label": "incorrect",
+          "explanation": "The system did not provide an answer related to Caroline pursuing counseling as a career.",
+          "retrievalMetrics": {
+            "hitAtK": 0,
+            "precisionAtK": 0,
+            "recallAtK": 0,
+            "f1AtK": 0,
+            "mrr": 0,
+            "ndcg": 0,
+            "k": 0,
+            "relevantRetrieved": 0,
+            "totalRelevant": 1
+          },
+          "completedAt": "2026-08-06T18:16:06.914Z",
+          "durationMs": 1802
+        }
+      },
+      "sessions": [
+        {
+          "sessionId": "conv-26-session_1",
+          "date": "2023-05-08T13:56:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_2",
+          "date": "2023-05-25T13:14:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_3",
+          "date": "2023-06-09T19:55:00.000Z",
+          "messageCount": 23
+        },
+        {
+          "sessionId": "conv-26-session_4",
+          "date": "2023-06-27T10:37:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_5",
+          "date": "2023-07-03T13:36:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_6",
+          "date": "2023-07-06T20:18:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_7",
+          "date": "2023-07-12T16:33:00.000Z",
+          "messageCount": 27
+        },
+        {
+          "sessionId": "conv-26-session_8",
+          "date": "2023-07-15T13:51:00.000Z",
+          "messageCount": 39
+        },
+        {
+          "sessionId": "conv-26-session_9",
+          "date": "2023-07-17T14:31:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_10",
+          "date": "2023-07-20T20:56:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_11",
+          "date": "2023-08-14T14:24:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_12",
+          "date": "2023-08-17T13:50:00.000Z",
+          "messageCount": 21
+        },
+        {
+          "sessionId": "conv-26-session_13",
+          "date": "2023-08-23T15:31:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_14",
+          "date": "2023-08-25T13:33:00.000Z",
+          "messageCount": 35
+        },
+        {
+          "sessionId": "conv-26-session_15",
+          "date": "2023-08-28T15:19:00.000Z",
+          "messageCount": 28
+        },
+        {
+          "sessionId": "conv-26-session_16",
+          "date": "2023-09-13T00:09:00.000Z",
+          "messageCount": 20
+        },
+        {
+          "sessionId": "conv-26-session_17",
+          "date": "2023-10-13T10:31:00.000Z",
+          "messageCount": 26
+        },
+        {
+          "sessionId": "conv-26-session_18",
+          "date": "2023-10-20T18:55:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_19",
+          "date": "2023-10-22T09:55:00.000Z",
+          "messageCount": 15
+        }
+      ]
+    },
+    "conv-26-q22": {
+      "questionId": "conv-26-q22",
+      "containerTag": "conv-26-q22-memoryminusone-locomo-20260806-t4ib",
+      "question": "Would Caroline likely have Dr. Seuss books on her bookshelf?",
+      "groundTruth": "Yes, since she collects classic children's books",
+      "questionType": "temporal",
+      "phases": {
+        "ingest": {
+          "status": "completed",
+          "completedSessions": [
+            "conv-26-session_1",
+            "conv-26-session_2",
+            "conv-26-session_3",
+            "conv-26-session_4",
+            "conv-26-session_5",
+            "conv-26-session_6",
+            "conv-26-session_7",
+            "conv-26-session_8",
+            "conv-26-session_9",
+            "conv-26-session_10",
+            "conv-26-session_11",
+            "conv-26-session_12",
+            "conv-26-session_13",
+            "conv-26-session_14",
+            "conv-26-session_15",
+            "conv-26-session_16",
+            "conv-26-session_17",
+            "conv-26-session_18",
+            "conv-26-session_19"
+          ],
+          "startedAt": "2026-08-06T18:13:34.045Z",
+          "ingestResult": {
+            "documentIds": [
+              "242921a7-b0f2-4799-8081-0f87005aeb11",
+              "a582c3f5-6293-4228-8425-fc7d14669da6",
+              "54c2b323-c7af-4473-bc79-07c022141a58",
+              "255c2f3d-671d-46f9-a682-d834d9495f07",
+              "a62ddf2b-7d4e-42b4-8f57-8d17e77960ea",
+              "b62e8865-6669-4a87-8a1d-3cc0ae9e150a",
+              "c156f405-c7ae-4138-befc-8764781b99ef",
+              "eef42672-5a0e-4f45-9c40-cb42b3178c60",
+              "6c14d6cd-7cc2-41fe-8be5-aad9eb00698b",
+              "0eaaa480-3f27-44b2-b9c9-89d5619e38aa",
+              "6902ac62-dbe1-405b-8d68-f3c30e1aa483",
+              "b7974ee7-1169-4210-b654-b169f0a39868",
+              "152195ed-7751-4f74-bb92-82da95eef985",
+              "47b39883-65fc-4545-a565-2656f7b60682",
+              "692ed39e-a3ab-4ca9-b62d-138a37b8724e",
+              "e662394b-29eb-47c3-bd66-264c67e4993f",
+              "1bfab4d9-5352-44da-9c4d-a6db64038621",
+              "4231aa17-ae97-45de-ac00-7057ff69a1e3",
+              "d34c74b4-0fc8-4a1f-a8d6-67b998dc2962"
+            ]
+          },
+          "completedAt": "2026-08-06T18:13:42.417Z",
+          "durationMs": 8372
+        },
+        "indexing": {
+          "status": "completed",
+          "completedIds": [
+            "242921a7-b0f2-4799-8081-0f87005aeb11",
+            "a582c3f5-6293-4228-8425-fc7d14669da6",
+            "54c2b323-c7af-4473-bc79-07c022141a58",
+            "255c2f3d-671d-46f9-a682-d834d9495f07",
+            "a62ddf2b-7d4e-42b4-8f57-8d17e77960ea",
+            "b62e8865-6669-4a87-8a1d-3cc0ae9e150a",
+            "c156f405-c7ae-4138-befc-8764781b99ef",
+            "eef42672-5a0e-4f45-9c40-cb42b3178c60",
+            "6c14d6cd-7cc2-41fe-8be5-aad9eb00698b",
+            "0eaaa480-3f27-44b2-b9c9-89d5619e38aa",
+            "6902ac62-dbe1-405b-8d68-f3c30e1aa483",
+            "b7974ee7-1169-4210-b654-b169f0a39868",
+            "152195ed-7751-4f74-bb92-82da95eef985",
+            "47b39883-65fc-4545-a565-2656f7b60682",
+            "692ed39e-a3ab-4ca9-b62d-138a37b8724e",
+            "e662394b-29eb-47c3-bd66-264c67e4993f",
+            "1bfab4d9-5352-44da-9c4d-a6db64038621",
+            "4231aa17-ae97-45de-ac00-7057ff69a1e3",
+            "d34c74b4-0fc8-4a1f-a8d6-67b998dc2962"
+          ],
+          "failedIds": [],
+          "startedAt": "2026-08-06T18:15:25.142Z",
+          "completedAt": "2026-08-06T18:15:25.143Z",
+          "durationMs": 1
+        },
+        "search": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:26.243Z",
+          "resultFile": "data/runs/memoryminusone-locomo-20260806-t4ib/results/conv-26-q22.json",
+          "results": [],
+          "completedAt": "2026-08-06T18:15:26.333Z",
+          "durationMs": 89
+        },
+        "answer": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:37.701Z",
+          "hypothesis": "I don't know",
+          "promptTokens": 171,
+          "basePromptTokens": 171,
+          "contextTokens": 0,
+          "completedAt": "2026-08-06T18:15:38.298Z",
+          "durationMs": 597
+        },
+        "evaluate": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:16:06.917Z",
+          "score": 0,
+          "label": "incorrect",
+          "explanation": "The system did not provide an answer.",
+          "retrievalMetrics": {
+            "hitAtK": 0,
+            "precisionAtK": 0,
+            "recallAtK": 0,
+            "f1AtK": 0,
+            "mrr": 0,
+            "ndcg": 0,
+            "k": 0,
+            "relevantRetrieved": 0,
+            "totalRelevant": 1
+          },
+          "completedAt": "2026-08-06T18:16:08.311Z",
+          "durationMs": 1394
+        }
+      },
+      "sessions": [
+        {
+          "sessionId": "conv-26-session_1",
+          "date": "2023-05-08T13:56:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_2",
+          "date": "2023-05-25T13:14:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_3",
+          "date": "2023-06-09T19:55:00.000Z",
+          "messageCount": 23
+        },
+        {
+          "sessionId": "conv-26-session_4",
+          "date": "2023-06-27T10:37:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_5",
+          "date": "2023-07-03T13:36:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_6",
+          "date": "2023-07-06T20:18:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_7",
+          "date": "2023-07-12T16:33:00.000Z",
+          "messageCount": 27
+        },
+        {
+          "sessionId": "conv-26-session_8",
+          "date": "2023-07-15T13:51:00.000Z",
+          "messageCount": 39
+        },
+        {
+          "sessionId": "conv-26-session_9",
+          "date": "2023-07-17T14:31:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_10",
+          "date": "2023-07-20T20:56:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_11",
+          "date": "2023-08-14T14:24:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_12",
+          "date": "2023-08-17T13:50:00.000Z",
+          "messageCount": 21
+        },
+        {
+          "sessionId": "conv-26-session_13",
+          "date": "2023-08-23T15:31:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_14",
+          "date": "2023-08-25T13:33:00.000Z",
+          "messageCount": 35
+        },
+        {
+          "sessionId": "conv-26-session_15",
+          "date": "2023-08-28T15:19:00.000Z",
+          "messageCount": 28
+        },
+        {
+          "sessionId": "conv-26-session_16",
+          "date": "2023-09-13T00:09:00.000Z",
+          "messageCount": 20
+        },
+        {
+          "sessionId": "conv-26-session_17",
+          "date": "2023-10-13T10:31:00.000Z",
+          "messageCount": 26
+        },
+        {
+          "sessionId": "conv-26-session_18",
+          "date": "2023-10-20T18:55:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_19",
+          "date": "2023-10-22T09:55:00.000Z",
+          "messageCount": 15
+        }
+      ]
+    },
+    "conv-26-q27": {
+      "questionId": "conv-26-q27",
+      "containerTag": "conv-26-q27-memoryminusone-locomo-20260806-t4ib",
+      "question": "Would Caroline pursue writing as a career option?",
+      "groundTruth": "LIkely no; though she likes reading, she wants to be a counselor",
+      "questionType": "temporal",
+      "phases": {
+        "ingest": {
+          "status": "completed",
+          "completedSessions": [
+            "conv-26-session_1",
+            "conv-26-session_2",
+            "conv-26-session_3",
+            "conv-26-session_4",
+            "conv-26-session_5",
+            "conv-26-session_6",
+            "conv-26-session_7",
+            "conv-26-session_8",
+            "conv-26-session_9",
+            "conv-26-session_10",
+            "conv-26-session_11",
+            "conv-26-session_12",
+            "conv-26-session_13",
+            "conv-26-session_14",
+            "conv-26-session_15",
+            "conv-26-session_16",
+            "conv-26-session_17",
+            "conv-26-session_18",
+            "conv-26-session_19"
+          ],
+          "startedAt": "2026-08-06T18:13:43.421Z",
+          "ingestResult": {
+            "documentIds": [
+              "13ec2dbb-f1c7-4a1f-b3a5-efe7edaa2a0c",
+              "536dc3fa-a520-412a-b97e-bafa16150a23",
+              "74066f12-7045-46cb-bccc-e59cf601580b",
+              "ef227eaa-ea19-4f89-92d3-e78b00b573b8",
+              "eb530d90-1d5f-46be-8f90-ea3c809dfd02",
+              "0573db37-d940-43d7-b525-80bf9a67ef74",
+              "66fc6aa0-d298-4f67-bc9a-6716ad94528b",
+              "63c4eb81-8831-4909-acbd-e0703d5d0c6c",
+              "21296467-196b-4202-b12b-8110990df62a",
+              "21a96d53-af74-4f4f-abb1-5d6373884b7a",
+              "ad1ad215-2486-49c0-86d2-3c2e557c64b9",
+              "9c9bb5e4-9cf5-47d6-8b3c-7733facd7509",
+              "e3d2b3fa-24b9-4a5b-9c2d-9dfae6b74078",
+              "db827dde-bc63-45f6-bec8-9c42eadbf464",
+              "7bb314e7-ca93-4a05-a01a-ac712cb5c6ce",
+              "01ee9c76-9526-47c2-9ac7-66a8516c29ed",
+              "a8e2a32a-7e97-4b9f-a06e-88938d4123c4",
+              "64d54ae0-e45c-41a0-a88a-bdf302838303",
+              "a9c13e2b-80b5-461b-bc5d-d1fa09d35855"
+            ]
+          },
+          "completedAt": "2026-08-06T18:13:52.950Z",
+          "durationMs": 9529
+        },
+        "indexing": {
+          "status": "completed",
+          "completedIds": [
+            "13ec2dbb-f1c7-4a1f-b3a5-efe7edaa2a0c",
+            "536dc3fa-a520-412a-b97e-bafa16150a23",
+            "74066f12-7045-46cb-bccc-e59cf601580b",
+            "ef227eaa-ea19-4f89-92d3-e78b00b573b8",
+            "eb530d90-1d5f-46be-8f90-ea3c809dfd02",
+            "0573db37-d940-43d7-b525-80bf9a67ef74",
+            "66fc6aa0-d298-4f67-bc9a-6716ad94528b",
+            "63c4eb81-8831-4909-acbd-e0703d5d0c6c",
+            "21296467-196b-4202-b12b-8110990df62a",
+            "21a96d53-af74-4f4f-abb1-5d6373884b7a",
+            "ad1ad215-2486-49c0-86d2-3c2e557c64b9",
+            "9c9bb5e4-9cf5-47d6-8b3c-7733facd7509",
+            "e3d2b3fa-24b9-4a5b-9c2d-9dfae6b74078",
+            "db827dde-bc63-45f6-bec8-9c42eadbf464",
+            "7bb314e7-ca93-4a05-a01a-ac712cb5c6ce",
+            "01ee9c76-9526-47c2-9ac7-66a8516c29ed",
+            "a8e2a32a-7e97-4b9f-a06e-88938d4123c4",
+            "64d54ae0-e45c-41a0-a88a-bdf302838303",
+            "a9c13e2b-80b5-461b-bc5d-d1fa09d35855"
+          ],
+          "failedIds": [],
+          "startedAt": "2026-08-06T18:15:25.143Z",
+          "completedAt": "2026-08-06T18:15:25.144Z",
+          "durationMs": 1
+        },
+        "search": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:26.336Z",
+          "resultFile": "data/runs/memoryminusone-locomo-20260806-t4ib/results/conv-26-q27.json",
+          "results": [],
+          "completedAt": "2026-08-06T18:15:26.428Z",
+          "durationMs": 91
+        },
+        "answer": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:38.301Z",
+          "hypothesis": "I don't know",
+          "promptTokens": 168,
+          "basePromptTokens": 168,
+          "contextTokens": 0,
+          "completedAt": "2026-08-06T18:15:38.894Z",
+          "durationMs": 593
+        },
+        "evaluate": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:16:08.314Z",
+          "score": 0,
+          "label": "incorrect",
+          "explanation": "The system did not provide an answer related to Caroline pursuing writing as her career option.",
+          "retrievalMetrics": {
+            "hitAtK": 0,
+            "precisionAtK": 0,
+            "recallAtK": 0,
+            "f1AtK": 0,
+            "mrr": 0,
+            "ndcg": 0,
+            "k": 0,
+            "relevantRetrieved": 0,
+            "totalRelevant": 1
+          },
+          "completedAt": "2026-08-06T18:16:10.016Z",
+          "durationMs": 1702
+        }
+      },
+      "sessions": [
+        {
+          "sessionId": "conv-26-session_1",
+          "date": "2023-05-08T13:56:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_2",
+          "date": "2023-05-25T13:14:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_3",
+          "date": "2023-06-09T19:55:00.000Z",
+          "messageCount": 23
+        },
+        {
+          "sessionId": "conv-26-session_4",
+          "date": "2023-06-27T10:37:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_5",
+          "date": "2023-07-03T13:36:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_6",
+          "date": "2023-07-06T20:18:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_7",
+          "date": "2023-07-12T16:33:00.000Z",
+          "messageCount": 27
+        },
+        {
+          "sessionId": "conv-26-session_8",
+          "date": "2023-07-15T13:51:00.000Z",
+          "messageCount": 39
+        },
+        {
+          "sessionId": "conv-26-session_9",
+          "date": "2023-07-17T14:31:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_10",
+          "date": "2023-07-20T20:56:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_11",
+          "date": "2023-08-14T14:24:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_12",
+          "date": "2023-08-17T13:50:00.000Z",
+          "messageCount": 21
+        },
+        {
+          "sessionId": "conv-26-session_13",
+          "date": "2023-08-23T15:31:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_14",
+          "date": "2023-08-25T13:33:00.000Z",
+          "messageCount": 35
+        },
+        {
+          "sessionId": "conv-26-session_15",
+          "date": "2023-08-28T15:19:00.000Z",
+          "messageCount": 28
+        },
+        {
+          "sessionId": "conv-26-session_16",
+          "date": "2023-09-13T00:09:00.000Z",
+          "messageCount": 20
+        },
+        {
+          "sessionId": "conv-26-session_17",
+          "date": "2023-10-13T10:31:00.000Z",
+          "messageCount": 26
+        },
+        {
+          "sessionId": "conv-26-session_18",
+          "date": "2023-10-20T18:55:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_19",
+          "date": "2023-10-22T09:55:00.000Z",
+          "messageCount": 15
+        }
+      ]
+    },
+    "conv-26-q30": {
+      "questionId": "conv-26-q30",
+      "containerTag": "conv-26-q30-memoryminusone-locomo-20260806-t4ib",
+      "question": "Would Melanie be considered a member of the LGBTQ community?",
+      "groundTruth": "Likely no, she does not refer to herself as part of it",
+      "questionType": "temporal",
+      "phases": {
+        "ingest": {
+          "status": "completed",
+          "completedSessions": [
+            "conv-26-session_1",
+            "conv-26-session_2",
+            "conv-26-session_3",
+            "conv-26-session_4",
+            "conv-26-session_5",
+            "conv-26-session_6",
+            "conv-26-session_7",
+            "conv-26-session_8",
+            "conv-26-session_9",
+            "conv-26-session_10",
+            "conv-26-session_11",
+            "conv-26-session_12",
+            "conv-26-session_13",
+            "conv-26-session_14",
+            "conv-26-session_15",
+            "conv-26-session_16",
+            "conv-26-session_17",
+            "conv-26-session_18",
+            "conv-26-session_19"
+          ],
+          "startedAt": "2026-08-06T18:13:53.953Z",
+          "ingestResult": {
+            "documentIds": [
+              "5a683eed-d2b2-4eac-afe7-d08751b4c0b9",
+              "73fcabca-6618-4a8b-8acb-934fbdf534cc",
+              "82d3d33b-21d5-4a2d-9582-14c7a71e071f",
+              "58da3c59-0b23-42cb-9814-b84c2284720e",
+              "b79ba37c-eb29-4927-b9ba-2741b2268b33",
+              "61984506-b3c2-43cc-be16-1b30dc04e565",
+              "a872a503-35f0-4274-8d54-77dd397999a3",
+              "63aa5dc3-931b-4d23-8ff1-9f440e2f9efd",
+              "367ca9f9-5182-4e56-88cd-882231f99664",
+              "8ad853ea-118a-4f1e-810e-e02fb3dd1c76",
+              "686da1be-2b74-4fc5-876d-86e5bb1563ab",
+              "11aa98e9-7e85-42ea-adc6-ce82953d3d85",
+              "d53d7489-0d00-46b2-b2d9-05c389d14ec4",
+              "3151856e-04d7-4aba-ae86-64b6655f1ddd",
+              "e72ba749-7972-4f52-99ae-1d8571f03eeb",
+              "267d9984-2a43-4603-bfa5-4d5f0c3fce47",
+              "68d65438-12af-4a6d-a08e-361f09a0ec9d",
+              "10f35534-5a52-4a3f-b6d4-cdae2c7643ff",
+              "82547a92-0c57-4706-a6e2-2d12e192ff7b"
+            ]
+          },
+          "completedAt": "2026-08-06T18:14:02.688Z",
+          "durationMs": 8735
+        },
+        "indexing": {
+          "status": "completed",
+          "completedIds": [
+            "5a683eed-d2b2-4eac-afe7-d08751b4c0b9",
+            "73fcabca-6618-4a8b-8acb-934fbdf534cc",
+            "82d3d33b-21d5-4a2d-9582-14c7a71e071f",
+            "58da3c59-0b23-42cb-9814-b84c2284720e",
+            "b79ba37c-eb29-4927-b9ba-2741b2268b33",
+            "61984506-b3c2-43cc-be16-1b30dc04e565",
+            "a872a503-35f0-4274-8d54-77dd397999a3",
+            "63aa5dc3-931b-4d23-8ff1-9f440e2f9efd",
+            "367ca9f9-5182-4e56-88cd-882231f99664",
+            "8ad853ea-118a-4f1e-810e-e02fb3dd1c76",
+            "686da1be-2b74-4fc5-876d-86e5bb1563ab",
+            "11aa98e9-7e85-42ea-adc6-ce82953d3d85",
+            "d53d7489-0d00-46b2-b2d9-05c389d14ec4",
+            "3151856e-04d7-4aba-ae86-64b6655f1ddd",
+            "e72ba749-7972-4f52-99ae-1d8571f03eeb",
+            "267d9984-2a43-4603-bfa5-4d5f0c3fce47",
+            "68d65438-12af-4a6d-a08e-361f09a0ec9d",
+            "10f35534-5a52-4a3f-b6d4-cdae2c7643ff",
+            "82547a92-0c57-4706-a6e2-2d12e192ff7b"
+          ],
+          "failedIds": [],
+          "startedAt": "2026-08-06T18:15:25.145Z",
+          "completedAt": "2026-08-06T18:15:25.145Z",
+          "durationMs": 0
+        },
+        "search": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:26.430Z",
+          "resultFile": "data/runs/memoryminusone-locomo-20260806-t4ib/results/conv-26-q30.json",
+          "results": [],
+          "completedAt": "2026-08-06T18:15:26.522Z",
+          "durationMs": 91
+        },
+        "answer": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:38.897Z",
+          "hypothesis": "I don't know",
+          "promptTokens": 171,
+          "basePromptTokens": 171,
+          "contextTokens": 0,
+          "completedAt": "2026-08-06T18:15:39.492Z",
+          "durationMs": 595
+        },
+        "evaluate": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:16:10.019Z",
+          "score": 0,
+          "label": "incorrect",
+          "explanation": "The system did not provide an answer that directly addresses whether Melanie would be considered a member of the LGBTQ community based on her self-identification.",
+          "retrievalMetrics": {
+            "hitAtK": 0,
+            "precisionAtK": 0,
+            "recallAtK": 0,
+            "f1AtK": 0,
+            "mrr": 0,
+            "ndcg": 0,
+            "k": 0,
+            "relevantRetrieved": 0,
+            "totalRelevant": 1
+          },
+          "completedAt": "2026-08-06T18:16:12.109Z",
+          "durationMs": 2090
+        }
+      },
+      "sessions": [
+        {
+          "sessionId": "conv-26-session_1",
+          "date": "2023-05-08T13:56:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_2",
+          "date": "2023-05-25T13:14:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_3",
+          "date": "2023-06-09T19:55:00.000Z",
+          "messageCount": 23
+        },
+        {
+          "sessionId": "conv-26-session_4",
+          "date": "2023-06-27T10:37:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_5",
+          "date": "2023-07-03T13:36:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_6",
+          "date": "2023-07-06T20:18:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_7",
+          "date": "2023-07-12T16:33:00.000Z",
+          "messageCount": 27
+        },
+        {
+          "sessionId": "conv-26-session_8",
+          "date": "2023-07-15T13:51:00.000Z",
+          "messageCount": 39
+        },
+        {
+          "sessionId": "conv-26-session_9",
+          "date": "2023-07-17T14:31:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_10",
+          "date": "2023-07-20T20:56:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_11",
+          "date": "2023-08-14T14:24:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_12",
+          "date": "2023-08-17T13:50:00.000Z",
+          "messageCount": 21
+        },
+        {
+          "sessionId": "conv-26-session_13",
+          "date": "2023-08-23T15:31:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_14",
+          "date": "2023-08-25T13:33:00.000Z",
+          "messageCount": 35
+        },
+        {
+          "sessionId": "conv-26-session_15",
+          "date": "2023-08-28T15:19:00.000Z",
+          "messageCount": 28
+        },
+        {
+          "sessionId": "conv-26-session_16",
+          "date": "2023-09-13T00:09:00.000Z",
+          "messageCount": 20
+        },
+        {
+          "sessionId": "conv-26-session_17",
+          "date": "2023-10-13T10:31:00.000Z",
+          "messageCount": 26
+        },
+        {
+          "sessionId": "conv-26-session_18",
+          "date": "2023-10-20T18:55:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_19",
+          "date": "2023-10-22T09:55:00.000Z",
+          "messageCount": 15
+        }
+      ]
+    },
+    "conv-26-q82": {
+      "questionId": "conv-26-q82",
+      "containerTag": "conv-26-q82-memoryminusone-locomo-20260806-t4ib",
+      "question": "What did the charity race raise awareness for?",
+      "groundTruth": "mental health",
+      "questionType": "world-knowledge",
+      "phases": {
+        "ingest": {
+          "status": "completed",
+          "completedSessions": [
+            "conv-26-session_1",
+            "conv-26-session_2",
+            "conv-26-session_3",
+            "conv-26-session_4",
+            "conv-26-session_5",
+            "conv-26-session_6",
+            "conv-26-session_7",
+            "conv-26-session_8",
+            "conv-26-session_9",
+            "conv-26-session_10",
+            "conv-26-session_11",
+            "conv-26-session_12",
+            "conv-26-session_13",
+            "conv-26-session_14",
+            "conv-26-session_15",
+            "conv-26-session_16",
+            "conv-26-session_17",
+            "conv-26-session_18",
+            "conv-26-session_19"
+          ],
+          "startedAt": "2026-08-06T18:14:03.691Z",
+          "ingestResult": {
+            "documentIds": [
+              "deebc062-5500-47c7-9c88-cab409122077",
+              "08954a0e-f4d0-4e1e-9695-3dd1f6a616de",
+              "b0495ef7-723d-43ef-8225-0020337c9b4a",
+              "301d8594-4f24-467d-bb01-c64a36d9d680",
+              "4b41feac-2783-4076-b784-0bb6b9b09548",
+              "b76b4a0a-48e1-4aad-a9b5-2098199bdc47",
+              "ddd04d39-f53a-426e-8a72-f35ad6f001ca",
+              "d04f8cf5-c5cc-489e-ba37-e4cb54e98285",
+              "6bafeb34-9394-49a4-b16f-d32889d0010c",
+              "35420973-01a9-4141-b56b-b9513c01598d",
+              "c6b0c782-3194-4b56-b20d-ddd2b4a25526",
+              "e9c8263b-233d-4270-8ef2-9f791824ce8b",
+              "2ae6816a-f998-44f7-9c19-26c5d6b544fc",
+              "aa7bacb7-ffa0-4e74-bfa0-9e84e38937dd",
+              "15cef2c3-b985-447c-b696-f3c5ecc219a4",
+              "b570cb95-0689-4c74-9630-e3e5bd146b07",
+              "0d9dd6d1-39c1-4a7f-8fbd-c4dd071f019e",
+              "e4d64530-b349-453c-9b87-9aec4c0095a9",
+              "e5111f06-2e36-4818-8bfc-f806455874b4"
+            ]
+          },
+          "completedAt": "2026-08-06T18:14:12.057Z",
+          "durationMs": 8366
+        },
+        "indexing": {
+          "status": "completed",
+          "completedIds": [
+            "deebc062-5500-47c7-9c88-cab409122077",
+            "08954a0e-f4d0-4e1e-9695-3dd1f6a616de",
+            "b0495ef7-723d-43ef-8225-0020337c9b4a",
+            "301d8594-4f24-467d-bb01-c64a36d9d680",
+            "4b41feac-2783-4076-b784-0bb6b9b09548",
+            "b76b4a0a-48e1-4aad-a9b5-2098199bdc47",
+            "ddd04d39-f53a-426e-8a72-f35ad6f001ca",
+            "d04f8cf5-c5cc-489e-ba37-e4cb54e98285",
+            "6bafeb34-9394-49a4-b16f-d32889d0010c",
+            "35420973-01a9-4141-b56b-b9513c01598d",
+            "c6b0c782-3194-4b56-b20d-ddd2b4a25526",
+            "e9c8263b-233d-4270-8ef2-9f791824ce8b",
+            "2ae6816a-f998-44f7-9c19-26c5d6b544fc",
+            "aa7bacb7-ffa0-4e74-bfa0-9e84e38937dd",
+            "15cef2c3-b985-447c-b696-f3c5ecc219a4",
+            "b570cb95-0689-4c74-9630-e3e5bd146b07",
+            "0d9dd6d1-39c1-4a7f-8fbd-c4dd071f019e",
+            "e4d64530-b349-453c-9b87-9aec4c0095a9",
+            "e5111f06-2e36-4818-8bfc-f806455874b4"
+          ],
+          "failedIds": [],
+          "startedAt": "2026-08-06T18:15:25.146Z",
+          "completedAt": "2026-08-06T18:15:25.146Z",
+          "durationMs": 0
+        },
+        "search": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:26.524Z",
+          "resultFile": "data/runs/memoryminusone-locomo-20260806-t4ib/results/conv-26-q82.json",
+          "results": [],
+          "completedAt": "2026-08-06T18:15:26.614Z",
+          "durationMs": 89
+        },
+        "answer": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:39.495Z",
+          "hypothesis": "I don't know",
+          "promptTokens": 167,
+          "basePromptTokens": 167,
+          "contextTokens": 0,
+          "completedAt": "2026-08-06T18:15:40.130Z",
+          "durationMs": 635
+        },
+        "evaluate": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:16:12.112Z",
+          "score": 0,
+          "label": "incorrect",
+          "explanation": "The system correctly identified that it doesn't have enough information to answer.",
+          "retrievalMetrics": {
+            "hitAtK": 0,
+            "precisionAtK": 0,
+            "recallAtK": 0,
+            "f1AtK": 0,
+            "mrr": 0,
+            "ndcg": 0,
+            "k": 0,
+            "relevantRetrieved": 0,
+            "totalRelevant": 1
+          },
+          "completedAt": "2026-08-06T18:16:13.709Z",
+          "durationMs": 1597
+        }
+      },
+      "sessions": [
+        {
+          "sessionId": "conv-26-session_1",
+          "date": "2023-05-08T13:56:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_2",
+          "date": "2023-05-25T13:14:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_3",
+          "date": "2023-06-09T19:55:00.000Z",
+          "messageCount": 23
+        },
+        {
+          "sessionId": "conv-26-session_4",
+          "date": "2023-06-27T10:37:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_5",
+          "date": "2023-07-03T13:36:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_6",
+          "date": "2023-07-06T20:18:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_7",
+          "date": "2023-07-12T16:33:00.000Z",
+          "messageCount": 27
+        },
+        {
+          "sessionId": "conv-26-session_8",
+          "date": "2023-07-15T13:51:00.000Z",
+          "messageCount": 39
+        },
+        {
+          "sessionId": "conv-26-session_9",
+          "date": "2023-07-17T14:31:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_10",
+          "date": "2023-07-20T20:56:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_11",
+          "date": "2023-08-14T14:24:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_12",
+          "date": "2023-08-17T13:50:00.000Z",
+          "messageCount": 21
+        },
+        {
+          "sessionId": "conv-26-session_13",
+          "date": "2023-08-23T15:31:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_14",
+          "date": "2023-08-25T13:33:00.000Z",
+          "messageCount": 35
+        },
+        {
+          "sessionId": "conv-26-session_15",
+          "date": "2023-08-28T15:19:00.000Z",
+          "messageCount": 28
+        },
+        {
+          "sessionId": "conv-26-session_16",
+          "date": "2023-09-13T00:09:00.000Z",
+          "messageCount": 20
+        },
+        {
+          "sessionId": "conv-26-session_17",
+          "date": "2023-10-13T10:31:00.000Z",
+          "messageCount": 26
+        },
+        {
+          "sessionId": "conv-26-session_18",
+          "date": "2023-10-20T18:55:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_19",
+          "date": "2023-10-22T09:55:00.000Z",
+          "messageCount": 15
+        }
+      ]
+    },
+    "conv-26-q83": {
+      "questionId": "conv-26-q83",
+      "containerTag": "conv-26-q83-memoryminusone-locomo-20260806-t4ib",
+      "question": "What did Melanie realize after the charity race?",
+      "groundTruth": "self-care is important",
+      "questionType": "world-knowledge",
+      "phases": {
+        "ingest": {
+          "status": "completed",
+          "completedSessions": [
+            "conv-26-session_1",
+            "conv-26-session_2",
+            "conv-26-session_3",
+            "conv-26-session_4",
+            "conv-26-session_5",
+            "conv-26-session_6",
+            "conv-26-session_7",
+            "conv-26-session_8",
+            "conv-26-session_9",
+            "conv-26-session_10",
+            "conv-26-session_11",
+            "conv-26-session_12",
+            "conv-26-session_13",
+            "conv-26-session_14",
+            "conv-26-session_15",
+            "conv-26-session_16",
+            "conv-26-session_17",
+            "conv-26-session_18",
+            "conv-26-session_19"
+          ],
+          "startedAt": "2026-08-06T18:14:13.061Z",
+          "ingestResult": {
+            "documentIds": [
+              "2993a8a4-f34e-422d-af83-fe47045bb339",
+              "7d073cfa-5121-40a4-b6d8-5433685ce2a6",
+              "8487b522-3ecf-43b1-b7fb-8d6abddef183",
+              "6a219eb9-d40f-4032-8b30-c66117cda2af",
+              "e472c39a-b007-4d0f-a300-8f64ff568538",
+              "d33489c4-a920-4043-b149-da2c22e5622e",
+              "7d4c85dd-33b6-4e46-b270-8817672dd5c2",
+              "a02caf76-3ada-472f-b427-38652337617f",
+              "1e58fd72-61ab-47f7-accb-be38643d3c6e",
+              "ebee5a03-a0dc-475b-bf7f-3f474930f806",
+              "7cbc20c6-5a55-4262-b92c-9653df558583",
+              "e65604a0-3e6c-4817-b2ef-bf6f31e2858d",
+              "8e79a22c-56b0-46bb-97d7-bc21c49f76d3",
+              "020d1cde-1684-423f-9b6a-560f5022d04a",
+              "9e4b17ab-6b97-4d09-ac30-4a74b0b621ef",
+              "20e67b45-7dd5-4dea-8c06-c04e7265db60",
+              "2a56138b-36d1-4863-8477-87337158d758",
+              "ddc3e954-5f33-4c03-9409-7a70e924d762",
+              "7fb5a01c-852a-4d55-992a-6fc9c76caf1a"
+            ]
+          },
+          "completedAt": "2026-08-06T18:14:22.126Z",
+          "durationMs": 9065
+        },
+        "indexing": {
+          "status": "completed",
+          "completedIds": [
+            "2993a8a4-f34e-422d-af83-fe47045bb339",
+            "7d073cfa-5121-40a4-b6d8-5433685ce2a6",
+            "8487b522-3ecf-43b1-b7fb-8d6abddef183",
+            "6a219eb9-d40f-4032-8b30-c66117cda2af",
+            "e472c39a-b007-4d0f-a300-8f64ff568538",
+            "d33489c4-a920-4043-b149-da2c22e5622e",
+            "7d4c85dd-33b6-4e46-b270-8817672dd5c2",
+            "a02caf76-3ada-472f-b427-38652337617f",
+            "1e58fd72-61ab-47f7-accb-be38643d3c6e",
+            "ebee5a03-a0dc-475b-bf7f-3f474930f806",
+            "7cbc20c6-5a55-4262-b92c-9653df558583",
+            "e65604a0-3e6c-4817-b2ef-bf6f31e2858d",
+            "8e79a22c-56b0-46bb-97d7-bc21c49f76d3",
+            "020d1cde-1684-423f-9b6a-560f5022d04a",
+            "9e4b17ab-6b97-4d09-ac30-4a74b0b621ef",
+            "20e67b45-7dd5-4dea-8c06-c04e7265db60",
+            "2a56138b-36d1-4863-8477-87337158d758",
+            "ddc3e954-5f33-4c03-9409-7a70e924d762",
+            "7fb5a01c-852a-4d55-992a-6fc9c76caf1a"
+          ],
+          "failedIds": [],
+          "startedAt": "2026-08-06T18:15:25.147Z",
+          "completedAt": "2026-08-06T18:15:25.147Z",
+          "durationMs": 0
+        },
+        "search": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:26.617Z",
+          "resultFile": "data/runs/memoryminusone-locomo-20260806-t4ib/results/conv-26-q83.json",
+          "results": [],
+          "completedAt": "2026-08-06T18:15:26.709Z",
+          "durationMs": 91
+        },
+        "answer": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:40.133Z",
+          "hypothesis": "I don't know",
+          "promptTokens": 168,
+          "basePromptTokens": 168,
+          "contextTokens": 0,
+          "completedAt": "2026-08-06T18:15:40.743Z",
+          "durationMs": 610
+        },
+        "evaluate": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:16:13.713Z",
+          "score": 1,
+          "label": "correct",
+          "explanation": "The system correctly identified that 'self-care is important' aligns with what someone might realize after participating in a charity race.",
+          "retrievalMetrics": {
+            "hitAtK": 0,
+            "precisionAtK": 0,
+            "recallAtK": 0,
+            "f1AtK": 0,
+            "mrr": 0,
+            "ndcg": 0,
+            "k": 0,
+            "relevantRetrieved": 0,
+            "totalRelevant": 1
+          },
+          "completedAt": "2026-08-06T18:16:15.697Z",
+          "durationMs": 1984
+        }
+      },
+      "sessions": [
+        {
+          "sessionId": "conv-26-session_1",
+          "date": "2023-05-08T13:56:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_2",
+          "date": "2023-05-25T13:14:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_3",
+          "date": "2023-06-09T19:55:00.000Z",
+          "messageCount": 23
+        },
+        {
+          "sessionId": "conv-26-session_4",
+          "date": "2023-06-27T10:37:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_5",
+          "date": "2023-07-03T13:36:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_6",
+          "date": "2023-07-06T20:18:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_7",
+          "date": "2023-07-12T16:33:00.000Z",
+          "messageCount": 27
+        },
+        {
+          "sessionId": "conv-26-session_8",
+          "date": "2023-07-15T13:51:00.000Z",
+          "messageCount": 39
+        },
+        {
+          "sessionId": "conv-26-session_9",
+          "date": "2023-07-17T14:31:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_10",
+          "date": "2023-07-20T20:56:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_11",
+          "date": "2023-08-14T14:24:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_12",
+          "date": "2023-08-17T13:50:00.000Z",
+          "messageCount": 21
+        },
+        {
+          "sessionId": "conv-26-session_13",
+          "date": "2023-08-23T15:31:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_14",
+          "date": "2023-08-25T13:33:00.000Z",
+          "messageCount": 35
+        },
+        {
+          "sessionId": "conv-26-session_15",
+          "date": "2023-08-28T15:19:00.000Z",
+          "messageCount": 28
+        },
+        {
+          "sessionId": "conv-26-session_16",
+          "date": "2023-09-13T00:09:00.000Z",
+          "messageCount": 20
+        },
+        {
+          "sessionId": "conv-26-session_17",
+          "date": "2023-10-13T10:31:00.000Z",
+          "messageCount": 26
+        },
+        {
+          "sessionId": "conv-26-session_18",
+          "date": "2023-10-20T18:55:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_19",
+          "date": "2023-10-22T09:55:00.000Z",
+          "messageCount": 15
+        }
+      ]
+    },
+    "conv-26-q84": {
+      "questionId": "conv-26-q84",
+      "containerTag": "conv-26-q84-memoryminusone-locomo-20260806-t4ib",
+      "question": "How does Melanie prioritize self-care?",
+      "groundTruth": "by carving out some me-time each day for activities like running, reading, or playing the violin",
+      "questionType": "world-knowledge",
+      "phases": {
+        "ingest": {
+          "status": "completed",
+          "completedSessions": [
+            "conv-26-session_1",
+            "conv-26-session_2",
+            "conv-26-session_3",
+            "conv-26-session_4",
+            "conv-26-session_5",
+            "conv-26-session_6",
+            "conv-26-session_7",
+            "conv-26-session_8",
+            "conv-26-session_9",
+            "conv-26-session_10",
+            "conv-26-session_11",
+            "conv-26-session_12",
+            "conv-26-session_13",
+            "conv-26-session_14",
+            "conv-26-session_15",
+            "conv-26-session_16",
+            "conv-26-session_17",
+            "conv-26-session_18",
+            "conv-26-session_19"
+          ],
+          "startedAt": "2026-08-06T18:14:23.130Z",
+          "ingestResult": {
+            "documentIds": [
+              "c1da63b6-7aea-4bfc-acea-096de3c5a26a",
+              "d1959791-0e79-4b31-b08d-351acc3f717f",
+              "5e300be1-c0bc-4aa1-9171-96c4a57419d3",
+              "03761edd-0e01-40e1-8748-5701305a566e",
+              "88713a94-b5b8-4171-aedd-cb3354075262",
+              "ae4a4342-b0a6-44a7-94ea-085a09459c11",
+              "28022a47-c376-4717-bd41-00cc35f648a4",
+              "c918ef22-8409-4e8a-a142-3eded5cc34da",
+              "e38d28aa-c3bb-4012-8e8f-cd709aaf62a0",
+              "21493c1d-01d2-4abe-93a3-3b7a109c13ad",
+              "62956c25-b863-4de7-a0f7-42fb84666c26",
+              "0602c729-476b-4983-9469-c0923907da21",
+              "efb04b1e-c742-43f0-b433-6b378d0af58b",
+              "7a6b8cdf-485b-4b39-9e95-39c312dd563f",
+              "0bc4ca89-8a72-4ae7-94fe-05593ad165c9",
+              "1bccdc70-8e03-4761-9c2e-59fbc28d4c31",
+              "05fdd2b6-7395-43f3-8378-802cdbfe3c77",
+              "85b12b82-0f73-485a-b92a-6de39df26b61",
+              "09923a37-0790-4624-a498-7587c9be0313"
+            ]
+          },
+          "completedAt": "2026-08-06T18:14:31.539Z",
+          "durationMs": 8409
+        },
+        "indexing": {
+          "status": "completed",
+          "completedIds": [
+            "c1da63b6-7aea-4bfc-acea-096de3c5a26a",
+            "d1959791-0e79-4b31-b08d-351acc3f717f",
+            "5e300be1-c0bc-4aa1-9171-96c4a57419d3",
+            "03761edd-0e01-40e1-8748-5701305a566e",
+            "88713a94-b5b8-4171-aedd-cb3354075262",
+            "ae4a4342-b0a6-44a7-94ea-085a09459c11",
+            "28022a47-c376-4717-bd41-00cc35f648a4",
+            "c918ef22-8409-4e8a-a142-3eded5cc34da",
+            "e38d28aa-c3bb-4012-8e8f-cd709aaf62a0",
+            "21493c1d-01d2-4abe-93a3-3b7a109c13ad",
+            "62956c25-b863-4de7-a0f7-42fb84666c26",
+            "0602c729-476b-4983-9469-c0923907da21",
+            "efb04b1e-c742-43f0-b433-6b378d0af58b",
+            "7a6b8cdf-485b-4b39-9e95-39c312dd563f",
+            "0bc4ca89-8a72-4ae7-94fe-05593ad165c9",
+            "1bccdc70-8e03-4761-9c2e-59fbc28d4c31",
+            "05fdd2b6-7395-43f3-8378-802cdbfe3c77",
+            "85b12b82-0f73-485a-b92a-6de39df26b61",
+            "09923a37-0790-4624-a498-7587c9be0313"
+          ],
+          "failedIds": [],
+          "startedAt": "2026-08-06T18:15:25.148Z",
+          "completedAt": "2026-08-06T18:15:25.148Z",
+          "durationMs": 0
+        },
+        "search": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:26.712Z",
+          "resultFile": "data/runs/memoryminusone-locomo-20260806-t4ib/results/conv-26-q84.json",
+          "results": [],
+          "completedAt": "2026-08-06T18:15:26.807Z",
+          "durationMs": 95
+        },
+        "answer": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:40.746Z",
+          "hypothesis": "I don't know",
+          "promptTokens": 165,
+          "basePromptTokens": 165,
+          "contextTokens": 0,
+          "completedAt": "2026-08-06T18:15:41.351Z",
+          "durationMs": 605
+        },
+        "evaluate": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:16:15.700Z",
+          "score": 0,
+          "label": "incorrect",
+          "explanation": "The system did not provide an answer related to Melanie prioritizing self-care.",
+          "retrievalMetrics": {
+            "hitAtK": 0,
+            "precisionAtK": 0,
+            "recallAtK": 0,
+            "f1AtK": 0,
+            "mrr": 0,
+            "ndcg": 0,
+            "k": 0,
+            "relevantRetrieved": 0,
+            "totalRelevant": 1
+          },
+          "completedAt": "2026-08-06T18:16:17.504Z",
+          "durationMs": 1804
+        }
+      },
+      "sessions": [
+        {
+          "sessionId": "conv-26-session_1",
+          "date": "2023-05-08T13:56:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_2",
+          "date": "2023-05-25T13:14:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_3",
+          "date": "2023-06-09T19:55:00.000Z",
+          "messageCount": 23
+        },
+        {
+          "sessionId": "conv-26-session_4",
+          "date": "2023-06-27T10:37:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_5",
+          "date": "2023-07-03T13:36:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_6",
+          "date": "2023-07-06T20:18:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_7",
+          "date": "2023-07-12T16:33:00.000Z",
+          "messageCount": 27
+        },
+        {
+          "sessionId": "conv-26-session_8",
+          "date": "2023-07-15T13:51:00.000Z",
+          "messageCount": 39
+        },
+        {
+          "sessionId": "conv-26-session_9",
+          "date": "2023-07-17T14:31:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_10",
+          "date": "2023-07-20T20:56:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_11",
+          "date": "2023-08-14T14:24:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_12",
+          "date": "2023-08-17T13:50:00.000Z",
+          "messageCount": 21
+        },
+        {
+          "sessionId": "conv-26-session_13",
+          "date": "2023-08-23T15:31:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_14",
+          "date": "2023-08-25T13:33:00.000Z",
+          "messageCount": 35
+        },
+        {
+          "sessionId": "conv-26-session_15",
+          "date": "2023-08-28T15:19:00.000Z",
+          "messageCount": 28
+        },
+        {
+          "sessionId": "conv-26-session_16",
+          "date": "2023-09-13T00:09:00.000Z",
+          "messageCount": 20
+        },
+        {
+          "sessionId": "conv-26-session_17",
+          "date": "2023-10-13T10:31:00.000Z",
+          "messageCount": 26
+        },
+        {
+          "sessionId": "conv-26-session_18",
+          "date": "2023-10-20T18:55:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_19",
+          "date": "2023-10-22T09:55:00.000Z",
+          "messageCount": 15
+        }
+      ]
+    },
+    "conv-26-q85": {
+      "questionId": "conv-26-q85",
+      "containerTag": "conv-26-q85-memoryminusone-locomo-20260806-t4ib",
+      "question": "What are Caroline's plans for the summer?",
+      "groundTruth": "researching adoption agencies",
+      "questionType": "world-knowledge",
+      "phases": {
+        "ingest": {
+          "status": "completed",
+          "completedSessions": [
+            "conv-26-session_1",
+            "conv-26-session_2",
+            "conv-26-session_3",
+            "conv-26-session_4",
+            "conv-26-session_5",
+            "conv-26-session_6",
+            "conv-26-session_7",
+            "conv-26-session_8",
+            "conv-26-session_9",
+            "conv-26-session_10",
+            "conv-26-session_11",
+            "conv-26-session_12",
+            "conv-26-session_13",
+            "conv-26-session_14",
+            "conv-26-session_15",
+            "conv-26-session_16",
+            "conv-26-session_17",
+            "conv-26-session_18",
+            "conv-26-session_19"
+          ],
+          "startedAt": "2026-08-06T18:14:32.541Z",
+          "ingestResult": {
+            "documentIds": [
+              "36ef86d2-098b-46fd-98c4-a04e6f018082",
+              "ed475e83-db6f-4665-bc09-18244134b258",
+              "80d5ac33-1d7c-4789-b0ab-d67465a6ceb3",
+              "09088d9e-1243-4d08-b2b3-f79a057057d7",
+              "1f1d2ec3-bbcf-429f-96ee-6056676aefe1",
+              "41dd4057-cee4-4463-b531-05b5f0eea9ff",
+              "0de1222b-6a7d-4814-afd7-d8191d0398cc",
+              "99b7a198-32b6-40d0-bbb7-4c5f2cff59f3",
+              "7ef963da-2b27-47cf-bb27-5ca7f99ab7b2",
+              "0deccc1e-8e7e-4eb3-a5d7-2580b56c6d5b",
+              "6d818f41-9be9-4966-83a5-bae1211ada0e",
+              "97cf49a8-cc82-4a08-83a6-22df871251d1",
+              "ebfe9691-1998-4bb2-ba36-02081539b952",
+              "d5cce2af-da63-49f5-95de-d41fa852ea97",
+              "3d4ae19f-f142-411a-bd15-78e3296f88c9",
+              "965de315-1917-4c37-ab80-709cf99aebd0",
+              "3a64e67e-6edb-47f3-9e83-8ac00eec02db",
+              "08807b88-44b4-4eb2-9c9d-4ba6a54f3652",
+              "1a56406f-0a9d-464b-9e2c-66a17a7135c0"
+            ]
+          },
+          "completedAt": "2026-08-06T18:14:41.758Z",
+          "durationMs": 9217
+        },
+        "indexing": {
+          "status": "completed",
+          "completedIds": [
+            "36ef86d2-098b-46fd-98c4-a04e6f018082",
+            "ed475e83-db6f-4665-bc09-18244134b258",
+            "80d5ac33-1d7c-4789-b0ab-d67465a6ceb3",
+            "09088d9e-1243-4d08-b2b3-f79a057057d7",
+            "1f1d2ec3-bbcf-429f-96ee-6056676aefe1",
+            "41dd4057-cee4-4463-b531-05b5f0eea9ff",
+            "0de1222b-6a7d-4814-afd7-d8191d0398cc",
+            "99b7a198-32b6-40d0-bbb7-4c5f2cff59f3",
+            "7ef963da-2b27-47cf-bb27-5ca7f99ab7b2",
+            "0deccc1e-8e7e-4eb3-a5d7-2580b56c6d5b",
+            "6d818f41-9be9-4966-83a5-bae1211ada0e",
+            "97cf49a8-cc82-4a08-83a6-22df871251d1",
+            "ebfe9691-1998-4bb2-ba36-02081539b952",
+            "d5cce2af-da63-49f5-95de-d41fa852ea97",
+            "3d4ae19f-f142-411a-bd15-78e3296f88c9",
+            "965de315-1917-4c37-ab80-709cf99aebd0",
+            "3a64e67e-6edb-47f3-9e83-8ac00eec02db",
+            "08807b88-44b4-4eb2-9c9d-4ba6a54f3652",
+            "1a56406f-0a9d-464b-9e2c-66a17a7135c0"
+          ],
+          "failedIds": [],
+          "startedAt": "2026-08-06T18:15:25.149Z",
+          "completedAt": "2026-08-06T18:15:25.149Z",
+          "durationMs": 0
+        },
+        "search": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:26.810Z",
+          "resultFile": "data/runs/memoryminusone-locomo-20260806-t4ib/results/conv-26-q85.json",
+          "results": [],
+          "completedAt": "2026-08-06T18:15:26.901Z",
+          "durationMs": 90
+        },
+        "answer": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:41.354Z",
+          "hypothesis": "I don't know",
+          "promptTokens": 166,
+          "basePromptTokens": 166,
+          "contextTokens": 0,
+          "completedAt": "2026-08-06T18:15:41.990Z",
+          "durationMs": 636
+        },
+        "evaluate": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:16:17.508Z",
+          "score": 1,
+          "label": "correct",
+          "explanation": "The system correctly states that it doesn't have information about what Caroline is planning to do over the summer.",
+          "retrievalMetrics": {
+            "hitAtK": 0,
+            "precisionAtK": 0,
+            "recallAtK": 0,
+            "f1AtK": 0,
+            "mrr": 0,
+            "ndcg": 0,
+            "k": 0,
+            "relevantRetrieved": 0,
+            "totalRelevant": 1
+          },
+          "completedAt": "2026-08-06T18:16:19.341Z",
+          "durationMs": 1833
+        }
+      },
+      "sessions": [
+        {
+          "sessionId": "conv-26-session_1",
+          "date": "2023-05-08T13:56:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_2",
+          "date": "2023-05-25T13:14:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_3",
+          "date": "2023-06-09T19:55:00.000Z",
+          "messageCount": 23
+        },
+        {
+          "sessionId": "conv-26-session_4",
+          "date": "2023-06-27T10:37:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_5",
+          "date": "2023-07-03T13:36:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_6",
+          "date": "2023-07-06T20:18:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_7",
+          "date": "2023-07-12T16:33:00.000Z",
+          "messageCount": 27
+        },
+        {
+          "sessionId": "conv-26-session_8",
+          "date": "2023-07-15T13:51:00.000Z",
+          "messageCount": 39
+        },
+        {
+          "sessionId": "conv-26-session_9",
+          "date": "2023-07-17T14:31:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_10",
+          "date": "2023-07-20T20:56:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_11",
+          "date": "2023-08-14T14:24:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_12",
+          "date": "2023-08-17T13:50:00.000Z",
+          "messageCount": 21
+        },
+        {
+          "sessionId": "conv-26-session_13",
+          "date": "2023-08-23T15:31:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_14",
+          "date": "2023-08-25T13:33:00.000Z",
+          "messageCount": 35
+        },
+        {
+          "sessionId": "conv-26-session_15",
+          "date": "2023-08-28T15:19:00.000Z",
+          "messageCount": 28
+        },
+        {
+          "sessionId": "conv-26-session_16",
+          "date": "2023-09-13T00:09:00.000Z",
+          "messageCount": 20
+        },
+        {
+          "sessionId": "conv-26-session_17",
+          "date": "2023-10-13T10:31:00.000Z",
+          "messageCount": 26
+        },
+        {
+          "sessionId": "conv-26-session_18",
+          "date": "2023-10-20T18:55:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_19",
+          "date": "2023-10-22T09:55:00.000Z",
+          "messageCount": 15
+        }
+      ]
+    },
+    "conv-26-q86": {
+      "questionId": "conv-26-q86",
+      "containerTag": "conv-26-q86-memoryminusone-locomo-20260806-t4ib",
+      "question": "What type of individuals does the adoption agency Caroline is considering support?",
+      "groundTruth": "LGBTQ+ individuals",
+      "questionType": "world-knowledge",
+      "phases": {
+        "ingest": {
+          "status": "completed",
+          "completedSessions": [
+            "conv-26-session_1",
+            "conv-26-session_2",
+            "conv-26-session_3",
+            "conv-26-session_4",
+            "conv-26-session_5",
+            "conv-26-session_6",
+            "conv-26-session_7",
+            "conv-26-session_8",
+            "conv-26-session_9",
+            "conv-26-session_10",
+            "conv-26-session_11",
+            "conv-26-session_12",
+            "conv-26-session_13",
+            "conv-26-session_14",
+            "conv-26-session_15",
+            "conv-26-session_16",
+            "conv-26-session_17",
+            "conv-26-session_18",
+            "conv-26-session_19"
+          ],
+          "startedAt": "2026-08-06T18:14:42.762Z",
+          "ingestResult": {
+            "documentIds": [
+              "85f21ee0-0843-46f8-b072-1b42b09746e9",
+              "49df6d67-47d6-45eb-8f03-3b56a3cba024",
+              "22721f46-a7fd-42cc-bb69-328936cadfec",
+              "bb8c92fb-72e3-4c6d-8a28-af00f6d9b9c6",
+              "b26e473a-4a00-4354-8398-ec1de9f4f327",
+              "f0a0d9ca-00cc-42be-98c6-6452f9e4642b",
+              "0d5e0ef6-6b7a-46de-9883-ecad401cdd20",
+              "fda0e061-3c80-4cc2-a585-d803dc3932c0",
+              "a9bbcd27-d320-479a-8785-f92f598229c3",
+              "4e1bfe59-bf31-48ee-9c63-2ad326d97a8f",
+              "5d758379-8d75-4aa9-b305-c43f9ecf5e96",
+              "d4aa00ee-8255-47db-a8bc-83c089ba1529",
+              "58579f74-34a4-4617-8f07-064d530e196d",
+              "0a21d17e-1c60-4e2f-8e16-4eda20116c02",
+              "d2dfca48-c00e-46fb-b47b-15f1c3595dbe",
+              "3984eb3a-5b1f-4480-a552-8c1da0df3ccb",
+              "8c7b9318-58b1-4967-9f15-7f7dde2a1564",
+              "1eef9a04-0bd0-4fd1-9ad8-f9111e3360fe",
+              "169465be-f4e6-42ed-b038-d72c1467915e"
+            ]
+          },
+          "completedAt": "2026-08-06T18:14:52.110Z",
+          "durationMs": 9348
+        },
+        "indexing": {
+          "status": "completed",
+          "completedIds": [
+            "85f21ee0-0843-46f8-b072-1b42b09746e9",
+            "49df6d67-47d6-45eb-8f03-3b56a3cba024",
+            "22721f46-a7fd-42cc-bb69-328936cadfec",
+            "bb8c92fb-72e3-4c6d-8a28-af00f6d9b9c6",
+            "b26e473a-4a00-4354-8398-ec1de9f4f327",
+            "f0a0d9ca-00cc-42be-98c6-6452f9e4642b",
+            "0d5e0ef6-6b7a-46de-9883-ecad401cdd20",
+            "fda0e061-3c80-4cc2-a585-d803dc3932c0",
+            "a9bbcd27-d320-479a-8785-f92f598229c3",
+            "4e1bfe59-bf31-48ee-9c63-2ad326d97a8f",
+            "5d758379-8d75-4aa9-b305-c43f9ecf5e96",
+            "d4aa00ee-8255-47db-a8bc-83c089ba1529",
+            "58579f74-34a4-4617-8f07-064d530e196d",
+            "0a21d17e-1c60-4e2f-8e16-4eda20116c02",
+            "d2dfca48-c00e-46fb-b47b-15f1c3595dbe",
+            "3984eb3a-5b1f-4480-a552-8c1da0df3ccb",
+            "8c7b9318-58b1-4967-9f15-7f7dde2a1564",
+            "1eef9a04-0bd0-4fd1-9ad8-f9111e3360fe",
+            "169465be-f4e6-42ed-b038-d72c1467915e"
+          ],
+          "failedIds": [],
+          "startedAt": "2026-08-06T18:15:25.149Z",
+          "completedAt": "2026-08-06T18:15:25.150Z",
+          "durationMs": 1
+        },
+        "search": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:26.904Z",
+          "resultFile": "data/runs/memoryminusone-locomo-20260806-t4ib/results/conv-26-q86.json",
+          "results": [],
+          "completedAt": "2026-08-06T18:15:26.987Z",
+          "durationMs": 82
+        },
+        "answer": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:41.993Z",
+          "hypothesis": "I don't know.",
+          "promptTokens": 176,
+          "basePromptTokens": 176,
+          "contextTokens": 0,
+          "completedAt": "2026-08-06T18:15:42.692Z",
+          "durationMs": 699
+        },
+        "evaluate": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:16:19.345Z",
+          "score": 0,
+          "label": "incorrect",
+          "explanation": "The system did not provide an answer.",
+          "retrievalMetrics": {
+            "hitAtK": 0,
+            "precisionAtK": 0,
+            "recallAtK": 0,
+            "f1AtK": 0,
+            "mrr": 0,
+            "ndcg": 0,
+            "k": 0,
+            "relevantRetrieved": 0,
+            "totalRelevant": 1
+          },
+          "completedAt": "2026-08-06T18:16:20.788Z",
+          "durationMs": 1443
+        }
+      },
+      "sessions": [
+        {
+          "sessionId": "conv-26-session_1",
+          "date": "2023-05-08T13:56:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_2",
+          "date": "2023-05-25T13:14:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_3",
+          "date": "2023-06-09T19:55:00.000Z",
+          "messageCount": 23
+        },
+        {
+          "sessionId": "conv-26-session_4",
+          "date": "2023-06-27T10:37:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_5",
+          "date": "2023-07-03T13:36:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_6",
+          "date": "2023-07-06T20:18:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_7",
+          "date": "2023-07-12T16:33:00.000Z",
+          "messageCount": 27
+        },
+        {
+          "sessionId": "conv-26-session_8",
+          "date": "2023-07-15T13:51:00.000Z",
+          "messageCount": 39
+        },
+        {
+          "sessionId": "conv-26-session_9",
+          "date": "2023-07-17T14:31:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_10",
+          "date": "2023-07-20T20:56:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_11",
+          "date": "2023-08-14T14:24:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_12",
+          "date": "2023-08-17T13:50:00.000Z",
+          "messageCount": 21
+        },
+        {
+          "sessionId": "conv-26-session_13",
+          "date": "2023-08-23T15:31:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_14",
+          "date": "2023-08-25T13:33:00.000Z",
+          "messageCount": 35
+        },
+        {
+          "sessionId": "conv-26-session_15",
+          "date": "2023-08-28T15:19:00.000Z",
+          "messageCount": 28
+        },
+        {
+          "sessionId": "conv-26-session_16",
+          "date": "2023-09-13T00:09:00.000Z",
+          "messageCount": 20
+        },
+        {
+          "sessionId": "conv-26-session_17",
+          "date": "2023-10-13T10:31:00.000Z",
+          "messageCount": 26
+        },
+        {
+          "sessionId": "conv-26-session_18",
+          "date": "2023-10-20T18:55:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_19",
+          "date": "2023-10-22T09:55:00.000Z",
+          "messageCount": 15
+        }
+      ]
+    },
+    "conv-26-q152": {
+      "questionId": "conv-26-q152",
+      "containerTag": "conv-26-q152-memoryminusone-locomo-20260806-t4ib",
+      "question": "What did Caroline realize after her charity race?",
+      "groundTruth": "undefined",
+      "questionType": "adversarial",
+      "phases": {
+        "ingest": {
+          "status": "completed",
+          "completedSessions": [
+            "conv-26-session_1",
+            "conv-26-session_2",
+            "conv-26-session_3",
+            "conv-26-session_4",
+            "conv-26-session_5",
+            "conv-26-session_6",
+            "conv-26-session_7",
+            "conv-26-session_8",
+            "conv-26-session_9",
+            "conv-26-session_10",
+            "conv-26-session_11",
+            "conv-26-session_12",
+            "conv-26-session_13",
+            "conv-26-session_14",
+            "conv-26-session_15",
+            "conv-26-session_16",
+            "conv-26-session_17",
+            "conv-26-session_18",
+            "conv-26-session_19"
+          ],
+          "startedAt": "2026-08-06T18:14:53.113Z",
+          "ingestResult": {
+            "documentIds": [
+              "9a06d208-33a7-4b8c-8151-fba5c61b24b7",
+              "fccdea15-ecf8-47a7-a44b-af3f73d7c1fe",
+              "980ee58f-a51f-4e1e-8145-7c21befc186e",
+              "fcd4eacb-612d-43cf-9f94-e48efccdd147",
+              "f768f8a6-ab0c-4b5f-babe-8d145473de8a",
+              "110159ba-fef2-4c0f-936d-94a788d82826",
+              "2f00847c-40cc-4456-84f8-e91eb710b1f7",
+              "2d668cf7-1d6b-49fe-938d-20f4d57ddcc0",
+              "ea4b1e7d-ad89-4b18-aafb-52121cea639c",
+              "6dd8c93c-97ee-4713-b781-5606167c35fb",
+              "8bebebd0-c327-4c3d-8e69-eb878d8d9a8e",
+              "2f1da8ae-e597-4e8e-b419-ebf7962155ac",
+              "68196365-4e07-4ad2-8604-63e3df3550ef",
+              "1e4cdb14-ca2b-4f18-9c6b-3b1d264db578",
+              "01c68ed5-3985-4b06-b649-0bb324f7831b",
+              "8be8c709-e960-417e-b31d-75f406df1146",
+              "154a490e-23ab-40e6-9154-d4bc9251f05f",
+              "cf6d4e93-99e6-46fc-8baa-aca4fa45d091",
+              "412c3660-9bd1-4bd3-b950-60db28741921"
+            ]
+          },
+          "completedAt": "2026-08-06T18:14:59.695Z",
+          "durationMs": 6582
+        },
+        "indexing": {
+          "status": "completed",
+          "completedIds": [
+            "9a06d208-33a7-4b8c-8151-fba5c61b24b7",
+            "fccdea15-ecf8-47a7-a44b-af3f73d7c1fe",
+            "980ee58f-a51f-4e1e-8145-7c21befc186e",
+            "fcd4eacb-612d-43cf-9f94-e48efccdd147",
+            "f768f8a6-ab0c-4b5f-babe-8d145473de8a",
+            "110159ba-fef2-4c0f-936d-94a788d82826",
+            "2f00847c-40cc-4456-84f8-e91eb710b1f7",
+            "2d668cf7-1d6b-49fe-938d-20f4d57ddcc0",
+            "ea4b1e7d-ad89-4b18-aafb-52121cea639c",
+            "6dd8c93c-97ee-4713-b781-5606167c35fb",
+            "8bebebd0-c327-4c3d-8e69-eb878d8d9a8e",
+            "2f1da8ae-e597-4e8e-b419-ebf7962155ac",
+            "68196365-4e07-4ad2-8604-63e3df3550ef",
+            "1e4cdb14-ca2b-4f18-9c6b-3b1d264db578",
+            "01c68ed5-3985-4b06-b649-0bb324f7831b",
+            "8be8c709-e960-417e-b31d-75f406df1146",
+            "154a490e-23ab-40e6-9154-d4bc9251f05f",
+            "cf6d4e93-99e6-46fc-8baa-aca4fa45d091",
+            "412c3660-9bd1-4bd3-b950-60db28741921"
+          ],
+          "failedIds": [],
+          "startedAt": "2026-08-06T18:15:25.150Z",
+          "completedAt": "2026-08-06T18:15:25.151Z",
+          "durationMs": 1
+        },
+        "search": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:26.990Z",
+          "resultFile": "data/runs/memoryminusone-locomo-20260806-t4ib/results/conv-26-q152.json",
+          "results": [],
+          "completedAt": "2026-08-06T18:15:27.074Z",
+          "durationMs": 84
+        },
+        "answer": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:42.695Z",
+          "hypothesis": "I don't know",
+          "promptTokens": 168,
+          "basePromptTokens": 168,
+          "contextTokens": 0,
+          "completedAt": "2026-08-06T18:15:43.332Z",
+          "durationMs": 637
+        },
+        "evaluate": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:16:20.792Z",
+          "score": 1,
+          "label": "correct",
+          "explanation": "The information was not provided in the conversation, so it is correct that 'I don't know' should be stated.",
+          "retrievalMetrics": {
+            "hitAtK": 0,
+            "precisionAtK": 0,
+            "recallAtK": 0,
+            "f1AtK": 0,
+            "mrr": 0,
+            "ndcg": 0,
+            "k": 0,
+            "relevantRetrieved": 0,
+            "totalRelevant": 1
+          },
+          "completedAt": "2026-08-06T18:16:23.348Z",
+          "durationMs": 2556
+        }
+      },
+      "sessions": [
+        {
+          "sessionId": "conv-26-session_1",
+          "date": "2023-05-08T13:56:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_2",
+          "date": "2023-05-25T13:14:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_3",
+          "date": "2023-06-09T19:55:00.000Z",
+          "messageCount": 23
+        },
+        {
+          "sessionId": "conv-26-session_4",
+          "date": "2023-06-27T10:37:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_5",
+          "date": "2023-07-03T13:36:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_6",
+          "date": "2023-07-06T20:18:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_7",
+          "date": "2023-07-12T16:33:00.000Z",
+          "messageCount": 27
+        },
+        {
+          "sessionId": "conv-26-session_8",
+          "date": "2023-07-15T13:51:00.000Z",
+          "messageCount": 39
+        },
+        {
+          "sessionId": "conv-26-session_9",
+          "date": "2023-07-17T14:31:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_10",
+          "date": "2023-07-20T20:56:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_11",
+          "date": "2023-08-14T14:24:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_12",
+          "date": "2023-08-17T13:50:00.000Z",
+          "messageCount": 21
+        },
+        {
+          "sessionId": "conv-26-session_13",
+          "date": "2023-08-23T15:31:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_14",
+          "date": "2023-08-25T13:33:00.000Z",
+          "messageCount": 35
+        },
+        {
+          "sessionId": "conv-26-session_15",
+          "date": "2023-08-28T15:19:00.000Z",
+          "messageCount": 28
+        },
+        {
+          "sessionId": "conv-26-session_16",
+          "date": "2023-09-13T00:09:00.000Z",
+          "messageCount": 20
+        },
+        {
+          "sessionId": "conv-26-session_17",
+          "date": "2023-10-13T10:31:00.000Z",
+          "messageCount": 26
+        },
+        {
+          "sessionId": "conv-26-session_18",
+          "date": "2023-10-20T18:55:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_19",
+          "date": "2023-10-22T09:55:00.000Z",
+          "messageCount": 15
+        }
+      ]
+    },
+    "conv-26-q153": {
+      "questionId": "conv-26-q153",
+      "containerTag": "conv-26-q153-memoryminusone-locomo-20260806-t4ib",
+      "question": "What are Melanie's plans for the summer with respect to adoption?",
+      "groundTruth": "undefined",
+      "questionType": "adversarial",
+      "phases": {
+        "ingest": {
+          "status": "completed",
+          "completedSessions": [
+            "conv-26-session_1",
+            "conv-26-session_2",
+            "conv-26-session_3",
+            "conv-26-session_4",
+            "conv-26-session_5",
+            "conv-26-session_6",
+            "conv-26-session_7",
+            "conv-26-session_8",
+            "conv-26-session_9",
+            "conv-26-session_10",
+            "conv-26-session_11",
+            "conv-26-session_12",
+            "conv-26-session_13",
+            "conv-26-session_14",
+            "conv-26-session_15",
+            "conv-26-session_16",
+            "conv-26-session_17",
+            "conv-26-session_18",
+            "conv-26-session_19"
+          ],
+          "startedAt": "2026-08-06T18:15:00.697Z",
+          "ingestResult": {
+            "documentIds": [
+              "96b340e6-10de-435c-b52f-c7a263202340",
+              "651c541e-7e4c-4e3a-9855-e65c34a88282",
+              "40b0b1e0-c348-45f1-b32f-8523c2ec61d1",
+              "f69ff2d1-dce4-4a51-9002-fdad27dae410",
+              "2ab43fda-7cbd-4709-9c0c-7ea81bdd0b21",
+              "a38264c7-5e81-4031-a9b4-bc69cab4a43a",
+              "a247eb3e-d2cf-4901-90af-dac2f9ab0dad",
+              "756762a2-933b-430a-a3ce-d87653d3e880",
+              "fb85415b-cb4c-4267-918f-25c908f8b67e",
+              "441bb7f6-28ad-46c7-b190-1b13e10f03c8",
+              "d7977301-04ca-4d5e-b1b0-51bd93931cee",
+              "472e9ff9-c90c-4f27-9152-8649efcc79c4",
+              "0048b5c1-6c19-41bf-8d38-ad24535bf21a",
+              "6beacaf8-9f04-4d80-8d75-6bf8f71ab2e3",
+              "b353c4a5-aecc-481a-a2f9-3a465653b4c6",
+              "94be2370-e1c2-4484-a838-490a59ef698f",
+              "986b6750-1273-44c3-a0ca-5d45aa25c38d",
+              "d322d551-56f4-40af-93d4-3674c2e7edf3",
+              "e332dc04-491b-4c1d-a8a5-94cd19d55558"
+            ]
+          },
+          "completedAt": "2026-08-06T18:15:06.098Z",
+          "durationMs": 5401
+        },
+        "indexing": {
+          "status": "completed",
+          "completedIds": [
+            "96b340e6-10de-435c-b52f-c7a263202340",
+            "651c541e-7e4c-4e3a-9855-e65c34a88282",
+            "40b0b1e0-c348-45f1-b32f-8523c2ec61d1",
+            "f69ff2d1-dce4-4a51-9002-fdad27dae410",
+            "2ab43fda-7cbd-4709-9c0c-7ea81bdd0b21",
+            "a38264c7-5e81-4031-a9b4-bc69cab4a43a",
+            "a247eb3e-d2cf-4901-90af-dac2f9ab0dad",
+            "756762a2-933b-430a-a3ce-d87653d3e880",
+            "fb85415b-cb4c-4267-918f-25c908f8b67e",
+            "441bb7f6-28ad-46c7-b190-1b13e10f03c8",
+            "d7977301-04ca-4d5e-b1b0-51bd93931cee",
+            "472e9ff9-c90c-4f27-9152-8649efcc79c4",
+            "0048b5c1-6c19-41bf-8d38-ad24535bf21a",
+            "6beacaf8-9f04-4d80-8d75-6bf8f71ab2e3",
+            "b353c4a5-aecc-481a-a2f9-3a465653b4c6",
+            "94be2370-e1c2-4484-a838-490a59ef698f",
+            "986b6750-1273-44c3-a0ca-5d45aa25c38d",
+            "d322d551-56f4-40af-93d4-3674c2e7edf3",
+            "e332dc04-491b-4c1d-a8a5-94cd19d55558"
+          ],
+          "failedIds": [],
+          "startedAt": "2026-08-06T18:15:25.151Z",
+          "completedAt": "2026-08-06T18:15:25.151Z",
+          "durationMs": 0
+        },
+        "search": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:27.077Z",
+          "resultFile": "data/runs/memoryminusone-locomo-20260806-t4ib/results/conv-26-q153.json",
+          "results": [],
+          "completedAt": "2026-08-06T18:15:27.161Z",
+          "durationMs": 84
+        },
+        "answer": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:43.335Z",
+          "hypothesis": "I don't know",
+          "promptTokens": 172,
+          "basePromptTokens": 172,
+          "contextTokens": 0,
+          "completedAt": "2026-08-06T18:15:43.984Z",
+          "durationMs": 649
+        },
+        "evaluate": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:16:23.352Z",
+          "score": 1,
+          "label": "correct",
+          "explanation": "The information about Melanie's plans is not available in the conversation.",
+          "retrievalMetrics": {
+            "hitAtK": 0,
+            "precisionAtK": 0,
+            "recallAtK": 0,
+            "f1AtK": 0,
+            "mrr": 0,
+            "ndcg": 0,
+            "k": 0,
+            "relevantRetrieved": 0,
+            "totalRelevant": 1
+          },
+          "completedAt": "2026-08-06T18:16:24.929Z",
+          "durationMs": 1577
+        }
+      },
+      "sessions": [
+        {
+          "sessionId": "conv-26-session_1",
+          "date": "2023-05-08T13:56:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_2",
+          "date": "2023-05-25T13:14:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_3",
+          "date": "2023-06-09T19:55:00.000Z",
+          "messageCount": 23
+        },
+        {
+          "sessionId": "conv-26-session_4",
+          "date": "2023-06-27T10:37:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_5",
+          "date": "2023-07-03T13:36:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_6",
+          "date": "2023-07-06T20:18:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_7",
+          "date": "2023-07-12T16:33:00.000Z",
+          "messageCount": 27
+        },
+        {
+          "sessionId": "conv-26-session_8",
+          "date": "2023-07-15T13:51:00.000Z",
+          "messageCount": 39
+        },
+        {
+          "sessionId": "conv-26-session_9",
+          "date": "2023-07-17T14:31:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_10",
+          "date": "2023-07-20T20:56:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_11",
+          "date": "2023-08-14T14:24:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_12",
+          "date": "2023-08-17T13:50:00.000Z",
+          "messageCount": 21
+        },
+        {
+          "sessionId": "conv-26-session_13",
+          "date": "2023-08-23T15:31:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_14",
+          "date": "2023-08-25T13:33:00.000Z",
+          "messageCount": 35
+        },
+        {
+          "sessionId": "conv-26-session_15",
+          "date": "2023-08-28T15:19:00.000Z",
+          "messageCount": 28
+        },
+        {
+          "sessionId": "conv-26-session_16",
+          "date": "2023-09-13T00:09:00.000Z",
+          "messageCount": 20
+        },
+        {
+          "sessionId": "conv-26-session_17",
+          "date": "2023-10-13T10:31:00.000Z",
+          "messageCount": 26
+        },
+        {
+          "sessionId": "conv-26-session_18",
+          "date": "2023-10-20T18:55:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_19",
+          "date": "2023-10-22T09:55:00.000Z",
+          "messageCount": 15
+        }
+      ]
+    },
+    "conv-26-q154": {
+      "questionId": "conv-26-q154",
+      "containerTag": "conv-26-q154-memoryminusone-locomo-20260806-t4ib",
+      "question": "What type of individuals does the adoption agency Melanie is considering support?",
+      "groundTruth": "undefined",
+      "questionType": "adversarial",
+      "phases": {
+        "ingest": {
+          "status": "completed",
+          "completedSessions": [
+            "conv-26-session_1",
+            "conv-26-session_2",
+            "conv-26-session_3",
+            "conv-26-session_4",
+            "conv-26-session_5",
+            "conv-26-session_6",
+            "conv-26-session_7",
+            "conv-26-session_8",
+            "conv-26-session_9",
+            "conv-26-session_10",
+            "conv-26-session_11",
+            "conv-26-session_12",
+            "conv-26-session_13",
+            "conv-26-session_14",
+            "conv-26-session_15",
+            "conv-26-session_16",
+            "conv-26-session_17",
+            "conv-26-session_18",
+            "conv-26-session_19"
+          ],
+          "startedAt": "2026-08-06T18:15:07.102Z",
+          "ingestResult": {
+            "documentIds": [
+              "de2a1248-4f00-4abb-a5e7-6df961efb3c4",
+              "e77702be-c289-4772-947a-a7cf6e248573",
+              "41e1bc67-421b-49f8-a6b7-d4d7d723c4ae",
+              "d94bf39e-1345-49c3-90a4-397a64d93a33",
+              "d77da02f-0e44-4477-90d2-d9866823e6a4",
+              "26479c58-10c2-4590-a518-d510fabd738c",
+              "a8057980-003f-4ccf-9c0d-c034f14f0a29",
+              "287253e9-87c6-4ba5-a0ed-ee92f37783da",
+              "847cfaf6-fc46-49f9-84c7-e449531d7fb2",
+              "66d3ea9e-2ffc-45aa-b1f3-7b905746ebbb",
+              "a7e52484-e9ad-4c85-bb57-d503d8a2ca9c",
+              "8e1fb1c2-52bc-4ba8-9e1d-3eeb2291283f",
+              "58f873e9-f673-42dc-9e51-29006caeffbe",
+              "e682ffb2-3ed1-4499-a73d-00871e88b8a8",
+              "381c5af7-9a84-46ea-8d6b-b397377cc8b8",
+              "c3bad794-9d0a-4534-a3d4-511a60a883a8",
+              "7da5d064-2a7f-4974-a677-4d91076dbef8",
+              "cab27311-6f43-486d-adce-1bf9bdedf70b",
+              "e9ef11fa-90aa-4b03-91f9-a0b4627df5f8"
+            ]
+          },
+          "completedAt": "2026-08-06T18:15:12.448Z",
+          "durationMs": 5346
+        },
+        "indexing": {
+          "status": "completed",
+          "completedIds": [
+            "de2a1248-4f00-4abb-a5e7-6df961efb3c4",
+            "e77702be-c289-4772-947a-a7cf6e248573",
+            "41e1bc67-421b-49f8-a6b7-d4d7d723c4ae",
+            "d94bf39e-1345-49c3-90a4-397a64d93a33",
+            "d77da02f-0e44-4477-90d2-d9866823e6a4",
+            "26479c58-10c2-4590-a518-d510fabd738c",
+            "a8057980-003f-4ccf-9c0d-c034f14f0a29",
+            "287253e9-87c6-4ba5-a0ed-ee92f37783da",
+            "847cfaf6-fc46-49f9-84c7-e449531d7fb2",
+            "66d3ea9e-2ffc-45aa-b1f3-7b905746ebbb",
+            "a7e52484-e9ad-4c85-bb57-d503d8a2ca9c",
+            "8e1fb1c2-52bc-4ba8-9e1d-3eeb2291283f",
+            "58f873e9-f673-42dc-9e51-29006caeffbe",
+            "e682ffb2-3ed1-4499-a73d-00871e88b8a8",
+            "381c5af7-9a84-46ea-8d6b-b397377cc8b8",
+            "c3bad794-9d0a-4534-a3d4-511a60a883a8",
+            "7da5d064-2a7f-4974-a677-4d91076dbef8",
+            "cab27311-6f43-486d-adce-1bf9bdedf70b",
+            "e9ef11fa-90aa-4b03-91f9-a0b4627df5f8"
+          ],
+          "failedIds": [],
+          "startedAt": "2026-08-06T18:15:25.152Z",
+          "completedAt": "2026-08-06T18:15:25.152Z",
+          "durationMs": 0
+        },
+        "search": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:27.164Z",
+          "resultFile": "data/runs/memoryminusone-locomo-20260806-t4ib/results/conv-26-q154.json",
+          "results": [],
+          "completedAt": "2026-08-06T18:15:27.249Z",
+          "durationMs": 84
+        },
+        "answer": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:43.987Z",
+          "hypothesis": "I don't know.",
+          "promptTokens": 176,
+          "basePromptTokens": 176,
+          "contextTokens": 0,
+          "completedAt": "2026-08-06T18:15:44.702Z",
+          "durationMs": 715
+        },
+        "evaluate": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:16:24.932Z",
+          "score": 1,
+          "label": "correct",
+          "explanation": "The correct abstention was given as requested.",
+          "retrievalMetrics": {
+            "hitAtK": 0,
+            "precisionAtK": 0,
+            "recallAtK": 0,
+            "f1AtK": 0,
+            "mrr": 0,
+            "ndcg": 0,
+            "k": 0,
+            "relevantRetrieved": 0,
+            "totalRelevant": 1
+          },
+          "completedAt": "2026-08-06T18:16:26.423Z",
+          "durationMs": 1491
+        }
+      },
+      "sessions": [
+        {
+          "sessionId": "conv-26-session_1",
+          "date": "2023-05-08T13:56:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_2",
+          "date": "2023-05-25T13:14:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_3",
+          "date": "2023-06-09T19:55:00.000Z",
+          "messageCount": 23
+        },
+        {
+          "sessionId": "conv-26-session_4",
+          "date": "2023-06-27T10:37:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_5",
+          "date": "2023-07-03T13:36:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_6",
+          "date": "2023-07-06T20:18:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_7",
+          "date": "2023-07-12T16:33:00.000Z",
+          "messageCount": 27
+        },
+        {
+          "sessionId": "conv-26-session_8",
+          "date": "2023-07-15T13:51:00.000Z",
+          "messageCount": 39
+        },
+        {
+          "sessionId": "conv-26-session_9",
+          "date": "2023-07-17T14:31:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_10",
+          "date": "2023-07-20T20:56:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_11",
+          "date": "2023-08-14T14:24:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_12",
+          "date": "2023-08-17T13:50:00.000Z",
+          "messageCount": 21
+        },
+        {
+          "sessionId": "conv-26-session_13",
+          "date": "2023-08-23T15:31:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_14",
+          "date": "2023-08-25T13:33:00.000Z",
+          "messageCount": 35
+        },
+        {
+          "sessionId": "conv-26-session_15",
+          "date": "2023-08-28T15:19:00.000Z",
+          "messageCount": 28
+        },
+        {
+          "sessionId": "conv-26-session_16",
+          "date": "2023-09-13T00:09:00.000Z",
+          "messageCount": 20
+        },
+        {
+          "sessionId": "conv-26-session_17",
+          "date": "2023-10-13T10:31:00.000Z",
+          "messageCount": 26
+        },
+        {
+          "sessionId": "conv-26-session_18",
+          "date": "2023-10-20T18:55:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_19",
+          "date": "2023-10-22T09:55:00.000Z",
+          "messageCount": 15
+        }
+      ]
+    },
+    "conv-26-q155": {
+      "questionId": "conv-26-q155",
+      "containerTag": "conv-26-q155-memoryminusone-locomo-20260806-t4ib",
+      "question": "Why did Melanie choose the adoption agency?",
+      "groundTruth": "undefined",
+      "questionType": "adversarial",
+      "phases": {
+        "ingest": {
+          "status": "completed",
+          "completedSessions": [
+            "conv-26-session_1",
+            "conv-26-session_2",
+            "conv-26-session_3",
+            "conv-26-session_4",
+            "conv-26-session_5",
+            "conv-26-session_6",
+            "conv-26-session_7",
+            "conv-26-session_8",
+            "conv-26-session_9",
+            "conv-26-session_10",
+            "conv-26-session_11",
+            "conv-26-session_12",
+            "conv-26-session_13",
+            "conv-26-session_14",
+            "conv-26-session_15",
+            "conv-26-session_16",
+            "conv-26-session_17",
+            "conv-26-session_18",
+            "conv-26-session_19"
+          ],
+          "startedAt": "2026-08-06T18:15:13.453Z",
+          "ingestResult": {
+            "documentIds": [
+              "a9bd29e7-02ff-4fd3-b5a9-f7a253029a01",
+              "75b8fffa-238a-4136-b9dd-0ce29d117051",
+              "0c79a34a-c4ba-43e2-bc30-ac795451ea30",
+              "4ac8e633-1498-4c19-9b92-7abecae4eefb",
+              "8e3d5b1f-e19b-4fe5-a922-79b7420092fd",
+              "a2bd224a-9a7d-4ec7-b525-09da99cda4d5",
+              "5ecc97bd-1c60-493c-9345-83b0768e8c9c",
+              "a76754cb-7e42-4ddd-9a15-b4582a19d45e",
+              "6bc3451d-138a-4c5d-acea-1e23afefe5b2",
+              "559f10d9-8f26-4eb2-8d9d-37375b3105b2",
+              "cd83229c-ff3e-490b-aace-b25cafaaf6f6",
+              "22ded548-a88a-4aca-b075-952ff6bab61e",
+              "1eb1bdba-ce1d-4357-903c-13dc4b95d39a",
+              "0466642e-cd86-4e74-ad78-2f8323f474d7",
+              "ba90627a-70a7-4a4a-80c7-98cb1d7d41c2",
+              "9a88c427-d9d1-4954-a468-3ec5c481e527",
+              "c4d99eec-59fe-42ea-a681-de45fade9f3a",
+              "af50a6ec-1fe0-45ce-8251-1ea5c559b8ea",
+              "c6cc73a1-1ad8-4127-ba20-d0b7ecd54be1"
+            ]
+          },
+          "completedAt": "2026-08-06T18:15:18.797Z",
+          "durationMs": 5344
+        },
+        "indexing": {
+          "status": "completed",
+          "completedIds": [
+            "a9bd29e7-02ff-4fd3-b5a9-f7a253029a01",
+            "75b8fffa-238a-4136-b9dd-0ce29d117051",
+            "0c79a34a-c4ba-43e2-bc30-ac795451ea30",
+            "4ac8e633-1498-4c19-9b92-7abecae4eefb",
+            "8e3d5b1f-e19b-4fe5-a922-79b7420092fd",
+            "a2bd224a-9a7d-4ec7-b525-09da99cda4d5",
+            "5ecc97bd-1c60-493c-9345-83b0768e8c9c",
+            "a76754cb-7e42-4ddd-9a15-b4582a19d45e",
+            "6bc3451d-138a-4c5d-acea-1e23afefe5b2",
+            "559f10d9-8f26-4eb2-8d9d-37375b3105b2",
+            "cd83229c-ff3e-490b-aace-b25cafaaf6f6",
+            "22ded548-a88a-4aca-b075-952ff6bab61e",
+            "1eb1bdba-ce1d-4357-903c-13dc4b95d39a",
+            "0466642e-cd86-4e74-ad78-2f8323f474d7",
+            "ba90627a-70a7-4a4a-80c7-98cb1d7d41c2",
+            "9a88c427-d9d1-4954-a468-3ec5c481e527",
+            "c4d99eec-59fe-42ea-a681-de45fade9f3a",
+            "af50a6ec-1fe0-45ce-8251-1ea5c559b8ea",
+            "c6cc73a1-1ad8-4127-ba20-d0b7ecd54be1"
+          ],
+          "failedIds": [],
+          "startedAt": "2026-08-06T18:15:25.153Z",
+          "completedAt": "2026-08-06T18:15:25.153Z",
+          "durationMs": 0
+        },
+        "search": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:27.251Z",
+          "resultFile": "data/runs/memoryminusone-locomo-20260806-t4ib/results/conv-26-q155.json",
+          "results": [],
+          "completedAt": "2026-08-06T18:15:27.338Z",
+          "durationMs": 86
+        },
+        "answer": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:44.705Z",
+          "hypothesis": "I don't know",
+          "promptTokens": 167,
+          "basePromptTokens": 167,
+          "contextTokens": 0,
+          "completedAt": "2026-08-06T18:15:45.369Z",
+          "durationMs": 664
+        },
+        "evaluate": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:16:26.426Z",
+          "score": 1,
+          "label": "correct",
+          "explanation": "The information was not provided in the conversation.",
+          "retrievalMetrics": {
+            "hitAtK": 0,
+            "precisionAtK": 0,
+            "recallAtK": 0,
+            "f1AtK": 0,
+            "mrr": 0,
+            "ndcg": 0,
+            "k": 0,
+            "relevantRetrieved": 0,
+            "totalRelevant": 1
+          },
+          "completedAt": "2026-08-06T18:16:27.903Z",
+          "durationMs": 1477
+        }
+      },
+      "sessions": [
+        {
+          "sessionId": "conv-26-session_1",
+          "date": "2023-05-08T13:56:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_2",
+          "date": "2023-05-25T13:14:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_3",
+          "date": "2023-06-09T19:55:00.000Z",
+          "messageCount": 23
+        },
+        {
+          "sessionId": "conv-26-session_4",
+          "date": "2023-06-27T10:37:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_5",
+          "date": "2023-07-03T13:36:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_6",
+          "date": "2023-07-06T20:18:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_7",
+          "date": "2023-07-12T16:33:00.000Z",
+          "messageCount": 27
+        },
+        {
+          "sessionId": "conv-26-session_8",
+          "date": "2023-07-15T13:51:00.000Z",
+          "messageCount": 39
+        },
+        {
+          "sessionId": "conv-26-session_9",
+          "date": "2023-07-17T14:31:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_10",
+          "date": "2023-07-20T20:56:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_11",
+          "date": "2023-08-14T14:24:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_12",
+          "date": "2023-08-17T13:50:00.000Z",
+          "messageCount": 21
+        },
+        {
+          "sessionId": "conv-26-session_13",
+          "date": "2023-08-23T15:31:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_14",
+          "date": "2023-08-25T13:33:00.000Z",
+          "messageCount": 35
+        },
+        {
+          "sessionId": "conv-26-session_15",
+          "date": "2023-08-28T15:19:00.000Z",
+          "messageCount": 28
+        },
+        {
+          "sessionId": "conv-26-session_16",
+          "date": "2023-09-13T00:09:00.000Z",
+          "messageCount": 20
+        },
+        {
+          "sessionId": "conv-26-session_17",
+          "date": "2023-10-13T10:31:00.000Z",
+          "messageCount": 26
+        },
+        {
+          "sessionId": "conv-26-session_18",
+          "date": "2023-10-20T18:55:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_19",
+          "date": "2023-10-22T09:55:00.000Z",
+          "messageCount": 15
+        }
+      ]
+    },
+    "conv-26-q156": {
+      "questionId": "conv-26-q156",
+      "containerTag": "conv-26-q156-memoryminusone-locomo-20260806-t4ib",
+      "question": "What is Melanie excited about in her adoption process?",
+      "groundTruth": "undefined",
+      "questionType": "adversarial",
+      "phases": {
+        "ingest": {
+          "status": "completed",
+          "completedSessions": [
+            "conv-26-session_1",
+            "conv-26-session_2",
+            "conv-26-session_3",
+            "conv-26-session_4",
+            "conv-26-session_5",
+            "conv-26-session_6",
+            "conv-26-session_7",
+            "conv-26-session_8",
+            "conv-26-session_9",
+            "conv-26-session_10",
+            "conv-26-session_11",
+            "conv-26-session_12",
+            "conv-26-session_13",
+            "conv-26-session_14",
+            "conv-26-session_15",
+            "conv-26-session_16",
+            "conv-26-session_17",
+            "conv-26-session_18",
+            "conv-26-session_19"
+          ],
+          "startedAt": "2026-08-06T18:15:19.802Z",
+          "ingestResult": {
+            "documentIds": [
+              "ff7b6cb0-da4e-4299-ae40-9beb1fcf0496",
+              "c12ee131-10fa-4f14-961e-75882d5a9354",
+              "9248c26a-8dc6-4321-ae22-a944fa06216e",
+              "f99b5afe-4025-4d04-ba8b-5a53c4d76d1c",
+              "fe7feb7d-1a8e-4f4f-8d75-6af51fa2ab24",
+              "10da06cb-003f-477b-b352-34fd43efd14c",
+              "ae252218-4e66-4190-8520-ceb9c2c51143",
+              "d618ae9e-e7d6-4a03-804b-80016043d06d",
+              "93817539-d288-42b3-a51c-02a3a87daeec",
+              "f27f0e82-f8b7-494d-97fc-c8a90f145eb4",
+              "db4a979e-e5a4-4aa1-9a15-92bf331a51a2",
+              "75bd4577-20e0-4559-a276-9c7f3009ec2e",
+              "f6ed0abe-db07-459c-84d5-7506ba3b722c",
+              "4a70d9ad-f55c-4392-9dce-e8e4ada201f4",
+              "98e73e3e-9687-4898-8be4-82c719cd56a0",
+              "7fea9f5a-0227-4d21-9806-e0defd271c48",
+              "92404935-d8d2-44a4-9975-e47ef42fccb5",
+              "6353dd48-7623-4aa4-8111-81008255d127",
+              "6ad3b6fd-9ff3-455e-8181-78cfde39f684"
+            ]
+          },
+          "completedAt": "2026-08-06T18:15:25.120Z",
+          "durationMs": 5318
+        },
+        "indexing": {
+          "status": "completed",
+          "completedIds": [
+            "ff7b6cb0-da4e-4299-ae40-9beb1fcf0496",
+            "c12ee131-10fa-4f14-961e-75882d5a9354",
+            "9248c26a-8dc6-4321-ae22-a944fa06216e",
+            "f99b5afe-4025-4d04-ba8b-5a53c4d76d1c",
+            "fe7feb7d-1a8e-4f4f-8d75-6af51fa2ab24",
+            "10da06cb-003f-477b-b352-34fd43efd14c",
+            "ae252218-4e66-4190-8520-ceb9c2c51143",
+            "d618ae9e-e7d6-4a03-804b-80016043d06d",
+            "93817539-d288-42b3-a51c-02a3a87daeec",
+            "f27f0e82-f8b7-494d-97fc-c8a90f145eb4",
+            "db4a979e-e5a4-4aa1-9a15-92bf331a51a2",
+            "75bd4577-20e0-4559-a276-9c7f3009ec2e",
+            "f6ed0abe-db07-459c-84d5-7506ba3b722c",
+            "4a70d9ad-f55c-4392-9dce-e8e4ada201f4",
+            "98e73e3e-9687-4898-8be4-82c719cd56a0",
+            "7fea9f5a-0227-4d21-9806-e0defd271c48",
+            "92404935-d8d2-44a4-9975-e47ef42fccb5",
+            "6353dd48-7623-4aa4-8111-81008255d127",
+            "6ad3b6fd-9ff3-455e-8181-78cfde39f684"
+          ],
+          "failedIds": [],
+          "startedAt": "2026-08-06T18:15:25.154Z",
+          "completedAt": "2026-08-06T18:15:25.154Z",
+          "durationMs": 0
+        },
+        "search": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:27.340Z",
+          "resultFile": "data/runs/memoryminusone-locomo-20260806-t4ib/results/conv-26-q156.json",
+          "results": [],
+          "completedAt": "2026-08-06T18:15:27.427Z",
+          "durationMs": 86
+        },
+        "answer": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:15:45.372Z",
+          "hypothesis": "I don't know",
+          "promptTokens": 169,
+          "basePromptTokens": 169,
+          "contextTokens": 0,
+          "completedAt": "2026-08-06T18:15:46.032Z",
+          "durationMs": 660
+        },
+        "evaluate": {
+          "status": "completed",
+          "startedAt": "2026-08-06T18:16:27.905Z",
+          "score": 1,
+          "label": "correct",
+          "explanation": "The information requested was not available, so the system correctly abstained.",
+          "retrievalMetrics": {
+            "hitAtK": 0,
+            "precisionAtK": 0,
+            "recallAtK": 0,
+            "f1AtK": 0,
+            "mrr": 0,
+            "ndcg": 0,
+            "k": 0,
+            "relevantRetrieved": 0,
+            "totalRelevant": 1
+          },
+          "completedAt": "2026-08-06T18:16:29.560Z",
+          "durationMs": 1655
+        }
+      },
+      "sessions": [
+        {
+          "sessionId": "conv-26-session_1",
+          "date": "2023-05-08T13:56:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_2",
+          "date": "2023-05-25T13:14:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_3",
+          "date": "2023-06-09T19:55:00.000Z",
+          "messageCount": 23
+        },
+        {
+          "sessionId": "conv-26-session_4",
+          "date": "2023-06-27T10:37:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_5",
+          "date": "2023-07-03T13:36:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_6",
+          "date": "2023-07-06T20:18:00.000Z",
+          "messageCount": 16
+        },
+        {
+          "sessionId": "conv-26-session_7",
+          "date": "2023-07-12T16:33:00.000Z",
+          "messageCount": 27
+        },
+        {
+          "sessionId": "conv-26-session_8",
+          "date": "2023-07-15T13:51:00.000Z",
+          "messageCount": 39
+        },
+        {
+          "sessionId": "conv-26-session_9",
+          "date": "2023-07-17T14:31:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_10",
+          "date": "2023-07-20T20:56:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_11",
+          "date": "2023-08-14T14:24:00.000Z",
+          "messageCount": 17
+        },
+        {
+          "sessionId": "conv-26-session_12",
+          "date": "2023-08-17T13:50:00.000Z",
+          "messageCount": 21
+        },
+        {
+          "sessionId": "conv-26-session_13",
+          "date": "2023-08-23T15:31:00.000Z",
+          "messageCount": 18
+        },
+        {
+          "sessionId": "conv-26-session_14",
+          "date": "2023-08-25T13:33:00.000Z",
+          "messageCount": 35
+        },
+        {
+          "sessionId": "conv-26-session_15",
+          "date": "2023-08-28T15:19:00.000Z",
+          "messageCount": 28
+        },
+        {
+          "sessionId": "conv-26-session_16",
+          "date": "2023-09-13T00:09:00.000Z",
+          "messageCount": 20
+        },
+        {
+          "sessionId": "conv-26-session_17",
+          "date": "2023-10-13T10:31:00.000Z",
+          "messageCount": 26
+        },
+        {
+          "sessionId": "conv-26-session_18",
+          "date": "2023-10-20T18:55:00.000Z",
+          "messageCount": 24
+        },
+        {
+          "sessionId": "conv-26-session_19",
+          "date": "2023-10-22T09:55:00.000Z",
+          "messageCount": 15
+        }
+      ]
+    }
+  }
+}

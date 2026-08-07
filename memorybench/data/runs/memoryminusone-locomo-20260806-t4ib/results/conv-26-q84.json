@@ -1,0 +1,10 @@
+{
+  "questionId": "conv-26-q84",
+  "question": "How does Melanie prioritize self-care?",
+  "questionType": "world-knowledge",
+  "groundTruth": "by carving out some me-time each day for activities like running, reading, or playing the violin",
+  "containerTag": "conv-26-q84-memoryminusone-locomo-20260806-t4ib",
+  "timestamp": "2026-08-06T18:15:26.807Z",
+  "durationMs": 95,
+  "results": []
+}

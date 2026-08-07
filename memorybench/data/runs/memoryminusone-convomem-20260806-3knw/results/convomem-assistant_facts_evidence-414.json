@@ -1,0 +1,38 @@
+{
+  "questionId": "convomem-assistant_facts_evidence-414",
+  "question": "You suggested a museum for my cultural outing in San Francisco. Which one was it?",
+  "questionType": "assistant_facts_evidence",
+  "groundTruth": "The de Young Museum.",
+  "containerTag": "convomem-assistant_facts_evidence-414-memoryminusone-convomem-20260806-3knw",
+  "timestamp": "2026-08-06T19:07:46.746Z",
+  "durationMs": 145,
+  "results": [
+    {
+      "memory": {
+        "id": "60462eb3-771d-4d91-a6a1-043b22397915",
+        "userId": "convomem-assistant_facts_evidence-414-memoryminusone-convomem-20260806-3knw",
+        "content": "Here is the session as a stringified JSON:\n[{\"role\":\"user\",\"content\":\"Hey, I'm thinking about planning a cultural outing in San Francisco. Do you have any recommendations?\"},{\"role\":\"assistant\",\"content\":\"For a great cultural outing in San Francisco, I'd definitely suggest the de Young Museum. It has a fantastic collection of American art and often features exhibits that touch on different cultures and human stories, which I think you'd find really interesting given your background in psychology.\"},{\"role\":\"user\",\"content\":\"That sounds perfect! I love when art connects with human stories. Do they have any special exhibits right now?\"},{\"role\":\"assistant\",\"content\":\"Yes, they currently have an exhibit on the evolution of American art through the lens of cultural diversity. It explores how different cultural influences have shaped the art scene in America.\"},{\"role\":\"user\",\"content\":\"That sounds fascinating. I think it would be a great way to spend the day. Do you know if they have guided tours?\"},{\"role\":\"assistant\",\"content\":\"They do offer guided tours, both in-person and virtual. It's a great way to get deeper insights into the exhibits.\"},{\"role\":\"user\",\"content\":\"I might go for the in-person tour. It's been a while since I've been to a museum, and I miss the experience.\"},{\"role\":\"assistant\",\"content\":\"That sounds like a wonderful plan. Let me know if you need help with anything else related to your outing.\"},{\"role\":\"user\",\"content\":\"Thanks! I'll check their website for more details and maybe book a ticket.\"},{\"role\":\"assistant\",\"content\":\"Great idea. Enjoy your visit to the de Young Museum!\"}]",
+        "primarySector": "benchmark",
+        "sectors": [
+          "benchmark"
+        ],
+        "tags": [],
+        "metadata": {
+          "sessionId": "convomem-assistant_facts_evidence-414-session-0"
+        },
+        "simhash": "9832000098320000",
+        "salience": 1,
+        "decayLambda": 0.01,
+        "version": 1,
+        "createdAt": 1786043195793,
+        "updatedAt": 1786043195793,
+        "lastSeenAt": 1786043266746
+      },
+      "score": 0.6653112302454566,
+      "matchType": "semantic",
+      "path": [
+        "60462eb3-771d-4d91-a6a1-043b22397915"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "questionId": "conv-26-q13",
+  "question": "What career path has Caroline decided to persue?",
+  "questionType": "single-hop",
+  "groundTruth": "counseling or mental health for Transgender people",
+  "containerTag": "conv-26-q13-memoryminusone-locomo-20260806-t4ib",
+  "timestamp": "2026-08-06T18:15:26.150Z",
+  "durationMs": 84,
+  "results": []
+}

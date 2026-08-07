@@ -1,0 +1,10 @@
+{
+  "questionId": "conv-26-q153",
+  "question": "What are Melanie's plans for the summer with respect to adoption?",
+  "questionType": "adversarial",
+  "groundTruth": "undefined",
+  "containerTag": "conv-26-q153-memoryminusone-locomo-20260806-t4ib",
+  "timestamp": "2026-08-06T18:15:27.161Z",
+  "durationMs": 84,
+  "results": []
+}

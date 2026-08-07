@@ -1,0 +1,65 @@
+{
+  "questionId": "convomem-changing_evidence-956",
+  "question": "What is the customer growth percentage cited in our annual report?",
+  "questionType": "changing_evidence",
+  "groundTruth": "The customer growth percentage cited in the annual report is 15% for 2023.",
+  "containerTag": "convomem-changing_evidence-956-memoryminusone-convomem-20260806-3knw",
+  "timestamp": "2026-08-06T19:07:49.485Z",
+  "durationMs": 754,
+  "results": [
+    {
+      "memory": {
+        "id": "9f7515b0-826a-4bbe-9d50-58b7c041508a",
+        "userId": "convomem-changing_evidence-956-memoryminusone-convomem-20260806-3knw",
+        "content": "Here is the session as a stringified JSON:\n[{\"role\":\"user\",\"content\":\"Hey, I just saw an update in our annual report and wanted to make sure I'm using the correct figures for my presentation.\"},{\"role\":\"assistant\",\"content\":\"Hi Sarah, sure thing. What update did you notice?\"},{\"role\":\"user\",\"content\":\"I recently saw an update in the report that mentioned a 15% growth for 2023. Can you confirm this is the figure I should use?\"},{\"role\":\"assistant\",\"content\":\"Let me check the latest version of the report to confirm that for you.\"},{\"role\":\"user\",\"content\":\"Thanks. It's important to have the most recent data, especially when discussing growth metrics.\"},{\"role\":\"assistant\",\"content\":\"Absolutely, having the latest figures is crucial for an accurate presentation.\"},{\"role\":\"user\",\"content\":\"Exactly. I want to ensure that our potential clients see the most impressive numbers.\"},{\"role\":\"assistant\",\"content\":\"I understand. Just a moment while I verify the updated growth percentage.\"},{\"role\":\"user\",\"content\":\"No problem. I appreciate your help with this.\"},{\"role\":\"assistant\",\"content\":\"Alright, I've confirmed that the updated report does indeed state a 15% growth for 2023.\"},{\"role\":\"user\",\"content\":\"Perfect, that's exactly what I needed to know. Thanks for confirming.\"},{\"role\":\"assistant\",\"content\":\"You're welcome, Sarah. If you need any more information, feel free to ask.\"}]",
+        "primarySector": "benchmark",
+        "sectors": [
+          "benchmark"
+        ],
+        "tags": [],
+        "metadata": {
+          "sessionId": "convomem-changing_evidence-956-session-1"
+        },
+        "simhash": "1431000014310000",
+        "salience": 1,
+        "decayLambda": 0.01,
+        "version": 1,
+        "createdAt": 1786043211347,
+        "updatedAt": 1786043211347,
+        "lastSeenAt": 1786043269485
+      },
+      "score": 0.6591554625498132,
+      "matchType": "semantic",
+      "path": [
+        "9f7515b0-826a-4bbe-9d50-58b7c041508a"
+      ]
+    },
+    {
+      "memory": {
+        "id": "d84e4ecb-0029-4a72-b713-d902c09bd2f9",
+        "userId": "convomem-changing_evidence-956-memoryminusone-convomem-20260806-3knw",
+        "content": "Here is the session as a stringified JSON:\n[{\"role\":\"user\",\"content\":\"Hey, I was just going through the annual report and wanted to double-check some figures for my upcoming pitch.\"},{\"role\":\"assistant\",\"content\":\"Sure, Sarah. What specific figures are you looking at?\"},{\"role\":\"user\",\"content\":\"I remember the annual report initially mentioned a 10% customer growth for 2022. I need to make sure I have the right figures for my pitch.\"},{\"role\":\"assistant\",\"content\":\"Got it. Let me pull up the report to confirm that for you.\"},{\"role\":\"user\",\"content\":\"Thanks. It's crucial to have the correct numbers, especially when presenting to potential clients.\"},{\"role\":\"assistant\",\"content\":\"Absolutely, accuracy is key. Just a moment while I verify that.\"},{\"role\":\"user\",\"content\":\"No rush. While you're at it, could you also check if there are any updates or revisions to the report?\"},{\"role\":\"assistant\",\"content\":\"Sure thing. I'll make sure to look for any recent changes or updates.\"},{\"role\":\"user\",\"content\":\"Perfect. It's always a bit nerve-wracking to ensure everything is up-to-date.\"},{\"role\":\"assistant\",\"content\":\"I understand. Keeping track of all the updates can be challenging, especially with how fast things change in the tech industry.\"},{\"role\":\"user\",\"content\":\"Exactly. That's why I rely on these reports to be accurate and current.\"},{\"role\":\"assistant\",\"content\":\"Alright, I've confirmed that the initial report did indeed mention a 10% growth for 2022.\"},{\"role\":\"user\",\"content\":\"Great, thanks for confirming that. I'll keep an eye out for any updates.\"},{\"role\":\"assistant\",\"content\":\"You're welcome. Let me know if there's anything else you need.\"}]",
+        "primarySector": "benchmark",
+        "sectors": [
+          "benchmark"
+        ],
+        "tags": [],
+        "metadata": {
+          "sessionId": "convomem-changing_evidence-956-session-0"
+        },
+        "simhash": "d2318000d2318000",
+        "salience": 1,
+        "decayLambda": 0.01,
+        "version": 1,
+        "createdAt": 1786043211006,
+        "updatedAt": 1786043211006,
+        "lastSeenAt": 1786043269485
+      },
+      "score": 0.6554373740200025,
+      "matchType": "semantic",
+      "path": [
+        "d84e4ecb-0029-4a72-b713-d902c09bd2f9"
+      ]
+    }
+  ]
+}

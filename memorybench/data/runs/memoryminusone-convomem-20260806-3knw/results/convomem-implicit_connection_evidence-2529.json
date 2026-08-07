@@ -1,0 +1,38 @@
+{
+  "questionId": "convomem-implicit_connection_evidence-2529",
+  "question": "My team's energy is really low this week. Any suggestions for boosting morale?",
+  "questionType": "implicit_connection_evidence",
+  "groundTruth": "A good response should infer from the prior context that the team is under immense pressure due to a critical, high-stakes project deadline. Therefore, the suggestions should be low-commitment, stress-reducing, and sensitive to the team's limited time and high cognitive load. It should avoid suggesting time-consuming activities outside of work. Ideal suggestions would include bringing in catered lunch, arranging for a professional coffee cart, or offering a small, tangible reward post-launch like a gift card or an extra day off.",
+  "containerTag": "convomem-implicit_connection_evidence-2529-memoryminusone-convomem-20260806-3knw",
+  "timestamp": "2026-08-06T19:08:02.986Z",
+  "durationMs": 397,
+  "results": [
+    {
+      "memory": {
+        "id": "9b067996-969b-48f9-ab92-1d726d0cb28e",
+        "userId": "convomem-implicit_connection_evidence-2529-memoryminusone-convomem-20260806-3knw",
+        "content": "Here is the session as a stringified JSON:\n[{\"role\":\"user\",\"content\":\"Hey, I've been thinking about how to keep my team motivated this week. It's been really hectic.\"},{\"role\":\"assistant\",\"content\":\"I can imagine. What's been going on?\"},{\"role\":\"user\",\"content\":\"This whole week is going to be a nail-biter. We have the final go-live for the new CRM platform for the entire national sales division this Friday. My director is watching this rollout like a hawk, and if this doesn't go smoothly, it's going to be a huge mess. Everyone on my team is working late and feeling the pressure.\"},{\"role\":\"assistant\",\"content\":\"That sounds intense. Have you thought about doing something special for the team to boost morale?\"},{\"role\":\"user\",\"content\":\"Yeah, that's what I'm trying to figure out. Maybe something simple that doesn't take up too much time.\"},{\"role\":\"assistant\",\"content\":\"How about bringing in some catered lunch or a coffee cart? It could be a nice treat without taking too much time away from work.\"},{\"role\":\"user\",\"content\":\"That's a great idea. I think they'd really appreciate that.\"},{\"role\":\"assistant\",\"content\":\"And maybe after the launch, you could offer a small reward like a gift card or an extra day off to show your appreciation.\"},{\"role\":\"user\",\"content\":\"I like that. It would be a nice way to say thanks for all their hard work.\"},{\"role\":\"assistant\",\"content\":\"Exactly. Sometimes the little things can make a big difference.\"},{\"role\":\"user\",\"content\":\"Thanks for the suggestions. I'll definitely consider them.\"},{\"role\":\"assistant\",\"content\":\"Anytime! Let me know if there's anything else I can help with.\"}]",
+        "primarySector": "benchmark",
+        "sectors": [
+          "benchmark"
+        ],
+        "tags": [],
+        "metadata": {
+          "sessionId": "convomem-implicit_connection_evidence-2529-session-0"
+        },
+        "simhash": "15b0800015b08000",
+        "salience": 1,
+        "decayLambda": 0.01,
+        "version": 1,
+        "createdAt": 1786043259410,
+        "updatedAt": 1786043259410,
+        "lastSeenAt": 1786043282986
+      },
+      "score": 0.659398883551039,
+      "matchType": "semantic",
+      "path": [
+        "9b067996-969b-48f9-ab92-1d726d0cb28e"
+      ]
+    }
+  ]
+}
