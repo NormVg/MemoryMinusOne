@@ -329,6 +329,10 @@ declare class MemoryEngine {
      * Runs the decay pass across all memories.
      */
     runDecayPass(userId: string): Promise<void>;
+    /**
+     * Runs the reflection pass across all memories.
+     */
+    runReflection(userId: string): Promise<void>;
 }
 
 declare class FactStore {

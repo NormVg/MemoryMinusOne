@@ -697,6 +697,51 @@ function fingerprintMemory(id, essence) {
   return Array.from(vec);
 }
 
+// src/engine/reflection.ts
+function jaccardSimilarity(setA, setB) {
+  if (setA.size === 0 || setB.size === 0) return 0;
+  const intersection = new Set([...setA].filter((x) => setB.has(x)));
+  const union = /* @__PURE__ */ new Set([...setA, ...setB]);
+  return intersection.size / union.size;
+}
+function clusterMemories(memories, threshold = 0.8) {
+  const clusters = [];
+  const visited = /* @__PURE__ */ new Set();
+  for (let i = 0; i < memories.length; i++) {
+    const mem = memories[i];
+    if (visited.has(mem.id) || mem.metadata?.consolidated === true) continue;
+    const currentCluster = [mem];
+    visited.add(mem.id);
+    const tokensA = new Set(mem.content.toLowerCase().split(/\W+/).filter((w) => w.length > 3));
+    for (let j = i + 1; j < memories.length; j++) {
+      const candidate = memories[j];
+      if (visited.has(candidate.id) || candidate.metadata?.consolidated === true) continue;
+      if (mem.primarySector !== candidate.primarySector) continue;
+      const tokensB = new Set(candidate.content.toLowerCase().split(/\W+/).filter((w) => w.length > 3));
+      const sim = jaccardSimilarity(tokensA, tokensB);
+      if (sim >= threshold) {
+        currentCluster.push(candidate);
+        visited.add(candidate.id);
+      }
+    }
+    if (currentCluster.length > 1) {
+      clusters.push(currentCluster);
+    }
+  }
+  return clusters;
+}
+function calcReflectionSalience(cluster, nowMs) {
+  const p = cluster.length / 10;
+  let sumR = 0;
+  for (const mem of cluster) {
+    sumR += Math.exp(-(nowMs - mem.createdAt) / 432e5);
+  }
+  const r = sumR / cluster.length;
+  const e = cluster.some((m) => m.sectors.includes("emotional")) ? 1 : 0;
+  const salience = 0.6 * p + 0.3 * r + 0.1 * e;
+  return Math.min(1, salience);
+}
+
 // src/engine/memory.ts
 init_clock();
 var MemoryEngine = class {
@@ -985,6 +1030,59 @@ var MemoryEngine = class {
       fingerprinted,
       durationMs: clock.now() - startTime
     });
+  }
+  /**
+   * Runs the reflection pass across all memories.
+   */
+  async runReflection(userId) {
+    if (!this.config.storage.getMemoriesByUser) {
+      return;
+    }
+    const startTime = clock.now();
+    const limit = 1e3;
+    const memories = await this.config.storage.getMemoriesByUser(userId, limit, 0);
+    if (memories.length === 0) return;
+    const clusters = clusterMemories(memories, 0.8);
+    let reflectionsCreated = 0;
+    for (const cluster of clusters) {
+      if (cluster.length < 2) continue;
+      const combinedText = cluster.map((m) => m.content).join(" ");
+      const summary = extractEssence(combinedText, 300);
+      const reflectionId = crypto.randomUUID();
+      const now = clock.now();
+      const primarySector = cluster[0].primarySector;
+      const salience = calcReflectionSalience(cluster, now);
+      const reflectionMemory = {
+        id: reflectionId,
+        userId,
+        content: `[Reflection] ${summary}`,
+        primarySector,
+        sectors: [primarySector],
+        tags: ["reflection"],
+        metadata: {
+          reflectionOf: cluster.map((m) => m.id)
+        },
+        simhash: computeSimhash(summary),
+        salience,
+        decayLambda: 0.01,
+        version: 1,
+        createdAt: now,
+        updatedAt: now,
+        lastSeenAt: now,
+        coactivations: 0
+      };
+      const { vector, dim } = await this.config.embedding.embed(reflectionMemory.content, primarySector);
+      await this.config.vector.storeVector(reflectionId, primarySector, userId, vector, dim);
+      await this.config.storage.insertMemory(reflectionMemory);
+      reflectionsCreated++;
+      for (const m of cluster) {
+        m.metadata = { ...m.metadata, consolidated: true };
+        m.salience = Math.min(1, m.salience + 0.1);
+        m.updatedAt = now;
+        await this.config.storage.updateMemory(m);
+        await createSingleWaypoint(m.id, [], userId, this.config.storage, reflectionId, 0.9);
+      }
+    }
   }
 };
 

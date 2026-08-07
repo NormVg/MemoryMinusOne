@@ -18,14 +18,14 @@ export function jaccardSimilarity<T>(setA: Set<T>, setB: Set<T>): number {
  */
 export function clusterMemories(
   memories: MemoryNode[], 
-  threshold: number = 0.5
+  threshold: number = 0.8
 ): MemoryNode[][] {
   const clusters: MemoryNode[][] = [];
   const visited = new Set<string>();
 
   for (let i = 0; i < memories.length; i++) {
     const mem = memories[i];
-    if (visited.has(mem.id)) continue;
+    if (visited.has(mem.id) || mem.metadata?.consolidated === true) continue;
     
     const currentCluster = [mem];
     visited.add(mem.id);
@@ -35,7 +35,10 @@ export function clusterMemories(
 
     for (let j = i + 1; j < memories.length; j++) {
       const candidate = memories[j];
-      if (visited.has(candidate.id)) continue;
+      if (visited.has(candidate.id) || candidate.metadata?.consolidated === true) continue;
+      
+      // Strict primary sector match required for clustering
+      if (mem.primarySector !== candidate.primarySector) continue;
       
       const tokensB = new Set(candidate.content.toLowerCase().split(/\W+/).filter(w => w.length > 3));
       

@@ -8,6 +8,7 @@ import { computeCombinedKeywordScore } from "./keyword";
 import { reinforcePath, reinforceNodeSalience } from "./waypoints";
 import { calcDecay } from "./decay";
 import { compressVector, fingerprintMemory, extractEssence } from "./compression";
+import { clusterMemories, calcReflectionSalience } from "./reflection";
 import { clock } from "../core/clock";
 import { TypedEventEmitter } from "../core/events";
 
@@ -362,5 +363,74 @@ export class MemoryEngine {
       fingerprinted,
       durationMs: clock.now() - startTime
     });
+  }
+
+  /**
+   * Runs the reflection pass across all memories.
+   */
+  async runReflection(userId: string): Promise<void> {
+    if (!this.config.storage.getMemoriesByUser) {
+      return;
+    }
+
+    const startTime = clock.now();
+    const limit = 1000; // Gather a large chunk for clustering
+    const memories = await this.config.storage.getMemoriesByUser(userId, limit, 0);
+    if (memories.length === 0) return;
+
+    const clusters = clusterMemories(memories, 0.8);
+    let reflectionsCreated = 0;
+
+    for (const cluster of clusters) {
+      if (cluster.length < 2) continue;
+
+      // Extract essence of the cluster
+      const combinedText = cluster.map(m => m.content).join(" ");
+      const summary = extractEssence(combinedText, 300);
+
+      const reflectionId = crypto.randomUUID();
+      const now = clock.now();
+      const primarySector = cluster[0].primarySector;
+      const salience = calcReflectionSalience(cluster, now);
+
+      const reflectionMemory: MemoryNode = {
+        id: reflectionId,
+        userId,
+        content: `[Reflection] ${summary}`,
+        primarySector,
+        sectors: [primarySector],
+        tags: ["reflection"],
+        metadata: {
+          reflectionOf: cluster.map(m => m.id)
+        },
+        simhash: computeSimhash(summary),
+        salience,
+        decayLambda: 0.01,
+        version: 1,
+        createdAt: now,
+        updatedAt: now,
+        lastSeenAt: now,
+        coactivations: 0
+      };
+
+      // Embed and store
+      const { vector, dim } = await this.config.embedding.embed(reflectionMemory.content, primarySector);
+      await this.config.vector.storeVector(reflectionId, primarySector, userId, vector, dim);
+      await this.config.storage.insertMemory(reflectionMemory);
+
+      reflectionsCreated++;
+
+      // Update originals as consolidated
+      for (const m of cluster) {
+        m.metadata = { ...m.metadata, consolidated: true };
+        // Boost salience slightly due to consolidation
+        m.salience = Math.min(1.0, m.salience + 0.1);
+        m.updatedAt = now;
+        await this.config.storage.updateMemory(m);
+
+        // Optionally, create a waypoint from original to reflection
+        await createSingleWaypoint(m.id, [], userId, this.config.storage, reflectionId, 0.9);
+      }
+    }
   }
 }
